@@ -232,7 +232,7 @@ const projects = [
 
   tagButtons.forEach(button => {
     button.addEventListener('click', () => {
-      const tag = button.textContent.trim();
+      const tag = button.textContent?.trim() || '';
       if (selectedTags.has(tag)) {
         selectedTags.delete(tag);
         button.classList.remove('bg-indigo-600');
@@ -248,9 +248,11 @@ const projects = [
 
   function filterProjects() {
     projects.forEach(project => {
-      const projectTags = project.dataset.tags.split(',');
-      const shouldShow = selectedTags.size === 0 || Array.from(selectedTags).every(tag => projectTags.includes(tag));
-      project.style.display = shouldShow ? 'block' : 'none';
+      if (project instanceof HTMLElement) {
+        const projectTags = project.dataset.tags?.split(',') || [];
+        const shouldShow = selectedTags.size === 0 || Array.from(selectedTags).every(tag => projectTags.includes(tag));
+        project.style.display = shouldShow ? 'block' : 'none';
+      }
     });
   }
 </script>
