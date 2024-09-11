@@ -28,6 +28,8 @@ const { title } = Astro.props;
     display: flex;
     flex-direction: column;
     color: #e2e8f0;
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   body::before {
@@ -148,17 +150,23 @@ const { title } = Astro.props;
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: 18px;
+    }
+  }
 </style>
 	</head>
 	<body class="flex flex-col min-h-screen">
-		<header class="p-6">
+		<header class="p-4 md:p-6">
 			<nav>
-				<ul class="flex justify-center space-x-8">
-					<li><a href="/" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold">Home</a></li>
-					<li><a href="/about" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold">About Me</a></li>
-					<li><a href="/experience" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold">Experience</a></li>
-					<li><a href="/resume" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold">Resume</a></li>
-					<li><a href="/contact" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold">Contact</a></li>
+				<ul class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8">
+					<li><a href="/" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold block py-2">Home</a></li>
+					<li><a href="/about" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold block py-2">About Me</a></li>
+					<li><a href="/experience" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold block py-2">Experience</a></li>
+					<li><a href="/resume" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold block py-2">Resume</a></li>
+					<li><a href="/contact" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold block py-2">Contact</a></li>
 				</ul>
 			</nav>
 		</header>
