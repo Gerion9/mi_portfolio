@@ -226,9 +226,9 @@ const projects = [
 </Layout>
 
 <script>
-  const tagButtons = document.querySelectorAll('.tag-filter');
-  const projects = document.querySelectorAll('.project');
-  let selectedTags = new Set();
+  const tagButtons = document.querySelectorAll<HTMLButtonElement>('.tag-filter');
+  const projects = document.querySelectorAll<HTMLElement>('.project');
+  let selectedTags = new Set<string>();
 
   tagButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -248,11 +248,9 @@ const projects = [
 
   function filterProjects() {
     projects.forEach(project => {
-      if (project instanceof HTMLElement) {
-        const projectTags = project.dataset.tags?.split(',') || [];
-        const shouldShow = selectedTags.size === 0 || Array.from(selectedTags).every(tag => projectTags.includes(tag));
-        project.style.display = shouldShow ? 'block' : 'none';
-      }
+      const projectTags = project.dataset.tags?.split(',') || [];
+      const shouldShow = selectedTags.size === 0 || Array.from(selectedTags).every(tag => projectTags.includes(tag));
+      project.style.display = shouldShow ? 'block' : 'none';
     });
   }
 </script>
