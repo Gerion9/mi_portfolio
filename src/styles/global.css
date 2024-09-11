@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-background: #0a192f;
+  --color-text: #e2e8f0;
+  --color-primary: #4F46E5;
+  --color-accent: #F24968;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.interactive-element:hover {
+  box-shadow: 0 0 15px var(--color-accent);
+}
+
+.scrollable-content {
+  height: calc(100vh - 80px); /* Ajusta este valor según la altura de tu encabezado */
+  overflow-y: auto;
+  padding-right: 60px; /* Para dar espacio a la barra de desplazamiento personalizada */
+}
+
+.scrollable-content::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollable-content {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.fade-container {
+  position: relative;
+  height: calc(100vh - 310px);
+  overflow: hidden;
+}
+
+.fade-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(10, 25, 47, 0), rgba(10, 25, 47, 1));
+  pointer-events: none;
+}
+
+.fade-container {
+  position: relative;
+}
+
+.fade-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(10, 25, 47, 0), var(--color-background));
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+}
+
+.fade-container.at-bottom::after {
+  opacity: 0;
+}
+
+main {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-in {
+  animation: fadeIn 1.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

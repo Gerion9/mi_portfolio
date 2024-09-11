@@ -1,0 +1,211 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const tags = [
+  "Data Analysis",
+  "Business Intelligence",
+  "Web Development",
+  "Machine Learning",
+  "Geospatial Analysis",
+  "Visualization",
+  "Automation",
+  "ETL",
+  "Database Management",
+  "API Integration",
+  "UI/UX Design",
+  "Performance Optimization",
+  "Financial Analysis",
+  "Survey Analysis",
+  "Project Management",
+  "Documentation"
+];
+
+const projects = [
+  {
+    id: "comprehensiveBusinessAnalysis",
+    title: "Comprehensive Business Analysis Project for TV Shopping Company",
+    company: "STRTGY",
+    date: "2024-02-01",
+    tags: ["Data Analysis", "Business Intelligence", "Web Development", "Visualization"],
+    description: [
+      "Developed a comprehensive business analysis solution for a leading TV shopping company, including an integrated dashboard and advanced analysis tools.",
+      "Implemented a data extraction process from Microsoft SQL Server, migration to MongoDB Atlas, and data processing using Python and Jupyter Notebooks.",
+      "Designed and developed a robust backend with FastAPI and a modern, responsive frontend using React and Material-UI.",
+      "Integrated Google Trends data to analyze consumer interest, including visualizations of temporal and geographic trends.",
+      "Created specific analysis modules for sales, customers, inventory, products, and operational efficiency.",
+      "Overcame data integration, performance, and scalability challenges by implementing solutions such as caching and query optimization.",
+      "The project demonstrated a comprehensive ability to handle the complete data cycle, from extraction to presentation in an interactive dashboard."
+    ],
+    impact: "This application provides the client with a powerful tool for making real-time data-driven decisions, improving inventory management, optimizing marketing and sales strategies, and enhancing operational efficiency."
+  },
+  {
+    id: "interactivePersonalPortfolio",
+    title: "Interactive Personal Portfolio Development",
+    company: "Personal Project",
+    date: "2024-06-01",
+    tags: ["Web Development", "UI/UX Design", "Performance Optimization"],
+    description: [
+      "Designed and developed an interactive personal portfolio using modern web technologies such as Astro, React, and Tailwind CSS.",
+      "Implemented a responsive and accessible design, ensuring an optimal user experience across all devices.",
+      "Created reusable components to maintain clean and easily maintainable code, following web development best practices.",
+      "Integrated smooth animations and transitions to enhance the interactivity and visual appeal of the site.",
+      "Optimized the website's performance, achieving fast loading times and a fluid experience for visitors.",
+      "Implemented a content management system to facilitate portfolio information updates.",
+      "Used version control with Git to maintain a change history and facilitate future updates."
+    ],
+    impact: "This project demonstrates my skills in front-end web development, UI/UX design, and the ability to create efficient and attractive web solutions. The portfolio serves as a dynamic platform to showcase my projects and skills to potential employers and clients."
+  },
+  {
+    id: "geoAIInsights",
+    title: "GeoAI Insights: Advanced Visualization of the Competitive Landscape",
+    company: "STRTGY",
+    date: "2024-09-01",
+    tags: ["Geospatial Analysis", "Machine Learning", "Visualization"],
+    description: [
+      "Data Extraction: Utilized AI algorithms from OpenAI to process and analyze large datasets from social media platforms like Facebook and Instagram.",
+      "Geospatial Analysis: Implemented GIS tools to create detailed maps categorizing various data points such as showroom locations and retail outlets.",
+      "Market Index Development: Developed bespoke market indices based on data attributes including NAICS codes, providing insights into the potential customer base.",
+      "Integration and Visualization: Combined extracted data with county layer maps to produce gradient-based visual insights."
+    ],
+    impact: "The project culminated in a powerful decision-support tool that enabled strategic planning for market entry and expansion in the U.S. market, providing robust foundations for strategic decisions in real-time."
+  },
+  {
+    id: "automatedDataAnalysisSystem",
+    title: "Automated Data Analysis System",
+    company: "STRTGY",
+    date: "2024-03-01",
+    tags: ["Automation", "ETL", "Data Analysis", "Documentation"],
+    description: [
+      "Developed an automated system for efficient analysis of large-scale survey data.",
+      "Designed and implemented a comprehensive ETL pipeline, including data cleaning and AI-driven insight generation.",
+      "Created an intuitive user interface for data selection and rapid report generation.",
+      "Established thorough documentation practices, enhancing project transparency and replicability."
+    ],
+    impact: "This system significantly reduced the time and effort required for data analysis, enabling faster and more accurate decision-making processes."
+  },
+  {
+    id: "dataAnalysisVisualizationPlatform",
+    title: "Data Analysis and Visualization Platform",
+    company: "STRTGY",
+    date: "2024-11-01",
+    tags: ["Data Analysis", "Visualization", "Project Management"],
+    description: [
+      "Architected a comprehensive data analysis platform, demonstrating proficiency in managing complex analytical projects.",
+      "Developed interactive dashboards for multifaceted metric visualization, showcasing advanced data summarization techniques.",
+      "Implemented robust data security measures to ensure information integrity and confidentiality.",
+      "Created detailed documentation for data processing, analysis, and visualization methodologies."
+    ],
+    impact: "The platform enhanced data-driven decision-making capabilities across the organization, leading to improved operational efficiency and strategic planning."
+  },
+  {
+    id: "automatedInterviewAnalysis",
+    title: "Automated Interview Analysis",
+    company: "STRTGY",
+    date: "2023-07-01",
+    tags: ["Automation", "Data Analysis", "Visualization"],
+    description: [
+      "Automated the analysis of survey data collected from SurveyMonkey to support a methodology focused on identifying market opportunities and enhancing in-house decision-making.",
+      "Used Python, pandas, and multi-index for data filtering and processing, and generated custom radar charts and multi-line charts in Plotly, embedded in HTML for interactive visualization.",
+      "Customized visualizations to match the company's design specifications, allowing for detailed analysis of employee responses by various characteristics such as location and department.",
+      "Enabled the company to identify performance issues within specific work sections and demographics, providing actionable insights for organizational improvement.",
+      "Overcame challenges related to creating custom visualizations and applying arbitrary formulas to generate effective outputs for analysis."
+    ],
+    impact: "This automation significantly reduced the time required for data analysis and provided deeper insights into employee feedback, leading to targeted improvements in organizational performance."
+  },
+  {
+    id: "tradingStrategyBacktesting",
+    title: "Trading Strategy Backtesting",
+    company: "Personal Project",
+    date: "2023-02-01",
+    tags: ["Financial Analysis", "Data Analysis", "API Integration"],
+    description: [
+      "Extracted financial data via an API, visualized trading patterns using Plotly in Python, and a collection of strategies including MA crosses.",
+      "Configured a MongoDB database for storing data from economic calendars, showing capability in database setup and management.",
+      "Conducted correlation analysis on economic data versus market trends to guide strategy development, displaying strong analytical skills.",
+      "Discovered through rigorous testing that the tested strategies performed poorly, reinforcing the necessity for more sophisticated analytical methods and strategy refinement in trading for long-term success."
+    ],
+    impact: "This project provided valuable insights into the complexities of financial markets and the importance of robust testing in strategy development."
+  },
+  {
+    id: "geospatialAnalysisCiudadGuzman",
+    title: "Geospatial Analysis of Ciudad Guzmán",
+    company: "Storymaps Personal Project",
+    date: "2022-09-01",
+    tags: ["Geospatial Analysis", "Visualization"],
+    description: [
+      "Initiated and conducted exploratory geospatial analysis in ArcGIS focusing on earthquake activity in a city from Mexico.",
+      "Analyzed geospatial data to reveal a pattern between earthquake intensity and elevation, presented through visualizations.",
+      "Created an interactive Storymaps map in ArcGIS to illustrate earthquake patterns, inviting further research."
+    ],
+    impact: "This project demonstrated the power of geospatial analysis in understanding natural phenomena and its potential applications in urban planning and disaster preparedness."
+  },
+  {
+    id: "dataAnalysisPropertyManagement",
+    title: "Data Analysis for Property Management System",
+    company: "BlackPrint Technologies",
+    date: "2022-03-01",
+    tags: ["Data Analysis", "Geospatial Analysis", "Database Management"],
+    description: [
+      "Conducted comprehensive data analysis to optimize property management processes.",
+      "Utilized advanced geocoding techniques to enhance location-based data accuracy.",
+      "Performed data cleaning and preparation, contributing to improved data integrity and operational efficiency.",
+      "Applied Python libraries such as pandas and numpy for sophisticated data manipulation and analysis."
+    ],
+    impact: "The analysis led to significant improvements in property management efficiency and accuracy of location-based services."
+  },
+  {
+    id: "userEngagementAnalysisSaaS",
+    title: "User Engagement Analysis for SaaS Platform",
+    company: "Collaborative Project: AGM Analytics",
+    date: "2021-11-01",
+    tags: ["Data Analysis", "Visualization", "Business Intelligence"],
+    description: [
+      "Conducted in-depth data analysis to understand user engagement patterns for a SaaS platform using JavaScript and data visualization tools.",
+      "Developed innovative data visualization techniques to effectively communicate insights on usage trends and customer behavior.",
+      "Collaborated within the team to align analytics with strategic objectives, providing actionable insights for business decision-making."
+    ],
+    impact: "The analysis provided crucial insights into user behavior, enabling data-driven decisions to improve user engagement and retention."
+  }
+];
+
+---
+<Layout title="Experience">
+  <div class="fade-container">
+    <div class="scrollable-content">
+      <h1 class="text-5xl font-bold mb-12 text-center text-indigo-300">Experience</h1>
+      
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-pink-500">Filter by Tags</h2>
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <button class="tag-filter bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded-full text-sm transition duration-300">
+              {tag}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="space-y-16">
+        {projects.map((project) => (
+          <div class="bg-gray-800 p-8 rounded-lg shadow-lg project" data-date={project.date} data-tags={project.tags?.join(',')}>
+            <h2 class="text-3xl font-bold mb-4 text-pink-500">{project.title}</h2>
+            <p class="text-xl text-gray-400 mb-6">
+              {project.company}, {project.date ? new Date(project.date).getFullYear() : 'N/A'}
+            </p>
+            <div class="mb-4 flex flex-wrap gap-2">
+              {project.tags && project.tags.map((tag) => (
+                <span class="bg-indigo-600 text-white px-2 py-1 rounded-full text-xs">{tag}</span>
+              ))}
+            </div>
+            <ul class="list-disc list-inside space-y-4 text-lg">
+              {project.description && project.description.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+            <p class="mt-8 text-lg">Impact: {project.impact}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>

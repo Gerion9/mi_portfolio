@@ -1,0 +1,214 @@
+{
+  "general": {
+    "experience": "Experiencia",
+    "filterByTags": "Filtrar por Etiquetas",
+    "impact": "Impacto",
+    "home": "Inicio",
+    "about": "Sobre Mí",
+    "resume": "Currículum",
+    "contact": "Contacto"
+  },
+  "tags": [
+    "Análisis de Datos",
+    "Inteligencia de Negocios",
+    "Desarrollo Web",
+    "Aprendizaje Automático",
+    "Análisis Geoespacial",
+    "Visualización",
+    "Automatización",
+    "ETL",
+    "Gestión de Bases de Datos",
+    "Integración de API",
+    "Diseño UI/UX",
+    "Optimización de Rendimiento",
+    "Análisis Financiero",
+    "Análisis de Encuestas",
+    "Gestión de Proyectos",
+    "Documentación"
+  ],
+  "home": {
+    "title": "Gairo Peralta - Científico de Datos",
+    "subtitle": "Científico de Datos",
+    "intro": "Desde niño, descubrí el poder de los datos y la automatización. Hoy, como científico de datos, convierto la información en soluciones inteligentes que mejoran la vida diaria y allanan el camino hacia el futuro.",
+    "aboutButton": "Sobre Mí",
+    "experienceButton": "Mi Experiencia",
+    "resumeButton": "Mi Currículum"
+  },
+  "about": {
+    "title": "Sobre Mí - Gairo Peralta",
+    "content": [
+      "Soy Gairo Peralta, un apasionado Científico de Datos con una formación diversa que abarca desde Los Ángeles, California hasta Villa de Álvarez, Colima, México. Mi viaje en la ciencia de datos comenzó con una fascinación infantil por las matemáticas y la tecnología, que evolucionó hacia una búsqueda profesional en UC Berkeley.",
+      "Mi experiencia radica en el uso de análisis avanzados, aprendizaje automático e IA para resolver problemas empresariales complejos. En STRTGY, he liderado proyectos que van desde el análisis sociodemográfico utilizando métricas del INEGI hasta la implementación de herramientas de análisis de mercado impulsadas por IA. Mi trabajo a menudo implica la creación de visualizaciones interactivas y análisis de datos geoespaciales utilizando herramientas como ARCGIS y GeoJSON.",
+      "Antes de mi rol actual, cofundé BlackPrint Technologies, donde me desempeñé como Científico de Datos Principal, enfocándome en sistemas de información geoespacial y aplicaciones de IA. Mi trayectoria académica a través del sistema de colegios comunitarios de California y UC Berkeley me ha equipado con una perspectiva única sobre la ciencia de datos y sus aplicaciones prácticas.",
+      "Fuera del trabajo, soy un ávido aprendiz, siempre explorando nuevas tecnologías y metodologías en el campo de la ciencia de datos. Equilibro mi vida profesional con intereses personales como ver series, ir al gimnasio y descubrir joyas culinarias locales."
+    ],
+    "experienceButton": "Ver Mi Experiencia",
+    "resumeButton": "Ver Mi Currículum"
+  },
+  "projects": [
+    {
+      "id": "comprehensiveBusinessAnalysis",
+      "title": "Proyecto de Análisis Empresarial Integral para Compañía de Compras por TV",
+      "company": "STRTGY",
+      "date": "2024-06-01",
+      "tags": ["Análisis de Datos", "Inteligencia de Negocios", "Desarrollo Web", "Visualización"],
+      "description": [
+        "Desarrollé una solución integral de análisis empresarial para una compañía líder de compras por TV, incluyendo un panel integrado y herramientas de análisis avanzadas.",
+        "Implementé un proceso de extracción de datos de Microsoft SQL Server, migración a MongoDB Atlas y procesamiento de datos utilizando Python y Jupyter Notebooks.",
+        "Diseñé y desarrollé un backend robusto con FastAPI y un frontend moderno y responsivo utilizando React y Material-UI.",
+        "Integré datos de Google Trends para analizar el interés del consumidor, incluyendo visualizaciones de tendencias temporales y geográficas.",
+        "Creé módulos de análisis específicos para ventas, clientes, inventario, productos y eficiencia operativa.",
+        "Superé desafíos de integración de datos, rendimiento y escalabilidad implementando soluciones como caché y optimización de consultas.",
+        "El proyecto demostró una capacidad integral para manejar el ciclo completo de datos, desde la extracción hasta la presentación en un panel interactivo."
+      ],
+      "impact": "Esta aplicación proporciona al cliente una poderosa herramienta para tomar decisiones basadas en datos en tiempo real, mejorando la gestión de inventario, optimizando estrategias de marketing y ventas, y mejorando la eficiencia operativa."
+    },
+    {
+      "id": "interactivePersonalPortfolio",
+      "title": "Desarrollo de Portafolio Personal Interactivo",
+      "company": "Proyecto Personal",
+      "date": "2024-05-01",
+      "tags": ["Desarrollo Web", "Diseño UI/UX"],
+      "description": [
+        "Diseñé y desarrollé un portafolio personal interactivo utilizando tecnologías web modernas como Astro, React y Tailwind CSS.",
+        "Implementé un diseño responsivo y accesible, asegurando una experiencia de usuario óptima en todos los dispositivos.",
+        "Creé componentes reutilizables para mantener un código limpio y fácil de mantener, siguiendo las mejores prácticas de desarrollo web.",
+        "Integré animaciones y transiciones suaves para mejorar la interactividad y el atractivo visual del sitio.",
+        "Optimicé el rendimiento del sitio web, logrando tiempos de carga rápidos y una experiencia fluida para los visitantes.",
+        "Implementé un sistema de gestión de contenido para facilitar las actualizaciones de información del portafolio.",
+        "Utilicé control de versiones con Git para mantener un historial de cambios y facilitar futuras actualizaciones."
+      ],
+      "impact": "Este proyecto demuestra mis habilidades en desarrollo web front-end, diseño UI/UX y la capacidad de crear soluciones web eficientes y atractivas. El portafolio sirve como una plataforma dinámica para mostrar mis proyectos y habilidades a potenciales empleadores y clientes."
+    },
+    {
+      "id": "geoAIInsights",
+      "title": "GeoAI Insights: Visualización Avanzada del Panorama Competitivo",
+      "company": "STRTGY",
+      "date": "2024-01-01",
+      "tags": ["Análisis Geoespacial", "Aprendizaje Automático", "Visualización"],
+      "description": [
+        "Extracción de Datos: Utilicé algoritmos de IA de OpenAI para procesar y analizar grandes conjuntos de datos de plataformas de redes sociales como Facebook e Instagram.",
+        "Análisis Geoespacial: Implementé herramientas GIS para crear mapas detallados categorizando varios puntos de datos como ubicaciones de salas de exposición y puntos de venta.",
+        "Desarrollo de Índice de Mercado: Desarrollé índices de mercado personalizados basados en atributos de datos incluyendo códigos NAICS, proporcionando información sobre la base de clientes potenciales.",
+        "Integración y Visualización: Combiné datos extraídos con mapas de capas de condados para producir información visual basada en gradientes."
+      ],
+      "impact": "El proyecto culminó en una poderosa herramienta de apoyo a la toma de decisiones que permitió la planificación estratégica para la entrada y expansión en el mercado de EE.UU., proporcionando bases sólidas para decisiones estratégicas en tiempo real."
+    },
+    {
+      "id": "automatedDataAnalysisSystem",
+      "title": "Sistema Automatizado de Análisis de Datos",
+      "company": "STRTGY",
+      "date": "2024-03-01",
+      "tags": ["Automatización", "ETL", "Análisis de Datos", "Documentación"],
+      "description": [
+        "Desarrollé un sistema automatizado para el análisis eficiente de datos de encuestas a gran escala.",
+        "Diseñé e implementé un pipeline ETL integral, incluyendo limpieza de datos y generación de insights impulsada por IA.",
+        "Creé una interfaz de usuario intuitiva para la selección de datos y la generación rápida de informes.",
+        "Establecí prácticas de documentación exhaustivas, mejorando la transparencia y replicabilidad del proyecto."
+      ],
+      "impact": "Este sistema redujo significativamente el tiempo y esfuerzo requeridos para el análisis de datos, permitiendo procesos de toma de decisiones más rápidos y precisos."
+    },
+    {
+      "id": "dataAnalysisVisualizationPlatform",
+      "title": "Plataforma de Análisis y Visualización de Datos",
+      "company": "STRTGY",
+      "date": "2024-11-01",
+      "tags": ["Análisis de Datos", "Visualización", "Gestión de Proyectos"],
+      "description": [
+        "Diseñé una plataforma integral de análisis de datos, demostrando competencia en la gestión de proyectos analíticos complejos.",
+        "Desarrollé paneles interactivos para la visualización de métricas multifacéticas, mostrando técnicas avanzadas de resumen de datos.",
+        "Implementé medidas robustas de seguridad de datos para garantizar la integridad y confidencialidad de la información.",
+        "Creé documentación detallada para las metodologías de procesamiento, análisis y visualización de datos."
+      ],
+      "impact": "La plataforma mejoró las capacidades de toma de decisiones basadas en datos en toda la organización, llevando a una mejor eficiencia operativa y planificación estratégica."
+    },
+    {
+      "id": "automatedInterviewAnalysis",
+      "title": "Análisis Automatizado de Entrevistas",
+      "company": "STRTGY",
+      "date": "2023-08-01",
+      "tags": ["Automatización", "Análisis de Datos", "Visualización"],
+      "description": [
+        "Automaticé el análisis de datos de encuestas recopilados de SurveyMonkey para apoyar una metodología enfocada en identificar oportunidades de mercado y mejorar la toma de decisiones interna.",
+        "Utilicé Python, pandas y multi-index para el filtrado y procesamiento de datos, y generé gráficos de radar personalizados y gráficos de líneas múltiples en Plotly, incrustados en HTML para visualización interactiva.",
+        "Personalicé visualizaciones para coincidir con las especificaciones de diseño de la empresa, permitiendo un análisis detallado de las respuestas de los empleados por varias características como ubicación y departamento.",
+        "Permití a la empresa identificar problemas de rendimiento dentro de secciones de trabajo específicas y demografías, proporcionando información procesable para la mejora organizacional.",
+        "Superé desafíos relacionados con la creación de visualizaciones personalizadas y la aplicación de fórmulas arbitrarias para generar resultados efectivos para el análisis."
+      ],
+      "impact": "Esta automatización redujo significativamente el tiempo requerido para el análisis de datos y proporcionó información más profunda sobre la retroalimentación de los empleados, llevando a mejoras dirigidas en el rendimiento organizacional."
+    },
+    {
+      "id": "tradingStrategyBacktesting",
+      "title": "Backtesting de Estrategia de Trading",
+      "company": "Proyecto Personal",
+      "date": "2023-02-01",
+      "tags": ["Análisis Financiero", "Análisis de Datos", "Integración de API"],
+      "description": [
+        "Extraje datos financieros a través de una API, visualicé patrones de trading usando Plotly en Python, y una colección de estrategias incluyendo cruces de MA.",
+        "Configuré una base de datos MongoDB para almacenar datos de calendarios económicos, mostrando capacidad en configuración y gestión de bases de datos.",
+        "Realicé análisis de correlación en datos económicos versus tendencias de mercado para guiar el desarrollo de estrategias, mostrando fuertes habilidades analíticas.",
+        "Descubrí a través de pruebas rigurosas que las estrategias probadas tuvieron un rendimiento deficiente, reforzando la necesidad de métodos analíticos más sofisticados y refinamiento de estrategias en trading para el éxito a largo plazo."
+      ],
+      "impact": "Este proyecto proporcionó valiosas perspectivas sobre las complejidades de los mercados financieros y la importancia de pruebas robustas en el desarrollo de estrategias."
+    },
+    {
+      "id": "geospatialAnalysisCiudadGuzman",
+      "title": "Análisis Geoespacial de Ciudad Guzmán",
+      "company": "Proyecto Personal Storymaps",
+      "date": "2022-09-01",
+      "tags": ["Análisis Geoespacial", "Visualización"],
+      "description": [
+        "Inicié y realicé análisis geoespacial exploratorio en ArcGIS enfocándome en la actividad sísmica en una ciudad de México.",
+        "Analicé datos geoespaciales para revelar un patrón entre la intensidad de los terremotos y la elevación, presentado a través de visualizaciones.",
+        "Creé un mapa interactivo de Storymaps en ArcGIS para ilustrar patrones de terremotos, invitando a una investigación adicional."
+      ],
+      "impact": "Este proyecto demostró el poder del análisis geoespacial en la comprensión de fenómenos naturales y sus potenciales aplicaciones en planificación urbana y preparación para desastres."
+    },
+    {
+      "id": "dataAnalysisPropertyManagement",
+      "title": "Análisis de Datos para Sistema de Gestión de Propiedades",
+      "company": "BlackPrint Technologies",
+      "date": "2022-06-01",
+      "tags": ["Análisis de Datos", "Análisis Geoespacial"],
+      "description": [
+        "Realicé un análisis de datos integral para optimizar los procesos de gestión de propiedades.",
+        "Utilicé técnicas avanzadas de geocodificación para mejorar la precisión de los datos basados en ubicación.",
+        "Realicé limpieza y preparación de datos, contribuyendo a mejorar la integridad de los datos y la eficiencia operativa.",
+        "Apliqué bibliotecas de Python como pandas y numpy para manipulación y análisis de datos sofisticados."
+      ],
+      "impact": "El análisis llevó a mejoras significativas en la eficiencia de la gestión de propiedades y la precisión de los servicios basados en ubicación."
+    },
+    {
+      "id": "userEngagementAnalysisSaaS",
+      "title": "Análisis de Compromiso de Usuarios para Plataforma SaaS",
+      "company": "Proyecto Colaborativo: AGM Analytics",
+      "date": "2021-03-01",
+      "description": [
+        "Realicé un análisis de datos en profundidad para entender los patrones de compromiso de usuarios para una plataforma SaaS utilizando JavaScript y herramientas de visualización de datos.",
+        "Desarrollé técnicas innovadoras de visualización de datos para comunicar eficazmente insights sobre tendencias de uso y comportamiento del cliente.",
+        "Colaboré dentro del equipo para alinear los análisis con los objetivos estratégicos, proporcionando insights procesables para la toma de decisiones empresariales."
+      ],
+      "impact": "El análisis proporcionó insights cruciales sobre el comportamiento del usuario, permitiendo decisiones basadas en datos para mejorar el compromiso y la retención de usuarios."
+    }
+  ],
+  "contact": {
+    "title": "Contacto - Gairo Peralta",
+    "heading": "Información de Contacto",
+    "getInTouch": "Ponte en Contacto",
+    "reachOut": "No dudes en contactarme para cualquier oportunidad o pregunta.",
+    "email": "gairo@berkeley.edu",
+    "phone": {
+      "us": "🇺🇸:",
+      "mx": "🇲🇽:"
+    },
+    "phoneNote": "* No es necesario marcar el código de país si llamas desde dentro del país",
+    "locations": "Ubicaciones",
+    "basedIn": "Basado en Los Ángeles, California y Villa de Álvarez, Colima, México"
+  },
+  "resume": {
+    "title": "Currículum - Gairo Peralta",
+    "heading": "Currículum",
+    "summary": "Aquí tienes un resumen de mi experiencia profesional y habilidades. Para información más detallada, no dudes en descargar mi currículum completo.",
+    "downloadButton": "Descargar Currículum Completo"
+  }
+}

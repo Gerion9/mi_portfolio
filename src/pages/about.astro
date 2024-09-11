@@ -1,0 +1,37 @@
+   ---
+   import Layout from '../layouts/Layout.astro';
+   ---
+
+   <Layout title="About Me - Gairo Peralta">
+     <section class="text-center max-w-4xl mx-auto">
+       <h1 class="text-6xl font-bold mb-8 text-indigo-300">About Me</h1>
+       
+       <div class="relative w-48 h-48 mx-auto mb-12">
+         <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full blur-xl opacity-75"></div>
+         <img src="/images/profile.jpg" alt="Gairo Peralta" class="relative w-full h-full object-cover rounded-full shadow-xl">
+       </div>
+
+       <div class="space-y-8 text-left">
+         <p class="text-xl text-gray-300">
+           I'm Gairo Peralta, a passionate Data Scientist with a diverse background spanning from Los Angeles, California to Villa de Álvarez, Colima, Mexico. My journey in data science began with a childhood fascination for mathematics and technology, which evolved into a professional pursuit at UC Berkeley.
+         </p>
+
+         <p class="text-xl text-gray-300">
+           My expertise lies in leveraging advanced analytics, machine learning, and AI to solve complex business problems. At STRTGY, I've led projects ranging from sociodemographic analysis using INEGI metrics to implementing AI-driven market analysis tools. My work often involves creating interactive visualizations and geospatial data analysis using tools like ARCGIS and GeoJSON.
+         </p>
+
+         <p class="text-xl text-gray-300">
+           Prior to my current role, I co-founded BlackPrint Technologies, where I served as the Lead Data Scientist, focusing on geospatial information systems and AI applications. My academic journey through the California community college system and UC Berkeley has equipped me with a unique perspective on data science and its practical applications.
+         </p>
+
+         <p class="text-xl text-gray-300">
+           Outside of work, I'm an avid learner, always exploring new technologies and methodologies in the field of data science. I balance my professional life with personal interests like watching series, going to the gym, and discovering local culinary gems.
+         </p>
+       </div>
+
+       <div class="mt-12 flex justify-center space-x-6">
+         <a href="/experience" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">View My Experience</a>
+         <a href="/resume" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">View My Resume</a>
+       </div>
+     </section>
+   </Layout>

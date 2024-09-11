@@ -1,0 +1,178 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Gairo Peralta - Data Scientist Portfolio">
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<ViewTransitions />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style is:global>
+  body {
+    background: linear-gradient(135deg, #0a192f 0%, #1a0a1f 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    color: #e2e8f0;
+  }
+
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, transparent 20%, #0a192f 20%, #0a192f 80%, transparent 80%, transparent);
+    background-size: 50px 50px;
+    animation: moveBackground 8s linear infinite;
+    opacity: 0.1;
+    z-index: -1;
+  }
+
+  @keyframes moveBackground {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 50px 50px;
+    }
+  }
+
+  .interactive-element {
+    transition: all 0.3s ease;
+  }
+
+  .interactive-element:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(242, 73, 104, 0.5);
+  }
+
+  .timeline-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--color-primary), var(--color-accent));
+    opacity: 0.3;
+    z-index: 1000;
+  }
+
+  .timeline-indicator::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--scroll, 0%);
+    background: var(--color-accent);
+    transition: height 0.3s ease-out;
+  }
+
+  [data-date] {
+    position: relative;
+    transition: opacity 0.3s ease-out;
+  }
+
+  [data-date]::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    transform: translateY(-50%) scale(0);
+    transition: transform 0.3s ease-out;
+  }
+
+  [data-date].active::before {
+    transform: translateY(-50%) scale(1);
+  }
+
+  .date-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .date-marker {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    transition: all 0.3s ease-out;
+  }
+
+  .date-marker.active {
+    background: var(--color-accent);
+    font-weight: bold;
+  }
+
+  .scrollable-content {
+    height: calc(100vh - 310px);
+    overflow-y: auto;
+    padding-right: 60px;
+    margin-bottom: 0px;
+    mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  }
+
+  .scrollable-content::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollable-content {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+	</head>
+	<body class="flex flex-col min-h-screen">
+		<header class="p-6">
+			<nav>
+				<ul class="flex justify-center space-x-8">
+					<li><a href="/" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold">Home</a></li>
+					<li><a href="/about" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold">About Me</a></li>
+					<li><a href="/experience" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold">Experience</a></li>
+					<li><a href="/resume" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold">Resume</a></li>
+					<li><a href="/contact" class="text-indigo-300 hover:text-white transition-colors duration-300 text-lg font-semibold">Contact</a></li>
+				</ul>
+			</nav>
+		</header>
+		<main class="container mx-auto px-4 py-12 flex-grow max-w-4xl">
+			<slot />
+		</main>
+		<footer class="py-8 text-center mt-auto">
+			<div class="social-media space-x-6 mb-4">
+				<a href="https://linkedin.com/in/gairoperalta" class="text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-linkedin fa-2x"></i></a>
+				<a href="https://github.com/Gerion9" class="text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-github fa-2x"></i></a>
+				<a href="https://www.facebook.com/gairo.yostin" class="text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-facebook fa-2x"></i></a>
+				<a href="https://www.instagram.com/gairo_peralta" class="text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-instagram fa-2x"></i></a>
+			</div>
+			<p class="text-gray-400 text-sm">&copy; 2024 Gairo Peralta</p>
+		</footer>
+	</body>
+</html>
