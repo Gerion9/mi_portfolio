@@ -83,7 +83,7 @@ const projects = [
     title: "Automated Interview Analysis",
     company: "STRTGY",
     date: "2023-07-01",
-    tags: ["Automation", "Data Analysis", "Data Visualization", "SurveyMonkey","Survey Analysis" ,"Python", "Pandas", "Multi-Index", "Plotly", "HTML", "Interactive Visualization", "Custom Visualizations", "Employee Feedback Analysis", "Performance Analysis", "Organizational Improvement"],
+    tags: ["Automation", "Data Analysis", "Data Visualization", "SurveyMonkey", "Survey Analysis","Python", "Pandas", "Multi-Index", "Plotly", "HTML", "Interactive Visualization", "Custom Visualizations", "Employee Feedback Analysis", "Performance Analysis", "Organizational Improvement"],
     description: [
       "Automated the analysis of survey data collected from SurveyMonkey to support a methodology focused on identifying market opportunities and enhancing in-house decision-making.",
       "Used Python, pandas, and multi-index for data filtering and processing, and generated custom radar charts and multi-line charts in Plotly, embedded in HTML for interactive visualization.",
@@ -148,8 +148,8 @@ const projects = [
     impact: "The analysis provided crucial insights into user behavior, enabling data-driven decisions to improve user engagement and retention."
   }
 ];
-function getCategoryIcon(category) {
-  const icons = {
+function getCategoryIcon(category: string) {
+    const icons = {
     "Data Analysis and Visualization": "📊",
     "Web Development and Technologies": "💻",
     "Databases and Data Management": "🗄️",
@@ -177,7 +177,7 @@ const tagCategories = {
 
 ---
 
-<Layout title="Experience - Gairo Peralta">
+<Layout title="Experience">
   <div class="fade-container">
     <div class="scrollable-content">
       <h1 class="text-5xl font-bold mb-12 text-center text-indigo-300">Experience</h1>
@@ -232,7 +232,7 @@ const tagCategories = {
   const categoryButtons = document.querySelectorAll('.category-filter');
   const tagButtons = document.querySelectorAll('.tag-filter');
   const projects = document.querySelectorAll('.project');
-  let selectedTags = new Set();
+  let selectedTags: Set<string> = new Set();
 
   categoryButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -274,13 +274,13 @@ const tagCategories = {
     });
   });
 
-  function filterProjects() {
-    projects.forEach(project => {
-      if (project instanceof HTMLElement) {
-        const projectTags = project.dataset.tags?.split(',') || [];
-        const shouldShow = selectedTags.size === 0 || Array.from(selectedTags).every(tag => projectTags.includes(tag));
-        project.style.display = shouldShow ? 'block' : 'none';
-      }
-    });
-  }
+function filterProjects() {
+  projects.forEach(project => {
+    if (project instanceof HTMLElement) {
+      const projectTags = project.dataset.tags?.split(',') || [];
+      const shouldShow = selectedTags.size === 0 || Array.from(selectedTags).every(tag => typeof tag === 'string' && projectTags.includes(tag));
+      project.style.display = shouldShow ? 'block' : 'none';
+    }
+  });
+}
 </script>
