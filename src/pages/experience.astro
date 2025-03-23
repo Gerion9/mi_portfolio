@@ -226,44 +226,16 @@ const tagCategories = {
   "Databases and Data Management": ["MongoDB", "SQL", "ETL", "Database Management", "Data Processing", "Data Migration"],
   "Optimization and Performance": ["Performance Optimization", "Automation"],
   "Design and User Experience": ["UI/UX Design", "Responsive Design", "Accessibility", "Animation"],
-  "Artificial Intelligence and Machine Learning": ["Machine Learning", "OpenAI"],
+  "Artificial Intelligence and Machine Learning": ["Machine Learning", "Deep Learning", "OpenAI", "Time Series Analysis"],
   "Project Management and Methodologies": ["Project Management", "Git", "Version Control", "Documentation"],
   "Specific Analyses": ["Financial Analysis", "Survey Analysis", "Market Analysis", "User Engagement", "Customer Behavior"],
-  "Tools and Platforms": ["Python", "JavaScript", "ArcGIS", "SaaS Platform"]
+  "Tools and Platforms": ["Python", "JavaScript", "ArcGIS", "SaaS Platform", "Pandas", "Numpy", "TensorFlow", "PyTorch"]
 };
 
 // Sort projects by date (most recent to oldest)
 const projects = [...unsortedProjects].sort((a, b) => {
   return new Date(b.date).getTime() - new Date(a.date).getTime();
 });
-
-// Organize tags into more specific categories with icons
-function getCategoryIcon(category: string) {
-    const icons = {
-    "Data Analysis and Visualization": "📊",
-    "Web Development and Technologies": "💻",
-    "Databases and Data Management": "🗄️",
-    "Optimization and Performance": "⚡",
-    "Design and User Experience": "🎨",
-    "Artificial Intelligence and Machine Learning": "🤖",
-    "Project Management and Methodologies": "📅",
-    "Specific Analyses": "🔍",
-    "Tools and Platforms": "🛠️"
-  };
-  return icons[category] || "📌";
-}
-
-const tagCategories = {
-  "Data Analysis and Visualization": ["Data Analysis", "Data Visualization", "Business Intelligence", "Geospatial Analysis"],
-  "Web Development and Technologies": ["Web Development", "React", "FastAPI", "Astro", "Tailwind CSS"],
-  "Databases and Data Management": ["MongoDB", "SQL", "ETL", "Database Management", "Data Processing", "Data Migration"],
-  "Optimization and Performance": ["Performance Optimization", "Automation"],
-  "Design and User Experience": ["UI/UX Design", "Responsive Design", "Accessibility", "Animation"],
-  "Artificial Intelligence and Machine Learning": ["Machine Learning", "Deep Learning", "OpenAI", "Time Series Analysis"],
-  "Project Management and Methodologies": ["Project Management", "Git", "Version Control", "Documentation"],
-  "Specific Analyses": ["Financial Analysis", "Survey Analysis", "Market Analysis", "User Engagement", "Customer Behavior"],
-  "Tools and Platforms": ["Python", "JavaScript", "ArcGIS", "SaaS Platform", "Pandas", "Numpy", "TensorFlow", "PyTorch"]
-};
 
 // Structured data for SEO
 const structuredData = {
@@ -388,12 +360,18 @@ const structuredData = {
                       {typeof project.description === 'string' ? (
                         <p class="text-sm sm:text-base text-gray-300">{project.description}</p>
                       ) : (
-                        project.description && project.description.map((item) => (
-                          <div class="flex items-start">
-                            <span class="text-indigo-300 mr-2">•</span>
-                            <p class="text-sm sm:text-base text-gray-300">{item}</p>
-                          </div>
-                        ))
+                        (() => {
+                          if (project.description && Array.isArray(project.description)) {
+                            const descArr: string[] = project.description as string[];
+                            return descArr.map((item: string) => (
+                              <div class="flex items-start">
+                                <span class="text-indigo-300 mr-2">•</span>
+                                <p class="text-sm sm:text-base text-gray-300">{item}</p>
+                              </div>
+                            ));
+                          }
+                          return null;
+                        })()
                       )}
                     </div>
                     
@@ -460,7 +438,7 @@ const structuredData = {
   </div>
   
   <!-- Add structured data for SEO -->
-  <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 </Layout>
 
 <script>

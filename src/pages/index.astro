@@ -39,19 +39,19 @@ const technicalSkills = [
 const featuredProjects = [
   {
     title: "Time Series Forecasting",
-    description: "Advanced forecasting models using SARIMA, Prophet, XGBoost, LSTM & Transformer architectures for inventory optimization",
+    description: "Built forecasting models that help companies predict inventory needs and better plan for future demand",
     icon: "fas fa-chart-line",
     year: "2024"
   },
   {
     title: "GeoAI Insights",
-    description: "Competition analysis combining GPT-4 Vision with geospatial analysis for retail location strategy",
+    description: "Combined AI and mapping technologies to help retail businesses find the best locations for new stores",
     icon: "fas fa-map-marked-alt",
     year: "2024"
   },
   {
     title: "Business Analytics Dashboard",
-    description: "React & FastAPI solution transforming months of manual analysis into seconds of automated insights",
+    description: "Created a dashboard that automates analysis tasks, saving teams hours of manual work each week",
     icon: "fas fa-tachometer-alt",
     year: "2024"
   }
@@ -68,12 +68,12 @@ const featuredProjects = [
     </div>
     <h2 class="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6 text-pink-500 font-semibold animate__animated animate__fadeIn animate__delay-1s">Data Scientist & AI Specialist</h2>
     <p class="text-base md:text-xl text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto animate__animated animate__fadeIn animate__delay-1s leading-relaxed">
-      Transforming complex data into actionable insights through <span class="text-indigo-300">geospatial analysis</span>, <span class="text-indigo-300">generative AI</span>, and <span class="text-indigo-300">business intelligence</span> solutions for strategic decision-making.
+      Using <span class="text-indigo-300">geospatial analysis</span>, <span class="text-indigo-300">AI techniques</span>, and <span class="text-indigo-300">data visualization</span> to help businesses make better decisions with their data.
     </p>
     <div class="text-base md:text-lg text-gray-400 mb-8 md:mb-12 max-w-2xl mx-auto italic animate__animated animate__fadeIn animate__delay-2s relative">
       <div class="absolute -left-2 top-0 text-3xl md:text-4xl text-indigo-500 opacity-30">"</div>
       <p class="relative z-10 px-4 md:px-0">
-        Since childhood, I discovered the power of data and automation. Today, as a data scientist, I turn information into intelligent solutions that enhance daily life and pave the way for the future.
+        I enjoy finding patterns in data and building tools that make complex information easier to understand and use. My goal is to create solutions that actually help people in their daily work.
       </p>
       <div class="absolute -right-2 bottom-0 text-3xl md:text-4xl text-indigo-500 opacity-30">"</div>
     </div>
@@ -137,7 +137,7 @@ const featuredProjects = [
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   
   <!-- Add structured data for SEO -->
-  <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
   
   <style>
     /* Animation for skill tags */
@@ -170,9 +170,9 @@ const featuredProjects = [
     document.addEventListener('DOMContentLoaded', () => {
       const skillElements = document.querySelectorAll('.bg-gray-800\\/50.px-3.py-2, .bg-gray-800\\/50.px-4.py-3');
       
-      skillElements.forEach((el, index) => {
+      skillElements.forEach((el) => {
         el.classList.add('animate-float');
-        el.style.animationDelay = `${Math.random() * 2}s`;
+        (el as HTMLElement).style.animationDelay = `${Math.random() * 2}s`;
       });
       
       // Fix for touch events on mobile
