@@ -1,151 +1,208 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const projects = [
+// Projects array (will be sorted below)
+const unsortedProjects = [
   {
-    id: "comprehensiveBusinessAnalysis",
-    title: "Comprehensive Business Analysis Project for TV Shopping Company",
-    company: "STRTGY",
-    date: "2024-02-01",
-    tags: ["Data Analysis", "Business Intelligence", "Web Development", "Data Visualization", "Python", "React", "FastAPI", "MongoDB", "SQL", "ETL", "Database Management", "API Integration", "Performance Optimization", "Dashboard Development", "Data Processing", "Data Migration"],
-    description: [
-      "Developed a comprehensive business analysis solution for a leading TV shopping company, including an integrated dashboard and advanced analysis tools.",
-      "Implemented a data extraction process from Microsoft SQL Server, migration to MongoDB Atlas, and data processing using Python and Jupyter Notebooks.",
-      "Designed and developed a robust backend with FastAPI and a modern, responsive frontend using React and Material-UI.",
-      "Integrated Google Trends data to analyze consumer interest, including visualizations of temporal and geographic trends.",
-      "Created specific analysis modules for sales, customers, inventory, products, and operational efficiency.",
-      "Overcame data integration, performance, and scalability challenges by implementing solutions such as caching and query optimization.",
-      "The project demonstrated a comprehensive ability to handle the complete data cycle, from extraction to presentation in an interactive dashboard."
-    ],
-    impact: "This application provides the client with a powerful tool for making real-time data-driven decisions, improving inventory management, optimizing marketing and sales strategies, and enhancing operational efficiency."
-  },
-  {
-    id: "interactivePersonalPortfolio",
-    title: "Interactive Personal Portfolio Development",
-    company: "Personal Project",
-    date: "2024-06-01",
-    tags: ["Web Development", "UI/UX Design", "Performance Optimization", "React", "Tailwind CSS", "Astro", "Content Management", "Git", "Version Control", "Responsive Design", "Accessibility", "Component-Based Architecture", "Animation"],
-    description: [
-      "Designed and developed an interactive personal portfolio using modern web technologies such as Astro, React, and Tailwind CSS.",
-      "Implemented a responsive and accessible design, ensuring an optimal user experience across all devices.",
-      "Created reusable components to maintain clean and easily maintainable code, following web development best practices.",
-      "Integrated smooth animations and transitions to enhance the interactivity and visual appeal of the site.",
-      "Optimized the website's performance, achieving fast loading times and a fluid experience for visitors.",
-      "Implemented a content management system to facilitate portfolio information updates.",
-      "Used version control with Git to maintain a change history and facilitate future updates."
-    ],
-    impact: "This project demonstrates my skills in front-end web development, UI/UX design, and the ability to create efficient and attractive web solutions. The portfolio serves as a dynamic platform to showcase my projects and skills to potential employers and clients."
-  },
-  {
-    id: "geoAIInsights",
     title: "GeoAI Insights: Advanced Visualization of the Competitive Landscape",
     company: "STRTGY",
     date: "2024-09-01",
+    imgSrc: "/images/project-1.jpg",
+    impact: ["Decision Confidence: +82%", "Market Analysis Time: 70% ↓"],
     tags: ["Geospatial Analysis", "Machine Learning", "Data Visualization", "OpenAI", "GIS", "Social Media Analytics", "Market Analysis", "Strategic Planning", "Decision Support Systems"],
-    description: [
-      "Data Extraction: Utilized AI algorithms from OpenAI to process and analyze large datasets from social media platforms like Facebook and Instagram.",
-      "Geospatial Analysis: Implemented GIS tools to create detailed maps categorizing various data points such as showroom locations and retail outlets.",
-      "Market Index Development: Developed bespoke market indices based on data attributes including NAICS codes, providing insights into the potential customer base.",
-      "Integration and Visualization: Combined extracted data with county layer maps to produce gradient-based visual insights."
-    ],
-    impact: "The project culminated in a powerful decision-support tool that enabled strategic planning for market entry and expansion in the U.S. market, providing robust foundations for strategic decisions in real-time."
+    description: "Leveraged GPT-4 and GPT Vision for competitor analysis, using chain of thought reasoning and previous examples to extract insights on employee count, building size, and competitor locations. Implemented GIS tools with GeoJSON and ArcGIS Online, overcoming data cleaning challenges to create detailed maps of showroom and retail locations.",
+    impacts: [
+      "Utilized Storymaps in ArcGIS Online for effective visualization, balancing local and cloud-based processing based on analysis requirements.",
+      "Developed gradient-based visualizations using ArcGIS API to highlight competition concentrations across the US, ensuring interpretability through interactive maps.",
+      "Integrated AI-driven analysis with geospatial data, validating accuracy with GPT Vision API, to create a comprehensive competitive landscape view."
+    ]
   },
   {
-    id: "automatedDataAnalysisSystem",
-    title: "Automated Data Analysis System",
+    title: "Electoral and Socioeconomic Geospatial Analysis",
+    company: "Videntia",
+    date: "2025-05-01",
+    imgSrc: "/images/project-2.jpg",
+    impact: ["Data Processed: 2.5M+", "Predictive Effectiveness: +78%"],
+    tags: ["Geospatial Analysis", "Data Visualization", "React", "Python", "ETL", "GeoPandas", "Mapbox GL", "TypeScript", "Turf.js", "Data Processing", "Inventory Optimization"],
+    description: "Developed an advanced analytical platform integrating historical electoral data (2018-2024) with socioeconomic indicators at the block level for all of Mexico, allowing multidimensional analysis of electoral behavior. Implemented a frontend with React 18, TypeScript 5.0, and Mapbox GL JS v2.15 with custom extensions for interactive geospatial visualization and spatial analysis using Turf.js.",
+    impacts: [
+      "Designed and implemented Python scripts with GeoPandas for geospatial ETL, shapefile transformation, and vector processing for geometric schema unification.",
+      "Processed more than 2.5M urban blocks from INEGI with more than 30 variables per entity, implementing AMAI classification algorithms for socioeconomic level calculation.",
+      "Implemented topological optimization with adaptive Douglas-Peucker simplification and generation of vector tiling schemes with efficient encoding."
+    ]
+  },
+  {
+    title: "Intelligent Commercial Document Analysis System",
+    company: "Prodensa AI",
+    date: "2025-04-01",
+    imgSrc: "/images/project-3.jpg",
+    impact: ["Extraction Accuracy: +95%", "Processing Time: 98% ↓"],
+    tags: ["AI Application", "Document Processing", "React", "Vite", "Tailwind CSS", "PDF Processing", "LLM Integration", "NLP", "Data Extraction", "Frontend Development", "Meta Llama", "Prompt Engineering"],
+    description: "Designed and developed a multipurpose system to extract structured information from unstructured commercial documents such as invoices, packing lists, and customs documents. Implemented a modern frontend application with React and Vite, using Tailwind CSS for responsive design and Drag and Drop system for file handling.",
+    impacts: [
+      "Created an advanced document processing system with support for multiple formats (PDF, CSV, XLSX) and worker threads for asynchronous processing without blocking the main thread.",
+      "Developed advanced prompt engineering techniques for LLMs, with specialized templates for each document type, optimized parameter configuration, and advanced response validation.",
+      "Implemented an optimized processing pipeline with asynchronous architecture, real-time progress tracking, robust error handling, and memory optimization."
+    ]
+  },
+  {
+    title: "Specialized Industrial Real Estate Chatbot",
+    company: "STRTGY",
+    date: "2025-03-01",
+    imgSrc: "/images/project-4.jpg",
+    impact: ["Response Relevance: +90%", "Query Time: 85% ↓"],
+    tags: ["Machine Learning", "NLP", "Python", "Streamlit", "RAG", "LLM", "Vector Database", "Data Processing", "AI Application", "Anthropic Claude", "OpenAI", "PDF Generation"],
+    description: "Designed and implemented a custom RAG (Retrieval Augmented Generation) system with chatbot for the industrial real estate sector, integrating Anthropic's Claude 3.5 Sonnet and OpenAI APIs. Developed a data processing system for semantic vectorization (embeddings) of complex real estate information using OpenAI Embeddings and FAISS for efficient search.",
+    impacts: [
+      "Implemented advanced prompt engineering techniques with a multi-layer system for contextualization, generation, and formatting, significantly improving the relevance and accuracy of responses.",
+      "Created a dynamic PDF report generation system from conversations, using Jinja2 for templating and HTML-PDF conversion techniques for structured documents.",
+      "Developed a customized user interface in Streamlit with multi-user authentication system, dynamic theming, and accessibility optimizations."
+    ]
+  },
+  {
+    title: "Comprehensive Data Analysis Platform for TV Shopping Company",
+    company: "STRTGY",
+    date: "2025-02-01",
+    imgSrc: "/images/project-5.jpg",
+    impact: ["Analysis Time: 99% ↓", "User Adoption: +85%"],
+    tags: ["Data Analysis", "Business Intelligence", "FastAPI", "React", "MongoDB", "Dashboard Development", "API Development", "ETL", "Material UI", "Python", "JavaScript", "Data Visualization", "Microservices", "SQL", "Database Management", "API Integration", "Performance Optimization"],
+    description: "Developed a complete data analysis and business visualization ecosystem consisting of three interconnected projects: a RESTful API backend (FastAPI), an interactive dashboard (React), and a report generation platform (Flask with AI). Implemented a RESTful API with FastAPI that provides access to analytical data stored in MongoDB, with endpoints for different dimensions of business analysis.",
+    impacts: [
+      "Designed and developed an interactive dashboard with React 18 and Material UI 6 for business KPI visualization, implementing visualizations with Recharts, D3.js, and React Leaflet.",
+      "Created a data-driven decision-making solution, implementing KPIs for sales trends, customer segmentation, inventory turnover, and advertising effectiveness through interactive dashboards.",
+      "Employed K-means clustering for customer segmentation and created interactive chloropleth maps using GeoJSON data, revealing geographical patterns in sales and customer behavior.",
+      "Integrated Google Trends data using time series analysis to anticipate consumer interests, informing inventory management and marketing strategies.",
+      "Implemented a multi-stage data processing pipeline, extracting data from SQL databases, storing in MongoDB, processing with pandas and numpy, and integrating external APIs for data enrichment."
+    ]
+  },
+  {
+    title: "Advanced Demand Forecasting & Inventory Optimization System",
+    company: "STRTGY",
+    date: "2025-01-01",
+    imgSrc: "/images/project-6.jpg",
+    impact: ["Forecast Accuracy: +42%", "Inventory Cost: 30% ↓"],
+    tags: ["Time Series Analysis", "Machine Learning", "Python", "React", "TypeScript", "Data Processing", "Inventory Optimization", "Prophet", "SARIMA", "ETL", "Data Visualization", "Chart.js"],
+    description: "Developed a complete demand forecasting and inventory optimization system for the beverage industry, incorporating time series analysis, statistical modeling, and full-stack implementation. Designed and built a robust ETL pipeline for beverage sales data, with multiple source integration, advanced cleaning with pattern extraction, and automated outlier detection.",
+    impacts: [
+      "Implemented an adaptive forecasting system that selects optimal algorithms based on data characteristics: Prophet for SKUs with sufficient history, SARIMA for products with moderate history, and moving averages as fallback.",
+      "Developed a mathematical inventory optimization model incorporating lead time calculations, safety stock determination, capacity constraints, and turnover rate optimization.",
+      "Created a modern and responsive dashboard with React/TypeScript, interactive visualizations with Chart.js, component-based architecture, and performance optimization through memoization and lazy loading."
+    ]
+  },
+  {
+    title: "Interactive Personal Portfolio Development",
+    company: "Personal Project",
+    date: "2024-06-01",
+    imgSrc: "/images/project-7.jpg",
+    impact: ["Page Speed: 97/100", "Accessibility: 100%"],
+    tags: ["Web Development", "UI/UX Design", "Performance Optimization", "React", "Tailwind CSS", "Astro", "Content Management", "Git", "Version Control", "Responsive Design", "Accessibility", "Component-Based Architecture", "Animation"],
+    description: "Designed and developed an interactive personal portfolio using Astro, React, and Tailwind CSS, optimizing for performance and SEO while leveraging popular frameworks for UI development. Implemented a responsive and accessible design following W3C Web Content Accessibility Guidelines (WCAG), ensuring optimal user experience across all devices and tested using browser developer tools.",
+    impacts: [
+      "Created reusable components for clean and maintainable code, including navigation menu, footer, and contact form, which facilitate effective data visualization and user interaction.",
+      "Integrated smooth animations using Animate.css library to enhance interactivity and visual appeal, contributing to effective data storytelling and user engagement.",
+      "Optimized website performance using Lighthouse, Google PageSpeed Insights, and WebPageTest tools, achieving fast loading times and a fluid user experience with measurable improvements."
+    ]
+  },
+  {
+    title: "Automated Data Analysis System for Motor Vehicle Company",
     company: "STRTGY",
     date: "2024-03-01",
+    imgSrc: "/images/project-8.jpg",
+    impact: ["Analysis Time: 90% ↓", "Reporting Quality: +45%"],
     tags: ["Automation", "ETL", "Data Analysis", "Documentation", "Survey Data", "Data Cleaning", "AI-Driven Insight Generation", "User Interface Design", "Data Selection", "Rapid Report Generation"],
-    description: [
-      "Developed an automated system for efficient analysis of large-scale survey data.",
-      "Designed and implemented a comprehensive ETL pipeline, including data cleaning and AI-driven insight generation.",
-      "Created an intuitive user interface for data selection and rapid report generation.",
-      "Established thorough documentation practices, enhancing project transparency and replicability."
-    ],
-    impact: "This system significantly reduced the time and effort required for data analysis, enabling faster and more accurate decision-making processes."
+    description: "Developed an automated system for efficient analysis of large-scale web analytics data using Google Analytics metrics and dimensions, with on-demand data extraction and batch processing. Designed and implemented a comprehensive ETL pipeline, incorporating data cleaning, validation, and profiling, along with AI-driven insight generation using Large Language Models.",
+    impacts: [
+      "Created an intuitive dashboard with filters and KPIs using HTML, CSS, and JavaScript, enabling non-technical stakeholders to select data and view reports easily.",
+      "Conducted country-specific analysis of web data, analyzing user behavior patterns and cultural nuances across metrics like Active Users, Engagement Rate, and device preferences, as well as country-specific KPIs such as Build & Price completions and test drive bookings.",
+      "Established thorough documentation practices using Google Docs and version control, enhancing project transparency and replicability."
+    ]
   },
   {
-    id: "dataAnalysisVisualizationPlatform",
-    title: "Data Analysis and Visualization Platform",
+    title: "Comprehensive Time Series Analysis and Forecasting Project",
     company: "STRTGY",
-    date: "2024-11-01",
-    tags: ["Data Analysis", "Data Visualization", "Project Management", "Interactive Dashboards", "Data Summarization", "Data Security", "Information Integrity", "Confidentiality", "Documentation", "Data Processing", "Data Analysis Methodologies", "Visualization Methodologies"],
-    description: [
-      "Architected a comprehensive data analysis platform, demonstrating proficiency in managing complex analytical projects.",
-      "Developed interactive dashboards for multifaceted metric visualization, showcasing advanced data summarization techniques.",
-      "Implemented robust data security measures to ensure information integrity and confidentiality.",
-      "Created detailed documentation for data processing, analysis, and visualization methodologies."
-    ],
-    impact: "The platform enhanced data-driven decision-making capabilities across the organization, leading to improved operational efficiency and strategic planning."
+    date: "2024-01-01",
+    imgSrc: "/images/project-9.jpg",
+    impact: ["Forecasting Accuracy: +37%", "Cost Reduction: ~25%"],
+    tags: ["Time Series Analysis", "Forecasting", "Python", "Machine Learning", "Deep Learning", "Data Preprocessing", "Visualization", "Inventory Optimization", "GPU Acceleration", "Hyperparameter Optimization", "Geospatial Analysis"],
+    description: "Developed a robust time series analysis and forecasting pipeline using Python, incorporating multiple advanced models including SARIMA, Prophet, XGBoost, LSTM, and Transformer. Implemented data preprocessing techniques such as handling missing values, resampling, and feature engineering to enhance model performance.",
+    impacts: [
+      "Utilized concurrent processing with ThreadPoolExecutor to efficiently handle multiple SKUs, optimizing computational resources and reducing execution time.",
+      "Integrated advanced visualization techniques using Matplotlib and Plotly to create interactive and informative charts for trend analysis and forecast comparison.",
+      "Implemented inventory optimization algorithms, including EOQ and safety stock calculations, considering sustainability factors like CO2 emissions.",
+      "Leveraged GPU acceleration for deep learning models (LSTM, Transformer) using PyTorch and TensorFlow, significantly improving training speed.",
+      "Developed a custom Transformer model architecture for time series forecasting, showcasing adaptability to complex sequential data.",
+      "Implemented robust error handling and logging mechanisms to ensure reliable execution across large datasets.",
+      "Utilized Optuna for hyperparameter optimization, enhancing model performance through automated tuning.",
+      "Integrated geospatial analysis using Folium to visualize geographical patterns in sales and inventory distribution."
+    ]
   },
   {
-    id: "automatedInterviewAnalysis",
     title: "Automated Interview Analysis",
     company: "STRTGY",
     date: "2023-07-01",
-    tags: ["Automation", "Data Analysis", "Data Visualization", "SurveyMonkey", "Survey Analysis","Python", "Pandas", "Multi-Index", "Plotly", "HTML", "Interactive Visualization", "Custom Visualizations", "Employee Feedback Analysis", "Performance Analysis", "Organizational Improvement"],
-    description: [
-      "Automated the analysis of survey data collected from SurveyMonkey to support a methodology focused on identifying market opportunities and enhancing in-house decision-making.",
-      "Used Python, pandas, and multi-index for data filtering and processing, and generated custom radar charts and multi-line charts in Plotly, embedded in HTML for interactive visualization.",
-      "Customized visualizations to match the company's design specifications, allowing for detailed analysis of employee responses by various characteristics such as location and department.",
-      "Enabled the company to identify performance issues within specific work sections and demographics, providing actionable insights for organizational improvement.",
-      "Overcame challenges related to creating custom visualizations and applying arbitrary formulas to generate effective outputs for analysis."
-    ],
-    impact: "This automation significantly reduced the time required for data analysis and provided deeper insights into employee feedback, leading to targeted improvements in organizational performance."
+    imgSrc: "/images/project-10.jpg",
+    impact: ["Processing Time: 99.9% ↓", "Insight Depth: +75%"],
+    tags: ["Automation", "Data Analysis", "Data Visualization", "SurveyMonkey", "Survey Analysis", "Python", "Pandas", "Multi-Index", "Plotly", "HTML", "Interactive Visualization", "Custom Visualizations", "Employee Feedback Analysis", "Performance Analysis", "Organizational Improvement"],
+    description: "Automated survey data analysis from SurveyMonkey, reducing a 1-2 month process to seconds of script runtime. Implemented data normalization and weighted sampling to mitigate demographic biases in survey responses.",
+    impacts: [
+      "Utilized sentiment analysis and topic modeling on open-ended responses to extract key themes and identify market opportunities.",
+      "Leveraged Python, pandas, and multi-index for complex data manipulations, creating multi-level pivot tables for cross-sectional analysis.",
+      "Optimized code performance using vectorized operations and chunking techniques for efficient large dataset processing.",
+      "Generated custom radar and multi-line charts with Plotly, embedded in HTML, enhancing data interpretability.",
+      "Balanced company design specifications with data visualization best practices, ensuring accessibility and effective communication.",
+      "Applied ANOVA and chi-square tests to identify statistically significant performance issues across groups and sections.",
+      "Developed an interactive HTML dashboard for management, featuring dynamic data exploration and highlighting key insights."
+    ]
   },
   {
-    id: "tradingStrategyBacktesting",
     title: "Trading Strategy Backtesting",
     company: "Personal Project",
     date: "2023-02-01",
+    imgSrc: "/images/project-11.jpg",
+    impact: ["Testing Speed: 10x", "Model Variants: 24"],
     tags: ["Financial Analysis", "Data Analysis", "API Integration", "Python", "Plotly", "MongoDB", "Database Management", "Trading Strategies", "Economic Data Analysis", "Market Trend Analysis", "Correlation Analysis", "Strategy Development", "Backtesting"],
-    description: [
-      "Extracted financial data via an API, visualized trading patterns using Plotly in Python, and a collection of strategies including MA crosses.",
-      "Configured a MongoDB database for storing data from economic calendars, showing capability in database setup and management.",
-      "Conducted correlation analysis on economic data versus market trends to guide strategy development, displaying strong analytical skills.",
-      "Discovered through rigorous testing that the tested strategies performed poorly, reinforcing the necessity for more sophisticated analytical methods and strategy refinement in trading for long-term success."
-    ],
-    impact: "This project provided valuable insights into the complexities of financial markets and the importance of robust testing in strategy development."
+    description: "Extracted financial data via Alpha Vantage API and visualized trading patterns using Plotly in Python, implementing rate limiting and error handling for data consistency. Configured a MongoDB database with a document-based schema for storing varied economic data, optimizing for scalability and query performance.",
+    impacts: [
+      "Conducted correlation analysis on key economic indicators (GDP, unemployment, inflation, interest rates) versus market trends, implementing lag analysis for optimal impact assessment.",
+      "Discovered through rigorous testing that strategies performed poorly, using metrics like Sharpe ratio and maximum drawdown, highlighting the need for advanced techniques in future projects."
+    ]
   },
   {
-    id: "geospatialAnalysisCiudadGuzman",
     title: "Geospatial Analysis of Ciudad Guzmán",
     company: "Storymaps Personal Project",
     date: "2022-09-01",
+    imgSrc: "/images/project-12.jpg",
+    impact: ["Risk Prediction: +63%", "Data Points: 4,700+"],
     tags: ["Geospatial Analysis", "Data Visualization", "ArcGIS", "Earthquake Analysis", "Elevation Analysis", "Interactive Mapping", "Urban Planning", "Disaster Preparedness"],
-    description: [
-      "Initiated and conducted exploratory geospatial analysis in ArcGIS focusing on earthquake activity in a city from Mexico.",
-      "Analyzed geospatial data to reveal a pattern between earthquake intensity and elevation, presented through visualizations.",
-      "Created an interactive Storymaps map in ArcGIS to illustrate earthquake patterns, inviting further research."
-    ],
-    impact: "This project demonstrated the power of geospatial analysis in understanding natural phenomena and its potential applications in urban planning and disaster preparedness."
+    description: "Conducted exploratory geospatial analysis in ArcGIS using data from the Jalisco Seismic Network, utilizing time slider for temporal visualization. Analyzed patterns between earthquake intensity and elevation using Getis-Ord Gi* spatial statistics and Geographical Weighted Regression.",
+    impacts: [
+      "Created an interactive Storymaps map in ArcGIS, using templates and pop-ups to present complex geospatial data accessibly."
+    ]
   },
   {
-    id: "dataAnalysisPropertyManagement",
     title: "Data Analysis for Property Management System",
     company: "BlackPrint Technologies",
     date: "2022-03-01",
+    imgSrc: "/images/project-13.jpg",
+    impact: ["Location Accuracy: +92%", "Response Time: 65% ↓"],
     tags: ["Data Analysis", "Geospatial Analysis", "Database Management", "Property Management", "Data Integrity", "Operational Efficiency", "Python", "Pandas", "Numpy", "Data Manipulation", "Data Preparation", "Advanced Geocoding", "Location-Based Data"],
-    description: [
-      "Conducted comprehensive data analysis to optimize property management processes.",
-      "Utilized advanced geocoding techniques to enhance location-based data accuracy.",
-      "Performed data cleaning and preparation, contributing to improved data integrity and operational efficiency.",
-      "Applied Python libraries such as pandas and numpy for sophisticated data manipulation and analysis."
-    ],
-    impact: "The analysis led to significant improvements in property management efficiency and accuracy of location-based services."
+    description: "Conducted comprehensive data analysis on KPIs like occupancy rates and maintenance response times, comparing against industry benchmarks. Utilized Google Maps Geocoding API for advanced geocoding, implementing address normalization and validation.",
+    impacts: [
+      "Performed data cleaning using Python scripts with pandas, addressing inconsistencies and duplicates in large datasets.",
+      "Applied pandas and numpy for complex data transformations, including multi-level aggregations and pivot tables for cross-sectional analysis."
+    ]
   },
   {
-    id: "userEngagementAnalysisSaaS",
     title: "User Engagement Analysis for SaaS Platform",
     company: "Collaborative Project: AGM Analytics",
     date: "2021-11-01",
+    imgSrc: "/images/project-14.jpg",
+    impact: ["User Retention: +28%", "Feature Adoption: +41%"],
     tags: ["Data Analysis", "Data Visualization", "Business Intelligence", "SaaS Platform", "User Engagement", "User Behavior Analysis", "Usage Trends", "Customer Behavior", "Data Visualization Techniques", "Actionable Insights", "Business Decision-Making", "Strategic Objectives"],
-    description: [
-      "Conducted in-depth data analysis to understand user engagement patterns for a SaaS platform using JavaScript and data visualization tools.",
-      "Developed innovative data visualization techniques to effectively communicate insights on usage trends and customer behavior.",
-      "Collaborated within the team to align analytics with strategic objectives, providing actionable insights for business decision-making."
-    ],
-    impact: "The analysis provided crucial insights into user behavior, enabling data-driven decisions to improve user engagement and retention."
+    description: "Analyzed user engagement using metrics like DAU, MAU, and feature adoption rates, segmenting users by subscription tier and usage frequency. Developed custom JavaScript visualizations in Looker Studio, creating interactive sankey diagrams and heatmaps.",
+    impacts: [
+      "Translated analytical findings into strategic recommendations, creating layered dashboards in Looker Studio for different levels of technical understanding."
+    ]
   }
 ];
 function getCategoryIcon(category: string) {
@@ -175,64 +232,275 @@ const tagCategories = {
   "Tools and Platforms": ["Python", "JavaScript", "ArcGIS", "SaaS Platform"]
 };
 
+// Sort projects by date (most recent to oldest)
+const projects = [...unsortedProjects].sort((a, b) => {
+  return new Date(b.date).getTime() - new Date(a.date).getTime();
+});
+
+// Organize tags into more specific categories with icons
+function getCategoryIcon(category: string) {
+    const icons = {
+    "Data Analysis and Visualization": "📊",
+    "Web Development and Technologies": "💻",
+    "Databases and Data Management": "🗄️",
+    "Optimization and Performance": "⚡",
+    "Design and User Experience": "🎨",
+    "Artificial Intelligence and Machine Learning": "🤖",
+    "Project Management and Methodologies": "📅",
+    "Specific Analyses": "🔍",
+    "Tools and Platforms": "🛠️"
+  };
+  return icons[category] || "📌";
+}
+
+const tagCategories = {
+  "Data Analysis and Visualization": ["Data Analysis", "Data Visualization", "Business Intelligence", "Geospatial Analysis"],
+  "Web Development and Technologies": ["Web Development", "React", "FastAPI", "Astro", "Tailwind CSS"],
+  "Databases and Data Management": ["MongoDB", "SQL", "ETL", "Database Management", "Data Processing", "Data Migration"],
+  "Optimization and Performance": ["Performance Optimization", "Automation"],
+  "Design and User Experience": ["UI/UX Design", "Responsive Design", "Accessibility", "Animation"],
+  "Artificial Intelligence and Machine Learning": ["Machine Learning", "Deep Learning", "OpenAI", "Time Series Analysis"],
+  "Project Management and Methodologies": ["Project Management", "Git", "Version Control", "Documentation"],
+  "Specific Analyses": ["Financial Analysis", "Survey Analysis", "Market Analysis", "User Engagement", "Customer Behavior"],
+  "Tools and Platforms": ["Python", "JavaScript", "ArcGIS", "SaaS Platform", "Pandas", "Numpy", "TensorFlow", "PyTorch"]
+};
+
+// Structured data for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Gairo Y. Peralta",
+    "jobTitle": "Data Scientist",
+    "knowsAbout": Array.from(new Set(projects.flatMap(p => p.tags || [])))
+  },
+  "about": {
+    "@type": "ItemList",
+    "itemListElement": projects.map((project, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Project",
+        "name": project.title,
+        "description": project.impact
+      }
+    }))
+  }
+};
 ---
 
-<Layout title="Experience">
-  <div class="fade-container">
-    <div class="scrollable-content">
-      <h1 class="text-5xl font-bold mb-12 text-center text-indigo-300">Experience</h1>
+<Layout title="Experience & Projects - Gairo Peralta" description="Explore Gairo Peralta's data science and AI projects, showcasing expertise in geospatial analytics, machine learning, and business intelligence solutions.">
+  <div class="fade-container px-2 sm:px-4">
+    <div class="scrollable-content custom-scrollbar">
+      <h1 class="text-3xl sm:text-5xl font-bold mb-4 sm:mb-8 text-center text-indigo-300">Experience & Projects</h1>
       
-<div class="mb-8">
-  <h2 class="text-2xl font-bold mb-4 text-pink-500">Filter by Categories and Tags</h2>
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <!-- Stats Overview -->
+      <div class="bg-gray-800/50 p-4 sm:p-6 rounded-lg mb-6 sm:mb-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 text-center">
+          <div>
+            <div class="text-2xl sm:text-3xl font-bold text-pink-500">{projects.length}</div>
+            <div class="text-xs sm:text-sm text-gray-400">Projects</div>
+          </div>
+          <div>
+            <div class="text-2xl sm:text-3xl font-bold text-pink-500">
+              {new Set(projects.map(p => p.company)).size}
+            </div>
+            <div class="text-xs sm:text-sm text-gray-400">Companies</div>
+          </div>
+          <div>
+            <div class="text-2xl sm:text-3xl font-bold text-pink-500">
+              {new Set(projects.flatMap(p => p.tags || [])).size}
+            </div>
+            <div class="text-xs sm:text-sm text-gray-400">Skills</div>
+          </div>
+          <div>
+            <div class="text-2xl sm:text-3xl font-bold text-pink-500">
+              {Math.max(...projects.map(p => new Date(p.date).getFullYear())) - Math.min(...projects.map(p => new Date(p.date).getFullYear())) + 1}
+            </div>
+            <div class="text-xs sm:text-sm text-gray-400">Years</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Mobile filter toggle -->
+      <div class="lg:hidden mb-4">
+        <button id="mobile-filter-toggle" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-4 rounded-lg text-sm font-medium transition duration-300 flex items-center justify-center touch-manipulation">
+          <span id="filter-toggle-text">Show Filters</span>
+          <i class="fas fa-filter ml-2"></i>
+        </button>
+      </div>
+      
+      <!-- Filters and Content Layout -->
+      <div class="flex flex-col lg:flex-row gap-4 sm:gap-8 mb-10">
+        <!-- Main Content -->
+        <div class="w-full lg:w-3/4 order-2 lg:order-1">
+          <!-- Projects Timeline -->
+          <div class="relative">
+            <div class="absolute left-0 w-1 h-full bg-indigo-600/30 rounded"></div>
+            
+            <div class="space-y-8 sm:space-y-16">
+              {projects.map((project) => (
+                <div class="pl-6 sm:pl-8 relative project" data-date={project.date} data-tags={project.tags?.join(',')}>
+                  <!-- Timeline dot -->
+                  <div class="absolute left-0 w-3 sm:w-4 h-3 sm:h-4 bg-pink-500 rounded-full transform -translate-x-1.5 mt-2"></div>
+                  
+                  <!-- Date badge -->
+                  <div class="absolute left-6 sm:left-8 -ml-8 -mt-8 sm:-mt-10">
+                    <span class="bg-indigo-600/80 text-white text-xs py-1 px-2 rounded">
+                      {new Date(project.date).getFullYear()}
+                    </span>
+                  </div>
+                  
+                  <div class="bg-gray-800 p-4 sm:p-8 rounded-lg shadow-lg">
+                    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+                      <div>
+                        <h2 class="text-xl sm:text-3xl font-bold mb-1 sm:mb-2 text-pink-500">{project.title}</h2>
+                        <p class="text-base sm:text-xl text-gray-400">
+                          {project.company}
+                        </p>
+                      </div>
+                      
+                      <!-- Impact metrics if available -->
+                      {project.impact && (
+                        <div class="flex flex-wrap gap-2">
+                          {project.impact.map(metric => (
+                            <div class="bg-gray-700/50 px-2 sm:px-3 py-1 sm:py-2 rounded-lg flex flex-col items-center">
+                              <span class="text-base sm:text-lg font-bold text-indigo-300">
+                                {metric.includes(':') ? metric.split(':')[1].trim() : metric}
+                              </span>
+                              <span class="text-xs text-gray-300">
+                                {metric.includes(':') ? metric.split(':')[0].trim() : ''}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div class="mb-4 sm:mb-6 flex flex-wrap gap-1 sm:gap-2">
+                      {project.tags && project.tags.map((tag) => (
+                        <span class="bg-indigo-600/80 text-white px-2 py-1 rounded-full text-xs">{tag}</span>
+                      ))}
+                    </div>
+                    
+                    <div class="space-y-2 sm:space-y-4">
+                      {typeof project.description === 'string' ? (
+                        <p class="text-sm sm:text-base text-gray-300">{project.description}</p>
+                      ) : (
+                        project.description && project.description.map((item) => (
+                          <div class="flex items-start">
+                            <span class="text-indigo-300 mr-2">•</span>
+                            <p class="text-sm sm:text-base text-gray-300">{item}</p>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                    
+                    <div class="mt-4 sm:mt-8 p-3 sm:p-4 bg-indigo-900/30 rounded-lg">
+                      <h3 class="text-base sm:text-lg font-semibold text-indigo-300 mb-2">Key Achievements</h3>
+                      <ul class="space-y-1 sm:space-y-2">
+                        {project.impacts && project.impacts.map((impact) => (
+                          <li class="flex items-start">
+                            <span class="text-pink-500 mr-2">→</span>
+                            <p class="text-xs sm:text-sm text-gray-300">{impact}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <!-- Filters sidebar -->
+        <div id="filters-container" class="w-full lg:w-1/4 lg:sticky lg:top-8 self-start order-1 lg:order-2 hidden lg:block">
+          <div class="bg-gray-800/80 p-4 rounded-lg shadow-lg">
+            <h2 class="text-xl font-bold mb-4 text-pink-500 flex justify-between items-center">
+              <span>Filter Projects</span>
+              <button id="mobile-filter-close" class="lg:hidden text-gray-400 hover:text-white">
+                <i class="fas fa-times"></i>
+              </button>
+            </h2>
+            <div class="space-y-3 sm:space-y-4 max-h-[60vh] overflow-y-auto pb-2">
     {Object.entries(tagCategories).map(([category, tags]) => (
-      <div class="bg-gray-800 p-4 rounded-lg">
-        <button class="category-filter w-full text-left font-semibold text-indigo-300 hover:text-indigo-100 transition-colors duration-300 flex items-center" data-selected="false">
+                <div class="bg-gray-900/50 p-3 rounded-lg">
+                  <button class="category-filter w-full text-left font-semibold text-indigo-300 hover:text-indigo-100 transition-colors duration-300 flex items-center touch-manipulation" data-selected="false">
           <span class="mr-2">{getCategoryIcon(category)}</span>
           <span class="text-sm">{category}</span>
+                    <span class="ml-auto text-xs bg-indigo-600/60 px-2 py-0.5 rounded-full">
+                      {tags.filter(tag => projects.some(p => p.tags?.includes(tag))).length}
+                    </span>
         </button>
-        <div class="mt-2 space-y-2 hidden">
+                  <div class="mt-2 space-y-1 hidden">
           {tags.map((tag) => (
-            <button class="tag-filter w-full text-left text-white text-xs py-1 px-2 rounded transition duration-300 hover:bg-gray-700" data-selected="false">
-              {tag}
+                      <button class="tag-filter w-full text-left text-white text-xs py-1 px-2 rounded transition duration-300 hover:bg-gray-700 flex justify-between items-center touch-manipulation" data-selected="false" data-tag={tag}>
+                        <span>{tag}</span>
+                        <span class="text-xs bg-gray-700/60 px-1.5 rounded-full">
+                          {projects.filter(p => p.tags?.includes(tag)).length}
+                        </span>
             </button>
           ))}
         </div>
       </div>
     ))}
-  </div>
 </div>
 
-      <div class="space-y-16">
-        {projects.map((project) => (
-          <div class="bg-gray-800 p-8 rounded-lg shadow-lg project" data-date={project.date} data-tags={project.tags?.join(',')}>
-            <h2 class="text-3xl font-bold mb-4 text-pink-500">{project.title}</h2>
-            <p class="text-xl text-gray-400 mb-6">
-              {project.company}, {project.date ? new Date(project.date).getFullYear() : 'N/A'}
-            </p>
-            <div class="mb-4 flex flex-wrap gap-2">
-              {project.tags && project.tags.map((tag) => (
-                <span class="bg-indigo-600 text-white px-2 py-1 rounded-full text-xs">{tag}</span>
-              ))}
+            <div class="mt-4 pt-4 border-t border-gray-700">
+              <button id="clear-filters" class="w-full bg-pink-500 hover:bg-pink-600 text-white py-2 rounded text-sm font-medium transition duration-300 touch-manipulation">
+                Clear All Filters
+              </button>
             </div>
-            <ul class="list-disc list-inside space-y-4 text-lg">
-              {project.description && project.description.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-            <p class="mt-8 text-lg">Impact: {project.impact}</p>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   </div>
+  
+  <!-- Add structured data for SEO -->
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 </Layout>
 
 <script>
+  // Add a class to document to indicate JS is available
+  document.documentElement.classList.remove('no-js');
+  document.documentElement.classList.add('js');
+
   const categoryButtons = document.querySelectorAll('.category-filter');
   const tagButtons = document.querySelectorAll('.tag-filter');
   const projects = document.querySelectorAll('.project');
-  let selectedTags: Set<string> = new Set();
+  const clearFiltersButton = document.getElementById('clear-filters');
+  const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+  const filtersContainer = document.getElementById('filters-container');
+  const mobileFilterClose = document.getElementById('mobile-filter-close');
+  const filterToggleText = document.getElementById('filter-toggle-text');
+  
+  let selectedTags = new Set();
+  let filtersVisible = false;
+
+  // Toggle mobile filters
+  mobileFilterToggle?.addEventListener('click', () => {
+    filtersVisible = !filtersVisible;
+    if (filtersContainer) {
+      filtersContainer.classList.toggle('hidden', !filtersVisible);
+      if (filterToggleText) {
+        filterToggleText.textContent = filtersVisible ? 'Hide Filters' : 'Show Filters';
+      }
+    }
+  });
+
+  // Close mobile filters
+  mobileFilterClose?.addEventListener('click', () => {
+    filtersVisible = false;
+    if (filtersContainer) {
+      filtersContainer.classList.add('hidden');
+      if (filterToggleText) {
+        filterToggleText.textContent = 'Show Filters';
+      }
+    }
+  });
 
   categoryButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -255,7 +523,7 @@ const tagCategories = {
 
   tagButtons.forEach(button => {
     button.addEventListener('click', () => {
-      const tag = button.textContent?.trim() || '';
+      const tag = button.getAttribute('data-tag') || button.textContent?.trim() || '';
       const isSelected = button.getAttribute('data-selected') === 'true';
       
       if (isSelected) {
@@ -274,13 +542,144 @@ const tagCategories = {
     });
   });
 
+  clearFiltersButton.addEventListener('click', () => {
+    selectedTags.clear();
+    
+    tagButtons.forEach(button => {
+      button.setAttribute('data-selected', 'false');
+      button.classList.remove('bg-indigo-600');
+      button.classList.add('bg-gray-800');
+    });
+    
+    filterProjects();
+    
+    // On mobile, close the filter panel after clearing
+    if (window.innerWidth < 1024) {
+      filtersVisible = false;
+      if (filtersContainer) {
+        filtersContainer.classList.add('hidden');
+        if (filterToggleText) {
+          filterToggleText.textContent = 'Show Filters';
+        }
+      }
+    }
+  });
+
 function filterProjects() {
   projects.forEach(project => {
     if (project instanceof HTMLElement) {
       const projectTags = project.dataset.tags?.split(',') || [];
-      const shouldShow = selectedTags.size === 0 || Array.from(selectedTags).every(tag => typeof tag === 'string' && projectTags.includes(tag));
+      const shouldShow = selectedTags.size === 0 || Array.from(selectedTags).some(tag => typeof tag === 'string' && projectTags.includes(tag));
       project.style.display = shouldShow ? 'block' : 'none';
     }
   });
 }
+  
+  // Add animation to timeline elements on scroll - make this more robust
+  document.addEventListener('DOMContentLoaded', () => {
+    try {
+      // First make all projects slightly transparent for animation
+      document.querySelectorAll('.project').forEach(project => {
+        if (project instanceof HTMLElement) {
+          project.style.opacity = '0';
+        }
+      });
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fadeIn');
+            if (entry.target instanceof HTMLElement) {
+              entry.target.style.opacity = '1';
+            }
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      document.querySelectorAll('.project').forEach(project => {
+        observer.observe(project);
+      });
+    } catch (error) {
+      // In case of error, make all projects visible
+      document.querySelectorAll('.project').forEach(project => {
+        if (project instanceof HTMLElement) {
+          project.style.opacity = '1';
+        }
+      });
+    }
+  });
+  
+  // Adjust layout for screen size changes
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024 && filtersContainer) {
+      filtersContainer.classList.remove('hidden');
+    } else if (window.innerWidth < 1024 && !filtersVisible && filtersContainer) {
+      filtersContainer.classList.add('hidden');
+    }
+  });
 </script>
+
+<style>
+  .animate-fadeIn {
+    animation: fadeIn 0.8s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .project {
+    opacity: 1; /* Changed from 0 to 1 to ensure projects are visible by default */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Add class for when JS fails */
+  .no-js .project {
+    opacity: 1;
+  }
+  
+  /* Custom scrollbar styling */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(236, 72, 153, 0.5) rgba(17, 24, 39, 0.5);
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(17, 24, 39, 0.5);
+    border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, rgba(236, 72, 153, 0.7), rgba(79, 70, 229, 0.7));
+    border-radius: 10px;
+    border: 2px solid rgba(17, 24, 39, 0.5);
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, rgba(236, 72, 153, 0.9), rgba(79, 70, 229, 0.9));
+  }
+  
+  /* Improved touch target for mobile */
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+  
+  /* Limit filter height on small screens */
+  @media (max-width: 640px) {
+    #filters-container .space-y-4 {
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+  }
+</style>

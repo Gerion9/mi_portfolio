@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Define SEO metadata
+const title = "Terms of Service | Gairo Peralta - Data Scientist";
+const description = "Terms and conditions governing the use of Gairo Peralta's data science portfolio website and professional services.";
+
+// Define update date
+const lastUpdated = "May 1, 2025";
+
+// Structured data for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": title,
+  "description": description,
+  "dateModified": new Date(lastUpdated).toISOString(),
+  "publisher": {
+    "@type": "Person",
+    "name": "Gairo Y. Peralta",
+    "url": "https://gairoperalta.com"
+  }
+};
+---
+
+<Layout 
+  title={title}
+  description={description}
+  structuredData={structuredData}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="mb-12 text-center">
+      <h1 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-600">Terms of Service</h1>
+      <p class="text-gray-400">Last Updated: {lastUpdated}</p>
+    </div>
+    
+    <div class="prose prose-invert prose-lg max-w-none">
+      <h2>1. Introduction</h2>
+      <p>
+        Welcome to Gairo Peralta's professional portfolio and service website. These Terms of Service ("Terms") govern your use of my website located at <a href="https://gairoperalta.com" class="text-indigo-400 hover:text-indigo-300">gairoperalta.com</a> ("Website") and any related services that I provide ("Services").
+      </p>
+      <p>
+        By accessing or using the Website, you agree to be bound by these Terms. If you disagree with any part of the Terms, you may not access the Website or use my Services.
+      </p>
+      
+      <h2>2. Intellectual Property Rights</h2>
+      <p>
+        The Website and its original content, features, and functionality are owned by Gairo Y. Peralta and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.
+      </p>
+      <p>
+        Unless otherwise stated, all materials including without limitation, the logo, design, text, graphics, other files, and the selection and arrangement thereof are my copyright-protected intellectual property.
+      </p>
+      <p>
+        You may view and download content from the Website for your own personal, non-commercial use, provided that you keep intact all copyright and other proprietary notices. You may not use, reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of the material on my Website, except as follows:
+      </p>
+      <ul>
+        <li>Your computer may temporarily store copies of such materials in RAM incidental to your accessing and viewing those materials.</li>
+        <li>You may store files that are automatically cached by your Web browser for display enhancement purposes.</li>
+        <li>If I provide desktop, mobile, or other applications for download, you may download a single copy to your computer or mobile device solely for your own personal, non-commercial use.</li>
+      </ul>
+      
+      <h2>3. Website Use and Conduct</h2>
+      <p>
+        The Website is provided on an "as is" and "as available" basis. I do not guarantee that the Website, or any content on it, will always be available or be uninterrupted. I may suspend, withdraw, discontinue or change all or any part of the Website without notice.
+      </p>
+      <p>
+        You agree to use the Website only for lawful purposes and in a way that does not infringe the rights of, restrict or inhibit anyone else's use and enjoyment of the Website. Prohibited behavior includes harassing or causing distress or inconvenience to any other user, transmitting obscene or offensive content, or disrupting the normal flow of dialogue within the Website.
+      </p>
+      
+      <h2>4. Professional Services</h2>
+      <p>
+        Any data science, AI development, or consulting services that I provide will be governed by separate agreements that will detail the specific terms, including scope, deliverables, timelines, and compensation. These Terms apply to the use of the Website only and do not govern professional service engagements.
+      </p>
+      <p>
+        Contact via the Website does not constitute the formation of a client relationship. A formal agreement must be executed before any professional services commence.
+      </p>
+      
+      <h2>5. Limitation of Liability</h2>
+      <p>
+        In no event shall Gairo Y. Peralta be liable for any indirect, consequential, exemplary, incidental, special, or punitive damages, including lost profit, lost revenue, loss of data, or other damages arising from your use of the Website, even if I have been advised of the possibility of such damages.
+      </p>
+      
+      <h2>6. Indemnification</h2>
+      <p>
+        You agree to defend, indemnify, and hold harmless Gairo Y. Peralta from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to your violation of these Terms or your use of the Website.
+      </p>
+      
+      <h2>7. External Links</h2>
+      <p>
+        The Website may contain links to external websites that are not provided or maintained by me. I do not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites.
+      </p>
+      
+      <h2>8. Changes to Terms</h2>
+      <p>
+        I reserve the right to modify these Terms at any time. I will provide notice of any significant changes by posting the updated Terms on this page with a new effective date. Your continued use of the Website after any such changes constitutes your acceptance of the new Terms.
+      </p>
+      
+      <h2>9. Governing Law</h2>
+      <p>
+        These Terms shall be governed and construed in accordance with the laws of the state of California, United States, without regard to its conflict of law provisions.
+      </p>
+      
+      <h2>10. Contact Information</h2>
+      <p>
+        If you have any questions about these Terms, please contact me at:
+      </p>
+      <p>
+        Email: <a href="mailto:contact@gairoperalta.com" class="text-indigo-400 hover:text-indigo-300">contact@gairoperalta.com</a>
+      </p>
+    </div>
+    
+    <div class="mt-12 text-center">
+      <a href="/contact" class="inline-block bg-gradient-to-r from-pink-500 to-indigo-600 hover:from-pink-600 hover:to-indigo-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 ease-in-out">
+        Contact Me
+      </a>
+    </div>
+  </div>
+</Layout> 

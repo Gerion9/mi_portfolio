@@ -1,25 +1,187 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Define structured data for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Gairo Y. Peralta",
+  "jobTitle": "Data Scientist",
+  "url": "https://gairoperalta.com",
+  "image": "https://gairoperalta.com/images/profile.jpg",
+  "sameAs": [
+    "https://linkedin.com/in/gairoperalta",
+    "https://github.com/gairoperalta"
+  ],
+  "knowsAbout": ["Geospatial Analysis", "Generative AI", "Business Intelligence", "Data Visualization", "Machine Learning", "Time Series Analysis"],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "STRTGY"
+  },
+  "alumniOf": {
+    "@type": "EducationalOrganization",
+    "name": "University of California, Berkeley"
+  },
+  "description": "Senior Data Scientist specializing in machine learning solutions, geospatial analysis, and business intelligence."
+};
+
+// Define technical skills for animated showcase
+const technicalSkills = [
+  { name: "Python", icon: "fab fa-python", color: "blue" },
+  { name: "Machine Learning", icon: "fas fa-brain", color: "indigo" },
+  { name: "GIS", icon: "fas fa-map-marked-alt", color: "green" },
+  { name: "Data Visualization", icon: "fas fa-chart-line", color: "pink" },
+  { name: "SQL", icon: "fas fa-database", color: "yellow" },
+  { name: "Time Series", icon: "far fa-clock", color: "purple" }
+];
+
+// Define featured projects for the homepage
+const featuredProjects = [
+  {
+    title: "Time Series Forecasting",
+    description: "Advanced forecasting models using SARIMA, Prophet, XGBoost, LSTM & Transformer architectures for inventory optimization",
+    icon: "fas fa-chart-line",
+    year: "2024"
+  },
+  {
+    title: "GeoAI Insights",
+    description: "Competition analysis combining GPT-4 Vision with geospatial analysis for retail location strategy",
+    icon: "fas fa-map-marked-alt",
+    year: "2024"
+  },
+  {
+    title: "Business Analytics Dashboard",
+    description: "React & FastAPI solution transforming months of manual analysis into seconds of automated insights",
+    icon: "fas fa-tachometer-alt",
+    year: "2024"
+  }
+];
 ---
 
-<Layout title="Gairo Peralta - Data Scientist">
-  <section class="text-center max-w-3xl mx-auto">
-    <h1 class="text-6xl font-bold mb-8 text-indigo-300">Gairo Y. Peralta</h1>
-    <div class="relative w-32 h-32 md:w-48 md:h-48 mx-auto mb-8 md:mb-12">
+<Layout title="Gairo Peralta - Data Scientist & AI Specialist" description="Senior Data Scientist specialized in machine learning, geospatial analytics, and business intelligence solutions for strategic decision-making.">
+  <!-- Hero Section -->
+  <section class="text-center max-w-3xl mx-auto px-4 sm:px-6 mb-12 md:mb-20">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-pink-500 leading-tight">Gairo Y. Peralta</h1>
+    <div class="relative w-28 h-28 md:w-40 md:h-40 lg:w-48 lg:h-48 mx-auto mb-6 md:mb-10 animate__animated animate__fadeIn">
       <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-pink-500 rounded-full blur-xl opacity-75"></div>
-      <img src="/images/profile.jpg" alt="Profile Picture" class="relative w-full h-full object-cover rounded-full shadow-xl">
+      <img src="/images/profile.jpg" alt="Gairo Peralta - Data Scientist" class="relative w-full h-full object-cover rounded-full shadow-xl" loading="eager" width="192" height="192">
     </div>
-    <h2 class="text-4xl mb-6 text-pink-500 font-semibold">Data Scientist</h2>
-    <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-      Specializing in geospatial analysis, generative AI, and business intelligence. Transforming complex data into actionable insights for strategic decision-making.
+    <h2 class="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6 text-pink-500 font-semibold animate__animated animate__fadeIn animate__delay-1s">Data Scientist & AI Specialist</h2>
+    <p class="text-base md:text-xl text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto animate__animated animate__fadeIn animate__delay-1s leading-relaxed">
+      Transforming complex data into actionable insights through <span class="text-indigo-300">geospatial analysis</span>, <span class="text-indigo-300">generative AI</span>, and <span class="text-indigo-300">business intelligence</span> solutions for strategic decision-making.
     </p>
-    <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto italic">
-      "Since childhood, I discovered the power of data and automation. Today, as a data scientist, I turn information into intelligent solutions that enhance daily life and pave the way for the future."
-    </p>
-    <div class="flex flex-wrap justify-center gap-4">
-      <a href="/about" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">About Me</a>
-      <a href="/experience" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">My Experience</a>
-      <a href="/resume" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">My Resume</a>
+    <div class="text-base md:text-lg text-gray-400 mb-8 md:mb-12 max-w-2xl mx-auto italic animate__animated animate__fadeIn animate__delay-2s relative">
+      <div class="absolute -left-2 top-0 text-3xl md:text-4xl text-indigo-500 opacity-30">"</div>
+      <p class="relative z-10 px-4 md:px-0">
+        Since childhood, I discovered the power of data and automation. Today, as a data scientist, I turn information into intelligent solutions that enhance daily life and pave the way for the future.
+      </p>
+      <div class="absolute -right-2 bottom-0 text-3xl md:text-4xl text-indigo-500 opacity-30">"</div>
+    </div>
+    
+    <!-- Stats -->
+    <div class="mb-10 md:mb-12 grid grid-cols-3 gap-2 md:gap-6 max-w-2xl mx-auto">
+      <div class="bg-gray-800/50 p-3 md:p-4 rounded-lg text-center border border-gray-700 transform hover:scale-105 transition-transform duration-300 hover:border-indigo-500/30">
+        <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">5+</span>
+        <span class="text-xs md:text-sm text-gray-400">Years Experience</span>
+      </div>
+      <div class="bg-gray-800/50 p-3 md:p-4 rounded-lg text-center border border-gray-700 transform hover:scale-105 transition-transform duration-300 hover:border-indigo-500/30">
+        <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">20+</span>
+        <span class="text-xs md:text-sm text-gray-400">Projects Completed</span>
+      </div>
+      <div class="bg-gray-800/50 p-3 md:p-4 rounded-lg text-center border border-gray-700 transform hover:scale-105 transition-transform duration-300 hover:border-indigo-500/30">
+        <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">10+</span>
+        <span class="text-xs md:text-sm text-gray-400">Data Tools Mastered</span>
+      </div>
+    </div>
+    
+    <!-- Technical Skills -->
+    <div class="mb-10 md:mb-16">
+      <h3 class="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">Technical Expertise</h3>
+      <div class="flex flex-wrap justify-center gap-2 md:gap-4">
+        {technicalSkills.map(skill => (
+          <div class={`bg-gray-800/50 px-3 py-2 md:px-4 md:py-3 rounded-lg border border-gray-700 flex items-center gap-2 transform transition-all duration-300 hover:scale-110 touch-manipulation hover:border-${skill.color}-500/40 hover:shadow-lg hover:shadow-${skill.color}-500/10`}>
+            <i class={`${skill.icon} text-${skill.color}-400 text-sm md:text-base`}></i>
+            <span class="text-gray-300 text-sm md:text-base">{skill.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Featured Projects -->
+    <div class="mb-10 md:mb-16">
+      <h3 class="text-xl md:text-2xl font-semibold mb-4 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">Featured Projects</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {featuredProjects.map(project => (
+          <div class="bg-gray-800/50 p-4 md:p-6 rounded-xl border border-gray-700 text-left transform hover:scale-105 transition-all duration-300 hover:border-indigo-500/30 group touch-manipulation">
+            <div class="flex items-center mb-3 md:mb-4">
+              <div class="bg-gradient-to-br from-pink-500 to-indigo-600 w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                <i class={`${project.icon} text-white text-sm md:text-base`}></i>
+              </div>
+              <span class="text-xs text-gray-500">{project.year}</span>
+            </div>
+            <h4 class="text-base md:text-lg font-semibold text-white mb-1 md:mb-2">{project.title}</h4>
+            <p class="text-xs md:text-sm text-gray-400">{project.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- CTA Buttons -->
+    <div class="flex flex-wrap justify-center gap-3 md:gap-4 animate__animated animate__fadeIn animate__delay-3s">
+      <a href="/about" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px]" aria-label="Learn more about Gairo Peralta">About Me</a>
+      <a href="/experience" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px]" aria-label="View Gairo's experience and projects">My Experience</a>
+      <a href="/resume" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px]" aria-label="View Gairo's resume">My Resume</a>
     </div>
   </section>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+  <!-- Add structured data for SEO -->
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+  
+  <style>
+    /* Animation for skill tags */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    /* Improved touch target for mobile */
+    .touch-manipulation {
+      touch-action: manipulation;
+    }
+    
+    /* Prevent overflow issues on small screens */
+    @media (max-width: 640px) {
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+        animation-duration: 4s; /* Slower on mobile */
+      }
+    }
+  </style>
+  
+  <script>
+    // Add floating animation to skill tags with random delays
+    document.addEventListener('DOMContentLoaded', () => {
+      const skillElements = document.querySelectorAll('.bg-gray-800\\/50.px-3.py-2, .bg-gray-800\\/50.px-4.py-3');
+      
+      skillElements.forEach((el, index) => {
+        el.classList.add('animate-float');
+        el.style.animationDelay = `${Math.random() * 2}s`;
+      });
+      
+      // Fix for touch events on mobile
+      const touchElements = document.querySelectorAll('.touch-manipulation');
+      touchElements.forEach(el => {
+        el.addEventListener('touchstart', function() {
+          // This empty handler ensures the hover state works on first tap
+        }, {passive: true});
+      });
+    });
+  </script>
 </Layout>

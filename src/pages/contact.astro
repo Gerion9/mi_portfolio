@@ -1,39 +1,349 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Define services offered for collaboration
+const services = [
+  {
+    title: "Data Science Consulting",
+    description: "Expert guidance on data strategy, analytics architecture, and implementation of data-driven decision systems.",
+    icon: "fa-chart-bar",
+    examples: ["Data maturity assessment", "Analytics roadmap development", "Data strategy consulting"]
+  },
+  {
+    title: "Custom AI Solutions",
+    description: "Development of tailored machine learning models and AI applications to address specific business challenges.",
+    icon: "fa-robot",
+    examples: ["Predictive analytics systems", "Custom recommendation engines", "Computer vision applications"]
+  },
+  {
+    title: "Geospatial Analytics",
+    description: "Location-based intelligence solutions combining GIS capabilities with advanced analytics for strategic decision making.",
+    icon: "fa-map-marked-alt",
+    examples: ["Market potential mapping", "Location optimization", "Geospatial pattern analysis"]
+  },
+  {
+    title: "Data Visualization",
+    description: "Creation of interactive dashboards and visual analytics tools that make complex data accessible and actionable.",
+    icon: "fa-chart-line",
+    examples: ["Executive dashboards", "Interactive visualizations", "Automated reporting systems"]
+  }
+];
+
+// Define collaboration types
+const collaborationTypes = [
+  {
+    type: "Project-Based Work",
+    description: "Defined scope engagement with clear deliverables, timeline, and objectives. Ideal for specific business challenges requiring data science expertise.",
+    suitable: ["Companies needing specialized AI solutions", "Startups with defined data projects", "Organizations requiring proof-of-concept"]
+  },
+  {
+    type: "Advisory & Consulting",
+    description: "Strategic guidance and technical advice on data science implementation, technology selection, and best practices.",
+    suitable: ["Leadership teams planning data initiatives", "Organizations building internal data capabilities", "Teams navigating complex data decisions"]
+  },
+  {
+    type: "Research Collaboration",
+    description: "Partnership on innovative research projects exploring new methodologies in machine learning, AI, or applied data science.",
+    suitable: ["Academic institutions", "Research-oriented organizations", "Innovation labs and R&D departments"]
+  },
+  {
+    type: "Workshops & Training",
+    description: "Knowledge transfer sessions and hands-on training for teams looking to build internal data science capabilities.",
+    suitable: ["Data teams expanding their skillset", "Organizations transitioning to data-driven culture", "Technical teams adopting new data technologies"]
+  }
+];
+
+// Define contact information
+const contactInfo = {
+  email: "gairo@berkeley.edu",
+  linkedin: "https://linkedin.com/in/gairoperalta",
+  github: "https://github.com/Gerion9",
+  response_time: "24-48 hours"
+};
+
+// Define SEO metadata
+const title = "Contact & Collaboration | Gairo Peralta - Data Scientist";
+const description = "Get in touch to discuss data science consulting, custom AI solutions, and collaboration opportunities. Let's transform your data challenges into strategic advantages.";
+
+// Structured data for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": title,
+  "description": description,
+  "about": {
+    "@type": "Person",
+    "name": "Gairo Y. Peralta",
+    "jobTitle": "Senior Data Scientist",
+    "email": contactInfo.email,
+    "sameAs": [
+      contactInfo.linkedin,
+      contactInfo.github
+    ],
+    "makesOffer": services.map(service => ({
+      "@type": "Offer",
+      "name": service.title,
+      "description": service.description
+    }))
+  },
+  "mainContentOfPage": {
+    "@type": "WebPageElement",
+    "cssSelector": ".main-content"
+  }
+};
 ---
 
-<Layout title="Contact - Gairo Peralta">
-  <div class="max-w-4xl mx-auto">
-    <h1 class="text-4xl font-bold mb-12 text-center text-indigo-300">Contact Information</h1>
-    <div class="bg-gray-800 p-8 rounded-lg shadow-lg mb-8">
-      <h2 class="text-2xl font-bold mb-6 text-pink-500">Get in Touch</h2>
-      <p class="text-gray-300 mb-6">Feel free to reach out for any opportunities or questions.</p>
-      <ul class="space-y-6">
-        <li class="flex items-center">
-          <i class="fas fa-envelope mr-4 text-indigo-300 text-2xl"></i>
-          <a href="mailto:gairo@berkeley.edu" class="text-indigo-300 hover:text-white transition-colors duration-300 text-xl">gairo@berkeley.edu</a>
-        </li>
-        <li class="flex items-center">
-          <i class="fas fa-phone mr-4 text-indigo-300 text-2xl"></i>
-          <div>
-            <p><span class="text-gray-300 mr-2">🇺🇸:</span><a href="tel:+13234345684" class="text-indigo-300 hover:text-white transition-colors duration-300">(323) 434-5684</a></p>
-            <p><span class="text-gray-300 mr-2">🇲🇽:</span><a href="tel:+523122184811" class="text-indigo-300 hover:text-white transition-colors duration-300">(312) 218-4811</a></p>
-          </div>
-        </li>
-      </ul>
-      <p class="text-sm text-gray-400 mt-6">* No need to dial country code if calling from within the country</p>
+<Layout title={title} description={description} structuredData={structuredData}>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12 main-content">
+    <!-- Hero Section -->
+    <div class="mb-8 sm:mb-16">
+      <div class="text-center">
+        <h1 class="text-3xl sm:text-5xl font-bold mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-600">Let's Connect</h1>
+        <div class="w-32 sm:w-40 h-1 bg-gradient-to-r from-pink-500 to-indigo-600 mx-auto mb-4 sm:mb-8 rounded-full"></div>
+        <p class="text-base sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          Ready to explore how data science and AI can transform your business challenges into opportunities? Let's start a conversation about your goals and how we can achieve them together.
+        </p>
+      </div>
     </div>
-    <div class="mt-12 bg-gray-800 p-8 rounded-lg shadow-lg">
-      <h2 class="text-2xl font-bold mb-6 text-pink-500">Locations</h2>
-      <p class="text-gray-300 mb-4">Based in Los Angeles, California and Villa de Álvarez, Colima, Mexico</p>
-      <div class="grid md:grid-cols-2 gap-4">
-        <div class="aspect-w-16 aspect-h-9">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d423286.27405770525!2d-118.69192047471653!3d34.02016130653294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c75ddc27da13%3A0xe22fdf6f254608f4!2sLos%20Angeles%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1679929753099!5m2!1sen!2s" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    
+    <!-- Two Column Layout: Contact Form and Info (MOVED TO TOP) -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8 mb-12 sm:mb-20">
+      <!-- Contact Form -->
+      <div class="lg:col-span-2 bg-gray-800/50 rounded-xl p-4 sm:p-8 border border-gray-700 shadow-lg">
+        <h2 class="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500 mb-4 sm:mb-6">Send a Message</h2>
+        
+        <form id="contact-form" class="space-y-4 sm:space-y-6" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <!-- Netlify Form Configuration -->
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="subject" value="Nuevo mensaje desde gairoperalta.com" />
+          <p class="hidden">
+            <label>No llenar esto si eres humano: <input name="bot-field" /></label>
+          </p>
+          
+          <!-- Name Field -->
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Name</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              required 
+              class="w-full px-3 sm:px-4 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white text-sm sm:text-base"
+              placeholder="Your name"
+            />
+          </div>
+          
+          <!-- Email Field -->
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required 
+              class="w-full px-3 sm:px-4 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white text-sm sm:text-base"
+              placeholder="your.email@example.com"
+            />
+          </div>
+          
+          <!-- Subject Field -->
+          <div>
+            <label for="subject-field" class="block text-sm font-medium text-gray-300 mb-1">Subject</label>
+            <input 
+              type="text" 
+              id="subject-field" 
+              name="subject-field" 
+              required 
+              class="w-full px-3 sm:px-4 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white text-sm sm:text-base"
+              placeholder="What's this regarding?"
+            />
+          </div>
+          
+          <!-- Collaboration Type Field -->
+          <div>
+            <label for="collaboration_type" class="block text-sm font-medium text-gray-300 mb-1">Collaboration Type</label>
+            <select 
+              id="collaboration_type" 
+              name="collaboration_type" 
+              class="w-full px-3 sm:px-4 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white text-sm sm:text-base"
+            >
+              <option value="">Select a collaboration type</option>
+              <option value="Project-Based Work">Project-Based Work</option>
+              <option value="Advisory & Consulting">Advisory & Consulting</option>
+              <option value="Research Collaboration">Research Collaboration</option>
+              <option value="Workshops & Training">Workshops & Training</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          
+          <!-- Message Field -->
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+            <textarea 
+              id="message" 
+              name="message" 
+              rows="4" 
+              required 
+              class="w-full px-3 sm:px-4 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-white resize-none text-sm sm:text-base"
+              placeholder="Tell me about your project or inquiry..."
+            ></textarea>
+          </div>
+          
+          <!-- Submit Button -->
+          <div>
+            <button 
+              type="submit"
+              class="w-full bg-gradient-to-r from-pink-500 to-indigo-600 hover:from-pink-600 hover:to-indigo-700 text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg shadow-md transition-all duration-300 touch-manipulation"
+            >
+              Submit Message
+            </button>
+          </div>
+          
+          <p class="text-xs sm:text-sm text-gray-400 text-center">
+            I'll respond to your message within {contactInfo.response_time}.
+          </p>
+        </form>
+      </div>
+      
+      <!-- Contact Information -->
+      <div class="lg:col-span-1 space-y-4 sm:space-y-8">
+        <!-- Direct Contact Info -->
+        <div class="bg-gray-800/50 rounded-xl p-4 sm:p-6 border border-gray-700 shadow-lg">
+          <h3 class="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Direct Contact</h3>
+          
+          <div class="space-y-3 sm:space-y-4">
+            <a href={`mailto:${contactInfo.email}`} class="flex items-center text-gray-300 hover:text-indigo-400 transition-colors duration-300 touch-manipulation">
+              <div class="bg-gradient-to-br from-pink-500 to-indigo-600 w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 mr-3 sm:mr-4">
+                <i class="fas fa-envelope text-white text-sm sm:text-base"></i>
+              </div>
+              <span class="text-sm sm:text-base">{contactInfo.email}</span>
+            </a>
+            
+            <a href={contactInfo.linkedin} target="_blank" rel="noopener noreferrer" class="flex items-center text-gray-300 hover:text-indigo-400 transition-colors duration-300 touch-manipulation">
+              <div class="bg-gradient-to-br from-pink-500 to-indigo-600 w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 mr-3 sm:mr-4">
+                <i class="fab fa-linkedin-in text-white text-sm sm:text-base"></i>
+              </div>
+              <span class="text-sm sm:text-base">LinkedIn Profile</span>
+            </a>
+            
+            <a href={contactInfo.github} target="_blank" rel="noopener noreferrer" class="flex items-center text-gray-300 hover:text-indigo-400 transition-colors duration-300 touch-manipulation">
+              <div class="bg-gradient-to-br from-pink-500 to-indigo-600 w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0 mr-3 sm:mr-4">
+                <i class="fab fa-github text-white text-sm sm:text-base"></i>
+              </div>
+              <span class="text-sm sm:text-base">GitHub Profile</span>
+            </a>
+          </div>
         </div>
-        <div class="aspect-w-16 aspect-h-9">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30279.255492433123!2d-103.76291755!3d19.26721785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x84255ab3a9a8d4ab%3A0xf2f5e8a7f1f6d8b0!2sVilla%20de%20%C3%81lvarez%2C%20Colima%2C%20Mexico!5e0!3m2!1sen!2sus!4v1679929753099!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        
+        <!-- Quick Links -->
+        <div class="bg-gray-800/50 rounded-xl p-4 sm:p-6 border border-gray-700 shadow-lg">
+          <h3 class="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Quick Links</h3>
+          
+          <div class="space-y-2 sm:space-y-3">
+            <a href="/resume" class="flex items-center text-gray-300 hover:text-indigo-400 transition-colors duration-300 touch-manipulation">
+              <i class="fas fa-file-alt w-6 text-indigo-400"></i>
+              <span class="text-sm sm:text-base">Professional Resume</span>
+            </a>
+            
+            <a href="/experience" class="flex items-center text-gray-300 hover:text-indigo-400 transition-colors duration-300 touch-manipulation">
+              <i class="fas fa-project-diagram w-6 text-indigo-400"></i>
+              <span class="text-sm sm:text-base">Project Portfolio</span>
+            </a>
+            
+            <a href="/about" class="flex items-center text-gray-300 hover:text-indigo-400 transition-colors duration-300 touch-manipulation">
+              <i class="fas fa-user w-6 text-indigo-400"></i>
+              <span class="text-sm sm:text-base">About Me</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Services Grid -->
+    <div class="mb-12 sm:mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500 mb-6 sm:mb-12">Services & Expertise</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+        {services.map(service => (
+          <div class="bg-gray-800/50 rounded-xl p-4 sm:p-6 border border-gray-700 hover:border-indigo-500/30 transition-all duration-300 transform hover:scale-105 shadow-lg touch-manipulation">
+            <div class="flex items-start">
+              <div class="bg-gradient-to-br from-pink-500 to-indigo-600 w-10 sm:w-14 h-10 sm:h-14 rounded-xl flex items-center justify-center flex-shrink-0 mr-3 sm:mr-4">
+                <i class={`fas ${service.icon} text-xl sm:text-2xl text-white`}></i>
+              </div>
+              <div>
+                <h3 class="text-lg sm:text-xl font-semibold text-white mb-1 sm:mb-2">{service.title}</h3>
+                <p class="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">{service.description}</p>
+                
+                <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                  {service.examples.map(example => (
+                    <span class="text-xs bg-gray-700/70 text-gray-300 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">{example}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Collaboration Types -->
+    <div class="mb-12 sm:mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500 mb-6 sm:mb-12">Collaboration Opportunities</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+        {collaborationTypes.map(collab => (
+          <div class="bg-gray-800/50 rounded-xl p-4 sm:p-6 border border-gray-700 shadow-lg">
+            <h3 class="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3">{collab.type}</h3>
+            <p class="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">{collab.description}</p>
+            
+            <h4 class="text-xs sm:text-sm font-medium text-indigo-400 mb-1.5 sm:mb-2">Ideal for:</h4>
+            <ul class="space-y-1">
+              {collab.suitable.map(item => (
+                <li class="flex items-start text-gray-300 text-xs sm:text-sm">
+                  <span class="text-pink-500 mr-2">›</span>
+                  <span>{item}</span>
+        </li>
+              ))}
+      </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- CTA Section -->
+    <div class="text-center">
+      <div class="bg-gradient-to-r from-gray-800/70 to-gray-900/70 rounded-xl p-4 sm:p-8 shadow-lg backdrop-blur-sm border border-gray-800/50 max-w-4xl mx-auto">
+        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Ready to Transform Your Data Challenges?</h2>
+        <p class="text-gray-300 mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base">
+          Whether you're just starting your data journey or looking to enhance existing capabilities, I'm here to help you leverage the full potential of your data assets.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
+          <a href="#contact-form" class="bg-gradient-to-r from-pink-500 to-pink-700 hover:from-pink-600 hover:to-pink-800 text-white font-semibold py-2 sm:py-3 px-4 sm:px-8 rounded-lg shadow-md transition duration-300 ease-in-out text-sm sm:text-base touch-manipulation">
+            Send a Message
+          </a>
+          <a href="/experience" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 sm:py-3 px-4 sm:px-8 rounded-lg shadow-md transition duration-300 ease-in-out text-sm sm:text-base touch-manipulation">
+            Explore Projects
+          </a>
         </div>
       </div>
     </div>
   </div>
+  
+  <style>
+    /* Improved touch target for mobile */
+    .touch-manipulation {
+      touch-action: manipulation;
+    }
+    
+    /* Mobile-specific adjustments */
+    @media (max-width: 640px) {
+      input, select, textarea, button {
+        font-size: 16px; /* Prevents iOS zoom on focus */
+      }
+      
+      textarea {
+        max-height: 150px;
+      }
+    }
+  </style>
 </Layout>

@@ -1,0 +1,12 @@
+# robots.txt for https://gairoperalta.com
+
+User-agent: *
+Allow: /
+
+# Disallow development and admin paths
+Disallow: /admin/
+Disallow: /dev/
+Disallow: /test/
+
+# Sitemap
+Sitemap: https://gairoperalta.com/sitemap.xml 

@@ -1,37 +1,381 @@
    ---
    import Layout from '../layouts/Layout.astro';
-   ---
 
-   <Layout title="About Me - Gairo Peralta">
-     <section class="text-center max-w-4xl mx-auto">
-       <h1 class="text-6xl font-bold mb-8 text-indigo-300">About Me</h1>
-       
-<div class="relative w-32 h-32 md:w-48 md:h-48 mx-auto mb-8 md:mb-12">
-  <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-pink-500 rounded-full blur-xl opacity-75"></div>
-  <img src="/images/profile.jpg" alt="Profile Picture" class="relative w-full h-full object-cover rounded-full shadow-xl">
-</div>
+// Define career milestones for timeline
+const careerMilestones = [
+  {
+    year: 2025,
+    event: "Started Masters in Applied Artificial Intelligence",
+    description: "Enrolled in Tecnologico de Monterrey's prestigious MNA program to deepen expertise in cutting-edge AI methodologies and applications."
+  },
+  {
+    year: 2024,
+    event: "Joined PRODENSA as Python Developer",
+    description: "Contracted to develop AI tools for industrial document processing and knowledge management, implementing custom NLP solutions and intelligent data extraction systems."
+  },
+  {
+    year: 2023,
+    event: "Joined STRTGY",
+    description: "Became the lead data scientist at STRTGY, developing advanced geospatial analytics solutions for strategic decision-making."
+  },
+  {
+    year: 2022,
+    event: "Graduated from UC Berkeley",
+    description: "Completed Bachelor's degree in Data Science with honors, focusing on machine learning and statistical analysis."
+  },
+  {
+    year: 2022,
+    event: "Data Scientist at BlackPrint Technologies",
+    description: "Built property data analytics solutions and implemented geospatial intelligence for real estate market analysis."
+  },
+  {
+    year: 2021,
+    event: "Data Analyst at AGM Analytics",
+    description: "Performed user engagement analysis for SaaS platforms, analyzing metrics like DAU, MAU, and feature adoption rates to improve user retention and product development."
+  }
+];
 
-       <div class="space-y-8 text-left">
-         <p class="text-xl text-gray-300">
-           I'm Gairo Peralta, a passionate Data Scientist with a diverse background spanning from Los Angeles, California to Villa de Álvarez, Colima, Mexico. My journey in data science began with a childhood fascination for mathematics and technology, which evolved into a professional pursuit at UC Berkeley.
-         </p>
+// Define core values that shape professional approach
+const coreValues = [
+  {
+    title: "Data-Driven Excellence",
+    description: "Committed to delivering solutions backed by rigorous analysis and empirical evidence, ensuring decisions are based on facts rather than assumptions.",
+    icon: "fa-chart-line"
+  },
+  {
+    title: "Continuous Learning",
+    description: "Dedicated to staying at the forefront of data science and AI advancements through consistent self-education and formal learning opportunities.",
+    icon: "fa-graduation-cap"
+  },
+  {
+    title: "Ethical AI Advocate",
+    description: "Champion responsible AI development that prioritizes fairness, transparency, and human-centered design in all technical implementations.",
+    icon: "fa-shield-alt"
+  },
+  {
+    title: "Business-Technology Bridge",
+    description: "Skilled at translating complex technical concepts into business value and communicating effectively across technical and non-technical teams.",
+    icon: "fa-handshake"
+  }
+];
 
-         <p class="text-xl text-gray-300">
-           My expertise lies in leveraging advanced analytics, machine learning, and AI to solve complex business problems. At STRTGY, I've led projects ranging from sociodemographic analysis using INEGI metrics to implementing AI-driven market analysis tools. My work often involves creating interactive visualizations and geospatial data analysis using tools like ARCGIS and GeoJSON.
-         </p>
+// Define areas of professional interest
+const researchInterests = [
+  {
+    area: "Geospatial Machine Learning",
+    examples: ["Location intelligence algorithms", "Geographic pattern recognition", "Spatial prediction models"],
+    color: "indigo"
+  },
+  {
+    area: "Multimodal AI Systems",
+    examples: ["Vision-language models", "Cross-modal information retrieval", "Multimodal embeddings"],
+    color: "pink"
+  },
+  {
+    area: "Responsible AI",
+    examples: ["Fairness in machine learning", "Explainable AI methods", "Ethics in data science"],
+    color: "purple"
+  },
+  {
+    area: "Business Intelligence",
+    examples: ["Strategic decision support systems", "Predictive analytics", "Interactive data visualization"],
+    color: "blue"
+  }
+];
 
-         <p class="text-xl text-gray-300">
-           Prior to my current role, I co-founded BlackPrint Technologies, where I served as the Lead Data Scientist, focusing on geospatial information systems and AI applications. My academic journey through the California community college system and UC Berkeley has equipped me with a unique perspective on data science and its practical applications.
-         </p>
+// Define professional approach methodology
+const methodology = [
+  {
+    phase: "Discovery",
+    description: "Thorough understanding of business context, stakeholder needs, and existing data landscape through collaborative exploration.",
+    steps: ["Stakeholder interviews", "Data inventory", "Problem framing", "Opportunity identification"]
+  },
+  {
+    phase: "Solution Design",
+    description: "Systematic approach to architecture and algorithm selection based on problem requirements, data constraints, and business objectives.",
+    steps: ["Architecture planning", "Method selection", "Prototype design", "Feasibility validation"]
+  },
+  {
+    phase: "Implementation",
+    description: "Iterative development with continuous testing and refinement to ensure solutions meet both technical and business requirements.",
+    steps: ["Data pipeline construction", "Model development", "Validation testing", "Performance optimization"]
+  },
+  {
+    phase: "Integration",
+    description: "Seamless deployment and knowledge transfer ensuring solutions create sustainable business value with measurable impact.",
+    steps: ["Documentation", "Stakeholder training", "Systems integration", "Impact measurement"]
+  }
+];
 
-         <p class="text-xl text-gray-300">
-           Outside of work, I'm an avid learner, always exploring new technologies and methodologies in the field of data science. I balance my professional life with personal interests like watching series, going to the gym, and discovering local culinary gems.
-         </p>
+// Define SEO metadata
+const title = "About Me | Gairo Peralta - Data Scientist & AI Specialist";
+const description = "Learn about Gairo Peralta's background, professional journey, values, and approach to data science and AI. Discover what drives my passion for creating impactful data solutions.";
+
+// Structured data for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": title,
+  "description": description,
+  "about": {
+    "@type": "Person",
+    "name": "Gairo Y. Peralta",
+    "jobTitle": "Senior Data Scientist",
+    "alumniOf": [
+      {
+        "@type": "EducationalOrganization",
+        "name": "University of California, Berkeley",
+        "sameAs": "https://berkeley.edu"
+      },
+      {
+        "@type": "EducationalOrganization",
+        "name": "Tecnologico de Monterrey",
+        "sameAs": "https://tec.mx"
+      }
+    ],
+    "knowsAbout": [
+      "Data Science",
+      "Machine Learning",
+      "Artificial Intelligence",
+      "Geospatial Analysis",
+      "Business Intelligence"
+    ],
+    "seeks": researchInterests.map(r => r.area)
+  },
+  "mainContentOfPage": {
+    "@type": "WebPageElement",
+    "cssSelector": ".main-content"
+  }
+};
+---
+
+<Layout title={title} description={description}>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 main-content">
+    <!-- Hero Section -->
+    <div class="mb-10 sm:mb-16">
+      <div class="text-center">
+        <h1 class="text-4xl sm:text-5xl font-bold mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-600">About Me</h1>
+        <div class="w-32 sm:w-40 h-1 bg-gradient-to-r from-pink-500 to-indigo-600 mx-auto mb-6 sm:mb-8 rounded-full"></div>
+        <p class="text-base sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          My journey as a data scientist is driven by the power of transforming raw data into insights that create tangible value and shape better decisions.
+        </p>
+      </div>
+    </div>
+    
+    <!-- Personal & Professional Introduction -->
+    <div class="grid md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-20">
+      <!-- Profile Image Column -->
+      <div class="md:col-span-1">
+        <div class="relative mb-6">
+          <div class="absolute inset-0 bg-gradient-to-br from-pink-500 to-indigo-600 rounded-xl blur-xl opacity-20 transform -rotate-6"></div>
+          <img 
+            src="/images/profile.jpg" 
+            alt="Gairo Peralta - Data Scientist" 
+            class="relative rounded-xl w-full h-auto shadow-xl"
+          />
+          
+          <!-- Contact Info Card -->
+          <div class="bg-gray-800/70 rounded-xl p-4 sm:p-6 mt-6 border border-gray-700 backdrop-blur-sm">
+            <h3 class="text-lg font-semibold text-white mb-3 sm:mb-4">Connect With Me</h3>
+            
+            <div class="space-y-3 sm:space-y-4">
+              <a href="https://linkedin.com/in/gairoperalta" target="_blank" rel="noopener noreferrer" class="flex items-center text-gray-300 hover:text-indigo-400 transition-colors duration-300 touch-manipulation">
+                <i class="fab fa-linkedin text-xl w-8"></i>
+                <span>LinkedIn</span>
+              </a>
+              
+              <a href="https://github.com/gairoperalta" target="_blank" rel="noopener noreferrer" class="flex items-center text-gray-300 hover:text-indigo-400 transition-colors duration-300 touch-manipulation">
+                <i class="fab fa-github text-xl w-8"></i>
+                <span>GitHub</span>
+              </a>
+              
+              <a href="mailto:gairo@berkeley.edu" class="flex items-center text-gray-300 hover:text-indigo-400 transition-colors duration-300 touch-manipulation">
+                <i class="fas fa-envelope text-xl w-8"></i>
+                <span>Email</span>
+              </a>
+              
+              <a href="/contact" class="flex items-center text-gray-300 hover:text-indigo-400 transition-colors duration-300 touch-manipulation">
+                <i class="fas fa-paper-plane text-xl w-8"></i>
+                <span>Contact Form</span>
+              </a>
+            </div>
+          </div>
+        </div>
        </div>
 
-       <div class="mt-12 flex justify-center space-x-6">
-         <a href="/experience" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">View My Experience</a>
-         <a href="/resume" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">View My Resume</a>
+      <!-- Bio Information Column -->
+      <div class="md:col-span-2">
+        <div class="prose prose-lg prose-invert max-w-none">
+          <h2 class="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500 mb-4 sm:mb-6">My Professional Journey</h2>
+          
+          <p class="mb-4 text-base sm:text-lg">
+            I'm a data scientist specializing in building advanced analytics systems that solve complex business problems through the strategic application of machine learning and artificial intelligence. My expertise centers on creating customized solutions that transform data into actionable intelligence, providing organizations with the insights they need to make better decisions.
+          </p>
+          
+          <p class="mb-4 text-base sm:text-lg">
+            With experience spanning multiple industries including retail, real estate, financial services, and electoral analysis, I've developed a versatile skillset that allows me to quickly understand domain-specific challenges and develop tailored data science approaches. My academic background in Data Science from UC Berkeley provides a strong foundation in statistical methods and machine learning techniques.
+          </p>
+          
+          <p class="mb-4 text-base sm:text-lg">
+            Currently pursuing a Master's in Applied Artificial Intelligence at Tecnologico de Monterrey, I'm deepening my expertise in cutting-edge AI methodologies while maintaining an active professional practice, creating a powerful synergy between theoretical knowledge and practical application.
+          </p>
+          
+          <p class="text-base sm:text-lg">
+            My approach combines technical excellence with business acumen—I don't just build models, I deliver solutions that create measurable value. Whether it's optimizing inventory systems, enhancing customer experiences through personalization, or providing location intelligence for strategic decisions, I focus on translating complex algorithms into business impact.
+          </p>
+          
+          <div class="mt-6 sm:mt-8 flex flex-wrap gap-3 sm:items-center sm:justify-start">
+            <a href="/resume" class="inline-flex items-center bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg shadow-md transition duration-300 ease-in-out text-sm sm:text-base touch-manipulation">
+              <i class="fas fa-file-alt mr-2"></i>
+              View Resume
+            </a>
+            <a href="/experience" class="inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg shadow-md transition duration-300 ease-in-out text-sm sm:text-base touch-manipulation">
+              <i class="fas fa-project-diagram mr-2"></i>
+              See Projects
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Career Timeline -->
+    <div class="mb-12 sm:mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500 mb-8 sm:mb-12">Career Timeline</h2>
+      
+      <div class="relative">
+        <!-- Vertical Timeline Line - hidden on small screens, visible on larger ones -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-pink-500 to-indigo-600 rounded-full hidden sm:block"></div>
+        
+        <div class="space-y-10 sm:space-y-16">
+          {careerMilestones.map((milestone, index) => (
+            <div class="relative">
+              <!-- Year Circle - Only visible on larger screens -->
+              <div class="absolute left-1/2 transform -translate-x-1/2 w-10 sm:w-12 h-10 sm:h-12 rounded-full flex items-center justify-center bg-gray-900 border-4 border-indigo-500 z-10 hidden sm:flex">
+                <span class="font-bold text-white text-sm sm:text-base">{milestone.year}</span>
+              </div>
+              
+              <!-- Mobile-friendly version of the layout -->
+              <div class={`w-full sm:w-5/12 p-4 sm:p-6 rounded-xl shadow-lg bg-gray-800/80 backdrop-blur-sm border border-gray-700 ${index % 2 === 0 ? 'sm:ml-auto' : 'sm:mr-auto'}`}>
+                <!-- Year label visible on small screens -->
+                <div class="flex items-center sm:hidden mb-2">
+                  <div class="w-8 h-8 rounded-full flex items-center justify-center bg-gray-900 border-2 border-indigo-500 mr-3">
+                    <span class="font-bold text-white text-xs">{milestone.year}</span>
+                  </div>
+                  <h3 class="text-base sm:text-xl font-semibold text-white">{milestone.event}</h3>
+                </div>
+                
+                <!-- Event title only visible on larger screens -->
+                <h3 class="hidden sm:block text-xl font-semibold text-white mb-2">{milestone.event}</h3>
+                
+                <p class="text-sm sm:text-base text-gray-300">{milestone.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Core Values Section -->
+    <div class="mb-12 sm:mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500 mb-8 sm:mb-12">Professional Values</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+        {coreValues.map(value => (
+          <div class="bg-gray-800/50 border border-gray-700 hover:border-indigo-700/50 p-4 sm:p-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 touch-manipulation">
+            <div class="flex items-start">
+              <div class="bg-gradient-to-br from-pink-500 to-indigo-600 w-10 h-10 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center flex-shrink-0 mr-4">
+                <i class={`fas ${value.icon} text-xl sm:text-2xl text-white`}></i>
+              </div>
+              <div>
+                <h3 class="text-lg sm:text-xl font-semibold text-white mb-2">{value.title}</h3>
+                <p class="text-sm sm:text-base text-gray-300">{value.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Research Interests Section -->
+    <div class="mb-12 sm:mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500 mb-8 sm:mb-12">Areas of Professional Interest</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+        {researchInterests.map(interest => (
+          <div class={`bg-${interest.color}-900/20 border border-${interest.color}-800/30 p-4 sm:p-6 rounded-xl shadow-lg`}>
+            <h3 class={`text-lg sm:text-xl font-semibold text-${interest.color}-400 mb-3 sm:mb-4`}>{interest.area}</h3>
+            <ul class="space-y-1 sm:space-y-2">
+              {interest.examples.map(example => (
+                <li class="flex items-start">
+                  <span class={`text-${interest.color}-500 mr-2`}>›</span>
+                  <span class="text-sm sm:text-base text-gray-300">{example}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
        </div>
-     </section>
+
+    <!-- Methodology Section -->
+    <div class="mb-12 sm:mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500 mb-8 sm:mb-12">My Professional Approach</h2>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {methodology.map((phase, index) => (
+          <div class="bg-gray-800/50 border border-gray-700 p-4 sm:p-6 rounded-xl shadow-lg">
+            <div class="bg-gradient-to-br from-pink-500 to-indigo-600 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl font-bold text-white">
+              {index + 1}
+            </div>
+            <h3 class="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3">{phase.phase}</h3>
+            <p class="text-xs sm:text-sm text-gray-300 mb-3 sm:mb-4">{phase.description}</p>
+            <ul class="space-y-1 text-xs sm:text-sm">
+              {phase.steps.map(step => (
+                <li class="flex items-start">
+                  <span class="text-indigo-400 mr-2">•</span>
+                  <span class="text-gray-400">{step}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Call to Action Section -->
+    <div class="text-center">
+      <div class="bg-gradient-to-r from-gray-800/70 to-gray-900/70 rounded-xl p-6 sm:p-8 shadow-lg backdrop-blur-sm border border-gray-800/50 max-w-4xl mx-auto">
+        <h2 class="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Interested in Working Together?</h2>
+        <p class="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6 max-w-2xl mx-auto">
+          I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Let's connect and explore how we can create data-driven solutions together.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
+          <a href="/contact" class="bg-gradient-to-r from-pink-500 to-pink-700 hover:from-pink-600 hover:to-pink-800 text-white font-semibold py-2 sm:py-3 px-4 sm:px-8 rounded-lg shadow-md transition duration-300 ease-in-out text-sm sm:text-base touch-manipulation">
+            Start a Conversation
+          </a>
+          <a href="/experience" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 sm:py-3 px-4 sm:px-8 rounded-lg shadow-md transition duration-300 ease-in-out text-sm sm:text-base touch-manipulation">
+            View My Projects
+          </a>
+        </div>
+      </div>
+    </div>
+       </div>
+  
+  <!-- Add structured data for SEO -->
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+  
+  <style>
+    /* Improved touch target for mobile */
+    .touch-manipulation {
+      touch-action: manipulation;
+    }
+    
+    /* Responsive typography adjustments */
+    @media (max-width: 640px) {
+      .prose p {
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+    }
+  </style>
    </Layout>
