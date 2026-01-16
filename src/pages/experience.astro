@@ -484,9 +484,11 @@ const structuredData = {
 </Layout>
 <script>
   const initExperience = () => {
-    const root = document.querySelector('[data-experience-page]');
+    const root = document.querySelector('[data-experience-page]') as HTMLElement | null;
     if (!root || root.dataset.initialized === 'true') return;
     root.dataset.initialized = 'true';
+
+    const win = window as Window & { __experienceResizeHandler?: () => void };
 
     document.documentElement.classList.remove('no-js');
     document.documentElement.classList.add('js');
@@ -500,7 +502,7 @@ const structuredData = {
     const mobileFilterClose = root.querySelector('#mobile-filter-close');
     const filterToggleText = root.querySelector('#filter-toggle-text');
 
-    let selectedTags = new Set();
+    const selectedTags = new Set<string>();
     let filtersVisible = false;
 
     // Toggle mobile filters
@@ -628,17 +630,17 @@ const structuredData = {
     }
     
     // Adjust layout for screen size changes
-    if (window.__experienceResizeHandler) {
-      window.removeEventListener('resize', window.__experienceResizeHandler);
+    if (win.__experienceResizeHandler) {
+      window.removeEventListener('resize', win.__experienceResizeHandler);
     }
-    window.__experienceResizeHandler = () => {
+    win.__experienceResizeHandler = () => {
       if (window.innerWidth >= 1024 && filtersContainer) {
         filtersContainer.classList.remove('hidden');
       } else if (window.innerWidth < 1024 && !filtersVisible && filtersContainer) {
         filtersContainer.classList.add('hidden');
       }
     };
-    window.addEventListener('resize', window.__experienceResizeHandler);
+    window.addEventListener('resize', win.__experienceResizeHandler);
   };
 
   document.addEventListener('DOMContentLoaded', initExperience);
