@@ -369,7 +369,7 @@ const structuredData = {
 
       const updateProgress = () => {
         const rect = timeline.getBoundingClientRect();
-        const scrollY = window.scrollY || window.pageYOffset;
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
         const offsetTop = rect.top + scrollY;
         const start = offsetTop - window.innerHeight * 0.3;
         const end = offsetTop + rect.height - window.innerHeight * 0.4;
