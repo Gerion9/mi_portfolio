@@ -6,96 +6,242 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Gairo Y. Peralta",
-  "jobTitle": "Data Scientist",
+  "jobTitle": "AI/ML Engineer",
   "url": "https://gairoperalta.com",
   "image": "https://gairoperalta.com/images/profile.jpg",
   "sameAs": [
     "https://linkedin.com/in/gairoperalta",
     "https://github.com/gairoperalta"
   ],
-  "knowsAbout": ["Geospatial Analysis", "Generative AI", "Business Intelligence", "Data Visualization", "Machine Learning", "Time Series Analysis"],
+  "knowsAbout": ["LLM Systems", "RAG", "GeoAI", "MLOps", "Machine Learning", "Time Series Forecasting"],
   "worksFor": {
     "@type": "Organization",
-    "name": "STRTGY"
+    "name": "BlackPrint Technologies"
   },
   "alumniOf": {
     "@type": "EducationalOrganization",
     "name": "University of California, Berkeley"
   },
-  "description": "Senior Data Scientist specializing in machine learning solutions, geospatial analysis, and business intelligence."
+  "description": "AI/ML engineer specializing in LLM systems, GeoAI platforms, and production ML pipelines."
 };
 
 // Define technical skills for animated showcase
 const technicalSkills = [
-  { name: "Python", icon: "fab fa-python", color: "blue" },
-  { name: "Machine Learning", icon: "fas fa-brain", color: "indigo" },
-  { name: "GIS", icon: "fas fa-map-marked-alt", color: "green" },
-  { name: "Data Visualization", icon: "fas fa-chart-line", color: "pink" },
-  { name: "SQL", icon: "fas fa-database", color: "yellow" },
-  { name: "Time Series", icon: "far fa-clock", color: "purple" }
+  { name: "LLM Systems", icon: "fas fa-brain", color: "indigo" },
+  { name: "RAG + Agents", icon: "fas fa-robot", color: "pink" },
+  { name: "GeoAI", icon: "fas fa-map-marked-alt", color: "green" },
+  { name: "ML Pipelines", icon: "fas fa-cogs", color: "blue" },
+  { name: "Forecasting", icon: "fas fa-chart-line", color: "yellow" },
+  { name: "MLOps", icon: "fas fa-cloud", color: "purple" }
 ];
 
 // Define featured projects for the homepage
 const featuredProjects = [
   {
-    title: "Time Series Forecasting",
-    description: "Built forecasting models that help companies predict inventory needs and better plan for future demand",
-    icon: "fas fa-chart-line",
-    year: "2024"
-  },
-  {
-    title: "GeoAI Insights",
-    description: "Combined AI and mapping technologies to help retail businesses find the best locations for new stores",
+    title: "LLM GeoAI Platform",
+    description: "Built a GeoAI platform for 2.5M+ urban blocks with real-time inference and interactive maps",
     icon: "fas fa-map-marked-alt",
-    year: "2024"
+    year: "2025"
   },
   {
-    title: "Business Analytics Dashboard",
-    description: "Created a dashboard that automates analysis tasks, saving teams hours of manual work each week",
-    icon: "fas fa-tachometer-alt",
-    year: "2024"
+    title: "Meeting Intelligence Platform",
+    description: "Turned recordings into structured summaries and searchable transcripts with RBAC controls",
+    icon: "fas fa-microphone",
+    year: "2025"
+  },
+  {
+    title: "Medical QA Multi-Agent System",
+    description: "Multi-agent LLM system with PrimeKG + Neo4j for high-accuracy medical QA",
+    icon: "fas fa-stethoscope",
+    year: "2025"
   }
 ];
 ---
 
-<Layout title="Gairo Peralta - Data Scientist & AI Specialist" description="Senior Data Scientist specialized in machine learning, geospatial analytics, and business intelligence solutions for strategic decision-making.">
+<Layout title="Gairo Peralta - AI/ML Engineer | LLM Systems | GeoAI" description="AI/ML Engineer building LLM systems, GeoAI platforms, and production ML pipelines for measurable outcomes.">
   <!-- Hero Section -->
-  <section class="text-center max-w-3xl mx-auto px-4 sm:px-6 mb-12 md:mb-20">
-    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-pink-500 leading-tight">Gairo Y. Peralta</h1>
-    <div class="relative w-28 h-28 md:w-40 md:h-40 lg:w-48 lg:h-48 mx-auto mb-6 md:mb-10 animate__animated animate__fadeIn">
-      <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-pink-500 rounded-full blur-xl opacity-75"></div>
-      <img src="/images/profile.jpg" alt="Gairo Peralta - Data Scientist" class="relative w-full h-full object-cover rounded-full shadow-xl" loading="eager" width="192" height="192">
-    </div>
-    <h2 class="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6 text-pink-500 font-semibold animate__animated animate__fadeIn animate__delay-1s">Data Scientist & AI Specialist</h2>
+  <section class="text-center max-w-3xl mx-auto px-4 sm:px-6 mb-12 md:mb-20 relative overflow-hidden" data-home-page>
+    <div class="relative z-10">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-14 md:mb-20 text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-pink-500 leading-tight mt-3 sm:mt-4 md:mt-6">Gairo Y. Peralta</h1>
+      <div class="hero-node hero-node-offset relative w-28 h-28 md:w-40 md:h-40 lg:w-48 lg:h-48 mx-auto mb-14 md:mb-20 mt-12 sm:mt-10 md:mt-12 animate__animated animate__fadeIn">
+        <div class="hero-visual hero-visual--graph" aria-hidden="true">
+          <div class="hero-visual-inner">
+            <svg viewBox="0 0 900 360" role="presentation" focusable="false">
+          <defs>
+            <linearGradient id="graphStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#6366f1" stop-opacity="0.95" />
+              <stop offset="50%" stop-color="#ec4899" stop-opacity="0.85" />
+              <stop offset="100%" stop-color="#818cf8" stop-opacity="0.95" />
+            </linearGradient>
+            <radialGradient id="graphGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f472b6" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#f472b6" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <path id="edge-mlops" class="graph-edge" d="M160 80 L300 170 L450 180" />
+          <path id="edge-rag" class="graph-edge graph-edge--dim" d="M160 260 L300 190 L450 180" />
+          <path id="edge-geoai" class="graph-edge graph-edge--dim" d="M450 50 L450 180" />
+          <path id="edge-kg" class="graph-edge" d="M450 310 L450 180" />
+          <path id="edge-llm" class="graph-edge" d="M740 90 L600 170 L450 180" />
+          <path id="edge-vector" class="graph-edge graph-edge--dim" d="M740 260 L600 190 L450 180" />
+          <path id="edge-bridge-top" class="graph-edge graph-edge--dim" d="M300 170 L600 170" />
+          <path id="edge-bridge-bottom" class="graph-edge" d="M300 190 L600 190" />
+
+          <circle class="graph-packet" r="3">
+            <animateMotion dur="7s" repeatCount="indefinite">
+              <mpath href="#edge-mlops" />
+            </animateMotion>
+          </circle>
+          <circle class="graph-packet graph-packet--reverse" r="3">
+            <animateMotion dur="7s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+              <mpath href="#edge-mlops" />
+            </animateMotion>
+          </circle>
+          <circle class="graph-packet graph-packet--alt" r="2.5">
+            <animateMotion dur="8.5s" repeatCount="indefinite">
+              <mpath href="#edge-rag" />
+            </animateMotion>
+          </circle>
+          <circle class="graph-packet graph-packet--alt graph-packet--reverse" r="2.5">
+            <animateMotion dur="8.5s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+              <mpath href="#edge-rag" />
+            </animateMotion>
+          </circle>
+          <circle class="graph-packet" r="2.8">
+            <animateMotion dur="6.5s" repeatCount="indefinite">
+              <mpath href="#edge-llm" />
+            </animateMotion>
+          </circle>
+          <circle class="graph-packet graph-packet--reverse" r="2.8">
+            <animateMotion dur="6.5s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+              <mpath href="#edge-llm" />
+            </animateMotion>
+          </circle>
+          <circle class="graph-packet graph-packet--alt" r="2.4">
+            <animateMotion dur="7.8s" repeatCount="indefinite">
+              <mpath href="#edge-vector" />
+            </animateMotion>
+          </circle>
+          <circle class="graph-packet graph-packet--alt graph-packet--reverse" r="2.4">
+            <animateMotion dur="7.8s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+              <mpath href="#edge-vector" />
+            </animateMotion>
+          </circle>
+          <circle class="graph-packet" r="2.2">
+            <animateMotion dur="6s" repeatCount="indefinite">
+              <mpath href="#edge-geoai" />
+            </animateMotion>
+          </circle>
+          <circle class="graph-packet graph-packet--reverse" r="2.2">
+            <animateMotion dur="6s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+              <mpath href="#edge-geoai" />
+            </animateMotion>
+          </circle>
+          <circle class="graph-packet graph-packet--alt" r="2.2">
+            <animateMotion dur="6.8s" repeatCount="indefinite">
+              <mpath href="#edge-kg" />
+            </animateMotion>
+          </circle>
+          <circle class="graph-packet graph-packet--alt graph-packet--reverse" r="2.2">
+            <animateMotion dur="6.8s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+              <mpath href="#edge-kg" />
+            </animateMotion>
+          </circle>
+
+          <circle class="graph-core-glow" cx="450" cy="180" r="80" />
+          <circle class="graph-node graph-node--core graph-node--pulse" cx="450" cy="180" r="12" />
+
+          <circle class="graph-node graph-node--pulse" cx="160" cy="80" r="8" />
+          <circle class="graph-node graph-node--pulse graph-node--slow" cx="160" cy="260" r="8" />
+          <circle class="graph-node graph-node--pulse" cx="450" cy="50" r="7" />
+          <circle class="graph-node graph-node--pulse graph-node--slow" cx="450" cy="310" r="7" />
+          <circle class="graph-node graph-node--pulse" cx="740" cy="90" r="8" />
+          <circle class="graph-node graph-node--pulse graph-node--slow" cx="740" cy="260" r="8" />
+          <circle class="graph-node graph-node--pulse" cx="300" cy="170" r="7" />
+          <circle class="graph-node graph-node--pulse graph-node--slow" cx="600" cy="170" r="7" />
+          <circle class="graph-node graph-node--pulse" cx="300" cy="190" r="6" />
+          <circle class="graph-node graph-node--pulse graph-node--slow" cx="600" cy="190" r="6" />
+
+          <g class="graph-label-group">
+            <line class="graph-label-line" x1="450" y1="50" x2="450" y2="18" />
+            <text class="graph-label" x="450" y="14" text-anchor="middle">GEOAI</text>
+          </g>
+          <g class="graph-label-group">
+            <line class="graph-label-line" x1="160" y1="80" x2="120" y2="40" />
+            <text class="graph-label" x="120" y="34" text-anchor="middle">MLOPS</text>
+          </g>
+          <g class="graph-label-group">
+            <line class="graph-label-line" x1="160" y1="260" x2="120" y2="310" />
+            <text class="graph-label" x="120" y="326" text-anchor="middle">RAG PIPELINES</text>
+          </g>
+          <g class="graph-label-group">
+            <line class="graph-label-line" x1="740" y1="90" x2="780" y2="50" />
+            <text class="graph-label" x="780" y="44" text-anchor="middle">LLM SYSTEMS</text>
+          </g>
+          <g class="graph-label-group">
+            <line class="graph-label-line" x1="740" y1="260" x2="780" y2="310" />
+            <text class="graph-label" x="780" y="326" text-anchor="middle">VECTOR SEARCH</text>
+          </g>
+          <g class="graph-label-group">
+            <line class="graph-label-line" x1="450" y1="310" x2="450" y2="342" />
+            <text class="graph-label" x="450" y="356" text-anchor="middle">KNOWLEDGE GRAPHS</text>
+          </g>
+
+          <text class="graph-edge-label">
+            <textPath href="#edge-mlops" startOffset="50%" text-anchor="middle">DEPLOYMENT</textPath>
+          </text>
+          <text class="graph-edge-label">
+            <textPath href="#edge-rag" startOffset="50%" text-anchor="middle">CONTEXT</textPath>
+          </text>
+          <text class="graph-edge-label">
+            <textPath href="#edge-geoai" startOffset="50%" text-anchor="middle">SPATIAL SIGNAL</textPath>
+          </text>
+          <text class="graph-edge-label">
+            <textPath href="#edge-kg" startOffset="50%" text-anchor="middle">GROUNDING</textPath>
+          </text>
+          <text class="graph-edge-label">
+            <textPath href="#edge-llm" startOffset="50%" text-anchor="middle">GENERATION</textPath>
+          </text>
+          <text class="graph-edge-label">
+            <textPath href="#edge-vector" startOffset="50%" text-anchor="middle">RETRIEVAL</textPath>
+          </text>
+            </svg>
+          </div>
+        </div>
+        <div class="hero-node-glow absolute inset-0 bg-gradient-to-r from-indigo-500 to-pink-500 rounded-full blur-xl opacity-75"></div>
+        <img src="/images/profile.jpg" alt="Gairo Peralta - AI/ML Engineer" class="hero-node-image relative w-full h-full object-cover rounded-full shadow-xl" loading="eager" width="192" height="192">
+      </div>
+    <h2 class="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6 text-pink-500 font-semibold animate__animated animate__fadeIn animate__delay-1s">AI/ML Engineer | LLM Systems | GeoAI</h2>
     <p class="text-base md:text-xl text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto animate__animated animate__fadeIn animate__delay-1s leading-relaxed">
-      Using <span class="text-indigo-300">geospatial analysis</span>, <span class="text-indigo-300">AI techniques</span>, and <span class="text-indigo-300">data visualization</span> to help businesses make better decisions with their data.
+      Building <span class="text-indigo-300">LLM systems</span>, <span class="text-indigo-300">GeoAI platforms</span>, and <span class="text-indigo-300">production ML pipelines</span> that deliver measurable business outcomes.
     </p>
     <div class="text-base md:text-lg text-gray-400 mb-8 md:mb-12 max-w-2xl mx-auto italic animate__animated animate__fadeIn animate__delay-2s relative">
       <div class="absolute -left-2 top-0 text-3xl md:text-4xl text-indigo-500 opacity-30">"</div>
       <p class="relative z-10 px-4 md:px-0">
-        I enjoy finding patterns in data and building tools that make complex information easier to understand and use. My goal is to create solutions that actually help people in their daily work.
+        I focus on shipping reliable AI systems that turn complex data into clear decisions and real-world impact.
       </p>
       <div class="absolute -right-2 bottom-0 text-3xl md:text-4xl text-indigo-500 opacity-30">"</div>
     </div>
     
     <!-- Stats -->
-    <div class="mb-10 md:mb-12 grid grid-cols-3 gap-2 md:gap-6 max-w-2xl mx-auto">
+    <div class="mb-10 md:mb-12 grid grid-cols-3 gap-2 md:gap-6 max-w-2xl mx-auto" data-reveal>
       <div class="bg-gray-800/50 p-3 md:p-4 rounded-lg text-center border border-gray-700 transform hover:scale-105 transition-transform duration-300 hover:border-indigo-500/30">
-        <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">5+</span>
+        <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">6+</span>
         <span class="text-xs md:text-sm text-gray-400">Years Experience</span>
       </div>
       <div class="bg-gray-800/50 p-3 md:p-4 rounded-lg text-center border border-gray-700 transform hover:scale-105 transition-transform duration-300 hover:border-indigo-500/30">
-        <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">20+</span>
+        <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">14+</span>
         <span class="text-xs md:text-sm text-gray-400">Projects Completed</span>
       </div>
       <div class="bg-gray-800/50 p-3 md:p-4 rounded-lg text-center border border-gray-700 transform hover:scale-105 transition-transform duration-300 hover:border-indigo-500/30">
-        <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">10+</span>
-        <span class="text-xs md:text-sm text-gray-400">Data Tools Mastered</span>
+        <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">12+</span>
+        <span class="text-xs md:text-sm text-gray-400">Core Tools Mastered</span>
       </div>
     </div>
     
     <!-- Technical Skills -->
-    <div class="mb-10 md:mb-16">
+    <div class="mb-10 md:mb-16" data-reveal>
       <h3 class="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">Technical Expertise</h3>
       <div class="flex flex-wrap justify-center gap-2 md:gap-4">
         {technicalSkills.map(skill => (
@@ -108,11 +254,11 @@ const featuredProjects = [
     </div>
     
     <!-- Featured Projects -->
-    <div class="mb-10 md:mb-16">
+    <div class="mb-10 md:mb-16" data-reveal>
       <h3 class="text-xl md:text-2xl font-semibold mb-4 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">Featured Projects</h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {featuredProjects.map(project => (
-          <div class="bg-gray-800/50 p-4 md:p-6 rounded-xl border border-gray-700 text-left transform hover:scale-105 transition-all duration-300 hover:border-indigo-500/30 group touch-manipulation">
+          <div class="bg-gray-800/50 p-4 md:p-6 rounded-xl border border-gray-700 text-left transform hover:scale-105 transition-all duration-300 hover:border-indigo-500/30 group touch-manipulation card-hover">
             <div class="flex items-center mb-3 md:mb-4">
               <div class="bg-gradient-to-br from-pink-500 to-indigo-600 w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
                 <i class={`${project.icon} text-white text-sm md:text-base`}></i>
@@ -127,10 +273,11 @@ const featuredProjects = [
     </div>
     
     <!-- CTA Buttons -->
-    <div class="flex flex-wrap justify-center gap-3 md:gap-4 animate__animated animate__fadeIn animate__delay-3s">
-      <a href="/about" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px]" aria-label="Learn more about Gairo Peralta">About Me</a>
-      <a href="/experience" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px]" aria-label="View Gairo's experience and projects">My Experience</a>
-      <a href="/resume" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px]" aria-label="View Gairo's resume">My Resume</a>
+    <div class="flex flex-wrap justify-center gap-3 md:gap-4 animate__animated animate__fadeIn animate__delay-3s" data-reveal>
+      <a href="/about" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px] micro-cta" aria-label="Learn more about Gairo Peralta">About Me</a>
+      <a href="/experience" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px] micro-cta" aria-label="View Gairo's experience and projects">My Experience</a>
+      <a href="/resume" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px] micro-cta" aria-label="View Gairo's resume">My Resume</a>
+    </div>
     </div>
   </section>
   
@@ -140,6 +287,172 @@ const featuredProjects = [
   <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
   
   <style>
+    .hero-node {
+      overflow: visible;
+    }
+
+    .hero-node-offset {
+      top: 10px;
+    }
+
+    .hero-node-glow {
+      z-index: 1;
+    }
+
+    .hero-node-image {
+      z-index: 2;
+    }
+
+    .hero-visual {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: clamp(560px, 92vw, 900px);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: 0.38;
+      z-index: 0;
+    }
+
+    .hero-visual--graph {
+      mix-blend-mode: screen;
+    }
+
+    .hero-visual-inner {
+      animation: heroFloat 12s ease-in-out infinite;
+    }
+
+    .hero-visual svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .graph-edge {
+      fill: none;
+      stroke: url(#graphStroke);
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-dasharray: 6 12;
+      animation: edgeFlow 10s linear infinite;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .graph-edge--dim {
+      stroke-width: 1.2;
+      stroke-dasharray: 4 14;
+      opacity: 0.45;
+      animation-duration: 14s;
+    }
+
+    .graph-core-glow {
+      fill: url(#graphGlow);
+      opacity: 0.5;
+      animation: corePulse 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .graph-node {
+      fill: rgba(15, 23, 42, 0.7);
+      stroke: rgba(236, 72, 153, 0.8);
+      stroke-width: 1.2;
+      filter: drop-shadow(0 0 6px rgba(236, 72, 153, 0.35));
+      transform-box: fill-box;
+      transform-origin: center;
+      pointer-events: none;
+    }
+
+    .graph-node--core {
+      fill: rgba(99, 102, 241, 0.9);
+      stroke: rgba(248, 250, 252, 0.85);
+      filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.7));
+    }
+
+    .graph-node--pulse {
+      animation: nodePulse 4.5s ease-in-out infinite;
+    }
+
+    .graph-node--slow {
+      animation-duration: 6s;
+    }
+
+    .graph-packet {
+      fill: rgba(248, 250, 252, 0.9);
+      filter: drop-shadow(0 0 8px rgba(248, 250, 252, 0.6));
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .graph-packet--alt {
+      opacity: 0.6;
+    }
+
+    .graph-packet--reverse {
+      opacity: 0.55;
+    }
+
+    .graph-label-group {
+      opacity: 0.82;
+      transition: opacity 0.3s ease;
+    }
+
+    .graph-label-line {
+      stroke: rgba(129, 140, 248, 0.6);
+      stroke-width: 1;
+    }
+
+    .graph-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      fill: rgba(226, 232, 240, 0.9);
+      text-shadow: 0 0 8px rgba(15, 23, 42, 0.7);
+      paint-order: stroke;
+      stroke: rgba(15, 23, 42, 0.75);
+      stroke-width: 3px;
+    }
+
+    .graph-edge-label {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      fill: rgba(148, 163, 184, 0.8);
+      text-transform: uppercase;
+      paint-order: stroke;
+      stroke: rgba(15, 23, 42, 0.8);
+      stroke-width: 4px;
+      pointer-events: none;
+    }
+
+    .graph-label-group:hover {
+      opacity: 1;
+    }
+
+    .graph-label-group:hover .graph-label-line {
+      stroke: rgba(236, 72, 153, 0.9);
+    }
+
+    @keyframes heroFloat {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes edgeFlow {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -160; }
+    }
+
+    @keyframes nodePulse {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 0.95; }
+      100% { transform: scale(0.9); opacity: 0.6; }
+    }
+
+    @keyframes corePulse {
+      0% { transform: scale(0.92); opacity: 0.4; }
+      50% { transform: scale(1.05); opacity: 0.75; }
+      100% { transform: scale(0.92); opacity: 0.4; }
+    }
+
     /* Animation for skill tags */
     @keyframes float {
       0% { transform: translateY(0px); }
@@ -156,19 +469,103 @@ const featuredProjects = [
       touch-action: manipulation;
     }
     
+    /* Prevent overflow issues on smaller screens */
+    @media (max-width: 1024px) {
+      .hero-node-offset {
+        top: 18px;
+      }
+
+      .hero-visual {
+        width: clamp(520px, 94vw, 820px);
+        opacity: 0.32;
+      }
+
+      .graph-label {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+      }
+
+      .graph-edge-label {
+        font-size: 8px;
+        letter-spacing: 0.14em;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-node-offset {
+        top: 22px;
+      }
+
+      .hero-visual {
+        width: clamp(460px, 96vw, 720px);
+        opacity: 0.28;
+      }
+
+      .graph-label-group {
+        opacity: 0.7;
+      }
+
+      .graph-label {
+        font-size: 8px;
+        letter-spacing: 0.08em;
+      }
+
+      .graph-edge-label {
+        display: none;
+      }
+    }
+
     /* Prevent overflow issues on small screens */
     @media (max-width: 640px) {
       .animate-float {
         animation: float 3s ease-in-out infinite;
         animation-duration: 4s; /* Slower on mobile */
       }
+
+      .hero-visual {
+        width: clamp(420px, 98vw, 640px);
+        opacity: 0.22;
+      }
+
+      .graph-label {
+        font-size: 7px;
+        letter-spacing: 0.06em;
+      }
+
+      .graph-edge-label {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-node-offset {
+        top: 26px;
+      }
+
+      .graph-label-group {
+        opacity: 0.55;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-visual-inner,
+      .graph-edge,
+      .graph-node,
+      .graph-core-glow,
+      .graph-packet {
+        animation: none !important;
+      }
     }
   </style>
   
   <script>
-    // Add floating animation to skill tags with random delays
-    document.addEventListener('DOMContentLoaded', () => {
-      const skillElements = document.querySelectorAll('.bg-gray-800\\/50.px-3.py-2, .bg-gray-800\\/50.px-4.py-3');
+    const initHomeEffects = () => {
+      const root = document.querySelector('[data-home-page]') as HTMLElement | null;
+      if (!root || root.dataset.initialized === 'true') return;
+      root.dataset.initialized = 'true';
+
+      // Add floating animation to skill tags with random delays
+      const skillElements = root.querySelectorAll('.bg-gray-800\\/50.px-3.py-2, .bg-gray-800\\/50.px-4.py-3');
       
       skillElements.forEach((el) => {
         el.classList.add('animate-float');
@@ -176,12 +573,15 @@ const featuredProjects = [
       });
       
       // Fix for touch events on mobile
-      const touchElements = document.querySelectorAll('.touch-manipulation');
+      const touchElements = root.querySelectorAll('.touch-manipulation');
       touchElements.forEach(el => {
         el.addEventListener('touchstart', function() {
           // This empty handler ensures the hover state works on first tap
         }, {passive: true});
       });
-    });
+    };
+
+    document.addEventListener('DOMContentLoaded', initHomeEffects);
+    document.addEventListener('astro:page-load', initHomeEffects);
   </script>
 </Layout>

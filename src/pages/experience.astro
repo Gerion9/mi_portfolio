@@ -4,6 +4,48 @@ import Layout from '../layouts/Layout.astro';
 // Projects array (will be sorted below)
 const unsortedProjects = [
   {
+    title: "LLM GeoAI Platform for Urban Intelligence",
+    company: "BlackPrint Technologies",
+    date: "2025-08-01",
+    imgSrc: "/images/blackprint_technologies.jpg",
+    impact: ["Urban Blocks: 2.5M+", "Real-time Inference"],
+    tags: ["Geospatial Analysis", "Machine Learning", "React", "Mapbox GL", "Turf.js", "LLM", "GeoAI", "Data Visualization"],
+    description: "Built an LLM-powered GeoAI platform to model 2.5M+ urban blocks with real-time inference and interactive mapping for faster decision-making.",
+    impacts: [
+      "Shipped React + Mapbox + Turf.js pipelines for scalable geospatial visualization.",
+      "Integrated LLM reasoning to surface location intelligence insights in production.",
+      "Delivered real-time analytics to support licensing and urban planning workflows."
+    ]
+  },
+  {
+    title: "Meeting Intelligence Platform for Legal Teams",
+    company: "Law Offices of Manuel Solis",
+    date: "2025-06-01",
+    imgSrc: "/images/los_angeles.jpg",
+    impact: ["Turnaround Time: ~8x Faster", "Actionable Summaries"],
+    tags: ["LLM", "NLP", "Speechmatics", "Pinecone", "RBAC", "Data Processing", "FastAPI", "Vector Database"],
+    description: "Developed a meeting intelligence system that converts Zoom/Teams/Meet recordings into searchable transcripts and structured summaries with group-based access control.",
+    impacts: [
+      "Automated transcription and summarization workflows for legal case documentation.",
+      "Enabled semantic search across meetings using vector indexing and retrieval.",
+      "Implemented RBAC controls for admin, supervisor, and user access levels."
+    ]
+  },
+  {
+    title: "Medical QA Multi-Agent System",
+    company: "UT San Antonio (Volunteer)",
+    date: "2025-04-01",
+    imgSrc: "/images/berkeley_skydeck.jpg",
+    impact: ["Accuracy: 54.69%", "Lift: +24.24pp"],
+    tags: ["LLM", "Agents", "Knowledge Graph", "Neo4j", "Medical AI", "NLP"],
+    description: "Built a multi-agent LLM system grounded in PrimeKG and Neo4j to improve medical QA accuracy through multi-hop reasoning.",
+    impacts: [
+      "Designed specialized agents for clinical reasoning and evidence retrieval.",
+      "Integrated knowledge graph queries to support explainable QA outputs.",
+      "Evaluated system performance with systematic benchmarking."
+    ]
+  },
+  {
     title: "GeoAI Insights: Advanced Visualization of the Competitive Landscape",
     company: "STRTGY",
     date: "2024-09-01",
@@ -33,16 +75,16 @@ const unsortedProjects = [
   },
   {
     title: "Intelligent Commercial Document Analysis System",
-    company: "Prodensa AI",
+    company: "PRODENSA",
     date: "2025-04-01",
     imgSrc: "/images/project-3.jpg",
-    impact: ["Extraction Accuracy: +95%", "Processing Time: 98% ↓"],
-    tags: ["AI Application", "Document Processing", "React", "Vite", "Tailwind CSS", "PDF Processing", "LLM Integration", "NLP", "Data Extraction", "Frontend Development", "Meta Llama", "Prompt Engineering"],
-    description: "Designed and developed a multipurpose system to extract structured information from unstructured commercial documents such as invoices, packing lists, and customs documents. Implemented a modern frontend application with React and Vite, using Tailwind CSS for responsive design and Drag and Drop system for file handling.",
+    impact: ["Extraction Accuracy: 95%", "Processing Time: 98% ↓"],
+    tags: ["AI Application", "Document Processing", "React", "Vite", "FastAPI", "PDF Processing", "LLM", "NLP", "Data Extraction", "OCR"],
+    description: "Built an OCR and Llama 3.3 document extraction pipeline for invoices, packing lists, and customs documents, delivering structured outputs at scale.",
     impacts: [
-      "Created an advanced document processing system with support for multiple formats (PDF, CSV, XLSX) and worker threads for asynchronous processing without blocking the main thread.",
-      "Developed advanced prompt engineering techniques for LLMs, with specialized templates for each document type, optimized parameter configuration, and advanced response validation.",
-      "Implemented an optimized processing pipeline with asynchronous architecture, real-time progress tracking, robust error handling, and memory optimization."
+      "Deployed the extraction API with FastAPI and a React/Vite frontend for real-time PDF processing.",
+      "Implemented multi-format ingestion (PDF, CSV, XLSX) with asynchronous workers.",
+      "Improved extraction accuracy through targeted model tuning and validation."
     ]
   },
   {
@@ -184,12 +226,12 @@ const unsortedProjects = [
     company: "BlackPrint Technologies",
     date: "2022-03-01",
     imgSrc: "/images/project-13.jpg",
-    impact: ["Location Accuracy: +92%", "Response Time: 65% ↓"],
+    impact: ["Geocoding Accuracy: 92%", "Deliverable Accuracy: 99.9%"],
     tags: ["Data Analysis", "Geospatial Analysis", "Database Management", "Property Management", "Data Integrity", "Operational Efficiency", "Python", "Pandas", "Numpy", "Data Manipulation", "Data Preparation", "Advanced Geocoding", "Location-Based Data"],
-    description: "Conducted comprehensive data analysis on KPIs like occupancy rates and maintenance response times, comparing against industry benchmarks. Utilized Google Maps Geocoding API for advanced geocoding, implementing address normalization and validation.",
+    description: "Delivered property analytics with Google Maps geocoding and robust pandas/SQL ETL pipelines for high-confidence operational reporting.",
     impacts: [
-      "Performed data cleaning using Python scripts with pandas, addressing inconsistencies and duplicates in large datasets.",
-      "Applied pandas and numpy for complex data transformations, including multi-level aggregations and pivot tables for cross-sectional analysis."
+      "Achieved 92% geocoding accuracy through address normalization and validation.",
+      "Built pandas/SQL ETL pipelines that ensured 99.9% deliverable accuracy."
     ]
   },
   {
@@ -221,15 +263,15 @@ function getCategoryIcon(category: string) {
 }
 
 const tagCategories = {
-  "Data Analysis and Visualization": ["Data Analysis", "Data Visualization", "Business Intelligence", "Geospatial Analysis"],
-  "Web Development and Technologies": ["Web Development", "React", "FastAPI", "Astro", "Tailwind CSS"],
-  "Databases and Data Management": ["MongoDB", "SQL", "ETL", "Database Management", "Data Processing", "Data Migration"],
-  "Optimization and Performance": ["Performance Optimization", "Automation"],
+  "Data Analysis and Visualization": ["Data Analysis", "Data Visualization", "Business Intelligence", "Geospatial Analysis", "GeoAI"],
+  "Web Development and Technologies": ["Web Development", "React", "FastAPI", "Astro", "Tailwind CSS", "Node.js", "Vite"],
+  "Databases and Data Management": ["MongoDB", "SQL", "ETL", "Database Management", "Data Processing", "Data Migration", "Vector Database", "Pinecone", "Neo4j", "Knowledge Graph"],
+  "Optimization and Performance": ["Performance Optimization", "Automation", "Real-time Systems", "Latency Optimization"],
   "Design and User Experience": ["UI/UX Design", "Responsive Design", "Accessibility", "Animation"],
-  "Artificial Intelligence and Machine Learning": ["Machine Learning", "Deep Learning", "OpenAI", "Time Series Analysis"],
+  "Artificial Intelligence and Machine Learning": ["Machine Learning", "Deep Learning", "OpenAI", "Time Series Analysis", "LLM", "RAG", "Agents", "NLP", "Embeddings", "Multimodal AI", "Medical AI"],
   "Project Management and Methodologies": ["Project Management", "Git", "Version Control", "Documentation"],
   "Specific Analyses": ["Financial Analysis", "Survey Analysis", "Market Analysis", "User Engagement", "Customer Behavior"],
-  "Tools and Platforms": ["Python", "JavaScript", "ArcGIS", "SaaS Platform", "Pandas", "Numpy", "TensorFlow", "PyTorch"]
+  "Tools and Platforms": ["Python", "JavaScript", "ArcGIS", "SaaS Platform", "Pandas", "Numpy", "TensorFlow", "PyTorch", "Mapbox GL", "Turf.js", "Google Cloud", "Speechmatics", "FAISS", "RBAC"]
 };
 
 // Sort projects by date (most recent to oldest)
@@ -244,7 +286,7 @@ const structuredData = {
   "mainEntity": {
     "@type": "Person",
     "name": "Gairo Y. Peralta",
-    "jobTitle": "Data Scientist",
+    "jobTitle": "AI/ML Engineer",
     "knowsAbout": Array.from(new Set(projects.flatMap(p => p.tags || [])))
   },
   "about": {
@@ -262,13 +304,13 @@ const structuredData = {
 };
 ---
 
-<Layout title="Experience & Projects - Gairo Peralta" description="Explore Gairo Peralta's data science and AI projects, showcasing expertise in geospatial analytics, machine learning, and business intelligence solutions.">
-  <div class="fade-container px-2 sm:px-4">
+<Layout title="Experience & Projects - Gairo Peralta" description="Explore AI/ML, LLM, and GeoAI projects showcasing production systems, analytics, and scalable data pipelines.">
+  <div class="fade-container px-2 sm:px-4" data-experience-page>
     <div class="scrollable-content custom-scrollbar">
       <h1 class="text-3xl sm:text-5xl font-bold mb-4 sm:mb-8 text-center text-indigo-300">Experience & Projects</h1>
       
       <!-- Stats Overview -->
-      <div class="bg-gray-800/50 p-4 sm:p-6 rounded-lg mb-6 sm:mb-10">
+      <div class="bg-gray-800/50 p-4 sm:p-6 rounded-lg mb-6 sm:mb-10 card-hover" data-reveal>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 text-center">
           <div>
             <div class="text-2xl sm:text-3xl font-bold text-pink-500">{projects.length}</div>
@@ -296,8 +338,8 @@ const structuredData = {
       </div>
       
       <!-- Mobile filter toggle -->
-      <div class="lg:hidden mb-4">
-        <button id="mobile-filter-toggle" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-4 rounded-lg text-sm font-medium transition duration-300 flex items-center justify-center touch-manipulation">
+      <div class="lg:hidden mb-4" data-reveal>
+        <button id="mobile-filter-toggle" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-4 rounded-lg text-sm font-medium transition duration-300 flex items-center justify-center touch-manipulation micro-cta">
           <span id="filter-toggle-text">Show Filters</span>
           <i class="fas fa-filter ml-2"></i>
         </button>
@@ -324,7 +366,7 @@ const structuredData = {
                     </span>
                   </div>
                   
-                  <div class="bg-gray-800 p-4 sm:p-8 rounded-lg shadow-lg">
+                  <div class="bg-gray-800 p-4 sm:p-8 rounded-lg shadow-lg border border-gray-700/60 project-card card-hover">
                     <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
                       <div>
                         <h2 class="text-xl sm:text-3xl font-bold mb-1 sm:mb-2 text-pink-500">{project.title}</h2>
@@ -394,8 +436,8 @@ const structuredData = {
         </div>
         
         <!-- Filters sidebar -->
-        <div id="filters-container" class="w-full lg:w-1/4 lg:sticky lg:top-8 self-start order-1 lg:order-2 hidden lg:block">
-          <div class="bg-gray-800/80 p-4 rounded-lg shadow-lg">
+        <div id="filters-container" class="w-full lg:w-1/4 lg:sticky lg:top-8 self-start order-1 lg:order-2 hidden lg:block" data-reveal>
+          <div class="bg-gray-800/80 p-4 rounded-lg shadow-lg card-hover">
             <h2 class="text-xl font-bold mb-4 text-pink-500 flex justify-between items-center">
               <span>Filter Projects</span>
               <button id="mobile-filter-close" class="lg:hidden text-gray-400 hover:text-white">
@@ -427,7 +469,7 @@ const structuredData = {
 </div>
 
             <div class="mt-4 pt-4 border-t border-gray-700">
-              <button id="clear-filters" class="w-full bg-pink-500 hover:bg-pink-600 text-white py-2 rounded text-sm font-medium transition duration-300 touch-manipulation">
+              <button id="clear-filters" class="w-full bg-pink-500 hover:bg-pink-600 text-white py-2 rounded text-sm font-medium transition duration-300 touch-manipulation micro-cta">
                 Clear All Filters
               </button>
             </div>
@@ -440,99 +482,40 @@ const structuredData = {
   <!-- Add structured data for SEO -->
   <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 </Layout>
-
 <script>
-  // Add a class to document to indicate JS is available
-  document.documentElement.classList.remove('no-js');
-  document.documentElement.classList.add('js');
+  const initExperience = () => {
+    const root = document.querySelector('[data-experience-page]');
+    if (!root || root.dataset.initialized === 'true') return;
+    root.dataset.initialized = 'true';
 
-  const categoryButtons = document.querySelectorAll('.category-filter');
-  const tagButtons = document.querySelectorAll('.tag-filter');
-  const projects = document.querySelectorAll('.project');
-  const clearFiltersButton = document.getElementById('clear-filters');
-  const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
-  const filtersContainer = document.getElementById('filters-container');
-  const mobileFilterClose = document.getElementById('mobile-filter-close');
-  const filterToggleText = document.getElementById('filter-toggle-text');
-  
-  let selectedTags = new Set();
-  let filtersVisible = false;
+    document.documentElement.classList.remove('no-js');
+    document.documentElement.classList.add('js');
 
-  // Toggle mobile filters
-  mobileFilterToggle?.addEventListener('click', () => {
-    filtersVisible = !filtersVisible;
-    if (filtersContainer) {
-      filtersContainer.classList.toggle('hidden', !filtersVisible);
-      if (filterToggleText) {
-        filterToggleText.textContent = filtersVisible ? 'Hide Filters' : 'Show Filters';
-      }
-    }
-  });
+    const categoryButtons = root.querySelectorAll('.category-filter');
+    const tagButtons = root.querySelectorAll('.tag-filter');
+    const projects = root.querySelectorAll('.project');
+    const clearFiltersButton = root.querySelector('#clear-filters');
+    const mobileFilterToggle = root.querySelector('#mobile-filter-toggle');
+    const filtersContainer = root.querySelector('#filters-container');
+    const mobileFilterClose = root.querySelector('#mobile-filter-close');
+    const filterToggleText = root.querySelector('#filter-toggle-text');
 
-  // Close mobile filters
-  mobileFilterClose?.addEventListener('click', () => {
-    filtersVisible = false;
-    if (filtersContainer) {
-      filtersContainer.classList.add('hidden');
-      if (filterToggleText) {
-        filterToggleText.textContent = 'Show Filters';
-      }
-    }
-  });
+    let selectedTags = new Set();
+    let filtersVisible = false;
 
-  categoryButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const isSelected = button.getAttribute('data-selected') === 'true';
-      const tagContainer = button.nextElementSibling;
-      
-      if (isSelected) {
-        button.setAttribute('data-selected', 'false');
-        button.classList.remove('text-indigo-100');
-        button.classList.add('text-indigo-300');
-        tagContainer.classList.add('hidden');
-      } else {
-        button.setAttribute('data-selected', 'true');
-        button.classList.remove('text-indigo-300');
-        button.classList.add('text-indigo-100');
-        tagContainer.classList.remove('hidden');
+    // Toggle mobile filters
+    mobileFilterToggle?.addEventListener('click', () => {
+      filtersVisible = !filtersVisible;
+      if (filtersContainer) {
+        filtersContainer.classList.toggle('hidden', !filtersVisible);
+        if (filterToggleText) {
+          filterToggleText.textContent = filtersVisible ? 'Hide Filters' : 'Show Filters';
+        }
       }
     });
-  });
 
-  tagButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const tag = button.getAttribute('data-tag') || button.textContent?.trim() || '';
-      const isSelected = button.getAttribute('data-selected') === 'true';
-      
-      if (isSelected) {
-        selectedTags.delete(tag);
-        button.setAttribute('data-selected', 'false');
-        button.classList.remove('bg-indigo-600');
-        button.classList.add('bg-gray-800');
-      } else {
-        selectedTags.add(tag);
-        button.setAttribute('data-selected', 'true');
-        button.classList.remove('bg-gray-800');
-        button.classList.add('bg-indigo-600');
-      }
-      
-      filterProjects();
-    });
-  });
-
-  clearFiltersButton.addEventListener('click', () => {
-    selectedTags.clear();
-    
-    tagButtons.forEach(button => {
-      button.setAttribute('data-selected', 'false');
-      button.classList.remove('bg-indigo-600');
-      button.classList.add('bg-gray-800');
-    });
-    
-    filterProjects();
-    
-    // On mobile, close the filter panel after clearing
-    if (window.innerWidth < 1024) {
+    // Close mobile filters
+    mobileFilterClose?.addEventListener('click', () => {
       filtersVisible = false;
       if (filtersContainer) {
         filtersContainer.classList.add('hidden');
@@ -540,24 +523,91 @@ const structuredData = {
           filterToggleText.textContent = 'Show Filters';
         }
       }
-    }
-  });
+    });
 
-function filterProjects() {
-  projects.forEach(project => {
-    if (project instanceof HTMLElement) {
-      const projectTags = project.dataset.tags?.split(',') || [];
-      const shouldShow = selectedTags.size === 0 || Array.from(selectedTags).some(tag => typeof tag === 'string' && projectTags.includes(tag));
-      project.style.display = shouldShow ? 'block' : 'none';
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const isSelected = button.getAttribute('data-selected') === 'true';
+        const tagContainer = button.nextElementSibling;
+        
+        if (isSelected) {
+          button.setAttribute('data-selected', 'false');
+          button.classList.remove('text-indigo-100');
+          button.classList.add('text-indigo-300');
+          tagContainer.classList.add('hidden');
+        } else {
+          button.setAttribute('data-selected', 'true');
+          button.classList.remove('text-indigo-300');
+          button.classList.add('text-indigo-100');
+          tagContainer.classList.remove('hidden');
+        }
+      });
+    });
+
+    tagButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tag = button.getAttribute('data-tag') || button.textContent?.trim() || '';
+        const isSelected = button.getAttribute('data-selected') === 'true';
+        
+        if (isSelected) {
+          selectedTags.delete(tag);
+          button.setAttribute('data-selected', 'false');
+          button.classList.remove('bg-indigo-600');
+          button.classList.add('bg-gray-800');
+        } else {
+          selectedTags.add(tag);
+          button.setAttribute('data-selected', 'true');
+          button.classList.remove('bg-gray-800');
+          button.classList.add('bg-indigo-600');
+        }
+        
+        filterProjects();
+      });
+    });
+
+    clearFiltersButton?.addEventListener('click', () => {
+      selectedTags.clear();
+      
+      tagButtons.forEach(button => {
+        button.setAttribute('data-selected', 'false');
+        button.classList.remove('bg-indigo-600');
+        button.classList.add('bg-gray-800');
+      });
+      
+      filterProjects();
+      
+      // On mobile, close the filter panel after clearing
+      if (window.innerWidth < 1024) {
+        filtersVisible = false;
+        if (filtersContainer) {
+          filtersContainer.classList.add('hidden');
+          if (filterToggleText) {
+            filterToggleText.textContent = 'Show Filters';
+          }
+        }
+      }
+    });
+
+    function filterProjects() {
+      projects.forEach(project => {
+        if (project instanceof HTMLElement) {
+          const projectTags = project.dataset.tags?.split(',') || [];
+          const shouldShow = selectedTags.size === 0 || Array.from(selectedTags).some(tag => typeof tag === 'string' && projectTags.includes(tag));
+          project.style.display = shouldShow ? 'block' : 'none';
+        }
+      });
     }
-  });
-}
-  
-  // Add animation to timeline elements on scroll - make this more robust
-  document.addEventListener('DOMContentLoaded', () => {
-    try {
-      // First make all projects slightly transparent for animation
-      document.querySelectorAll('.project').forEach(project => {
+    
+    // Add animation to timeline elements on scroll
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      projects.forEach(project => {
+        if (project instanceof HTMLElement) {
+          project.style.opacity = '1';
+        }
+      });
+    } else {
+      projects.forEach(project => {
         if (project instanceof HTMLElement) {
           project.style.opacity = '0';
         }
@@ -574,27 +624,25 @@ function filterProjects() {
         });
       }, { threshold: 0.1 });
       
-      document.querySelectorAll('.project').forEach(project => {
-        observer.observe(project);
-      });
-    } catch (error) {
-      // In case of error, make all projects visible
-      document.querySelectorAll('.project').forEach(project => {
-        if (project instanceof HTMLElement) {
-          project.style.opacity = '1';
-        }
-      });
+      projects.forEach(project => observer.observe(project));
     }
-  });
-  
-  // Adjust layout for screen size changes
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 1024 && filtersContainer) {
-      filtersContainer.classList.remove('hidden');
-    } else if (window.innerWidth < 1024 && !filtersVisible && filtersContainer) {
-      filtersContainer.classList.add('hidden');
+    
+    // Adjust layout for screen size changes
+    if (window.__experienceResizeHandler) {
+      window.removeEventListener('resize', window.__experienceResizeHandler);
     }
-  });
+    window.__experienceResizeHandler = () => {
+      if (window.innerWidth >= 1024 && filtersContainer) {
+        filtersContainer.classList.remove('hidden');
+      } else if (window.innerWidth < 1024 && !filtersVisible && filtersContainer) {
+        filtersContainer.classList.add('hidden');
+      }
+    };
+    window.addEventListener('resize', window.__experienceResizeHandler);
+  };
+
+  document.addEventListener('DOMContentLoaded', initExperience);
+  document.addEventListener('astro:page-load', initExperience);
 </script>
 
 <style>
@@ -660,4 +708,36 @@ function filterProjects() {
       overflow-y: auto;
     }
   }
+
+  .project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(236, 72, 153, 0.5);
+    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.35), 0 0 18px rgba(236, 72, 153, 0.25);
+  }
+
+  .category-filter,
+  .tag-filter {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  }
+
+  .category-filter[data-selected="true"] {
+    background: rgba(79, 70, 229, 0.18);
+    border-radius: 8px;
+    padding: 0.35rem 0.5rem;
+  }
+
+  .tag-filter[data-selected="true"] {
+    background: rgba(79, 70, 229, 0.6);
+    box-shadow: 0 10px 18px rgba(15, 23, 42, 0.3);
+    transform: translateY(-1px);
+  }
+
+  .tag-filter:hover {
+    transform: translateY(-1px);
+  }
 </style>
+

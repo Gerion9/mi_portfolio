@@ -9,9 +9,9 @@ interface Props {
 	structuredData?: Record<string, any>;
 }
 
-const { 
-	title, 
-	description = "Gairo Peralta - Senior Data Scientist and AI Specialist with expertise in machine learning, geospatial analysis, and data visualization.",
+const {
+	title,
+	description = "Gairo Peralta - AI/ML Engineer specializing in LLM systems, GeoAI, and production ML pipelines.",
 	image = "/images/profile-banner.jpg",
 	noIndex = false,
 	structuredData
@@ -52,7 +52,7 @@ const imageUrl = new URL(image.startsWith('http') ? image : image, baseUrl).toSt
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={imageUrl} />
 		<meta property="og:locale" content="en_US" />
-		<meta property="og:site_name" content="Gairo Peralta - Data Scientist & AI Specialist" />
+		<meta property="og:site_name" content="Gairo Peralta - AI/ML Engineer" />
 		
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
@@ -230,17 +230,134 @@ const imageUrl = new URL(image.startsWith('http') ? image : image, baseUrl).toSt
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background: rgba(242, 73, 104, 0.4);
+    color: #f8fafc;
+  }
+
+  a, button, input, select, textarea {
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  a:active, button:active {
+    transform: translateY(1px) scale(0.98);
+  }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(242, 73, 104, 0.2);
+  }
+
+  .micro-link {
+    position: relative;
+  }
+
+  .micro-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-primary));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    opacity: 0.7;
+  }
+
+  .micro-link:hover::after,
+  .micro-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateZ(0);
+  }
+
+  .social-link:hover {
+    transform: translateY(-2px) scale(1.05);
+    text-shadow: 0 0 18px rgba(242, 73, 104, 0.5);
+  }
+
+  .micro-cta {
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+  }
+
+  .micro-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.18) 45%, rgba(255, 255, 255, 0) 70%);
+    transform: translateX(-120%);
+    transition: transform 0.6s ease;
+    opacity: 0.6;
+  }
+
+  .micro-cta:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 18px 38px rgba(15, 23, 42, 0.35), 0 0 18px rgba(99, 102, 241, 0.35);
+  }
+
+  .micro-cta:hover::after {
+    transform: translateX(120%);
+  }
+
+  .card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35), 0 0 20px rgba(236, 72, 153, 0.2);
+    border-color: rgba(236, 72, 153, 0.5);
+  }
+
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(6px);
+    transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+  }
+
+  html.js [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 </style>
 	</head>
 	<body class="flex flex-col min-h-screen">
 		<header class="p-4 md:p-6">
 			<nav>
 				<ul class="flex flex-wrap justify-center space-x-4 md:space-x-8">
-					<li><a href="/" class="text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">Home</a></li>
-					<li><a href="/about" class="text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">About Me</a></li>
-					<li><a href="/experience" class="text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">Experience</a></li>
-					<li><a href="/resume" class="text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">Resume</a></li>
-					<li><a href="/contact" class="text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">Contact</a></li>
+					<li><a href="/" class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">Home</a></li>
+					<li><a href="/about" class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">About Me</a></li>
+					<li><a href="/experience" class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">Experience</a></li>
+					<li><a href="/resume" class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">Resume</a></li>
+					<li><a href="/contact" class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">Contact</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -249,12 +366,55 @@ const imageUrl = new URL(image.startsWith('http') ? image : image, baseUrl).toSt
 		</main>
 		<footer class="py-8 text-center mt-auto">
 			<div class="social-media space-x-6 mb-4">
-				<a href="https://linkedin.com/in/gairoperalta" class="text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-linkedin fa-2x"></i></a>
-				<a href="https://github.com/Gerion9" class="text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-github fa-2x"></i></a>
-				<a href="https://www.facebook.com/gairo.yostin" class="text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-facebook fa-2x"></i></a>
-				<a href="https://www.instagram.com/gairo_peralta" class="text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-instagram fa-2x"></i></a>
+				<a href="https://linkedin.com/in/gairoperalta" class="social-link text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-linkedin fa-2x"></i></a>
+				<a href="https://github.com/Gerion9" class="social-link text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-github fa-2x"></i></a>
+				<a href="https://www.facebook.com/gairo.yostin" class="social-link text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-facebook fa-2x"></i></a>
+				<a href="https://www.instagram.com/gairo_peralta" class="social-link text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-instagram fa-2x"></i></a>
 			</div>
 			<p class="text-gray-400 text-sm">&copy; 2025 Gairo Peralta</p>
 		</footer>
+		<script is:inline>
+			const setupReveal = () => {
+				const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				const revealElements = document.querySelectorAll('[data-reveal]:not([data-reveal-ready])');
+				if (!revealElements.length) return;
+
+				if (prefersReducedMotion) {
+					revealElements.forEach(el => {
+						el.setAttribute('data-reveal-ready', 'true');
+						el.classList.add('is-visible');
+					});
+					return;
+				}
+
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('is-visible');
+							observer.unobserve(entry.target);
+						}
+					});
+				}, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+
+				revealElements.forEach(el => {
+					el.setAttribute('data-reveal-ready', 'true');
+					observer.observe(el);
+				});
+			};
+
+			const markJs = () => {
+				document.documentElement.classList.add('js');
+			};
+
+			document.addEventListener('DOMContentLoaded', () => {
+				markJs();
+				setupReveal();
+			});
+
+			document.addEventListener('astro:page-load', () => {
+				markJs();
+				setupReveal();
+			});
+		</script>
 	</body>
 </html>

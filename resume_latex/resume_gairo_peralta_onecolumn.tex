@@ -1,0 +1,197 @@
+\documentclass[10pt]{resume_gairo_peralta_openfont}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{pdfcomment}
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+% Definir colores personalizados
+\definecolor{sectioncolor}{RGB}{45, 62, 80}
+\definecolor{accentcolor}{RGB}{70, 130, 180}
+\definecolor{linkcolor}{RGB}{70, 130, 180}
+\definecolor{datecolor}{RGB}{80, 80, 80}
+\definecolor{timelinecolor}{RGB}{220, 220, 220}
+\definecolor{currentcolor}{RGB}{70, 130, 180}
+\definecolor{pastcolor}{RGB}{150, 150, 150}
+\definecolor{companycolor}{RGB}{45, 62, 80}
+\definecolor{rolecolor}{RGB}{70, 100, 160}
+\definecolor{iconcolor}{RGB}{70, 130, 180} % Nueva definición para iconos
+\definecolor{subtlecolor}{RGB}{230, 230, 230} % Color for subtle elements
+\definecolor{metriccolor}{RGB}{50, 120, 170} % Color for metrics highlight
+
+% Configurar enlaces
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkcolor,
+    urlcolor=linkcolor
+}
+
+% Configurar márgenes
+\geometry{left=0.4in,right=0.4in,top=0.3in,bottom=0.3in} % Reducir márgenes
+
+% Reemplazar el formato de sección con encabezados simples y ATS-friendly
+\renewcommand{\section}[1]{%
+  \vspace{3pt}%
+  \raggedright{
+    {\Large\bfseries\textcolor{sectioncolor}{\uppercase{#1}}}
+  }\\[-0.6em]
+  \rule{\textwidth}{0.5pt}\\[0.05em] % Espacio reducido después de la línea
+}
+
+% Configurar subsecciones y márgenes
+\titlespacing\subsection{0pt}{2pt}{0em} % Más espacio antes de subsecciones
+
+% Configurar items con mayor interlineado - ATS-friendly bullets
+\newenvironment{tightitemize}
+{\begin{itemize}[leftmargin=1.2em,label={\textcolor{accentcolor}{$\bullet$}},itemsep=0.15em,partopsep=0pt,parsep=0pt,topsep=0pt]\raggedright}
+{\end{itemize}}
+
+% Crear un estilo personalizado para las fechas
+\newcommand{\datetext}[1]{{\color{datecolor}\textbf{#1}}}
+
+% Estilo para compañías y roles
+\newcommand{\companytext}[1]{{\color{companycolor}\textbf{\textsc{#1}}}}
+\newcommand{\roletext}[1]{{\color{rolecolor}\textit{#1}}}
+
+% Project metadata (lighter than company headings)
+\newcommand{\projectorg}[1]{{\color{companycolor}\small\textbf{\textsc{#1}}}}
+
+% Simplificando el indicador de timeline para ATS
+\newcommand{\timelineindicator}[1]{}
+
+% Comando para posición y ubicación con alineación consistente
+\newcommand{\positionlocation}[3]{
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    \roletext{#1} & \makebox[5.5cm][l]{#2 \hfill {\color{datecolor}\textbf{#3}}}
+  \end{tabular*}
+}
+
+% Comando para títulos de proyectos alineados a la izquierda - simplificados para ATS
+\newcommand{\projecttitle}[1]{
+  \parbox[t]{\textwidth}{
+    \raggedright
+    \textbf{#1}
+  }
+}
+
+% Comando para métricas destacadas
+\newcommand{\highlight}[1]{{\textcolor{metriccolor}{\textbf{#1}}}}
+
+% Comando para las etiquetas de habilidades
+\newcommand{\skilltag}[1]{{\small\textbf{#1}}}
+
+% Separador sutil entre secciones
+\newcommand{\subtledivider}{\vspace{0.1em}\textcolor{subtlecolor}{\rule{\textwidth}{0.2pt}}\vspace{0.1em}}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Removing the line above the top of the document
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{document}
+
+% Encabezado sin línea superior
+\namesection{}{Gairo Peralta}{
+    \begin{center}
+        \urlstyle{same}\href{https://gairoperalta.com}{\textcolor{accentcolor}{gairoperalta.com}} \\
+        \vspace{0.1em}
+        \begin{tabular}{p{0.3\textwidth} p{0.3\textwidth} p{0.3\textwidth}}
+            \raggedright\href{mailto:gairo@berkeley.edu}{gairo@berkeley.edu} & 
+            \centering (323) 434-5684 & 
+            \raggedleft \urlstyle{same}\href{https://www.linkedin.com/in/gairoperalta}{LinkedIn.com/in/gairoperalta}
+        \end{tabular}
+        {\small\color{sectioncolor}AI/ML Engineer specializing in \textbf{Large Language Models}, \textbf{production ML systems}, and \textbf{multi-modal AI applications}}
+        \vspace{-1.2em}
+    \end{center}
+}
+
+\section{EDUCATION} 
+\runsubsection{\companytext{TECNOLOGICO DE MONTERREY}}
+\descript{\hfill{Mexico}}
+\location{\textit{MA in \textbf{Applied Artificial Intelligence}} \hfill Grade: \highlight{98/100} | \datetext{Expected 2026} }
+\runsubsection{\companytext{THE UNIVERSITY OF TEXAS AT SAN ANTONIO}}
+\descript{\hfill{Texas}}
+\location{\textit{Visiting Student Researcher (Medical AI, Volunteer)} \hfill \datetext{2025--Present}}
+\runsubsection{\companytext{UNIVERSITY OF CALIFORNIA, BERKELEY}}
+\descript{\hfill{California}}
+\location{\textit{BA in \textbf{Data Science}} \hfill \datetext{2022}}
+
+\section{PROFESSIONAL EXPERIENCE}
+\runsubsection{\companytext{BLACKPRINT TECHNOLOGIES}}
+\positionlocation{AI/ML Engineer (Full-time)}{Remote}{2025--Present}
+\begin{tightitemize}
+\item Built LLM-powered GeoAI platform for \highlight{2.5M+} urban blocks with \textbf{React/Mapbox/Turf.js} and real-time inference
+\item Built \textbf{Node.js} + \textbf{Google Cloud} web platform for license regularization using external POI data: density gradients by cadastral block, alcohol business flags, dashboards, and PDF export
+\end{tightitemize}
+\vspace{0.05em}
+\positionlocation{Data Scientist}{Berkeley, CA}{2022--2023}
+\begin{tightitemize}
+\item Delivered property analytics with \textbf{Google Maps} geocoding (\highlight{92\%} accuracy) and built \textbf{pandas/SQL} ETL pipelines ensuring \highlight{99.9\%} deliverable accuracy
+\end{tightitemize}
+\vspace{0.1em}
+
+\runsubsection{\companytext{LAW OFFICES OF MANUEL SOLIS}}
+\positionlocation{Lead AI/ML Engineer (Consulting)}{Remote}{2025--Present}
+\begin{tightitemize}
+\item Led development of \textbf{custom LLM agents} for T-Visa declarations and cover letters, cutting turnaround from \highlight{~2 hours} to \highlight{~15 minutes} per document (\highlight{~8x faster}), boosting productivity; automated email-to-case DB ingestion and assignment
+\item Built meeting intelligence platform (Zoom/Teams/Meet) that turns recordings into searchable transcripts and action-item summaries, with group-based access control across org/team
+\end{tightitemize}
+\vspace{0.1em}
+
+\runsubsection{\companytext{STRTGY}}
+\positionlocation{AI/ML Engineer (Full-time)}{Remote}{2023--2025}
+\begin{tightitemize}
+\item Architected \textbf{multi-modal GeoAI system} (spatial embeddings + \textbf{FAISS}), driving \highlight{82\%} improvement in location-based decision accuracy
+\item Built production ML pipelines: \textbf{Transformer+LoRA} forecasting (\highlight{42\%} accuracy gain, \highlight{60\%} lower latency) and enterprise \textbf{RAG} (Claude 3.5 Sonnet, hybrid retrieval) with \highlight{90\%} relevance
+\end{tightitemize}
+\vspace{0.1em}
+
+\runsubsection{\companytext{PRODENSA}}
+\positionlocation{AI Engineer (Contract)}{Remote}{2024--2025}
+\begin{tightitemize}
+\item Built OCR + fine-tuned \textbf{Llama 3.3 70B} document extraction pipeline (\highlight{95\%} accuracy); deployed via \textbf{FastAPI} with \textbf{React/Vite} front-end for real-time PDF processing
+\end{tightitemize}
+
+\section{SELECTED AI/ML PROJECTS (DETAILS)}
+\projecttitle{MEDICAL QA MULTI-AGENT SYSTEM (PrimeKG + Neo4j)}
+\vspace{-0.2em}
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+\projectorg{UT San Antonio (Volunteer)} & \datetext{2025--Present}
+\end{tabular*}
+\vspace{-0.8em}
+\begin{tightitemize}
+\item Developed multi-agent LLM architecture with knowledge graph integration (PrimeKG: 4M+ nodes, 33M+ edges), achieving \highlight{54.69\%} accuracy on medical QA (\highlight{+24.24pp})
+\item Engineered four specialized agents (II-Medical-8B, Kimi-K2-Instruct) with \textbf{Neo4j} for multi-hop reasoning and systematic evaluation
+\end{tightitemize}
+\vspace{0.05em}
+
+\projecttitle{MEETING INTELLIGENCE PLATFORM}
+\vspace{-0.2em}
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+\projectorg{Law Offices of Manuel Solis (Consulting)} & \datetext{2025--Present}
+\end{tabular*}
+\vspace{-0.8em}
+\begin{tightitemize}
+\item Captured Zoom/Teams/Meet meetings; \mbox{Speechmatics} transcription + \textbf{GPT-5} structured summaries (bullets, deadlines)
+\item Indexed transcripts in \textbf{Pinecone} for semantic search/Q\&A and retrieval across meetings
+\item Enforced group-based \textbf{RBAC} for access control (admin/supervisor/user) across teams
+\end{tightitemize}
+\vspace{0.15em}
+
+\section{TECHNICAL SKILLS}
+\vspace{-0.2em}
+\textbf{GenAI/LLM:} RAG, agents, fine-tuning (LoRA), embeddings, LangChain, FAISS, Pinecone, Speechmatics, RBAC \\
+\vspace{0.1em}
+\textbf{LLM Platforms:} OpenAI (GPT-4o/GPT-5), Claude, Gemini, Llama \\
+\vspace{0.1em}
+\textbf{ML/DL:} PyTorch, TensorFlow, scikit-learn, XGBoost, LSTM, forecasting \\
+\vspace{0.1em}
+\textbf{Backend/Cloud:} FastAPI, Node.js, Google Cloud, REST APIs, MLflow, Docker \\
+\vspace{0.1em}
+\textbf{Data/Geo:} Python, SQL, TypeScript, pandas, NumPy, GeoPandas, Neo4j, MongoDB, Mapbox GL, Turf.js, ArcGIS
+
+\end{document}

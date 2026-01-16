@@ -1,0 +1,33 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.25)  15 JAN 2026 19:00
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"c:/Users/gairo/OneDrive/Documents/My gairoperalta.com website/All_files/mi-portfolio/resume_latex/resume_gairo_peralta_onecolumn.tex"
+(c:/Users/gairo/OneDrive/Documents/My gairoperalta.com website/All_files/mi-portfolio/resume_latex/resume_gairo_peralta_onecolumn.tex
+LaTeX2e <2024-06-01> patch level 2
+L3 programming layer <2024-08-30>
+
+! LaTeX Error: File `resume_gairo_peralta_openfont.cls' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: cls)
+
+Enter file name: 
+c:/Users/gairo/OneDrive/Documents/My gairoperalta.com website/All_files/mi-portfolio/resume_latex/resume_gairo_peralta_onecolumn.tex:2: Emergency stop.
+<read *> 
+         
+l.2 \usepackage
+               [utf8]{inputenc}^^M
+*** (cannot \read from terminal in nonstop modes)
+
+ 
+Here is how much of TeX's memory you used:
+ 22 strings out of 473899
+ 976 string characters out of 5726500
+ 386318 words of memory out of 5000000
+ 22994 multiletter control sequences out of 15000+600000
+ 558069 words of font info for 36 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 19i,0n,29p,217b,17s stack positions out of 10000i,1000n,20000p,200000b,200000s
+c:/Users/gairo/OneDrive/Documents/My gairoperalta.com website/All_files/mi-portfolio/resume_latex/resume_gairo_peralta_onecolumn.tex:2:  ==> Fatal error occurred, no output PDF file produced!
