@@ -25,7 +25,7 @@ const getValidImage = (company: string, title: string = "") => {
     }
     return "/images/blackprint_logo.png";
   }
-  if (comp.includes("manuel solis") || comp.includes("law offices")) return "/images/los_angeles.jpg";
+  if (comp.includes("manuel solis") || comp.includes("law offices")) return "/images/manuel_solis_logo.png";
   if (comp.includes("ut san antonio") || comp.includes("san antonio")) return "/images/utsa_logo.png";
   if (comp.includes("strtgy")) return "/images/strtgy.jpg";
   if (comp.includes("personal project") || comp.includes("portfolio")) return "/images/personal_project.jpg";
@@ -34,7 +34,7 @@ const getValidImage = (company: string, title: string = "") => {
 };
 
 const mappedImage = getValidImage(project.company, project.title);
-const isLogoImage = mappedImage && (mappedImage.includes("logo") || mappedImage.endsWith(".svg"));
+const isLogoImage = mappedImage && (mappedImage.includes("logo") || mappedImage.endsWith(".svg")) && !mappedImage.includes("manuel_solis_logo");
 
 // Map actual high-resolution brand logos for esmerilated glass badges
 const getCompanyLogo = (company: string) => {
@@ -43,6 +43,7 @@ const getCompanyLogo = (company: string) => {
   if (comp.includes("ut san antonio") || comp.includes("san antonio") || comp.includes("utsa")) return "/images/utsa_logo.png";
   if (comp.includes("berkeley")) return "/images/berkeley-logo.png";
   if (comp.includes("tecnologico") || comp.includes("tec de monterrey")) return "/images/tec-logo.png";
+  if (comp.includes("manuel solis") || comp.includes("law offices")) return "/images/manuel_solis_logo.png";
   return null;
 };
 
@@ -123,11 +124,11 @@ const categorizeTags = (tags: string[] = []) => {
     const t = tag.toLowerCase();
     if (["python", "javascript", "typescript", "sql", "html", "css"].includes(t)) {
       categories.languages.push(tag);
-    } else if (["llm", "agents", "knowledge graph", "neo4j", "medical ai", "nlp", "speechmatics", "openai", "rag", "machine learning", "deep learning", "embeddings", "faiss", "vector database", "pinecone", "anthropic claude", "multimodal ai"].includes(t)) {
+    } else if (["llm", "agents", "knowledge graph", "neo4j", "medical ai", "nlp", "speechmatics", "openai", "rag", "machine learning", "deep learning", "embeddings", "faiss", "vector database", "pinecone", "anthropic claude", "multimodal ai", "google gemini ai", "google gemini vision api", "ocr", "certified translation", "multi-page ocr", "openai embeddings", "legal ai templates"].includes(t)) {
       categories.aiML.push(tag);
     } else if (["geospatial analysis", "mapbox gl", "turf.js", "gis", "arcgis", "geopandas", "arcgis online", "storymaps"].includes(t)) {
       categories.geo.push(tag);
-    } else if (["react", "fastapi", "astro", "node.js", "vite", "streamlit", "pandas", "numpy", "tensorflow", "pytorch", "flask", "mongodb", "material ui", "recharts", "chart.js", "plotly"].includes(t)) {
+    } else if (["react", "fastapi", "astro", "node.js", "vite", "streamlit", "pandas", "numpy", "tensorflow", "pytorch", "flask", "mongodb", "material ui", "recharts", "chart.js", "plotly", "model context protocol (mcp)", "zod", "qdrant", "mariadb", "mysql", "sqlite", "python-docx", "xml parsing"].includes(t)) {
       categories.frameworks.push(tag);
     } else {
       categories.other.push(tag);

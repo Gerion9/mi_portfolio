@@ -20,14 +20,14 @@ function getCategoryIcon(category: string) {
 
 const tagCategories = {
   "Data Analysis and Visualization": ["Data Analysis", "Data Visualization", "Business Intelligence", "Geospatial Analysis", "GeoAI"],
-  "Web Development and Technologies": ["Web Development", "React", "FastAPI", "Astro", "Tailwind CSS", "Node.js", "Vite"],
-  "Databases and Data Management": ["MongoDB", "SQL", "ETL", "Database Management", "Data Processing", "Data Migration", "Vector Database", "Pinecone", "Neo4j", "Knowledge Graph"],
-  "Optimization and Performance": ["Performance Optimization", "Automation", "Real-time Systems", "Latency Optimization"],
+  "Web Development and Technologies": ["Web Development", "React", "FastAPI", "Astro", "Tailwind CSS", "Node.js", "Vite", "Model Context Protocol (MCP)", "Zod"],
+  "Databases and Data Management": ["MongoDB", "SQL", "ETL", "Database Management", "Data Processing", "Data Migration", "Vector Database", "Pinecone", "Neo4j", "Knowledge Graph", "Qdrant", "MySQL", "MariaDB", "SQLite"],
+  "Optimization and Performance": ["Performance Optimization", "Automation", "Real-time Systems", "Latency Optimization", "Media Resolution Optimization"],
   "Design and User Experience": ["UI/UX Design", "Responsive Design", "Accessibility", "Animation"],
-  "Artificial Intelligence and Machine Learning": ["Machine Learning", "Deep Learning", "OpenAI", "Time Series Analysis", "LLM", "RAG", "Agents", "NLP", "Embeddings", "Multimodal AI", "Medical AI"],
+  "Artificial Intelligence and Machine Learning": ["Machine Learning", "Deep Learning", "OpenAI", "Time Series Analysis", "LLM", "RAG", "Agents", "NLP", "Embeddings", "Multimodal AI", "Medical AI", "Google Gemini AI", "Google Gemini Vision API", "OCR", "Certified Translation", "OpenAI Embeddings"],
   "Project Management and Methodologies": ["Project Management", "Git", "Version Control", "Documentation"],
   "Specific Analyses": ["Financial Analysis", "Survey Analysis", "Market Analysis", "User Engagement", "Customer Behavior"],
-  "Tools and Platforms": ["Python", "JavaScript", "ArcGIS", "SaaS Platform", "Pandas", "Numpy", "TensorFlow", "PyTorch", "Mapbox GL", "Turf.js", "Google Cloud", "Speechmatics", "FAISS", "RBAC"]
+  "Tools and Platforms": ["Python", "JavaScript", "ArcGIS", "SaaS Platform", "Pandas", "Numpy", "TensorFlow", "PyTorch", "Mapbox GL", "Turf.js", "Google Cloud", "Speechmatics", "FAISS", "RBAC", "python-docx", "XML parsing"]
 };
 
 // Sort projects by date (most recent to oldest)
@@ -541,6 +541,11 @@ const structuredData = {
           const shouldShow = matchesSearch && matchesTags;
 
           if (shouldShow) {
+            // Cancel any pending hide timeouts
+            if (wrapper.dataset.hideTimeoutId) {
+              clearTimeout(parseInt(wrapper.dataset.hideTimeoutId, 10));
+              delete wrapper.dataset.hideTimeoutId;
+            }
             wrapper.style.display = 'block';
             wrapper.classList.remove('hide-item');
             wrapper.classList.add('reveal-item');
@@ -548,11 +553,17 @@ const structuredData = {
           } else {
             wrapper.classList.remove('reveal-item');
             wrapper.classList.add('hide-item');
-            setTimeout(() => {
-              if (wrapper.classList.contains('hide-item')) {
-                wrapper.style.display = 'none';
-              }
-            }, 300);
+            
+            // Only set timeout if it's not already pending
+            if (!wrapper.dataset.hideTimeoutId) {
+              const timeoutId = setTimeout(() => {
+                if (wrapper.classList.contains('hide-item')) {
+                  wrapper.style.display = 'none';
+                }
+                delete wrapper.dataset.hideTimeoutId;
+              }, 300);
+              wrapper.dataset.hideTimeoutId = timeoutId.toString();
+            }
           }
         }
       });
@@ -685,6 +696,9 @@ const structuredData = {
 
         filtersBackdrop.classList.remove('opacity-100');
         filtersBackdrop.classList.add('opacity-0');
+        
+        // Auto-apply current selections on dismissal for absolute seamless flow
+        filterProjects();
         
         setTimeout(() => {
           filtersBackdrop.classList.add('hidden');

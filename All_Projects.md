@@ -140,7 +140,91 @@ This document contains a complete list of all my projects, chronologically order
 
 **Impact:** Provides a professional, highly responsive booking interface that eliminates booking conflicts through automated calendar syncing, enhancing customer acquisition and the shop's brand presence.
 
+### OCR Gemini: Certified Legal Translation Pipeline
+**Company:** Law Offices of Manuel Solis  
+**Date:** January 2026  
+**Impact Metrics:** 
+- Layout Preservation: Yes
+- Format: Bilingual DOCX
+
+**Technologies:** Python, Google Gemini Vision API, python-docx, Certified Translation, OCR, Media Resolution Optimization, Data Pipelines, AI Application, Multi-page OCR
+
+**Description:**
+- Led and guided a team of interns to develop a high-fidelity Python CLI pipeline using Gemini Vision API, instructing them on OCR best practices and spatial layout mapping.
+- Mentored interns on implementing a vision-based OCR pipeline utilizing Gemini Vision to extract and translate low-resolution legal scans with unmatched accuracy.
+- Guided the team in building a layout-preserving DOCX compiler that maps text positions, tables, and headers into a professional bilingual format.
+- Instructed junior engineers on integrating automatic media resolution preprocessing, reducing token costs while optimizing detection rates for certified signatures.
+
+**Impact:** Automates certified translation and multi-page layout reconstruction of low-resolution court documents, delivering clean bilingual outputs and driving growth for case processing workflows.
+
 ## 2025
+
+### BOS-MCP Server: Custom Database Protocol
+**Company:** Law Offices of Manuel Solis  
+**Date:** November 2025  
+**Impact Metrics:** 
+- Tools Exposed: 17 Specialized
+- Search Speed: <100ms
+
+**Technologies:** Node.js, Model Context Protocol (MCP), MySQL, MariaDB, Qdrant, OpenAI Embeddings, Zod, Vector Databases, Relational Databases, AI Integration
+
+**Description:**
+- Led the architecture and guided a team of interns to build a powerful Node.js Model Context Protocol (MCP) server, teaching them vector search implementation and schema validation best practices.
+- Supervised interns in designing and exposing 17 advanced database tools allowing AI agents to perform complex transactional queries and semantic search.
+- Mentored the team on integrating hybrid search mechanisms connecting legacy MySQL/MariaDB databases with a high-speed Qdrant vector database using OpenAI embeddings.
+- Instructed interns in establishing strict schema validation using Zod to ensure zero SQL injection risks and robust handling of high-concurrency connections.
+
+**Impact:** Empowers AI case management agents to securely query, search, and update client records semantic-wide in under 100ms via high-concurrency relational and vector pipelines.
+
+### DeclarationLetterOnline: Legal AI Generator
+**Company:** Law Offices of Manuel Solis  
+**Date:** October 2025  
+**Impact Metrics:** 
+- Processing Time: <60s
+- Format Accuracy: Century Schoolbook
+
+**Technologies:** FastAPI, Python, React, Google Gemini AI, SQLite, python-docx, XML parsing, Legal AI Templates, Document Generation
+
+**Description:**
+- Led and directed a team of interns to build a production-grade FastAPI and React legal document generator utilizing Gemini 1.5 Pro, instructing them on prompt engineering, strict document styling, and secure local audit trails.
+- Guided interns on developing a multi-stage NLP synthesis pipeline that ingests questionnaires and translates them into certified legal letters in Century Schoolbook format.
+- Mentored the team in building an asynchronous processing workflow with local SQLite audit trails and structured XML parsing for automated DOCX compilation.
+- Instructed junior developers on creating a React interface featuring real-time feedback loops, version control of draft revisions, and instant side-by-side editing.
+
+**Impact:** Drastically reduces declaration letter creation time from hours to under 60 seconds, maintaining perfect formatting compliance required by immigration and federal courts.
+
+### LLM GeoAI Platform for Urban Intelligence
+**Company:** BlackPrint Technologies  
+**Date:** August 2025  
+**Impact Metrics:** 
+- Urban Blocks: 2.5M+
+- Real-time Inference: Yes
+
+**Technologies:** Geospatial Analysis, Machine Learning, React, Mapbox GL, Turf.js, LLM, GeoAI, Data Visualization
+
+**Description:**
+- Shipped React + Mapbox + Turf.js pipelines for scalable geospatial visualization of 2.5M+ urban blocks.
+- Integrated LLM reasoning to surface location intelligence insights in production.
+- Delivered real-time analytics to support licensing and urban planning workflows.
+
+**Impact:** Empowers cities and businesses to run high-speed spatial inferences and query geographic trends directly in natural language.
+
+### Meeting Intelligence Platform for Legal Teams
+**Company:** Law Offices of Manuel Solis  
+**Date:** June 2025  
+**Impact Metrics:** 
+- Turnaround Time: ~8x Faster
+- Actionable Summaries: Yes
+
+**Technologies:** LLM, NLP, Speechmatics, Pinecone, RBAC, Data Processing, FastAPI, Vector Database
+
+**Description:**
+- Led the development and guided a team of interns to build a meeting intelligence system that converts Zoom/Teams/Meet recordings into searchable transcripts and structured summaries.
+- Mentored interns in automating transcription and summarization workflows using Speechmatics and LLM APIs for case documentation.
+- Guided the team in building semantic search across meetings using Pinecone vector indexing and retrieval.
+- Instructed interns on implementing secure RBAC controls for admin, supervisor, and user access levels under industry best practices.
+
+**Impact:** Saves legal teams hundreds of hours of manual transcription by enabling instant semantic searches across hundreds of hours of recordings with secure access controls.
 
 ### Electoral and Socioeconomic Geospatial Analysis
 **Company:** STRTGY  
@@ -177,6 +261,22 @@ This document contains a complete list of all my projects, chronologically order
 - Implemented an optimized processing pipeline with asynchronous architecture, real-time progress tracking, robust error handling, and memory optimization.
 
 **Impact:** This system significantly reduced the time spent on manual document analysis, improved accuracy in critical information extraction, and enabled efficient processing of large volumes of commercial documents with intelligent data validation.
+
+### Medical QA Multi-Agent System
+**Company:** UT San Antonio (Volunteer)  
+**Date:** April 2025  
+**Impact Metrics:** 
+- Accuracy: 54.69%
+- Lift: +24.24pp
+
+**Technologies:** LLM, Agents, Knowledge Graph, Neo4j, Medical AI, NLP
+
+**Description:**
+- Designed specialized agents for clinical reasoning and evidence retrieval grounded in medical knowledge bases.
+- Integrated Neo4j knowledge graph queries to support explainable QA outputs.
+- Evaluated system performance with systematic benchmarking over PrimeKG datasets.
+
+**Impact:** Improves clinical question-answering accuracy significantly through multi-hop reasoning over complex biomedical networks.
 
 ### Specialized Industrial Real Estate Chatbot
 **Company:** STRTGY  

@@ -112,6 +112,48 @@
     ]
   },
   {
+    "title": "OCR Gemini: Certified Legal Translation Pipeline",
+    "company": "Law Offices of Manuel Solis",
+    "date": "2026-01-15",
+    "imgSrc": "/images/manuel_solis_logo.png",
+    "impact": ["Layout Preservation: Yes", "Format: Bilingual DOCX"],
+    "tags": ["Python", "Google Gemini Vision API", "python-docx", "Certified Translation", "OCR", "Media Resolution Optimization", "Data Pipelines", "AI Application", "Multi-page OCR"],
+    "description": "Led and guided a team of interns to develop a high-fidelity Python CLI pipeline using Gemini Vision API, instructing them on OCR best practices and spatial layout mapping to automate certified translations of multi-page legal documents.",
+    "impacts": [
+      "Mentored interns on implementing a vision-based OCR pipeline utilizing Gemini Vision to extract and translate low-resolution legal scans with unmatched accuracy.",
+      "Guided the team in building a layout-preserving DOCX compiler that maps text positions, tables, and headers into a professional bilingual format.",
+      "Instructed junior engineers on integrating automatic media resolution preprocessing, reducing token costs while optimizing detection rates for certified signatures."
+    ]
+  },
+  {
+    "title": "BOS-MCP Server: Custom Database Protocol",
+    "company": "Law Offices of Manuel Solis",
+    "date": "2025-11-15",
+    "imgSrc": "/images/manuel_solis_logo.png",
+    "impact": ["Tools Exposed: 17 Specialized", "Search Speed: <100ms"],
+    "tags": ["Node.js", "Model Context Protocol (MCP)", "MySQL", "MariaDB", "Qdrant", "OpenAI Embeddings", "Zod", "Vector Databases", "Relational Databases", "AI Integration"],
+    "description": "Led the architecture and guided a team of interns to build a powerful Node.js Model Context Protocol (MCP) server, teaching them vector search implementation and schema validation best practices to expose relational and semantic database tools to AI agents.",
+    "impacts": [
+      "Supervised interns in designing and exposing 17 advanced database tools allowing AI agents to perform complex transactional queries and semantic search.",
+      "Mentored the team on integrating hybrid search mechanisms connecting legacy MySQL/MariaDB databases with a high-speed Qdrant vector database using OpenAI embeddings.",
+      "Instructed interns in establishing strict schema validation using Zod to ensure zero SQL injection risks and robust handling of high-concurrency connections."
+    ]
+  },
+  {
+    "title": "DeclarationLetterOnline: Legal AI Generator",
+    "company": "Law Offices of Manuel Solis",
+    "date": "2025-10-01",
+    "imgSrc": "/images/manuel_solis_logo.png",
+    "impact": ["Processing Time: <60s", "Format Accuracy: Century Schoolbook"],
+    "tags": ["FastAPI", "Python", "React", "Google Gemini AI", "SQLite", "python-docx", "XML parsing", "Legal AI Templates", "Document Generation"],
+    "description": "Led and directed a team of interns to build a production-grade FastAPI and React legal document generator utilizing Gemini 1.5 Pro, instructing them on prompt engineering, strict document styling, and secure local audit trails.",
+    "impacts": [
+      "Guided interns on developing a multi-stage NLP synthesis pipeline that ingests questionnaires and translates them into certified legal letters in Century Schoolbook format.",
+      "Mentored the team in building an asynchronous processing workflow with local SQLite audit trails and structured XML parsing for automated DOCX compilation.",
+      "Instructed junior developers on creating a React interface featuring real-time feedback loops, version control of draft revisions, and instant side-by-side editing."
+    ]
+  },
+  {
     "title": "LLM GeoAI Platform for Urban Intelligence",
     "company": "BlackPrint Technologies",
     "date": "2025-08-01",
@@ -129,14 +171,14 @@
     "title": "Meeting Intelligence Platform for Legal Teams",
     "company": "Law Offices of Manuel Solis",
     "date": "2025-06-01",
-    "imgSrc": "/images/los_angeles.jpg",
+    "imgSrc": "/images/manuel_solis_logo.png",
     "impact": ["Turnaround Time: ~8x Faster", "Actionable Summaries"],
     "tags": ["LLM", "NLP", "Speechmatics", "Pinecone", "RBAC", "Data Processing", "FastAPI", "Vector Database"],
-    "description": "Developed a meeting intelligence system that converts Zoom/Teams/Meet recordings into searchable transcripts and structured summaries with group-based access control.",
+    "description": "Led the development and guided a team of interns to build a meeting intelligence system that converts Zoom/Teams/Meet recordings into searchable transcripts and structured summaries with group-based access control.",
     "impacts": [
-      "Automated transcription and summarization workflows for legal case documentation.",
-      "Enabled semantic search across meetings using vector indexing and retrieval.",
-      "Implemented RBAC controls for admin, supervisor, and user access levels."
+      "Mentored interns in automating transcription and summarization workflows using Speechmatics and LLM APIs for legal case documentation.",
+      "Guided the team in building semantic search across meetings using Pinecone vector indexing and retrieval.",
+      "Instructed interns on implementing secure RBAC controls for admin, supervisor, and user access levels under industry best practices."
     ]
   },
   {
