@@ -1,5 +1,89 @@
 [
   {
+    "title": "NetAiCore: Affinity Network & NLP Analysis Ecosystem",
+    "company": "BlackPrint Technologies",
+    "date": "2026-05-19",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Anonymized Exports", "spaCy + BERTopic NLP"],
+    "tags": ["Python", "spaCy", "BERTopic", "NetworkX", "HDBSCAN", "Streamlit", "Quarto", "Data Privacy (LFPDPPP)", "Data Pipelines"],
+    "description": "Designed a 360-degree analytics ecosystem and secure anonymization pipeline for chatbot operational databases, extracting sociodemographic insights under LFPDPPP privacy regulations.",
+    "impacts": [
+      "Built an advanced NLP pipeline utilizing spaCy Spanish models and BERTopic for sentiment analysis and topic modeling on conversational logs.",
+      "Developed a dual-mode Streamlit dashboard (internal with PII / shareable anonymized) and Quarto reporting scripts for stakeholders.",
+      "Modelled user interactions as a social graph with NetworkX and grouped user cohorts using HDBSCAN and scikit-learn clustering."
+    ]
+  },
+  {
+    "title": "BrokerAI: Conversational AI & Lead Qualification Engine",
+    "company": "BlackPrint Technologies",
+    "date": "2026-05-15",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Operator SLA: <15 mins", "Funnel Conversion: +34%"],
+    "tags": ["Next.js 15", "React 19", "Tailwind CSS 4", "FastAPI", "OpenAI GPT-4o", "Prisma ORM", "WhatsApp Cloud API", "Google Calendar API", "Server-Sent Events", "Turborepo"],
+    "description": "Architected and built a production-grade WhatsApp conversational sales agent and real-time operator dashboard for progressive lead qualification and automated appointment booking.",
+    "impacts": [
+      "Designed a robust AI orchestrator using OpenAI GPT-4o and WhatsApp Cloud API for multi-stage lead qualification and dynamic booking slots via Google Calendar API.",
+      "Developed a real-time operator workspace using Next.js 15, React 19, Tailwind CSS 4, and Server-Sent Events (SSE) for seamless human takeover.",
+      "Built a secure database schema with Prisma ORM on Cloud SQL (PostgreSQL), deploying cron jobs for appointment reminders and SLA escalation alerts to Slack."
+    ]
+  },
+  {
+    "title": "Meridian: Low-Code Territory Intelligence SaaS",
+    "company": "BlackPrint Technologies",
+    "date": "2026-05-14",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Database Scale: ~577M Rows", "Data Footprint: ~79GB"],
+    "tags": ["Next.js 14", "FastAPI", "LangGraph", "Google BigQuery", "Terraform", "Google Cloud Run", "GIS", "Geospatial Analysis", "Multi-Agent Systems"],
+    "description": "Architected a low-code SaaS platform mapping BigQuery-scale Mexican socio-demographic and geographic data into dynamically generated, explainable geospatial applications.",
+    "impacts": [
+      "Built a multi-agent orchestrator in LangGraph with 7 specialized agents (Profiler, Discovery, SQLGenerator, etc.) to translate natural language queries into verified SQL.",
+      "Integrated a large-scale data lake of ~577M rows (~79GB) on Google BigQuery using strict dry-run cost gates and topological dictionaries to protect query costs.",
+      "Designed IaC with Terraform for scalable deployment on GCP Cloud Run and integrated design tokens 1:1 using the BlackPrint Design System."
+    ]
+  },
+  {
+    "title": "SJS Sales Intelligence: Geospatial Predictive Modeling",
+    "company": "BlackPrint Technologies",
+    "date": "2026-04-20",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Forecast Acc.: ElasticNet/XGB", "Active Blocks: 100k+ Manzanas"],
+    "tags": ["React", "FastAPI", "MapLibre GL JS", "XGBoost", "Zustand", "OSMnx", "H3 Index", "GeoJSON", "Predictive Analytics"],
+    "description": "Developed a predictive sales intelligence system and interactive GIS simulator to model branch performance and analyze competitive attraction in Querétaro.",
+    "impacts": [
+      "Designed a machine learning pipeline using XGBoost and ElasticNet to predict sales based on spatial competition, urban attractors, and mobility parameters.",
+      "Built a high-fidelity React frontend with MapLibre GL JS to display interactive target markets, custom radar charts, and multi-scenario side-by-side comparisons.",
+      "Implemented a FastAPI server delivering fast, on-demand inference for new-branch placement simulations with real-time UI updates."
+    ]
+  },
+  {
+    "title": "Proxy Security Risk Index: Neighborhood Safety Modeling",
+    "company": "BlackPrint Technologies",
+    "date": "2026-03-26",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Risk Classification: Jenks 5", "Census Granularity: AGEB/Manzana"],
+    "tags": ["Python", "GeoPandas", "QGIS", "mapclassify", "Spatial Statistics", "Moran's I (LISA)", "Kernel Density Estimation"],
+    "description": "Designed a multi-factor geospatial proxy security index at the neighborhood (colonia) level for Ecatepec, modeling spatial crime correlation and public exposure metrics.",
+    "impacts": [
+      "Engineered a GeoPandas ETL pipeline integrating population census data (INEGI), business directories (DENUE), major transit corridors, and municipal crime figures (SESNSP).",
+      "Calculated normalized per-capita exposure indices using WGS 84 / UTM Zone 14N projections and classified risk levels via Jenks Natural Breaks.",
+      "Conducted advanced spatial autocorrelation using Local Moran's I (LISA) to detect crime spillover effects and hotspots near inter-municipal transit terminals."
+    ]
+  },
+  {
+    "title": "Blackprint Radar: Multi-Source POI Matching Pipeline",
+    "company": "BlackPrint Technologies",
+    "date": "2026-03-18",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Match Rate: +9.1% (Gobierno)", "Processing Volume: 230k+ POIs"],
+    "tags": ["Python", "Pandas", "NLP", "Sentence Embeddings", "Vector Search", "STRtree", "Spatial Grid", "Pytest", "BigQuery"],
+    "description": "Engineered a high-performance, multi-stage deduplication and matching pipeline to merge, reconcile, and spatially enrich Point of Interest (POI) data from commercial and government sources in Querétaro.",
+    "impacts": [
+      "Developed an adaptive text-similarity algorithm combining Jaro-Winkler, Levenshtein, and semantic category similarity using paraphrase-multilingual sentence embeddings.",
+      "Implemented a high-performance SpatialGrid cell bucketing algorithm to optimize hot-loop deduplication matching across 215k x 34k records in under 3 minutes.",
+      "Engineered cadastral spatial joins using STRtree to enrich POIs with 2023 municipal zoning guidelines and verify business compatibility (AMAI / SCIAN classification)."
+    ]
+  },
+  {
     "title": "LLM GeoAI Platform for Urban Intelligence",
     "company": "BlackPrint Technologies",
     "date": "2025-08-01",
