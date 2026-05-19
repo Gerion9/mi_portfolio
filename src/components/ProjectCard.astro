@@ -15,9 +15,16 @@ interface Props {
 const { project } = Astro.props;
 
 // Intelligent company image mapping to ensure real, high-quality images show instead of missing ones
-const getValidImage = (company: string) => {
+const getValidImage = (company: string, title: string = "") => {
   const comp = company.toLowerCase();
-  if (comp.includes("blackprint")) return "/images/blackprint_logo.png";
+  const t = title.toLowerCase();
+  
+  if (comp.includes("blackprint")) {
+    if (t.includes("electoral") || t.includes("socioeconomic")) {
+      return "/images/villa_de_alvarez.jpg";
+    }
+    return "/images/blackprint_logo.png";
+  }
   if (comp.includes("manuel solis") || comp.includes("law offices")) return "/images/los_angeles.jpg";
   if (comp.includes("ut san antonio") || comp.includes("san antonio")) return "/images/utsa_logo.png";
   if (comp.includes("strtgy")) return "/images/strtgy.jpg";
@@ -26,7 +33,7 @@ const getValidImage = (company: string) => {
   return null;
 };
 
-const mappedImage = getValidImage(project.company);
+const mappedImage = getValidImage(project.company, project.title);
 const isLogoImage = mappedImage && (mappedImage.includes("logo") || mappedImage.endsWith(".svg"));
 
 // Map actual high-resolution brand logos for esmerilated glass badges

@@ -57,9 +57,9 @@
   },
   {
     "title": "Electoral and Socioeconomic Geospatial Analysis",
-    "company": "Videntia",
+    "company": "BlackPrint Technologies",
     "date": "2025-05-01",
-    "imgSrc": "/images/project-2.jpg",
+    "imgSrc": "/images/villa_de_alvarez.jpg",
     "impact": ["Data Processed: 2.5M+", "Predictive Effectiveness: +78%"],
     "tags": ["Geospatial Analysis", "Data Visualization", "React", "Python", "ETL", "GeoPandas", "Mapbox GL", "TypeScript", "Turf.js", "Data Processing", "Inventory Optimization"],
     "description": "Developed an advanced analytical platform integrating historical electoral data (2018-2024) with socioeconomic indicators at the block level for all of Mexico, allowing multidimensional analysis of electoral behavior. Implemented a frontend with React 18, TypeScript 5.0, and Mapbox GL JS v2.15 with custom extensions for interactive geospatial visualization and spatial analysis using Turf.js.",
