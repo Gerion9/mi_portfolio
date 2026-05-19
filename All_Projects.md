@@ -21,6 +21,23 @@ This document contains a complete list of all my projects, chronologically order
 
 **Impact:** This system enables safe, fully compliant sociodemographic insights and cohort modeling from raw chatbot conversations while guaranteeing strict protection of personally identifiable information.
 
+### Radar Comercial Querétaro V2: Geospatial License Analytics Dashboard
+**Company:** BlackPrint Technologies  
+**Date:** May 2026  
+**Impact Metrics:** 
+- Data Volume: ~110k Licenses
+- Connection: Redshift / CSV Fallback
+
+**Technologies:** Next.js 15, TypeScript, Tailwind CSS, shadcn/ui, MapLibre GL JS, Amazon Redshift, SQL Queries, Geospatial Analytics
+
+**Description:**
+- Built a high-performance geospatial analytics dashboard to visualize over 110,000 active and blocked commercial business licenses in Querétaro, mapping Redshift datasets with interactive bounding boxes and metadata export pipelines.
+- Engineered an interactive MapLibre GL JS mapping interface showcasing spatial business distributions and density filters across Querétaro.
+- Integrated dual-source data fetching connecting a production Amazon Redshift data warehouse with an optimized local CSV fallback parser.
+- Designed a sleek, modern UI utilizing Next.js 15, Tailwind CSS, and shadcn/ui components for rapid bounding-box and metadata exports.
+
+**Impact:** Translates complex commercial licensing spatial data into an optimized, interactive map dashboard, facilitating quick municipal zoning compatibility checks and license data extraction.
+
 ### BrokerAI: Conversational AI & Lead Qualification Engine
 **Company:** BlackPrint Technologies  
 **Date:** May 2026  
@@ -105,6 +122,23 @@ This document contains a complete list of all my projects, chronologically order
 - Engineered cadastral spatial joins using STRtree to enrich POIs with 2023 municipal zoning guidelines and verify business compatibility (AMAI / SCIAN classification).
 
 **Impact:** Built a consolidated database connecting municipal business licenses with commercial POIs and cadastral data, enabling accurate tax, zoning, and retail analysis.
+
+### H Barbería Colima: Client Booking & Management Web App
+**Company:** Personal Project  
+**Date:** February 2026  
+**Impact Metrics:** 
+- Google Calendar Sync: Real-Time
+- Zero-Latency Booking: Responsive UI
+
+**Technologies:** React 19, TypeScript, Vite 6, React Router DOM, React Helmet Async, CSS Modules, SEO Optimization
+
+**Description:**
+- Designed and developed a client-facing booking web app for a local barbershop in Colima, integrating custom calendar scheduling parameters per-barber and modern fluid galleries with SEO optimization.
+- Developed a fluid scheduling workflow using React 19 and Vite 6, incorporating Google Calendar sync integrations to eliminate double bookings.
+- Implemented responsive CSS modules with premium glassmorphism aesthetics and custom micro-animations to increase user engagement.
+- Optimized load times and SEO rankings using React Helmet Async and semantic HTML, ensuring zero-latency transitions.
+
+**Impact:** Provides a professional, highly responsive booking interface that eliminates booking conflicts through automated calendar syncing, enhancing customer acquisition and the shop's brand presence.
 
 ## 2025
 

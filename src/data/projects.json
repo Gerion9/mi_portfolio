@@ -14,6 +14,20 @@
     ]
   },
   {
+    "title": "Radar Comercial Querétaro V2: Geospatial License Analytics Dashboard",
+    "company": "BlackPrint Technologies",
+    "date": "2026-05-18",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Data Volume: ~110k Licenses", "Connection: Redshift / CSV Fallback"],
+    "tags": ["Next.js 15", "TypeScript", "Tailwind CSS", "shadcn/ui", "MapLibre GL JS", "Amazon Redshift", "SQL Queries", "Geospatial Analytics"],
+    "description": "Built a high-performance geospatial analytics dashboard to visualize over 110,000 active and blocked commercial business licenses in Querétaro, mapping Redshift datasets with interactive bounding boxes and metadata export pipelines.",
+    "impacts": [
+      "Engineered an interactive MapLibre GL JS mapping interface showcasing spatial business distributions and density filters across Querétaro.",
+      "Integrated dual-source data fetching connecting a production Amazon Redshift data warehouse with an optimized local CSV fallback parser.",
+      "Designed a sleek, modern UI utilizing Next.js 15, Tailwind CSS, and shadcn/ui components for rapid bounding-box and metadata exports."
+    ]
+  },
+  {
     "title": "BrokerAI: Conversational AI & Lead Qualification Engine",
     "company": "BlackPrint Technologies",
     "date": "2026-05-15",
@@ -81,6 +95,20 @@
       "Developed an adaptive text-similarity algorithm combining Jaro-Winkler, Levenshtein, and semantic category similarity using paraphrase-multilingual sentence embeddings.",
       "Implemented a high-performance SpatialGrid cell bucketing algorithm to optimize hot-loop deduplication matching across 215k x 34k records in under 3 minutes.",
       "Engineered cadastral spatial joins using STRtree to enrich POIs with 2023 municipal zoning guidelines and verify business compatibility (AMAI / SCIAN classification)."
+    ]
+  },
+  {
+    "title": "H Barbería Colima: Client Booking & Management Web App",
+    "company": "Personal Project",
+    "date": "2026-02-16",
+    "imgSrc": "/images/personal_project.jpg",
+    "impact": ["Google Calendar Sync", "Zero-Latency Booking"],
+    "tags": ["React 19", "TypeScript", "Vite 6", "React Router DOM", "React Helmet Async", "CSS Modules", "SEO Optimization"],
+    "description": "Designed and developed a client-facing booking web app for a local barbershop in Colima, integrating custom calendar scheduling parameters per-barber and modern fluid galleries with SEO optimization.",
+    "impacts": [
+      "Developed a fluid scheduling workflow using React 19 and Vite 6, incorporating Google Calendar sync integrations to eliminate double bookings.",
+      "Implemented responsive CSS modules with premium glassmorphism aesthetics and custom micro-animations to increase user engagement.",
+      "Optimized load times and SEO rankings using React Helmet Async and semantic HTML, ensuring zero-latency transitions."
     ]
   },
   {
