@@ -17,9 +17,9 @@ const { project } = Astro.props;
 // Intelligent company image mapping to ensure real, high-quality images show instead of missing ones
 const getValidImage = (company: string) => {
   const comp = company.toLowerCase();
-  if (comp.includes("blackprint")) return "/images/blackprint_technologies.jpg";
+  if (comp.includes("blackprint")) return "/images/blackprint_logo.png";
   if (comp.includes("manuel solis") || comp.includes("law offices")) return "/images/los_angeles.jpg";
-  if (comp.includes("ut san antonio") || comp.includes("san antonio")) return "/images/berkeley_skydeck.jpg";
+  if (comp.includes("ut san antonio") || comp.includes("san antonio")) return "/images/utsa_logo.png";
   if (comp.includes("strtgy")) return "/images/strtgy.jpg";
   if (comp.includes("personal project") || comp.includes("portfolio")) return "/images/personal_project.jpg";
   if (comp.includes("videntia")) return "/images/villa_de_alvarez.jpg";
@@ -27,6 +27,7 @@ const getValidImage = (company: string) => {
 };
 
 const mappedImage = getValidImage(project.company);
+const isLogoImage = mappedImage && (mappedImage.includes("logo") || mappedImage.endsWith(".svg"));
 
 // Map actual high-resolution brand logos for esmerilated glass badges
 const getCompanyLogo = (company: string) => {
@@ -141,14 +142,25 @@ const categorizedTags = categorizeTags(project.tags);
   <div class="relative h-44 sm:h-48 w-full overflow-hidden z-0">
     <!-- Image/Gradient Wrapper -->
     {mappedImage ? (
-      <div class="w-full h-full relative">
-        <img 
-          src={mappedImage} 
-          alt={`${project.company} banner`} 
-          class="w-full h-full object-cover filter brightness-75 contrast-125 group-hover:scale-105 transition-transform duration-700 ease-out" 
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-slate-900/10 z-10"></div>
-      </div>
+      isLogoImage ? (
+        <div class="w-full h-full bg-white flex items-center justify-center p-6 sm:p-8 relative">
+          <img 
+            src={mappedImage} 
+            alt={`${project.company} brand logo`} 
+            class="max-w-[85%] max-h-[85%] object-contain group-hover:scale-105 transition-transform duration-700 ease-out z-10" 
+          />
+          <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-slate-950/90 via-slate-950/45 to-transparent z-10 pointer-events-none"></div>
+        </div>
+      ) : (
+        <div class="w-full h-full relative">
+          <img 
+            src={mappedImage} 
+            alt={`${project.company} banner`} 
+            class="w-full h-full object-cover filter brightness-75 contrast-125 group-hover:scale-105 transition-transform duration-700 ease-out" 
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-slate-900/10 z-10"></div>
+        </div>
+      )
     ) : (
       <div class={`w-full h-full bg-gradient-to-br ${categoryStyle.gradient} relative group-hover:scale-105 transition-transform duration-700 ease-out flex items-center justify-center`}>
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent z-10"></div>
