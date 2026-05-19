@@ -28,6 +28,18 @@ const getValidImage = (company: string) => {
 
 const mappedImage = getValidImage(project.company);
 
+// Map actual high-resolution brand logos for esmerilated glass badges
+const getCompanyLogo = (company: string) => {
+  const comp = company.toLowerCase();
+  if (comp.includes("blackprint")) return "/images/blackprint_logo.png";
+  if (comp.includes("ut san antonio") || comp.includes("san antonio") || comp.includes("utsa")) return "/images/utsa_logo.png";
+  if (comp.includes("berkeley")) return "/images/berkeley-logo.png";
+  if (comp.includes("tecnologico") || comp.includes("tec de monterrey")) return "/images/tec-logo.png";
+  return null;
+};
+
+const mappedLogo = getCompanyLogo(project.company);
+
 // Detect primary tech categories to assign customized gradient styles for fallback covers
 const getTechCategoryStyle = (tags: string[] = []) => {
   const tString = tags.join(" ").toLowerCase();
@@ -161,15 +173,19 @@ const categorizedTags = categorizeTags(project.tags);
     </div>
 
     <!-- Company Mini Glass Badge (Bottom Left) -->
-    <div class="absolute bottom-4 left-4 z-20 flex items-center gap-3">
-      <div class="bg-slate-900/90 backdrop-blur-md w-10 h-10 rounded-xl border border-slate-700/80 shadow-xl flex items-center justify-center text-indigo-300 font-extrabold text-lg">
-        {project.company.charAt(0)}
+    <div class="absolute bottom-4 left-4 right-4 z-20 flex items-center gap-2 sm:gap-3 min-w-0">
+      <div class="bg-slate-900/90 backdrop-blur-md w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl border border-slate-700/80 shadow-xl flex items-center justify-center text-indigo-300 font-extrabold text-base sm:text-lg overflow-hidden p-1 sm:p-1.5 shrink-0 select-none">
+        {mappedLogo ? (
+          <img src={mappedLogo} alt={project.company} class="w-full h-full object-contain filter brightness-110" />
+        ) : (
+          <span>{project.company.charAt(0)}</span>
+        )}
       </div>
-      <div>
-        <span class="bg-indigo-500/20 backdrop-blur-md text-indigo-300 text-[10px] font-bold tracking-widest uppercase py-0.5 px-2 rounded border border-indigo-500/30 block mb-0.5 w-fit">
+      <div class="min-w-0 flex-grow">
+        <span class="bg-indigo-500/20 backdrop-blur-md text-indigo-300 text-[9px] sm:text-[10px] font-bold tracking-widest uppercase py-0.5 px-2 rounded border border-indigo-500/30 block mb-0.5 w-fit truncate">
           {project.company}
         </span>
-        <h3 class="text-white font-extrabold text-base sm:text-xl leading-tight text-shadow-sm line-clamp-1">
+        <h3 class="text-white font-extrabold text-sm sm:text-lg md:text-xl leading-tight text-shadow-sm line-clamp-1">
           {project.title.split(' for ')[0]}
         </h3>
       </div>
