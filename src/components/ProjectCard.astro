@@ -8,67 +8,337 @@ interface Props {
     tags?: string[];
     description: string | string[];
     impacts?: string[];
+    imgSrc?: string;
   };
 }
 
 const { project } = Astro.props;
+
+// Intelligent company image mapping to ensure real, high-quality images show instead of missing ones
+const getValidImage = (company: string) => {
+  const comp = company.toLowerCase();
+  if (comp.includes("blackprint")) return "/images/blackprint_technologies.jpg";
+  if (comp.includes("manuel solis") || comp.includes("law offices")) return "/images/los_angeles.jpg";
+  if (comp.includes("ut san antonio") || comp.includes("san antonio")) return "/images/berkeley_skydeck.jpg";
+  if (comp.includes("strtgy")) return "/images/strtgy.jpg";
+  if (comp.includes("personal project") || comp.includes("portfolio")) return "/images/personal_project.jpg";
+  if (comp.includes("videntia")) return "/images/villa_de_alvarez.jpg";
+  return null;
+};
+
+const mappedImage = getValidImage(project.company);
+
+// Detect primary tech categories to assign customized gradient styles for fallback covers
+const getTechCategoryStyle = (tags: string[] = []) => {
+  const tString = tags.join(" ").toLowerCase();
+  
+  if (tString.includes("geo") || tString.includes("mapbox") || tString.includes("gis") || tString.includes("arcgis")) {
+    return {
+      gradient: "from-emerald-950 via-teal-900 to-indigo-950",
+      accent: "text-emerald-400",
+      border: "border-emerald-500/20",
+      icon: "fa-map-location-dot",
+      badgeColor: "bg-emerald-500/10 text-emerald-300 border-emerald-500/20",
+      overlay: "rgba(16, 185, 129, 0.05)"
+    };
+  }
+  
+  if (tString.includes("llm") || tString.includes("agent") || tString.includes("rag") || tString.includes("brain") || tString.includes("nlp") || tString.includes("openai")) {
+    return {
+      gradient: "from-indigo-950 via-purple-900 to-pink-950",
+      accent: "text-pink-400",
+      border: "border-pink-500/20",
+      icon: "fa-brain",
+      badgeColor: "bg-pink-500/10 text-pink-300 border-pink-500/20",
+      overlay: "rgba(236, 72, 153, 0.05)"
+    };
+  }
+
+  if (tString.includes("time series") || tString.includes("forecasting") || tString.includes("prophet") || tString.includes("prediction") || tString.includes("xgboost")) {
+    return {
+      gradient: "from-violet-950 via-red-950 to-amber-950",
+      accent: "text-amber-400",
+      border: "border-amber-500/20",
+      icon: "fa-chart-line",
+      badgeColor: "bg-amber-500/10 text-amber-300 border-amber-500/20",
+      overlay: "rgba(245, 158, 11, 0.05)"
+    };
+  }
+
+  // Default Web Dev & Data
+  return {
+    gradient: "from-slate-950 via-indigo-950 to-slate-900",
+    accent: "text-indigo-400",
+    border: "border-indigo-500/20",
+    icon: "fa-laptop-code",
+    badgeColor: "bg-indigo-500/10 text-indigo-300 border-indigo-500/20",
+    overlay: "rgba(99, 102, 241, 0.05)"
+  };
+};
+
+const categoryStyle = getTechCategoryStyle(project.tags);
+
+// Helper to select optimal icon for impact metrics
+const getMetricIcon = (metric: string) => {
+  const m = metric.toLowerCase();
+  if (m.includes("%") || m.includes("accuracy") || m.includes("confidence")) return "fa-crosshairs text-emerald-400";
+  if (m.includes("faster") || m.includes("↓") || m.includes("time") || m.includes("turnaround")) return "fa-gauge-high text-pink-400";
+  if (m.includes("cost") || m.includes("reduction") || m.includes("$")) return "fa-wallet text-amber-400";
+  if (m.includes("data") || m.includes("blocks") || m.includes("processed")) return "fa-cubes text-cyan-400";
+  if (m.includes("lift") || m.includes("effective")) return "fa-arrow-trend-up text-indigo-400";
+  return "fa-chart-simple text-purple-400";
+};
+
+// Organize tags by type for structured rendering in expandable details
+const categorizeTags = (tags: string[] = []) => {
+  const categories = {
+    languages: [] as string[],
+    aiML: [] as string[],
+    geo: [] as string[],
+    frameworks: [] as string[],
+    other: [] as string[]
+  };
+
+  tags.forEach(tag => {
+    const t = tag.toLowerCase();
+    if (["python", "javascript", "typescript", "sql", "html", "css"].includes(t)) {
+      categories.languages.push(tag);
+    } else if (["llm", "agents", "knowledge graph", "neo4j", "medical ai", "nlp", "speechmatics", "openai", "rag", "machine learning", "deep learning", "embeddings", "faiss", "vector database", "pinecone", "anthropic claude", "multimodal ai"].includes(t)) {
+      categories.aiML.push(tag);
+    } else if (["geospatial analysis", "mapbox gl", "turf.js", "gis", "arcgis", "geopandas", "arcgis online", "storymaps"].includes(t)) {
+      categories.geo.push(tag);
+    } else if (["react", "fastapi", "astro", "node.js", "vite", "streamlit", "pandas", "numpy", "tensorflow", "pytorch", "flask", "mongodb", "material ui", "recharts", "chart.js", "plotly"].includes(t)) {
+      categories.frameworks.push(tag);
+    } else {
+      categories.other.push(tag);
+    }
+  });
+
+  return categories;
+};
+
+const categorizedTags = categorizeTags(project.tags);
 ---
-<div class="bg-gray-800 p-4 sm:p-8 rounded-lg shadow-lg border border-gray-700/60 project-card card-hover">
-  <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
-    <div>
-      <h2 class="text-xl sm:text-3xl font-bold mb-1 sm:mb-2 text-pink-500">{project.title}</h2>
-      <p class="text-base sm:text-xl text-gray-400">
-        {project.company}
-      </p>
-    </div>
-    
-    <!-- Impact metrics if available -->
-    {project.impact && (
-      <div class="flex flex-wrap gap-2">
-        {project.impact.map(metric => (
-          <div class="bg-gray-700/50 px-2 sm:px-3 py-1 sm:py-2 rounded-lg flex flex-col items-center">
-            <span class="text-base sm:text-lg font-bold text-indigo-300">
-              {metric.includes(':') ? metric.split(':')[1].trim() : metric}
-            </span>
-            <span class="text-xs text-gray-300">
-              {metric.includes(':') ? metric.split(':')[0].trim() : ''}
-            </span>
-          </div>
-        ))}
+
+<div class={`project-card-container group relative rounded-2xl border border-slate-800 bg-slate-950/40 backdrop-blur-xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden ${categoryStyle.border}`} data-card-root style={`--hover-glow: ${categoryStyle.overlay}`}>
+  
+  <!-- Ambient background glow on hover -->
+  <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={`background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${categoryStyle.overlay}, transparent 40%); z-index: 1;`}></div>
+
+  <!-- Portada Visual (Hero Cover) -->
+  <div class="relative h-44 sm:h-48 w-full overflow-hidden z-0">
+    <!-- Image/Gradient Wrapper -->
+    {mappedImage ? (
+      <div class="w-full h-full relative">
+        <img 
+          src={mappedImage} 
+          alt={`${project.company} banner`} 
+          class="w-full h-full object-cover filter brightness-75 contrast-125 group-hover:scale-105 transition-transform duration-700 ease-out" 
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-slate-900/10 z-10"></div>
+      </div>
+    ) : (
+      <div class={`w-full h-full bg-gradient-to-br ${categoryStyle.gradient} relative group-hover:scale-105 transition-transform duration-700 ease-out flex items-center justify-center`}>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent z-10"></div>
+        <!-- Abstract geometric decoration inside gradient cover -->
+        <div class="absolute inset-0 opacity-10 mix-blend-overlay">
+          <svg width="100%" height="100%">
+            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" stroke-width="1"/>
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+        </div>
+        <i class={`fa-solid ${categoryStyle.icon} text-white/10 text-7xl sm:text-8xl transform rotate-12 transition-transform duration-500 group-hover:rotate-6`}></i>
       </div>
     )}
-  </div>
-  
-  <div class="mb-4 sm:mb-6 flex flex-wrap gap-1 sm:gap-2">
-    {project.tags && project.tags.map((tag) => (
-      <span class="bg-indigo-600/80 text-white px-2 py-1 rounded-full text-xs">{tag}</span>
-    ))}
-  </div>
-  
-  <div class="space-y-2 sm:space-y-4">
-    {typeof project.description === 'string' ? (
-      <p class="text-sm sm:text-base text-gray-300">{project.description}</p>
-    ) : (
-      Array.isArray(project.description) && project.description.map((item) => (
-        <div class="flex items-start">
-          <span class="text-indigo-300 mr-2">•</span>
-          <p class="text-sm sm:text-base text-gray-300">{item}</p>
-        </div>
-      ))
-    )}
-  </div>
-  
-  {project.impacts && project.impacts.length > 0 && (
-    <div class="mt-4 sm:mt-8 p-3 sm:p-4 bg-indigo-900/30 rounded-lg">
-      <h3 class="text-base sm:text-lg font-semibold text-indigo-300 mb-2">Key Achievements</h3>
-      <ul class="space-y-1 sm:space-y-2">
-        {project.impacts.map((impact) => (
-          <li class="flex items-start">
-            <span class="text-pink-500 mr-2">→</span>
-            <p class="text-xs sm:text-sm text-gray-300">{impact}</p>
-          </li>
-        ))}
-      </ul>
+
+    <!-- Date Badge (Top Right) -->
+    <div class="absolute top-4 right-4 z-20">
+      <span class="bg-slate-900/80 backdrop-blur-md text-white text-xs font-semibold py-1.5 px-3 rounded-full border border-slate-700/50 shadow-lg tracking-wide">
+        {new Date(project.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+      </span>
     </div>
-  )}
+
+    <!-- Company Mini Glass Badge (Bottom Left) -->
+    <div class="absolute bottom-4 left-4 z-20 flex items-center gap-3">
+      <div class="bg-slate-900/90 backdrop-blur-md w-10 h-10 rounded-xl border border-slate-700/80 shadow-xl flex items-center justify-center text-indigo-300 font-extrabold text-lg">
+        {project.company.charAt(0)}
+      </div>
+      <div>
+        <span class="bg-indigo-500/20 backdrop-blur-md text-indigo-300 text-[10px] font-bold tracking-widest uppercase py-0.5 px-2 rounded border border-indigo-500/30 block mb-0.5 w-fit">
+          {project.company}
+        </span>
+        <h3 class="text-white font-extrabold text-base sm:text-xl leading-tight text-shadow-sm line-clamp-1">
+          {project.title.split(' for ')[0]}
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="p-5 sm:p-6 relative z-10 flex flex-col gap-4">
+    
+    <!-- Title & Company details underneath Hero if truncated -->
+    <div class="hidden sm:block">
+      <h2 class="text-xl sm:text-2xl font-extrabold text-slate-100 group-hover:text-white transition-colors duration-300 leading-snug">
+        {project.title}
+      </h2>
+    </div>
+
+    <!-- Metrics Telemetry Dashboard -->
+    {project.impact && project.impact.length > 0 && (
+      <div class="grid grid-cols-2 gap-3 mt-1">
+        {project.impact.map(metric => {
+          const hasCol = metric.includes(':');
+          const value = hasCol ? metric.split(':')[1].trim() : metric;
+          const label = hasCol ? metric.split(':')[0].trim() : 'Impact';
+          return (
+            <div class="bg-slate-900/50 backdrop-blur-sm border border-slate-800/80 p-2.5 rounded-xl flex items-center gap-3 group/metric hover:border-slate-700/60 transition-all duration-300 hover:-translate-y-0.5">
+              <div class="bg-slate-950 w-9 h-9 rounded-lg border border-slate-800 flex items-center justify-center shrink-0 shadow-inner group-hover/metric:scale-105 transition-transform duration-300">
+                <i class={`fa-solid ${getMetricIcon(metric)} text-sm`}></i>
+              </div>
+              <div class="min-w-0">
+                <span class="text-white font-extrabold text-xs sm:text-sm block tracking-tight line-clamp-1 group-hover/metric:text-indigo-200 transition-colors">
+                  {value}
+                </span>
+                <span class="text-[9px] text-slate-400 font-bold uppercase tracking-wider block line-clamp-1 mt-0.5">
+                  {label}
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    )}
+
+    <!-- Tags Pills (Quick Overview) -->
+    <div class="flex flex-wrap gap-1.5 sm:gap-2">
+      {project.tags && project.tags.slice(0, 4).map((tag) => (
+        <span class={`text-[10px] font-semibold px-2 py-0.5 rounded-md border tracking-wide bg-slate-900/80 text-slate-300 border-slate-800`}>
+          {tag}
+        </span>
+      ))}
+      {project.tags && project.tags.length > 4 && (
+        <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-slate-950 text-indigo-400 border border-slate-800 shrink-0">
+          +{project.tags.length - 4} More
+        </span>
+      )}
+    </div>
+
+    <!-- Description -->
+    <div class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+      {typeof project.description === 'string' ? (
+        <p>{project.description}</p>
+      ) : (
+        Array.isArray(project.description) && (
+          <p>{project.description[0]}</p>
+        )
+      )}
+    </div>
+
+    <!-- Expandable Detailed Technical Accordion -->
+    <div class="accordion-component mt-1">
+      <button 
+        class="w-full flex items-center justify-between py-2 px-3 rounded-lg bg-slate-900/50 hover:bg-slate-900/90 border border-slate-800/80 hover:border-indigo-500/30 text-indigo-300 hover:text-indigo-200 text-[10px] font-bold tracking-widest uppercase transition-all duration-300 select-none touch-manipulation cursor-pointer"
+        data-accordion-trigger
+      >
+        <span>Explore Technical Details</span>
+        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300 pointer-events-none" data-accordion-icon></i>
+      </button>
+
+      <!-- Expandable Pane -->
+      <div class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out" data-accordion-pane>
+        <div class="pt-4 pb-1 flex flex-col gap-4">
+          
+          <!-- Key Achievements List -->
+          {project.impacts && project.impacts.length > 0 && (
+            <div class="bg-indigo-950/10 border border-indigo-900/20 p-3.5 rounded-xl backdrop-blur-md">
+              <h4 class="text-[10px] uppercase tracking-widest text-indigo-300 font-bold mb-2.5 flex items-center gap-2">
+                <i class="fa-solid fa-trophy text-amber-400"></i> Key Achievements
+              </h4>
+              <ul class="space-y-2">
+                {project.impacts.map((impact) => (
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-arrow-right-long text-pink-500 mr-2.5 mt-1 text-[10px] shrink-0"></i>
+                    <p class="text-xs text-slate-300 leading-relaxed">{impact}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- Categorized Detailed Tech Stack -->
+          <div class="flex flex-col gap-2">
+            <h4 class="text-[10px] uppercase tracking-widest text-slate-400 font-bold flex items-center gap-2">
+              <i class="fa-solid fa-boxes-stacked text-indigo-400"></i> Technology Stack
+            </h4>
+            <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-900/80 flex flex-col gap-2.5">
+              <!-- AI / ML -->
+              {categorizedTags.aiML.length > 0 && (
+                <div>
+                  <span class="text-[9px] font-bold text-pink-400 uppercase tracking-widest block mb-1">AI / ML & NLP</span>
+                  <div class="flex flex-wrap gap-1">
+                    {categorizedTags.aiML.map(tag => (
+                      <span class="text-[9px] font-semibold bg-pink-500/10 text-pink-300 border border-pink-500/15 py-0.5 px-2 rounded-md">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              <!-- Geospatial -->
+              {categorizedTags.geo.length > 0 && (
+                <div>
+                  <span class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest block mb-1">Geospatial</span>
+                  <div class="flex flex-wrap gap-1">
+                    {categorizedTags.geo.map(tag => (
+                      <span class="text-[9px] font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/15 py-0.5 px-2 rounded-md">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <!-- Languages & Frameworks -->
+              {(categorizedTags.languages.length > 0 || categorizedTags.frameworks.length > 0) && (
+                <div>
+                  <span class="text-[9px] font-bold text-indigo-400 uppercase tracking-widest block mb-1">Core & Frameworks</span>
+                  <div class="flex flex-wrap gap-1">
+                    {categorizedTags.languages.map(tag => (
+                      <span class="text-[9px] font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/15 py-0.5 px-2 rounded-md">
+                        {tag}
+                      </span>
+                    ))}
+                    {categorizedTags.frameworks.map(tag => (
+                      <span class="text-[9px] font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/15 py-0.5 px-2 rounded-md">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <!-- Others -->
+              {categorizedTags.other.length > 0 && (
+                <div>
+                  <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Other Tools</span>
+                  <div class="flex flex-wrap gap-1">
+                    {categorizedTags.other.map(tag => (
+                      <span class="text-[9px] font-semibold bg-slate-800 text-slate-300 border border-slate-700/60 py-0.5 px-2 rounded-md">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
