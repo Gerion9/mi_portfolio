@@ -1,0 +1,74 @@
+---
+interface Props {
+  project: {
+    title: string;
+    company: string;
+    date: string;
+    impact?: string[];
+    tags?: string[];
+    description: string | string[];
+    impacts?: string[];
+  };
+}
+
+const { project } = Astro.props;
+---
+<div class="bg-gray-800 p-4 sm:p-8 rounded-lg shadow-lg border border-gray-700/60 project-card card-hover">
+  <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+    <div>
+      <h2 class="text-xl sm:text-3xl font-bold mb-1 sm:mb-2 text-pink-500">{project.title}</h2>
+      <p class="text-base sm:text-xl text-gray-400">
+        {project.company}
+      </p>
+    </div>
+    
+    <!-- Impact metrics if available -->
+    {project.impact && (
+      <div class="flex flex-wrap gap-2">
+        {project.impact.map(metric => (
+          <div class="bg-gray-700/50 px-2 sm:px-3 py-1 sm:py-2 rounded-lg flex flex-col items-center">
+            <span class="text-base sm:text-lg font-bold text-indigo-300">
+              {metric.includes(':') ? metric.split(':')[1].trim() : metric}
+            </span>
+            <span class="text-xs text-gray-300">
+              {metric.includes(':') ? metric.split(':')[0].trim() : ''}
+            </span>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+  
+  <div class="mb-4 sm:mb-6 flex flex-wrap gap-1 sm:gap-2">
+    {project.tags && project.tags.map((tag) => (
+      <span class="bg-indigo-600/80 text-white px-2 py-1 rounded-full text-xs">{tag}</span>
+    ))}
+  </div>
+  
+  <div class="space-y-2 sm:space-y-4">
+    {typeof project.description === 'string' ? (
+      <p class="text-sm sm:text-base text-gray-300">{project.description}</p>
+    ) : (
+      Array.isArray(project.description) && project.description.map((item) => (
+        <div class="flex items-start">
+          <span class="text-indigo-300 mr-2">•</span>
+          <p class="text-sm sm:text-base text-gray-300">{item}</p>
+        </div>
+      ))
+    )}
+  </div>
+  
+  {project.impacts && project.impacts.length > 0 && (
+    <div class="mt-4 sm:mt-8 p-3 sm:p-4 bg-indigo-900/30 rounded-lg">
+      <h3 class="text-base sm:text-lg font-semibold text-indigo-300 mb-2">Key Achievements</h3>
+      <ul class="space-y-1 sm:space-y-2">
+        {project.impacts.map((impact) => (
+          <li class="flex items-start">
+            <span class="text-pink-500 mr-2">→</span>
+            <p class="text-xs sm:text-sm text-gray-300">{impact}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+</div>

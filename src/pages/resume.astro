@@ -1,5 +1,6 @@
-   ---
-   import Layout from '../layouts/Layout.astro';
+---
+import Layout from '../layouts/Layout.astro';
+import projectsData from '../data/projects.json';
 
 // Define key skills for the skills section without percentages
 const skills = [
@@ -134,33 +135,24 @@ const certifications = [
   }
 ];
 
-// Define highlighted projects (versión simplificada)
-const highlightedProjects = [
-  {
-    title: "LLM GeoAI Platform",
-    description: "Urban intelligence platform with real-time inference for 2.5M+ blocks",
-    metrics: ["Urban Blocks: 2.5M+", "Real-time Inference"],
-    link: "/experience"
-  },
-  {
-    title: "Meeting Intelligence Platform",
-    description: "Speechmatics + GPT-5 summaries with secure RBAC access",
-    metrics: ["Turnaround: ~8x Faster", "Actionable Summaries"],
-    link: "/experience"
-  },
-  {
-    title: "Medical QA Multi-Agent System",
-    description: "PrimeKG + Neo4j grounded QA with multi-agent reasoning",
-    metrics: ["Accuracy: 54.69%", "Lift: +24.24pp"],
-    link: "/experience"
-  }
-];
+// Define highlighted projects dynamically from projects.json
+const highlightedProjects = projectsData.slice(0, 3).map(p => ({
+  title: p.title.split(' for ')[0], // Keep it short for UI display
+  description: p.description,
+  metrics: p.impact || [],
+  link: "/experience"
+}));
 
 // Structured data for SEO
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Gairo Y. Peralta",
+  "name": "Gairo Peralta",
+  "alternateName": [
+    "Gairo Yostin Peralta",
+    "Gairo Yostin Peralta Alvarez",
+    "Gairo Y. Peralta"
+  ],
   "jobTitle": "AI/ML Engineer",
   "url": "https://gairoperalta.com/resume",
   "worksFor": {

@@ -4,7 +4,7 @@
   "description": "Senior Data Scientist specializing in machine learning solutions, geospatial analysis, and business intelligence.",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/favicon.svg?v=2026-01-19",
       "sizes": "any",
       "type": "image/svg+xml"
     }
@@ -23,21 +23,21 @@
       "short_name": "Portfolio",
       "description": "See my data science projects",
       "url": "/experience",
-      "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+      "icons": [{ "src": "/favicon.svg?v=2026-01-19", "sizes": "any", "type": "image/svg+xml" }]
     },
     {
       "name": "View Resume",
       "short_name": "Resume",
       "description": "See my professional resume",
       "url": "/resume",
-      "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+      "icons": [{ "src": "/favicon.svg?v=2026-01-19", "sizes": "any", "type": "image/svg+xml" }]
     },
     {
       "name": "Contact Me",
       "short_name": "Contact",
       "description": "Get in touch for collaborations",
       "url": "/contact",
-      "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+      "icons": [{ "src": "/favicon.svg?v=2026-01-19", "sizes": "any", "type": "image/svg+xml" }]
     }
   ],
   "categories": ["portfolio", "professional", "data science", "artificial intelligence"]

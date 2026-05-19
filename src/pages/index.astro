@@ -1,11 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import projects from '../data/projects.json';
 
 // Define structured data for SEO
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Gairo Y. Peralta",
+  "name": "Gairo Peralta",
+  "alternateName": [
+    "Gairo Yostin Peralta",
+    "Gairo Yostin Peralta Alvarez",
+    "Gairo Y. Peralta"
+  ],
   "jobTitle": "AI/ML Engineer",
   "url": "https://gairoperalta.com",
   "image": "https://gairoperalta.com/images/profile.jpg",
@@ -35,27 +41,19 @@ const technicalSkills = [
   { name: "MLOps", icon: "fas fa-cloud", color: "purple" }
 ];
 
-// Define featured projects for the homepage
-const featuredProjects = [
-  {
-    title: "LLM GeoAI Platform",
-    description: "Built a GeoAI platform for 2.5M+ urban blocks with real-time inference and interactive maps",
-    icon: "fas fa-map-marked-alt",
-    year: "2025"
-  },
-  {
-    title: "Meeting Intelligence Platform",
-    description: "Turned recordings into structured summaries and searchable transcripts with RBAC controls",
-    icon: "fas fa-microphone",
-    year: "2025"
-  },
-  {
-    title: "Medical QA Multi-Agent System",
-    description: "Multi-agent LLM system with PrimeKG + Neo4j for high-accuracy medical QA",
-    icon: "fas fa-stethoscope",
-    year: "2025"
-  }
-];
+// Map dynamically from projects.json to maintain consistency
+const iconMap: Record<string, string> = {
+  "LLM GeoAI Platform for Urban Intelligence": "fas fa-map-marked-alt",
+  "Meeting Intelligence Platform for Legal Teams": "fas fa-microphone",
+  "Medical QA Multi-Agent System": "fas fa-stethoscope"
+};
+
+const featuredProjects = projects.slice(0, 3).map(p => ({
+  title: p.title.split(' for ')[0], // Keep it short for UI display
+  description: p.description,
+  icon: iconMap[p.title] || "fas fa-laptop-code",
+  year: new Date(p.date).getFullYear().toString()
+}));
 ---
 
 <Layout title="Gairo Peralta - AI/ML Engineer | LLM Systems | GeoAI" description="AI/ML Engineer building LLM systems, GeoAI platforms, and production ML pipelines for measurable outcomes.">

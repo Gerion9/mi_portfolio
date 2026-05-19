@@ -1,0 +1,23 @@
+---
+interface Props {
+  milestone: {
+    year: number;
+    event: string;
+    description: string;
+  };
+  index: number;
+}
+
+const { milestone, index } = Astro.props;
+---
+<div class="timeline-entry relative" data-timeline-item data-reveal>
+  <div class="timeline-dot" aria-hidden="true"></div>
+  
+  <div class={`timeline-card w-full sm:w-5/12 ${index % 2 === 0 ? 'sm:ml-auto' : 'sm:mr-auto'}`}>
+    <div class="timeline-header">
+      <span class="timeline-year">{milestone.year}</span>
+      <h3 class="text-base sm:text-xl font-semibold text-white">{milestone.event}</h3>
+    </div>
+    <p class="text-sm sm:text-base text-gray-300">{milestone.description}</p>
+  </div>
+</div>

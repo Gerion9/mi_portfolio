@@ -1,0 +1,245 @@
+[
+  {
+    "title": "LLM GeoAI Platform for Urban Intelligence",
+    "company": "BlackPrint Technologies",
+    "date": "2025-08-01",
+    "imgSrc": "/images/blackprint_technologies.jpg",
+    "impact": ["Urban Blocks: 2.5M+", "Real-time Inference"],
+    "tags": ["Geospatial Analysis", "Machine Learning", "React", "Mapbox GL", "Turf.js", "LLM", "GeoAI", "Data Visualization"],
+    "description": "Built an LLM-powered GeoAI platform to model 2.5M+ urban blocks with real-time inference and interactive mapping for faster decision-making.",
+    "impacts": [
+      "Shipped React + Mapbox + Turf.js pipelines for scalable geospatial visualization.",
+      "Integrated LLM reasoning to surface location intelligence insights in production.",
+      "Delivered real-time analytics to support licensing and urban planning workflows."
+    ]
+  },
+  {
+    "title": "Meeting Intelligence Platform for Legal Teams",
+    "company": "Law Offices of Manuel Solis",
+    "date": "2025-06-01",
+    "imgSrc": "/images/los_angeles.jpg",
+    "impact": ["Turnaround Time: ~8x Faster", "Actionable Summaries"],
+    "tags": ["LLM", "NLP", "Speechmatics", "Pinecone", "RBAC", "Data Processing", "FastAPI", "Vector Database"],
+    "description": "Developed a meeting intelligence system that converts Zoom/Teams/Meet recordings into searchable transcripts and structured summaries with group-based access control.",
+    "impacts": [
+      "Automated transcription and summarization workflows for legal case documentation.",
+      "Enabled semantic search across meetings using vector indexing and retrieval.",
+      "Implemented RBAC controls for admin, supervisor, and user access levels."
+    ]
+  },
+  {
+    "title": "Medical QA Multi-Agent System",
+    "company": "UT San Antonio (Volunteer)",
+    "date": "2025-04-01",
+    "imgSrc": "/images/berkeley_skydeck.jpg",
+    "impact": ["Accuracy: 54.69%", "Lift: +24.24pp"],
+    "tags": ["LLM", "Agents", "Knowledge Graph", "Neo4j", "Medical AI", "NLP"],
+    "description": "Built a multi-agent LLM system grounded in PrimeKG and Neo4j to improve medical QA accuracy through multi-hop reasoning.",
+    "impacts": [
+      "Designed specialized agents for clinical reasoning and evidence retrieval.",
+      "Integrated knowledge graph queries to support explainable QA outputs.",
+      "Evaluated system performance with systematic benchmarking."
+    ]
+  },
+  {
+    "title": "GeoAI Insights: Advanced Visualization of the Competitive Landscape",
+    "company": "STRTGY",
+    "date": "2024-09-01",
+    "imgSrc": "/images/project-1.jpg",
+    "impact": ["Decision Confidence: +82%", "Market Analysis Time: 70% ↓"],
+    "tags": ["Geospatial Analysis", "Machine Learning", "Data Visualization", "OpenAI", "GIS", "Social Media Analytics", "Market Analysis", "Strategic Planning", "Decision Support Systems"],
+    "description": "Leveraged GPT-4 and GPT Vision for competitor analysis, using chain of thought reasoning and previous examples to extract insights on employee count, building size, and competitor locations. Implemented GIS tools with GeoJSON and ArcGIS Online, overcoming data cleaning challenges to create detailed maps of showroom and retail locations.",
+    "impacts": [
+      "Utilized Storymaps in ArcGIS Online for effective visualization, balancing local and cloud-based processing based on analysis requirements.",
+      "Developed gradient-based visualizations using ArcGIS API to highlight competition concentrations across the US, ensuring interpretability through interactive maps.",
+      "Integrated AI-driven analysis with geospatial data, validating accuracy with GPT Vision API, to create a comprehensive competitive landscape view."
+    ]
+  },
+  {
+    "title": "Electoral and Socioeconomic Geospatial Analysis",
+    "company": "Videntia",
+    "date": "2025-05-01",
+    "imgSrc": "/images/project-2.jpg",
+    "impact": ["Data Processed: 2.5M+", "Predictive Effectiveness: +78%"],
+    "tags": ["Geospatial Analysis", "Data Visualization", "React", "Python", "ETL", "GeoPandas", "Mapbox GL", "TypeScript", "Turf.js", "Data Processing", "Inventory Optimization"],
+    "description": "Developed an advanced analytical platform integrating historical electoral data (2018-2024) with socioeconomic indicators at the block level for all of Mexico, allowing multidimensional analysis of electoral behavior. Implemented a frontend with React 18, TypeScript 5.0, and Mapbox GL JS v2.15 with custom extensions for interactive geospatial visualization and spatial analysis using Turf.js.",
+    "impacts": [
+      "Designed and implemented Python scripts with GeoPandas for geospatial ETL, shapefile transformation, and vector processing for geometric schema unification.",
+      "Processed more than 2.5M urban blocks from INEGI with more than 30 variables per entity, implementing AMAI classification algorithms for socioeconomic level calculation.",
+      "Implemented topological optimization with adaptive Douglas-Peucker simplification and generation of vector tiling schemes with efficient encoding."
+    ]
+  },
+  {
+    "title": "Intelligent Commercial Document Analysis System",
+    "company": "PRODENSA",
+    "date": "2025-04-01",
+    "imgSrc": "/images/project-3.jpg",
+    "impact": ["Extraction Accuracy: 95%", "Processing Time: 98% ↓"],
+    "tags": ["AI Application", "Document Processing", "React", "Vite", "FastAPI", "PDF Processing", "LLM", "NLP", "Data Extraction", "OCR"],
+    "description": "Built an OCR and Llama 3.3 document extraction pipeline for invoices, packing lists, and customs documents, delivering structured outputs at scale.",
+    "impacts": [
+      "Deployed the extraction API with FastAPI and a React/Vite frontend for real-time PDF processing.",
+      "Implemented multi-format ingestion (PDF, CSV, XLSX) with asynchronous workers.",
+      "Improved extraction accuracy through targeted model tuning and validation."
+    ]
+  },
+  {
+    "title": "Specialized Industrial Real Estate Chatbot",
+    "company": "STRTGY",
+    "date": "2025-03-01",
+    "imgSrc": "/images/project-4.jpg",
+    "impact": ["Response Relevance: +90%", "Query Time: 85% ↓"],
+    "tags": ["Machine Learning", "NLP", "Python", "Streamlit", "RAG", "LLM", "Vector Database", "Data Processing", "AI Application", "Anthropic Claude", "OpenAI", "PDF Generation"],
+    "description": "Designed and implemented a custom RAG (Retrieval Augmented Generation) system with chatbot for the industrial real estate sector, integrating Anthropic's Claude 3.5 Sonnet and OpenAI APIs. Developed a data processing system for semantic vectorization (embeddings) of complex real estate information using OpenAI Embeddings and FAISS for efficient search.",
+    "impacts": [
+      "Implemented advanced prompt engineering techniques with a multi-layer system for contextualization, generation, and formatting, significantly improving the relevance and accuracy of responses.",
+      "Created a dynamic PDF report generation system from conversations, using Jinja2 for templating and HTML-PDF conversion techniques for structured documents.",
+      "Developed a customized user interface in Streamlit with multi-user authentication system, dynamic theming, and accessibility optimizations."
+    ]
+  },
+  {
+    "title": "Comprehensive Data Analysis Platform for TV Shopping Company",
+    "company": "STRTGY",
+    "date": "2025-02-01",
+    "imgSrc": "/images/project-5.jpg",
+    "impact": ["Analysis Time: 99% ↓", "User Adoption: +85%"],
+    "tags": ["Data Analysis", "Business Intelligence", "FastAPI", "React", "MongoDB", "Dashboard Development", "API Development", "ETL", "Material UI", "Python", "JavaScript", "Data Visualization", "Microservices", "SQL", "Database Management", "API Integration", "Performance Optimization"],
+    "description": "Developed a complete data analysis and business visualization ecosystem consisting of three interconnected projects: a RESTful API backend (FastAPI), an interactive dashboard (React), and a report generation platform (Flask with AI). Implemented a RESTful API with FastAPI that provides access to analytical data stored in MongoDB, with endpoints for different dimensions of business analysis.",
+    "impacts": [
+      "Designed and developed an interactive dashboard with React 18 and Material UI 6 for business KPI visualization, implementing visualizations with Recharts, D3.js, and React Leaflet.",
+      "Created a data-driven decision-making solution, implementing KPIs for sales trends, customer segmentation, inventory turnover, and advertising effectiveness through interactive dashboards.",
+      "Employed K-means clustering for customer segmentation and created interactive chloropleth maps using GeoJSON data, revealing geographical patterns in sales and customer behavior.",
+      "Integrated Google Trends data using time series analysis to anticipate consumer interests, informing inventory management and marketing strategies.",
+      "Implemented a multi-stage data processing pipeline, extracting data from SQL databases, storing in MongoDB, processing with pandas and numpy, and integrating external APIs for data enrichment."
+    ]
+  },
+  {
+    "title": "Advanced Demand Forecasting & Inventory Optimization System",
+    "company": "STRTGY",
+    "date": "2025-01-01",
+    "imgSrc": "/images/project-6.jpg",
+    "impact": ["Forecast Accuracy: +42%", "Inventory Cost: 30% ↓"],
+    "tags": ["Time Series Analysis", "Machine Learning", "Python", "React", "TypeScript", "Data Processing", "Inventory Optimization", "Prophet", "SARIMA", "ETL", "Data Visualization", "Chart.js"],
+    "description": "Developed a complete demand forecasting and inventory optimization system for the beverage industry, incorporating time series analysis, statistical modeling, and full-stack implementation. Designed and built a robust ETL pipeline for beverage sales data, with multiple source integration, advanced cleaning with pattern extraction, and automated outlier detection.",
+    "impacts": [
+      "Implemented an adaptive forecasting system that selects optimal algorithms based on data characteristics: Prophet for SKUs with sufficient history, SARIMA for products with moderate history, and moving averages as fallback.",
+      "Developed a mathematical inventory optimization model incorporating lead time calculations, safety stock determination, capacity constraints, and turnover rate optimization.",
+      "Created a modern and responsive dashboard with React/TypeScript, interactive visualizations with Chart.js, component-based architecture, and performance optimization through memoization and lazy loading."
+    ]
+  },
+  {
+    "title": "Interactive Personal Portfolio Development",
+    "company": "Personal Project",
+    "date": "2024-06-01",
+    "imgSrc": "/images/project-7.jpg",
+    "impact": ["Page Speed: 97/100", "Accessibility: 100%"],
+    "tags": ["Web Development", "UI/UX Design", "Performance Optimization", "React", "Tailwind CSS", "Astro", "Content Management", "Git", "Version Control", "Responsive Design", "Accessibility", "Component-Based Architecture", "Animation"],
+    "description": "Designed and developed an interactive personal portfolio using Astro, React, and Tailwind CSS, optimizing for performance and SEO while leveraging popular frameworks for UI development. Implemented a responsive and accessible design following W3C Web Content Accessibility Guidelines (WCAG), ensuring optimal user experience across all devices and tested using browser developer tools.",
+    "impacts": [
+      "Created reusable components for clean and maintainable code, including navigation menu, footer, and contact form, which facilitate effective data visualization and user interaction.",
+      "Integrated smooth animations using Animate.css library to enhance interactivity and visual appeal, contributing to effective data storytelling and user engagement.",
+      "Optimized website performance using Lighthouse, Google PageSpeed Insights, and WebPageTest tools, achieving fast loading times and a fluid user experience with measurable improvements."
+    ]
+  },
+  {
+    "title": "Automated Data Analysis System for Motor Vehicle Company",
+    "company": "STRTGY",
+    "date": "2024-03-01",
+    "imgSrc": "/images/project-8.jpg",
+    "impact": ["Analysis Time: 90% ↓", "Reporting Quality: +45%"],
+    "tags": ["Automation", "ETL", "Data Analysis", "Documentation", "Survey Data", "Data Cleaning", "AI-Driven Insight Generation", "User Interface Design", "Data Selection", "Rapid Report Generation"],
+    "description": "Developed an automated system for efficient analysis of large-scale web analytics data using Google Analytics metrics and dimensions, with on-demand data extraction and batch processing. Designed and implemented a comprehensive ETL pipeline, incorporating data cleaning, validation, and profiling, along with AI-driven insight generation using Large Language Models.",
+    "impacts": [
+      "Created an intuitive dashboard with filters and KPIs using HTML, CSS, and JavaScript, enabling non-technical stakeholders to select data and view reports easily.",
+      "Conducted country-specific analysis of web data, analyzing user behavior patterns and cultural nuances across metrics like Active Users, Engagement Rate, and device preferences, as well as country-specific KPIs such as Build & Price completions and test drive bookings.",
+      "Established thorough documentation practices using Google Docs and version control, enhancing project transparency and replicability."
+    ]
+  },
+  {
+    "title": "Comprehensive Time Series Analysis and Forecasting Project",
+    "company": "STRTGY",
+    "date": "2024-01-01",
+    "imgSrc": "/images/project-9.jpg",
+    "impact": ["Forecasting Accuracy: +37%", "Cost Reduction: ~25%"],
+    "tags": ["Time Series Analysis", "Forecasting", "Python", "Machine Learning", "Deep Learning", "Data Preprocessing", "Visualization", "Inventory Optimization", "GPU Acceleration", "Hyperparameter Optimization", "Geospatial Analysis"],
+    "description": "Developed a robust time series analysis and forecasting pipeline using Python, incorporating multiple advanced models including SARIMA, Prophet, XGBoost, LSTM, and Transformer. Implemented data preprocessing techniques such as handling missing values, resampling, and feature engineering to enhance model performance.",
+    "impacts": [
+      "Utilized concurrent processing with ThreadPoolExecutor to efficiently handle multiple SKUs, optimizing computational resources and reducing execution time.",
+      "Integrated advanced visualization techniques using Matplotlib and Plotly to create interactive and informative charts for trend analysis and forecast comparison.",
+      "Implemented inventory optimization algorithms, including EOQ and safety stock calculations, considering sustainability factors like CO2 emissions.",
+      "Leveraged GPU acceleration for deep learning models (LSTM, Transformer) using PyTorch and TensorFlow, significantly improving training speed.",
+      "Developed a custom Transformer model architecture for time series forecasting, showcasing adaptability to complex sequential data.",
+      "Implemented robust error handling and logging mechanisms to ensure reliable execution across large datasets.",
+      "Utilized Optuna for hyperparameter optimization, enhancing model performance through automated tuning.",
+      "Integrated geospatial analysis using Folium to visualize geographical patterns in sales and inventory distribution."
+    ]
+  },
+  {
+    "title": "Automated Interview Analysis",
+    "company": "STRTGY",
+    "date": "2023-07-01",
+    "imgSrc": "/images/project-10.jpg",
+    "impact": ["Processing Time: 99.9% ↓", "Insight Depth: +75%"],
+    "tags": ["Automation", "Data Analysis", "Data Visualization", "SurveyMonkey", "Survey Analysis", "Python", "Pandas", "Multi-Index", "Plotly", "HTML", "Interactive Visualization", "Custom Visualizations", "Employee Feedback Analysis", "Performance Analysis", "Organizational Improvement"],
+    "description": "Automated survey data analysis from SurveyMonkey, reducing a 1-2 month process to seconds of script runtime. Implemented data normalization and weighted sampling to mitigate demographic biases in survey responses.",
+    "impacts": [
+      "Utilized sentiment analysis and topic modeling on open-ended responses to extract key themes and identify market opportunities.",
+      "Leveraged Python, pandas, and multi-index for complex data manipulations, creating multi-level pivot tables for cross-sectional analysis.",
+      "Optimized code performance using vectorized operations and chunking techniques for efficient large dataset processing.",
+      "Generated custom radar and multi-line charts with Plotly, embedded in HTML, enhancing data interpretability.",
+      "Balanced company design specifications with data visualization best practices, ensuring accessibility and effective communication.",
+      "Applied ANOVA and chi-square tests to identify statistically significant performance issues across groups and sections.",
+      "Developed an interactive HTML dashboard for management, featuring dynamic data exploration and highlighting key insights."
+    ]
+  },
+  {
+    "title": "Trading Strategy Backtesting",
+    "company": "Personal Project",
+    "date": "2023-02-01",
+    "imgSrc": "/images/project-11.jpg",
+    "impact": ["Testing Speed: 10x", "Model Variants: 24"],
+    "tags": ["Financial Analysis", "Data Analysis", "API Integration", "Python", "Plotly", "MongoDB", "Database Management", "Trading Strategies", "Economic Data Analysis", "Market Trend Analysis", "Correlation Analysis", "Strategy Development", "Backtesting"],
+    "description": "Extracted financial data via Alpha Vantage API and visualized trading patterns using Plotly in Python, implementing rate limiting and error handling for data consistency. Configured a MongoDB database with a document-based schema for storing varied economic data, optimizing for scalability and query performance.",
+    "impacts": [
+      "Conducted correlation analysis on key economic indicators (GDP, unemployment, inflation, interest rates) versus market trends, implementing lag analysis for optimal impact assessment.",
+      "Discovered through rigorous testing that strategies performed poorly, using metrics like Sharpe ratio and maximum drawdown, highlighting the need for advanced techniques in future projects."
+    ]
+  },
+  {
+    "title": "Geospatial Analysis of Ciudad Guzmán",
+    "company": "Storymaps Personal Project",
+    "date": "2022-09-01",
+    "imgSrc": "/images/project-12.jpg",
+    "impact": ["Risk Prediction: +63%", "Data Points: 4,700+"],
+    "tags": ["Geospatial Analysis", "Data Visualization", "ArcGIS", "Earthquake Analysis", "Elevation Analysis", "Interactive Mapping", "Urban Planning", "Disaster Preparedness"],
+    "description": "Conducted exploratory geospatial analysis in ArcGIS using data from the Jalisco Seismic Network, utilizing time slider for temporal visualization. Analyzed patterns between earthquake intensity and elevation using Getis-Ord Gi* spatial statistics and Geographical Weighted Regression.",
+    "impacts": [
+      "Created an interactive Storymaps map in ArcGIS, using templates and pop-ups to present complex geospatial data accessibly."
+    ]
+  },
+  {
+    "title": "Data Analysis for Property Management System",
+    "company": "BlackPrint Technologies",
+    "date": "2022-03-01",
+    "imgSrc": "/images/project-13.jpg",
+    "impact": ["Geocoding Accuracy: 92%", "Deliverable Accuracy: 99.9%"],
+    "tags": ["Data Analysis", "Geospatial Analysis", "Database Management", "Property Management", "Data Integrity", "Operational Efficiency", "Python", "Pandas", "Numpy", "Data Manipulation", "Data Preparation", "Advanced Geocoding", "Location-Based Data"],
+    "description": "Delivered property analytics with Google Maps geocoding and robust pandas/SQL ETL pipelines for high-confidence operational reporting.",
+    "impacts": [
+      "Achieved 92% geocoding accuracy through address normalization and validation.",
+      "Built pandas/SQL ETL pipelines that ensured 99.9% deliverable accuracy."
+    ]
+  },
+  {
+    "title": "User Engagement Analysis for SaaS Platform",
+    "company": "Collaborative Project: AGM Analytics",
+    "date": "2021-11-01",
+    "imgSrc": "/images/project-14.jpg",
+    "impact": ["User Retention: +28%", "Feature Adoption: +41%"],
+    "tags": ["Data Analysis", "Data Visualization", "Business Intelligence", "SaaS Platform", "User Engagement", "User Behavior Analysis", "Usage Trends", "Customer Behavior", "Data Visualization Techniques", "Actionable Insights", "Business Decision-Making", "Strategic Objectives"],
+    "description": "Analyzed user engagement using metrics like DAU, MAU, and feature adoption rates, segmenting users by subscription tier and usage frequency. Developed custom JavaScript visualizations in Looker Studio, creating interactive sankey diagrams and heatmaps.",
+    "impacts": [
+      "Translated analytical findings into strategic recommendations, creating layered dashboards in Looker Studio for different levels of technical understanding."
+    ]
+  }
+]

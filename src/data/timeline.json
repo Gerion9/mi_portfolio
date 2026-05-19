@@ -1,0 +1,37 @@
+[
+  {
+    "year": 2025,
+    "event": "AI/ML Engineer at BlackPrint Technologies",
+    "description": "Building LLM-powered GeoAI platforms for 2.5M+ urban blocks with real-time inference and interactive maps."
+  },
+  {
+    "year": 2025,
+    "event": "Lead AI/ML Engineer (Consulting) at Law Offices of Manuel Solis",
+    "description": "Developed custom LLM agents for legal documents and a meeting intelligence platform with RBAC."
+  },
+  {
+    "year": 2025,
+    "event": "Visiting Student Researcher at UT San Antonio",
+    "description": "Medical AI research with knowledge graphs and multi-agent evaluation pipelines."
+  },
+  {
+    "year": 2024,
+    "event": "AI Engineer at PRODENSA (Contract)",
+    "description": "Built OCR and Llama 3.3 extraction pipelines with FastAPI + React/Vite for real-time PDF processing."
+  },
+  {
+    "year": 2023,
+    "event": "AI/ML Engineer at STRTGY",
+    "description": "Architected multimodal GeoAI and enterprise RAG systems with hybrid retrieval."
+  },
+  {
+    "year": 2022,
+    "event": "Graduated from UC Berkeley",
+    "description": "Completed a Bachelor's degree in Data Science, focusing on machine learning and statistical analysis."
+  },
+  {
+    "year": 2022,
+    "event": "Data Scientist at BlackPrint Technologies",
+    "description": "Delivered geocoding analytics and pandas/SQL ETL pipelines for property intelligence."
+  }
+]

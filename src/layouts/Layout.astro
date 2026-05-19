@@ -17,6 +17,8 @@ const {
 	structuredData
 } = Astro.props;
 
+const faviconVersion = "2026-01-19";
+
 // Base URL for canonical links and OG images
 const baseUrl = "https://gairoperalta.com";
 const canonicalUrl = new URL(Astro.url.pathname, baseUrl).toString();
@@ -28,12 +30,12 @@ const imageUrl = new URL(image.startsWith('http') ? image : image, baseUrl).toSt
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href={`/favicon.svg?v=${faviconVersion}`} />
 		<!-- Primary Meta Tags -->
 		<title>{title}</title>
 		<meta name="title" content={title} />
 		<meta name="description" content={description} />
-		<meta name="author" content="Gairo Y. Peralta" />
+		<meta name="author" content="Gairo Peralta (Gairo Yostin Peralta Alvarez)" />
 		
 		<!-- Canonical URL -->
 		<link rel="canonical" href={canonicalUrl} />
@@ -65,7 +67,7 @@ const imageUrl = new URL(image.startsWith('http') ? image : image, baseUrl).toSt
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="manifest" href="/site.webmanifest">
+		<link rel="manifest" href={`/site.webmanifest?v=${faviconVersion}`}>
 		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 		<meta name="msapplication-TileColor" content="#603cba">
 		<meta name="theme-color" content="#1a1a2e">
