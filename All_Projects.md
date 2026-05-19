@@ -159,6 +159,23 @@ This document contains a complete list of all my projects, chronologically order
 
 ## 2025
 
+### Meeting Intelligence Platform for Legal Teams
+**Company:** Law Offices of Manuel Solis  
+**Date:** December 2025  
+**Impact Metrics:** 
+- Turnaround Time: ~8x Faster
+- Actionable Summaries: Yes
+
+**Technologies:** LLM, NLP, Speechmatics, Pinecone, RBAC, Data Processing, FastAPI, Vector Database
+
+**Description:**
+- Led the development and guided a team of interns to build a meeting intelligence system that converts Zoom/Teams/Meet recordings into searchable transcripts and structured summaries.
+- Mentored interns in automating transcription and summarization workflows using Speechmatics and LLM APIs for case documentation.
+- Guided the team in building semantic search across meetings using Pinecone vector indexing and retrieval.
+- Instructed interns on implementing secure RBAC controls for admin, supervisor, and user access levels under industry best practices.
+
+**Impact:** Saves legal teams hundreds of hours of manual transcription by enabling instant semantic searches across hundreds of hours of recordings with secure access controls.
+
 ### DeclarationLetterOnline: Legal AI Generator
 **Company:** Law Offices of Manuel Solis  
 **Date:** October 2025  
@@ -191,23 +208,6 @@ This document contains a complete list of all my projects, chronologically order
 - Delivered real-time analytics to support licensing and urban planning workflows.
 
 **Impact:** Empowers cities and businesses to run high-speed spatial inferences and query geographic trends directly in natural language.
-
-### Meeting Intelligence Platform for Legal Teams
-**Company:** Law Offices of Manuel Solis  
-**Date:** June 2025  
-**Impact Metrics:** 
-- Turnaround Time: ~8x Faster
-- Actionable Summaries: Yes
-
-**Technologies:** LLM, NLP, Speechmatics, Pinecone, RBAC, Data Processing, FastAPI, Vector Database
-
-**Description:**
-- Led the development and guided a team of interns to build a meeting intelligence system that converts Zoom/Teams/Meet recordings into searchable transcripts and structured summaries.
-- Mentored interns in automating transcription and summarization workflows using Speechmatics and LLM APIs for case documentation.
-- Guided the team in building semantic search across meetings using Pinecone vector indexing and retrieval.
-- Instructed interns on implementing secure RBAC controls for admin, supervisor, and user access levels under industry best practices.
-
-**Impact:** Saves legal teams hundreds of hours of manual transcription by enabling instant semantic searches across hundreds of hours of recordings with secure access controls.
 
 ### Electoral and Socioeconomic Geospatial Analysis
 **Company:** STRTGY  

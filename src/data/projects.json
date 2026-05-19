@@ -125,7 +125,20 @@
       "Instructed junior engineers on integrating automatic media resolution preprocessing, reducing token costs while optimizing detection rates for certified signatures."
     ]
   },
-
+  {
+    "title": "Meeting Intelligence Platform for Legal Teams",
+    "company": "Law Offices of Manuel Solis",
+    "date": "2025-12-15",
+    "imgSrc": "/images/manuel_solis_logo.png",
+    "impact": ["Turnaround Time: ~8x Faster", "Actionable Summaries"],
+    "tags": ["LLM", "NLP", "Speechmatics", "Pinecone", "RBAC", "Data Processing", "FastAPI", "Vector Database"],
+    "description": "Led the development and guided a team of interns to build a meeting intelligence system that converts Zoom/Teams/Meet recordings into searchable transcripts and structured summaries with group-based access control.",
+    "impacts": [
+      "Mentored interns in automating transcription and summarization workflows using Speechmatics and LLM APIs for legal case documentation.",
+      "Guided the team in building semantic search across meetings using Pinecone vector indexing and retrieval.",
+      "Instructed interns on implementing secure RBAC controls for admin, supervisor, and user access levels under industry best practices."
+    ]
+  },
   {
     "title": "DeclarationLetterOnline: Legal AI Generator",
     "company": "Law Offices of Manuel Solis",
@@ -152,20 +165,6 @@
       "Shipped React + Mapbox + Turf.js pipelines for scalable geospatial visualization.",
       "Integrated LLM reasoning to surface location intelligence insights in production.",
       "Delivered real-time analytics to support licensing and urban planning workflows."
-    ]
-  },
-  {
-    "title": "Meeting Intelligence Platform for Legal Teams",
-    "company": "Law Offices of Manuel Solis",
-    "date": "2025-06-01",
-    "imgSrc": "/images/manuel_solis_logo.png",
-    "impact": ["Turnaround Time: ~8x Faster", "Actionable Summaries"],
-    "tags": ["LLM", "NLP", "Speechmatics", "Pinecone", "RBAC", "Data Processing", "FastAPI", "Vector Database"],
-    "description": "Led the development and guided a team of interns to build a meeting intelligence system that converts Zoom/Teams/Meet recordings into searchable transcripts and structured summaries with group-based access control.",
-    "impacts": [
-      "Mentored interns in automating transcription and summarization workflows using Speechmatics and LLM APIs for legal case documentation.",
-      "Guided the team in building semantic search across meetings using Pinecone vector indexing and retrieval.",
-      "Instructed interns on implementing secure RBAC controls for admin, supervisor, and user access levels under industry best practices."
     ]
   },
   {
