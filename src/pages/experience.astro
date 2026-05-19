@@ -227,7 +227,9 @@ const structuredData = {
 
             <!-- Collapsible Filters Categories Scroll Area -->
             <div class="space-y-3 overflow-y-auto pr-1 flex-grow scrollable-filters custom-scrollbar pb-3">
-              {Object.entries(tagCategories).map(([category, tags]) => (
+              {Object.entries(tagCategories)
+                .filter(([_, tags]) => tags.some(tag => projects.some(p => p.tags?.includes(tag))))
+                .map(([category, tags]) => (
                 <div class="bg-slate-950/40 rounded-xl border border-slate-900 p-2.5 transition-all duration-300 hover:border-slate-800">
                   <button 
                     class="category-filter w-full text-left font-bold text-indigo-300 hover:text-indigo-100 transition-colors duration-300 flex items-center justify-between select-none touch-manipulation cursor-pointer" 
@@ -243,7 +245,7 @@ const structuredData = {
                     </span>
                   </button>
                   <div class="mt-2.5 grid grid-cols-1 gap-1 hidden" data-tag-container>
-                    {tags.map((tag) => (
+                    {tags.filter(tag => projects.some(p => p.tags?.includes(tag))).map((tag) => (
                       <button 
                         class="tag-filter w-full text-left text-slate-300 text-[10px] font-bold py-1.5 px-3 rounded-lg transition duration-300 hover:bg-slate-900 border border-transparent hover:border-slate-800 flex justify-between items-center touch-manipulation select-none cursor-pointer active:scale-98" 
                         data-selected="false" 

@@ -159,23 +159,6 @@ This document contains a complete list of all my projects, chronologically order
 
 ## 2025
 
-### BOS-MCP Server: Custom Database Protocol
-**Company:** Law Offices of Manuel Solis  
-**Date:** November 2025  
-**Impact Metrics:** 
-- Tools Exposed: 17 Specialized
-- Search Speed: <100ms
-
-**Technologies:** Node.js, Model Context Protocol (MCP), MySQL, MariaDB, Qdrant, OpenAI Embeddings, Zod, Vector Databases, Relational Databases, AI Integration
-
-**Description:**
-- Led the architecture and guided a team of interns to build a powerful Node.js Model Context Protocol (MCP) server, teaching them vector search implementation and schema validation best practices.
-- Supervised interns in designing and exposing 17 advanced database tools allowing AI agents to perform complex transactional queries and semantic search.
-- Mentored the team on integrating hybrid search mechanisms connecting legacy MySQL/MariaDB databases with a high-speed Qdrant vector database using OpenAI embeddings.
-- Instructed interns in establishing strict schema validation using Zod to ensure zero SQL injection risks and robust handling of high-concurrency connections.
-
-**Impact:** Empowers AI case management agents to securely query, search, and update client records semantic-wide in under 100ms via high-concurrency relational and vector pipelines.
-
 ### DeclarationLetterOnline: Legal AI Generator
 **Company:** Law Offices of Manuel Solis  
 **Date:** October 2025  
