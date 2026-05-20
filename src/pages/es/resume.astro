@@ -1,0 +1,460 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import projectsData from '../../data/projects_es.json';
+
+// Define key skills for the skills section without percentages
+const skills = [
+  {
+    category: "GenAI / LLM",
+    items: ["Sistemas LLM", "RAG", "Agentes", "Embeddings", "Ingeniería de Prompts", "Búsqueda Vectorial"]
+  },
+  {
+    category: "ML / Datos",
+    items: ["PyTorch", "TensorFlow", "scikit-learn", "Pronóstico de Series Temporales", "GeoAI", "NLP", "Pipelines de Datos"]
+  },
+  {
+    category: "Backend / Cloud",
+    items: ["FastAPI", "Node.js", "Google Cloud", "MLflow", "Docker", "SQL", "Neo4j", "Pinecone"]
+  }
+];
+
+// Define education for education section
+const education = [
+  {
+    institution: "Tecnológico de Monterrey",
+    degree: "Maestría",
+    field: "Inteligencia Artificial Aplicada (MNA)",
+    years: "2025-2026",
+    description: "Estudios avanzados en metodologías de IA con enfoque en sistemas de ML en producción. Promedio actual: 98/100.",
+    logo: "/images/tec-logo.png",
+    inProgress: true
+  },
+  {
+    institution: "Universidad de California, Berkeley",
+    degree: "Licenciatura",
+    field: "Ciencia de Datos",
+    years: "2018-2022",
+    description: "Enfoque en aprendizaje automático (machine learning), análisis estadístico y visualización de datos.",
+    logo: "/images/berkeley-logo.png",
+    inProgress: false
+  }
+];
+
+// Define professional experience
+const experience = [
+  {
+    position: "Ingeniero de IA/ML",
+    company: "BlackPrint Technologies",
+    location: "Remoto",
+    period: "2025 - Presente",
+    responsibilities: [
+      "Construyó una plataforma de GeoAI basada en LLM para más de 2.5 millones de manzanas urbanas utilizando React, Mapbox y Turf.js",
+      "Desarrolló una plataforma en Node.js + Google Cloud para la regularización de licencias comerciales con analítica de densidad de POIs y dashboards",
+      "Implementó pipelines de inferencia en tiempo real para la toma de decisiones sobre inteligencia territorial"
+    ]
+  },
+  {
+    position: "Ingeniero Principal de IA/ML (Consultor)",
+    company: "Law Offices of Manuel Solis",
+    location: "Remoto",
+    period: "2025 - Presente",
+    responsibilities: [
+      "Desarrolló agentes de LLM personalizados para la generación automatizada de declaraciones y cartas de cobertura de T-Visa, reduciendo el tiempo de procesamiento de ~2 horas a ~15 minutos",
+      "Desarrolló una plataforma de inteligencia de reuniones con transcripción de Speechmatics y resúmenes con modelos avanzados de lenguaje",
+      "Automatizó la ingesta y asignación de correos electrónicos a casos en la base de datos con controles de acceso basados en roles (RBAC)"
+    ]
+  },
+  {
+    position: "Investigador Estudiante Visitante (IA Médica)",
+    company: "UT San Antonio",
+    location: "San Antonio, TX",
+    period: "2025 - Presente",
+    responsibilities: [
+      "Desarrolló un sistema de respuesta a preguntas (QA) médicas multi-agente basado en PrimeKG y Neo4j",
+      "Mejoró la precisión de las respuestas a preguntas médicas al 54.69% (+24.24 puntos porcentuales) mediante razonamiento multi-salto",
+      "Diseñó pipelines de evaluación para QA fundamentado en grafos de conocimiento"
+    ]
+  },
+  {
+    position: "Ingeniero de IA/ML",
+    company: "STRTGY",
+    location: "Remoto",
+    period: "2023 - 2025",
+    responsibilities: [
+      "Diseñó un sistema de GeoAI multimodal con embeddings espaciales y FAISS, mejorando la precisión de las decisiones en un 82%",
+      "Desplegó pipelines de pronóstico basados en Transformers + LoRA, logrando un aumento del 42% en precisión y un 60% de reducción en latencia",
+      "Construyó un sistema RAG empresarial con Claude 3.5 Sonnet y recuperación híbrida logrando una relevancia del 90%"
+    ]
+  },
+  {
+    position: "Ingeniero de IA (Contratista)",
+    company: "PRODENSA",
+    location: "Remoto",
+    period: "2024 - 2025",
+    responsibilities: [
+      "Construyó pipelines de extracción de documentos con OCR y Llama 3.3 70B logrando una precisión del 95%",
+      "Desplegó servicios de FastAPI con frontend de React/Vite para el procesamiento de PDFs en tiempo real",
+      "Optimizó el procesamiento asíncrono para documentos multi-formato (PDF, CSV, XLSX)"
+    ]
+  },
+  {
+    position: "Científico de Datos",
+    company: "BlackPrint Technologies",
+    location: "Berkeley, CA",
+    period: "2022 - 2023",
+    responsibilities: [
+      "Entregó analítica de propiedades con geocodificación de Google Maps (92% de precisión)",
+      "Construyó pipelines de ETL en pandas/SQL, garantizando un 99.9% de precisión en los entregables",
+      "Generó insights geoespaciales para reportes de inteligencia de propiedades"
+    ]
+  }
+];
+
+// Define certifications and courses with correct information
+const certifications = [
+  {
+    name: "Enterprise Data Science in Practice",
+    issuer: "IBM SkillsBuild",
+    date: "Marzo 2025",
+    credentialId: "7c138adb-18cb-43a2-8ded-d3b2b6948432",
+    verifyUrl: "https://www.credly.com/badges/7c138adb-18cb-43a2-8ded-d3b2b6948432"
+  },
+  {
+    name: "Data Analysis with Python",
+    issuer: "Cognitive Class (Powered by IBM)",
+    date: "Marzo 2025",
+    credentialId: "1e33d232e7d8463dbaa62632bac62289",
+    verifyUrl: "https://courses.cognitiveclass.ai/certificates/1e33d232e7d8463dbaa62632bac62289"
+  },
+  {
+    name: "Sutardja Center for Entrepreneurship Certificate",
+    issuer: "UC Berkeley - Sutardja Center for Entrepreneurship & Technology",
+    date: "Otoño 2022",
+    credentialId: null,
+    verifyUrl: null
+  }
+];
+
+// Define highlighted projects dynamically from projects_es.json
+const highlightedProjects = projectsData.slice(0, 3).map(p => ({
+  title: p.title.split(' para ')[0], // Keep it short for UI display
+  description: p.description,
+  metrics: p.impact || [],
+  link: "/es/experience"
+}));
+
+// Structured data for SEO (localised)
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Gairo Peralta",
+  "alternateName": [
+    "Gairo Yostin Peralta",
+    "Gairo Yostin Peralta Alvarez",
+    "Gairo Y. Peralta"
+  ],
+  "jobTitle": "Ingeniero de IA/ML",
+  "url": "https://gairoperalta.com/es/resume",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "BlackPrint Technologies"
+  },
+  "alumniOf": [
+    {
+      "@type": "EducationalOrganization",
+      "name": "Tecnológico de Monterrey",
+      "sameAs": "https://tec.mx"
+    },
+    {
+      "@type": "EducationalOrganization",
+      "name": "University of California, Berkeley",
+      "sameAs": "https://berkeley.edu"
+    }
+  ],
+  "knowsAbout": skills.flatMap(s => s.items.map(item => item)),
+  "hasCredential": certifications.map(cert => ({
+    "@type": "EducationalOccupationalCredential",
+    "name": cert.name,
+    "credentialCategory": "Certificate",
+    "recognizedBy": {
+      "@type": "Organization",
+      "name": cert.issuer
+    },
+    "dateCreated": cert.date
+  }))
+};
+
+// Calculate total years of experience
+const currentYear = new Date().getFullYear();
+const experienceYears = currentYear - 2020; // Starting from first job
+
+// Set social media links
+const socialLinks = [
+  { platform: "LinkedIn", url: "https://linkedin.com/in/gairoperalta", icon: "fab fa-linkedin" },
+  { platform: "GitHub", url: "https://github.com/Gerion9", icon: "fab fa-github" },
+  { platform: "Twitter", url: "https://twitter.com/gairoperalta", icon: "fab fa-twitter" }
+];
+---
+
+<Layout title="Currículum Profesional - Gairo Peralta | Ingeniero de IA/ML" description="Ver el currículum profesional de Gairo Peralta, destacando sistemas LLM, plataformas de GeoAI y experiencia de ML en producción.">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
+    <!-- Resume Header -->
+    <div class="mb-8 sm:mb-12 text-center" data-reveal>
+      <h1 class="text-3xl sm:text-5xl font-bold mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-600">Currículum Profesional</h1>
+      <p class="text-base sm:text-xl text-gray-400 mb-4 sm:mb-6 max-w-3xl mx-auto font-medium">Ingeniero de IA/ML especializado en sistemas LLM, plataformas de GeoAI y pipelines de ML en producción.</p>
+      
+      <!-- Social Media Links -->
+      <div class="flex justify-center space-x-4 mb-6 sm:mb-8">
+        {socialLinks.map(link => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-indigo-500 transition-colors duration-300 touch-manipulation" aria-label={`Perfil de ${link.platform}`}>
+            <i class={`${link.icon} text-xl sm:text-2xl`}></i>
+          </a>
+        ))}
+      </div>
+      
+      <!-- Key Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 max-w-3xl mx-auto" data-reveal>
+        <div class="bg-gray-800/50 rounded-lg p-3 sm:p-4 transform hover:scale-105 transition-transform duration-300 touch-manipulation">
+          <div class="text-2xl sm:text-3xl font-bold text-pink-500">{experienceYears}+</div>
+          <div class="text-xs sm:text-sm text-gray-400">Años de Experiencia</div>
+        </div>
+        <div class="bg-gray-800/50 rounded-lg p-3 sm:p-4 transform hover:scale-105 transition-transform duration-300 touch-manipulation">
+          <div class="text-2xl sm:text-3xl font-bold text-pink-500">14+</div>
+          <div class="text-xs sm:text-sm text-gray-400">Proyectos Completados</div>
+        </div>
+        <div class="bg-gray-800/50 rounded-lg p-3 sm:p-4 transform hover:scale-105 transition-transform duration-300 touch-manipulation">
+          <div class="text-2xl sm:text-3xl font-bold text-pink-500">{skills.flatMap(s => s.items).length}+</div>
+          <div class="text-xs sm:text-sm text-gray-400">Habilidades Técnicas</div>
+        </div>
+        <div class="bg-gray-800/50 rounded-lg p-3 sm:p-4 transform hover:scale-105 transition-transform duration-300 touch-manipulation">
+          <div class="text-2xl sm:text-3xl font-bold text-pink-500">3+</div>
+          <div class="text-xs sm:text-sm text-gray-400">Certificaciones</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-4 sm:gap-8 mb-8 sm:mb-12" data-reveal>
+      <!-- Download Button Card -->
+      <div class="md:col-span-1 bg-gray-800/80 p-4 sm:p-6 rounded-lg shadow-lg flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300 card-hover">
+        <div class="text-center mb-4 sm:mb-6">
+          <div class="bg-gradient-to-br from-indigo-600 to-pink-500 rounded-full p-3 sm:p-4 mx-auto mb-3 sm:mb-4 w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center">
+            <i class="fas fa-file-alt text-2xl sm:text-3xl text-white"></i>
+          </div>
+          <h2 class="text-lg sm:text-xl font-semibold text-pink-500">Currículum Completo</h2>
+          <p class="text-gray-400 text-xs sm:text-sm mt-1 sm:mt-2">Descarga para ver todos los detalles</p>
+        </div>
+        
+        <a 
+          href="/documents/Resume_Gairo_Peralta_p.pdf" 
+          download="Gairo_Peralta_Resume.pdf" 
+          class="w-full bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 sm:py-3 px-3 sm:px-4 rounded-lg shadow-md transition duration-300 ease-in-out flex items-center justify-center touch-manipulation micro-cta"
+          aria-label="Descargar currículum como PDF"
+        >
+          <i class="fas fa-download mr-2"></i>Descargar PDF
+        </a>
+        
+        <div class="mt-3 sm:mt-4 w-full">
+          <a
+            href="#preview"
+            class="w-full block text-center bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-3 sm:px-4 rounded-lg shadow-md transition duration-300 ease-in-out touch-manipulation micro-cta"
+          >
+            <i class="fas fa-eye mr-2"></i>Ver Vista Previa
+          </a>
+        </div>
+      </div>
+      
+      <!-- Skills Card -->
+      <div class="md:col-span-2 bg-gray-800/80 p-4 sm:p-6 rounded-lg shadow-lg card-hover">
+        <h2 class="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500">Habilidades Clave</h2>
+        
+        <div class="space-y-4 sm:space-y-8">
+          {skills.map((skillGroup) => (
+            <div>
+              <h3 class="text-base sm:text-lg text-indigo-300 font-medium mb-2 sm:mb-4">{skillGroup.category}</h3>
+              <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                {skillGroup.items.map((skill) => (
+                  <span class="bg-gray-700/70 text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm hover:bg-indigo-700/50 transition-colors duration-300 touch-manipulation">{skill}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Education Section -->
+    <div class="bg-gray-800/80 p-4 sm:p-8 rounded-lg shadow-lg mb-8 sm:mb-12 card-hover" data-reveal>
+      <h2 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500">Educación</h2>
+      
+      <div class="space-y-6 sm:space-y-8">
+        {education.map((edu) => (
+          <div class="flex flex-col md:flex-row gap-4 sm:gap-6">
+            <div class="md:w-1/4 flex justify-center">
+              <div class="w-16 h-16 sm:w-24 sm:h-24 bg-gray-900/50 rounded-full flex items-center justify-center p-2">
+                <img src={edu.logo || "/images/education-placeholder.png"} alt={`Logotipo de ${edu.institution}`} class="max-w-full max-h-full rounded-full" />
+              </div>
+            </div>
+            <div class="md:w-3/4">
+              <div class="flex flex-col md:flex-row md:items-center justify-between mb-1 sm:mb-2">
+                <h3 class="text-lg sm:text-xl font-medium text-white flex items-center">
+                  {edu.institution}
+                  {edu.inProgress && <span class="ml-2 px-2 py-0.5 text-xs bg-indigo-600 text-white rounded-full font-bold">En Curso</span>}
+                </h3>
+                <span class="text-indigo-300 text-xs sm:text-sm inline-flex items-center">
+                  <i class="fas fa-calendar-alt mr-2"></i>
+                  {edu.years}
+                </span>
+              </div>
+              <p class="text-pink-500 mb-1 sm:mb-2 text-sm sm:text-base">{edu.degree} en {edu.field}</p>
+              <p class="text-gray-400 text-xs sm:text-sm">{edu.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Professional Experience Section -->
+    <div class="bg-gray-800/80 p-4 sm:p-8 rounded-lg shadow-lg mb-8 sm:mb-12 card-hover" data-reveal>
+      <h2 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500">Experiencia Profesional</h2>
+      
+      <div class="space-y-6 sm:space-y-10">
+        {experience.map((exp, index) => (
+          <div class="relative">
+            <!-- Timeline elements -->
+            {index < experience.length - 1 && (
+              <div class="absolute top-0 left-4 sm:left-6 h-full w-px bg-indigo-500/30"></div>
+            )}
+            <div class="absolute top-0 left-4 sm:left-6 w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-pink-500 transform -translate-x-1.5"></div>
+            
+            <div class="pl-8 sm:pl-14">
+              <div class="flex flex-col md:flex-row md:items-center justify-between mb-1 sm:mb-2">
+                <h3 class="text-lg sm:text-xl font-medium text-white">{exp.position}</h3>
+                <span class="text-indigo-300 text-xs sm:text-sm inline-flex items-center">
+                  <i class="fas fa-calendar-alt mr-2"></i>
+                  {exp.period}
+                </span>
+              </div>
+              <p class="text-pink-500 mb-2 sm:mb-4 text-sm sm:text-base font-semibold">{exp.company} | {exp.location}</p>
+              <ul class="space-y-1 sm:space-y-2 text-sm sm:text-base text-gray-300">
+                {exp.responsibilities.map(item => (
+                  <li class="flex items-start">
+                    <i class="fas fa-caret-right text-indigo-400 mt-1 mr-2"></i>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Two-column layout for Certifications and Projects -->
+    <div class="grid md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12" data-reveal>
+      <!-- Certifications Section -->
+      <div class="bg-gray-800/80 p-4 sm:p-8 rounded-lg shadow-lg card-hover">
+        <h2 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500">Certificaciones</h2>
+        
+        <div class="space-y-3 sm:space-y-6">
+          {certifications.map((cert) => (
+            <div class="p-3 sm:p-4 border border-gray-700 rounded-lg hover:border-indigo-500 transition-colors duration-300 touch-manipulation">
+              <h3 class="text-base sm:text-lg font-medium text-white mb-1">{cert.name}</h3>
+              <p class="text-indigo-300 text-xs sm:text-sm mb-1">{cert.issuer}</p>
+              <div class="flex flex-wrap justify-between items-center text-gray-400 text-xs">
+                <span>{cert.date}</span>
+                {cert.verifyUrl && (
+                  <a href={cert.verifyUrl} target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 transition-colors duration-300 flex items-center touch-manipulation font-semibold">
+                    <span>Verificar</span>
+                    <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Highlighted Projects Section -->
+      <div class="bg-gray-800/80 p-4 sm:p-8 rounded-lg shadow-lg card-hover">
+        <h2 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500">Proyectos Clave</h2>
+        
+        <div class="space-y-3 sm:space-y-6">
+          {highlightedProjects.map((project) => (
+            <a href={project.link} class="block p-3 sm:p-4 border border-gray-700 rounded-lg hover:border-pink-500 transition-colors duration-300 touch-manipulation">
+              <h3 class="text-base sm:text-lg font-medium text-white mb-1 sm:mb-2">{project.title}</h3>
+              <p class="text-gray-300 text-xs sm:text-sm mb-2 sm:mb-3">{project.description}</p>
+              <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                {project.metrics.map(metric => (
+                  <span class="text-xs bg-indigo-900/70 text-indigo-300 px-2 py-1 rounded-full">{metric}</span>
+                ))}
+              </div>
+            </a>
+          ))}
+          
+          <a href="/es/experience" class="flex items-center justify-center text-center text-indigo-400 hover:text-indigo-300 transition-colors duration-300 mt-3 sm:mt-4 bg-gray-700/50 hover:bg-gray-700 p-2 sm:p-3 rounded-lg touch-manipulation micro-cta font-semibold">
+            <span>Ver portafolio completo</span>
+            <i class="fas fa-arrow-right ml-2"></i>
+           </a>
+         </div>
+       </div>
+    </div>
+    
+    <!-- Resume Preview Section -->
+    <div id="preview" class="bg-gray-800/80 p-4 sm:p-8 rounded-lg shadow-lg mb-8 sm:mb-12 card-hover" data-reveal>
+      <h2 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500">Vista Previa del Currículum</h2>
+      
+      <!-- Mobile-friendly notice -->
+      <div class="md:hidden mb-3 text-center">
+        <p class="text-indigo-300 text-xs mb-2">Para una mejor visualización:</p>
+        <a href="/documents/Resume_Gairo_Peralta_p.pdf" target="_blank" class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white text-sm py-1.5 px-3 rounded-lg transition duration-300 touch-manipulation font-semibold">
+          <i class="fas fa-external-link-alt mr-2"></i>
+          Abrir PDF en nueva ventana
+        </a>
+      </div>
+      
+      <div class="aspect-w-8.5 aspect-h-11 rounded-lg overflow-hidden bg-gray-900/50 p-1 sm:p-2">
+        <iframe 
+          src="/documents/Resume_Gairo_Peralta_p.pdf" 
+          class="w-full h-[350px] sm:h-[500px] md:h-[600px] lg:h-[700px] rounded-lg shadow-inner border border-gray-700" 
+          title="Currículum de Gairo Peralta"
+          loading="lazy"
+        ></iframe>
+      </div>
+      
+      <!-- Mobile controls -->
+      <div class="flex justify-center mt-3">
+        <a href="/documents/Resume_Gairo_Peralta_p.pdf" download="Gairo_Peralta_Resume.pdf" class="text-indigo-400 hover:text-indigo-300 text-sm flex items-center mx-3 touch-manipulation micro-cta font-semibold">
+          <i class="fas fa-download mr-1"></i> Descargar
+        </a>
+        <a href="/documents/Resume_Gairo_Peralta_p.pdf" target="_blank" class="text-indigo-400 hover:text-indigo-300 text-sm flex items-center mx-3 touch-manipulation micro-cta font-semibold">
+          <i class="fas fa-external-link-alt mr-1"></i> Ver Tamaño Completo
+        </a>
+      </div>
+    </div>
+    
+    <!-- Contact & CTA Section -->
+    <div class="bg-gradient-to-r from-indigo-900/40 to-pink-900/40 p-4 sm:p-8 rounded-lg shadow-lg text-center" data-reveal>
+      <h2 class="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-white">¿Interesado en Colaborar?</h2>
+      <p class="text-gray-300 mb-4 sm:mb-6 max-w-xl mx-auto text-sm sm:text-base">Siempre estoy abierto a discutir nuevos proyectos, ideas creativas u oportunidades para formar parte de tu visión.</p>
+      
+      <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
+        <a href="/es/experience" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 sm:py-3 px-4 sm:px-8 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 flex items-center text-sm sm:text-base touch-manipulation micro-cta">
+          <i class="fas fa-project-diagram mr-2"></i>Ver mis Proyectos
+        </a>
+        <a href="/es/contact" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 sm:py-3 px-4 sm:px-8 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 flex items-center text-sm sm:text-base touch-manipulation micro-cta">
+          <i class="fas fa-envelope mr-2"></i>Contáctame
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Add structured data for SEO -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+
+  <style>
+    /* Improved touch target for mobile */
+    .touch-manipulation {
+      touch-action: manipulation;
+    }
+  </style>
+</Layout>

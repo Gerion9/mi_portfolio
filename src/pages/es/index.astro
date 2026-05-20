@@ -1,8 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import projects from '../data/projects.json';
+import Layout from '../../layouts/Layout.astro';
+import projects from '../../data/projects_es.json';
 
-// Define structured data for SEO
+// Define structured data for SEO in Spanish
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -12,51 +12,51 @@ const structuredData = {
     "Gairo Yostin Peralta Alvarez",
     "Gairo Y. Peralta"
   ],
-  "jobTitle": "AI/ML Engineer",
-  "url": "https://gairoperalta.com",
+  "jobTitle": "Ingeniero de AI/ML",
+  "url": "https://gairoperalta.com/es",
   "image": "https://gairoperalta.com/images/profile.jpg",
   "sameAs": [
     "https://linkedin.com/in/gairoperalta",
     "https://github.com/gairoperalta"
   ],
-  "knowsAbout": ["LLM Systems", "RAG", "GeoAI", "MLOps", "Machine Learning", "Time Series Forecasting"],
+  "knowsAbout": ["Sistemas LLM", "RAG", "GeoAI", "MLOps", "Aprendizaje Automático", "Pronóstico de Series Temporales"],
   "worksFor": {
     "@type": "Organization",
     "name": "BlackPrint Technologies"
   },
   "alumniOf": {
     "@type": "EducationalOrganization",
-    "name": "University of California, Berkeley"
+    "name": "Universidad de California, Berkeley"
   },
-  "description": "AI/ML engineer specializing in LLM systems, GeoAI platforms, and production ML pipelines."
+  "description": "Ingeniero de AI/ML especializado en sistemas LLM, plataformas GeoAI y pipelines de ML en producción."
 };
 
-// Define technical skills for animated showcase
+// Define technical skills for animated showcase (Spanish labels)
 const technicalSkills = [
-  { name: "LLM Systems", icon: "fas fa-brain", color: "indigo" },
-  { name: "RAG + Agents", icon: "fas fa-robot", color: "pink" },
+  { name: "Sistemas LLM", icon: "fas fa-brain", color: "indigo" },
+  { name: "RAG + Agentes", icon: "fas fa-robot", color: "pink" },
   { name: "GeoAI", icon: "fas fa-map-marked-alt", color: "green" },
-  { name: "ML Pipelines", icon: "fas fa-cogs", color: "blue" },
-  { name: "Forecasting", icon: "fas fa-chart-line", color: "yellow" },
+  { name: "Pipelines de ML", icon: "fas fa-cogs", color: "blue" },
+  { name: "Predicciones", icon: "fas fa-chart-line", color: "yellow" },
   { name: "MLOps", icon: "fas fa-cloud", color: "purple" }
 ];
 
-// Map dynamically from projects.json to maintain consistency
+// Map dynamically from projects_es.json to maintain consistency
 const iconMap: Record<string, string> = {
-  "LLM GeoAI Platform for Urban Intelligence": "fas fa-map-marked-alt",
-  "Meeting Intelligence Platform for Legal Teams": "fas fa-microphone",
-  "Medical QA Multi-Agent System": "fas fa-stethoscope"
+  "NetAiCore: Ecosistema de NLP y Análisis de Redes de Afinidad": "fas fa-network-wired",
+  "Radar Comercial Querétaro V2: Dashboard de Analítica de Licencias Comerciales": "fas fa-map-marked-alt",
+  "BrokerAI: Agente de IA Conversacional y Motor de Calificación de Leads": "fas fa-microphone"
 };
 
 const featuredProjects = projects.slice(0, 3).map(p => ({
-  title: p.title.split(' for ')[0], // Keep it short for UI display
+  title: p.title.includes(': ') ? p.title.split(': ')[0] : p.title, // Keep it short for UI display
   description: p.description,
   icon: iconMap[p.title] || "fas fa-laptop-code",
   year: new Date(p.date).getFullYear().toString()
 }));
 ---
 
-<Layout title="Gairo Peralta - AI/ML Engineer | LLM Systems | GeoAI" description="AI/ML Engineer building LLM systems, GeoAI platforms, and production ML pipelines for measurable outcomes.">
+<Layout title="Gairo Peralta - Ingeniero de AI/ML | Sistemas LLM | GeoAI" description="Ingeniero de AI/ML que diseña y desarrolla sistemas LLM, plataformas GeoAI y pipelines de ML en producción para generar resultados medibles.">
   <!-- Hero Section -->
   <section class="text-center max-w-3xl mx-auto px-4 sm:px-6 mb-12 md:mb-20 relative overflow-hidden" data-home-page>
     <div class="relative z-10">
@@ -171,53 +171,53 @@ const featuredProjects = projects.slice(0, 3).map(p => ({
           </g>
           <g class="graph-label-group">
             <line class="graph-label-line" x1="160" y1="260" x2="120" y2="310" />
-            <text class="graph-label" x="120" y="326" text-anchor="middle">RAG PIPELINES</text>
+            <text class="graph-label" x="120" y="326" text-anchor="middle">PIPELINES RAG</text>
           </g>
           <g class="graph-label-group">
             <line class="graph-label-line" x1="740" y1="90" x2="780" y2="50" />
-            <text class="graph-label" x="780" y="44" text-anchor="middle">LLM SYSTEMS</text>
+            <text class="graph-label" x="780" y="44" text-anchor="middle">SISTEMAS LLM</text>
           </g>
           <g class="graph-label-group">
             <line class="graph-label-line" x1="740" y1="260" x2="780" y2="310" />
-            <text class="graph-label" x="780" y="326" text-anchor="middle">VECTOR SEARCH</text>
+            <text class="graph-label" x="780" y="326" text-anchor="middle">BÚSQUEDA VECTORIAL</text>
           </g>
           <g class="graph-label-group">
             <line class="graph-label-line" x1="450" y1="310" x2="450" y2="342" />
-            <text class="graph-label" x="450" y="356" text-anchor="middle">KNOWLEDGE GRAPHS</text>
+            <text class="graph-label" x="450" y="356" text-anchor="middle">GRAFOS DE CONOCIMIENTO</text>
           </g>
 
           <text class="graph-edge-label">
-            <textPath href="#edge-mlops" startOffset="50%" text-anchor="middle">DEPLOYMENT</textPath>
+            <textPath href="#edge-mlops" startOffset="50%" text-anchor="middle">DESPLIEGUE</textPath>
           </text>
           <text class="graph-edge-label">
-            <textPath href="#edge-rag" startOffset="50%" text-anchor="middle">CONTEXT</textPath>
+            <textPath href="#edge-rag" startOffset="50%" text-anchor="middle">CONTEXTO</textPath>
           </text>
           <text class="graph-edge-label">
-            <textPath href="#edge-geoai" startOffset="50%" text-anchor="middle">SPATIAL SIGNAL</textPath>
+            <textPath href="#edge-geoai" startOffset="50%" text-anchor="middle">SEÑAL ESPACIAL</textPath>
           </text>
           <text class="graph-edge-label">
-            <textPath href="#edge-kg" startOffset="50%" text-anchor="middle">GROUNDING</textPath>
+            <textPath href="#edge-kg" startOffset="50%" text-anchor="middle">ANCLAJE</textPath>
           </text>
           <text class="graph-edge-label">
-            <textPath href="#edge-llm" startOffset="50%" text-anchor="middle">GENERATION</textPath>
+            <textPath href="#edge-llm" startOffset="50%" text-anchor="middle">GENERACIÓN</textPath>
           </text>
           <text class="graph-edge-label">
-            <textPath href="#edge-vector" startOffset="50%" text-anchor="middle">RETRIEVAL</textPath>
+            <textPath href="#edge-vector" startOffset="50%" text-anchor="middle">RECUPERACIÓN</textPath>
           </text>
             </svg>
           </div>
         </div>
         <div class="hero-node-glow absolute inset-0 bg-gradient-to-r from-indigo-500 to-pink-500 rounded-full blur-xl opacity-75"></div>
-        <img src="/images/profile.jpg" alt="Gairo Peralta - AI/ML Engineer" class="hero-node-image relative w-full h-full object-cover rounded-full shadow-xl" loading="eager" width="192" height="192">
+        <img src="/images/profile.jpg" alt="Gairo Peralta - Ingeniero de AI/ML" class="hero-node-image relative w-full h-full object-cover rounded-full shadow-xl" loading="eager" width="192" height="192">
       </div>
-    <h2 class="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6 text-pink-500 font-semibold animate__animated animate__fadeIn animate__delay-1s">AI/ML Engineer | LLM Systems | GeoAI</h2>
+    <h2 class="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6 text-pink-500 font-semibold animate__animated animate__fadeIn animate__delay-1s">Ingeniero de AI/ML | Sistemas LLM | GeoAI</h2>
     <p class="text-base md:text-xl text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto animate__animated animate__fadeIn animate__delay-1s leading-relaxed">
-      Building <span class="text-indigo-300">LLM systems</span>, <span class="text-indigo-300">GeoAI platforms</span>, and <span class="text-indigo-300">production ML pipelines</span> that deliver measurable business outcomes.
+      Desarrollando <span class="text-indigo-300">sistemas LLM</span>, <span class="text-indigo-300">plataformas GeoAI</span> y <span class="text-indigo-300">pipelines de ML en producción</span> que generan resultados de negocio medibles.
     </p>
     <div class="text-base md:text-lg text-gray-400 mb-8 md:mb-12 max-w-2xl mx-auto italic animate__animated animate__fadeIn animate__delay-2s relative">
       <div class="absolute -left-2 top-0 text-3xl md:text-4xl text-indigo-500 opacity-30">"</div>
       <p class="relative z-10 px-4 md:px-0">
-        I focus on shipping reliable AI systems that turn complex data into clear decisions and real-world impact.
+        Me enfoco en entregar sistemas de IA confiables que convierten datos complejos en decisiones claras e impacto en el mundo real.
       </p>
       <div class="absolute -right-2 bottom-0 text-3xl md:text-4xl text-indigo-500 opacity-30">"</div>
     </div>
@@ -226,21 +226,21 @@ const featuredProjects = projects.slice(0, 3).map(p => ({
     <div class="mb-10 md:mb-12 grid grid-cols-3 gap-2 md:gap-6 max-w-2xl mx-auto" data-reveal>
       <div class="bg-gray-800/50 p-3 md:p-4 rounded-lg text-center border border-gray-700 transform hover:scale-105 transition-transform duration-300 hover:border-indigo-500/30">
         <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">6+</span>
-        <span class="text-xs md:text-sm text-gray-400">Years Experience</span>
+        <span class="text-xs md:text-sm text-gray-400">Años de Experiencia</span>
       </div>
       <div class="bg-gray-800/50 p-3 md:p-4 rounded-lg text-center border border-gray-700 transform hover:scale-105 transition-transform duration-300 hover:border-indigo-500/30">
         <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">14+</span>
-        <span class="text-xs md:text-sm text-gray-400">Projects Completed</span>
+        <span class="text-xs md:text-sm text-gray-400">Proyectos Completados</span>
       </div>
       <div class="bg-gray-800/50 p-3 md:p-4 rounded-lg text-center border border-gray-700 transform hover:scale-105 transition-transform duration-300 hover:border-indigo-500/30">
         <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">12+</span>
-        <span class="text-xs md:text-sm text-gray-400">Core Tools Mastered</span>
+        <span class="text-xs md:text-sm text-gray-400">Herramientas Clave</span>
       </div>
     </div>
     
     <!-- Technical Skills -->
     <div class="mb-10 md:mb-16" data-reveal>
-      <h3 class="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">Technical Expertise</h3>
+      <h3 class="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">Experiencia Técnica</h3>
       <div class="flex flex-wrap justify-center gap-2 md:gap-4">
         {technicalSkills.map(skill => (
           <div class={`bg-gray-800/50 px-3 py-2 md:px-4 md:py-3 rounded-lg border border-gray-700 flex items-center gap-2 transform transition-all duration-300 hover:scale-110 touch-manipulation hover:border-${skill.color}-500/40 hover:shadow-lg hover:shadow-${skill.color}-500/10`}>
@@ -253,7 +253,7 @@ const featuredProjects = projects.slice(0, 3).map(p => ({
     
     <!-- Featured Projects -->
     <div class="mb-10 md:mb-16" data-reveal>
-      <h3 class="text-xl md:text-2xl font-semibold mb-4 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">Featured Projects</h3>
+      <h3 class="text-xl md:text-2xl font-semibold mb-4 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">Proyectos Destacados</h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {featuredProjects.map(project => (
           <div class="bg-gray-800/50 p-4 md:p-6 rounded-xl border border-gray-700 text-left transform hover:scale-105 transition-all duration-300 hover:border-indigo-500/30 group touch-manipulation card-hover">
@@ -272,9 +272,9 @@ const featuredProjects = projects.slice(0, 3).map(p => ({
     
     <!-- CTA Buttons -->
     <div class="flex flex-wrap justify-center gap-3 md:gap-4 animate__animated animate__fadeIn animate__delay-3s" data-reveal>
-      <a href="/about" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px] micro-cta" aria-label="Learn more about Gairo Peralta">About Me</a>
-      <a href="/experience" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px] micro-cta" aria-label="View Gairo's experience and projects">My Experience</a>
-      <a href="/resume" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px] micro-cta" aria-label="View Gairo's resume">My Resume</a>
+      <a href="/es/about" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px] micro-cta" aria-label="Saber más sobre Gairo Peralta">Sobre Mí</a>
+      <a href="/es/experience" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px] micro-cta" aria-label="Ver la experiencia y proyectos de Gairo">Mi Experiencia</a>
+      <a href="/es/resume" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px] micro-cta" aria-label="Ver el currículum de Gairo">Mi Currículum</a>
     </div>
     </div>
   </section>

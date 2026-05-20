@@ -10,9 +10,16 @@ interface Props {
 	isWide?: boolean;
 }
 
+const pathname = Astro.url.pathname;
+const isEs = pathname.startsWith('/es/') || pathname === '/es';
+
+const defaultDesc = isEs
+	? "Gairo Peralta - Ingeniero de AI/ML especializado en sistemas LLM, GeoAI y pipelines de ML en producción."
+	: "Gairo Peralta - AI/ML Engineer specializing in LLM systems, GeoAI, and production ML pipelines.";
+
 const {
 	title,
-	description = "Gairo Peralta - AI/ML Engineer specializing in LLM systems, GeoAI, and production ML pipelines.",
+	description = defaultDesc,
 	image = "/images/profile-banner.jpg",
 	noIndex = false,
 	structuredData,
@@ -25,10 +32,39 @@ const faviconVersion = "2026-01-19";
 const baseUrl = "https://gairoperalta.com";
 const canonicalUrl = new URL(Astro.url.pathname, baseUrl).toString();
 const imageUrl = new URL(image.startsWith('http') ? image : image, baseUrl).toString();
+
+const navItems = isEs ? [
+	{ href: '/es', label: 'Inicio' },
+	{ href: '/es/about', label: 'Sobre Mí' },
+	{ href: '/es/experience', label: 'Experiencia' },
+	{ href: '/es/resume', label: 'Currículum' },
+	{ href: '/es/contact', label: 'Contacto' }
+] : [
+	{ href: '/', label: 'Home' },
+	{ href: '/about', label: 'About Me' },
+	{ href: '/experience', label: 'Experience' },
+	{ href: '/resume', label: 'Resume' },
+	{ href: '/contact', label: 'Contact' }
+];
+
+let toggleLangLink = '/';
+if (isEs) {
+	if (pathname === '/es' || pathname === '/es/') {
+		toggleLangLink = '/';
+	} else {
+		toggleLangLink = pathname.replace(/^\/es/, '');
+	}
+} else {
+	if (pathname === '/' || pathname === '') {
+		toggleLangLink = '/es';
+	} else {
+		toggleLangLink = `/es${pathname}`;
+	}
+}
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang={isEs ? "es" : "en"} class="h-full">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -55,8 +91,8 @@ const imageUrl = new URL(image.startsWith('http') ? image : image, baseUrl).toSt
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={imageUrl} />
-		<meta property="og:locale" content="en_US" />
-		<meta property="og:site_name" content="Gairo Peralta - AI/ML Engineer" />
+		<meta property="og:locale" content={isEs ? "es_MX" : "en_US"} />
+		<meta property="og:site_name" content={isEs ? "Gairo Peralta - Ingeniero de AI/ML" : "Gairo Peralta - AI/ML Engineer"} />
 		
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
@@ -318,14 +354,89 @@ const imageUrl = new URL(image.startsWith('http') ? image : image, baseUrl).toSt
     transform: translateX(120%);
   }
 
+  /* Premium Global Mouse-following Background Aura */
+  #global-pointer-aura {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    opacity: 0;
+    background: radial-gradient(
+      600px circle at var(--global-mouse-x, 0px) var(--global-mouse-y, 0px),
+      rgba(99, 102, 241, 0.1) 0%,
+      rgba(236, 72, 153, 0.04) 40%,
+      transparent 80%
+    );
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
   .card-hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
 
   .card-hover:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35), 0 0 20px rgba(236, 72, 153, 0.2);
-    border-color: rgba(236, 72, 153, 0.5);
+  }
+
+  /* Neon Spotlights & Highlights for Box Containers */
+  .card-hover, .timeline-card, .stat-card, .project-card, form, .form-container, [data-tilt] {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Spotlight glow overlay inside the box */
+  .card-hover::after, .timeline-card::after, .stat-card::after, .project-card::after, form::after, .form-container::after, [data-tilt]::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+      rgba(99, 102, 241, 0.06) 0%,
+      rgba(242, 73, 104, 0.02) 50%,
+      transparent 80%
+    );
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  /* Border highlight overlay */
+  .card-hover::before, .timeline-card::before, .stat-card::before, .project-card::before, form::before, .form-container::before, [data-tilt]::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: radial-gradient(
+      200px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+      rgba(242, 73, 104, 0.3) 0%,
+      rgba(99, 102, 241, 0.12) 50%,
+      transparent 80%
+    );
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  /* Make sure children sit above the glow */
+  .card-hover > *, .timeline-card > *, .stat-card > *, .project-card > *, form > *, .form-container > *, [data-tilt] > * {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Trigger glows on hover */
+  .card-hover:hover::before, .timeline-card:hover::before, .stat-card:hover::before, .project-card:hover::before, form:hover::before, .form-container:hover::before, [data-tilt]:hover::before,
+  .card-hover:hover::after, .timeline-card:hover::after, .stat-card:hover::after, .project-card:hover::after, form:hover::after, .form-container:hover::after, [data-tilt]:hover::after {
+    opacity: 1;
+  }
+
+  /* Backlight neon drop-shadows on hover */
+  .card-hover:hover, .timeline-card:hover, .stat-card:hover, .project-card:hover, [data-tilt]:hover {
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45), 
+                0 0 25px rgba(242, 73, 104, 0.15), 
+                0 0 40px rgba(99, 102, 241, 0.1);
+    border-color: rgba(242, 73, 104, 0.4) !important;
   }
 
   html.js [data-reveal] {
@@ -354,14 +465,23 @@ const imageUrl = new URL(image.startsWith('http') ? image : image, baseUrl).toSt
 </style>
 	</head>
 	<body class="flex flex-col min-h-screen">
+		<div id="global-pointer-aura"></div>
 		<header class="p-4 md:p-6">
 			<nav>
-				<ul class="flex flex-wrap justify-center space-x-4 md:space-x-8">
-					<li><a href="/" class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">Home</a></li>
-					<li><a href="/about" class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">About Me</a></li>
-					<li><a href="/experience" class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">Experience</a></li>
-					<li><a href="/resume" class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">Resume</a></li>
-					<li><a href="/contact" class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">Contact</a></li>
+				<ul class="flex flex-wrap justify-center space-x-4 md:space-x-8 items-center">
+					{navItems.map(item => (
+						<li>
+							<a href={item.href} class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">
+								{item.label}
+							</a>
+						</li>
+					))}
+					<li>
+						<a href={toggleLangLink} class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold flex items-center gap-1">
+							<i class="fas fa-globe text-xs md:text-sm"></i>
+							{isEs ? 'EN' : 'ES'}
+						</a>
+					</li>
 				</ul>
 			</nav>
 		</header>
@@ -406,6 +526,67 @@ const imageUrl = new URL(image.startsWith('http') ? image : image, baseUrl).toSt
 				});
 			};
 
+			const setupGlobalAura = () => {
+				const aura = document.getElementById('global-pointer-aura');
+				if (!aura) return;
+				
+				if (window.globalAuraInitialized) return;
+				window.globalAuraInitialized = true;
+
+				window.addEventListener('mousemove', (e) => {
+					aura.style.setProperty('--global-mouse-x', `${e.clientX}px`);
+					aura.style.setProperty('--global-mouse-y', `${e.clientY}px`);
+					aura.style.opacity = '1';
+				});
+
+				document.addEventListener('mouseleave', () => {
+					aura.style.opacity = '0';
+				});
+			};
+
+			const setup3DTilt = () => {
+				const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				
+				// Match all cards, statistics, timelines, and forms
+				const cardSelectors = '.card-hover, [data-card-root], [data-tilt], .timeline-card, .stat-card, .project-card, form, .form-container, .bg-gray-800\\/50.p-4.rounded-xl, .bg-gray-800\\/50.p-3.md\\:p-4.rounded-lg';
+				const cards = document.querySelectorAll(cardSelectors);
+
+				cards.forEach(card => {
+					if (card.dataset.tiltInitialized === 'true') return;
+					card.dataset.tiltInitialized = 'true';
+
+					card.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, border-color 0.3s ease';
+
+					card.addEventListener('mousemove', (e) => {
+						const rect = card.getBoundingClientRect();
+						const x = e.clientX - rect.left;
+						const y = e.clientY - rect.top;
+
+						card.style.setProperty('--mouse-x', `${x}px`);
+						card.style.setProperty('--mouse-y', `${y}px`);
+
+						if (prefersReducedMotion) return;
+
+						if (card.classList.contains('card-hover') || card.hasAttribute('data-tilt') || card.hasAttribute('data-card-root') || card.classList.contains('project-card')) {
+							const xc = rect.width / 2;
+							const yc = rect.height / 2;
+							const tiltX = (yc - y) / yc * 8;
+							const tiltY = (x - xc) / xc * 8;
+							card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02) translateY(-2px)`;
+						}
+					});
+
+					card.addEventListener('mouseleave', () => {
+						card.style.setProperty('--mouse-x', `0px`);
+						card.style.setProperty('--mouse-y', `0px`);
+						if (prefersReducedMotion) return;
+						if (card.classList.contains('card-hover') || card.hasAttribute('data-tilt') || card.hasAttribute('data-card-root') || card.classList.contains('project-card')) {
+							card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+						}
+					});
+				});
+			};
+
 			const markJs = () => {
 				document.documentElement.classList.add('js');
 			};
@@ -413,11 +594,15 @@ const imageUrl = new URL(image.startsWith('http') ? image : image, baseUrl).toSt
 			document.addEventListener('DOMContentLoaded', () => {
 				markJs();
 				setupReveal();
+				setupGlobalAura();
+				setup3DTilt();
 			});
 
 			document.addEventListener('astro:page-load', () => {
 				markJs();
 				setupReveal();
+				setupGlobalAura();
+				setup3DTilt();
 			});
 		</script>
 	</body>

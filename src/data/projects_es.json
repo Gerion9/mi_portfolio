@@ -1,0 +1,382 @@
+[
+  {
+    "title": "NetAiCore: Ecosistema de NLP y Análisis de Redes de Afinidad",
+    "company": "BlackPrint Technologies",
+    "date": "2026-05-19",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Exportaciones Anonimizadas", "NLP con spaCy y BERTopic"],
+    "tags": ["Python", "spaCy", "BERTopic", "NetworkX", "HDBSCAN", "Streamlit", "Quarto", "Privacidad de Datos (LFPDPPP)", "Pipelines de Datos"],
+    "description": "Diseñó un ecosistema analítico de 360 grados y un pipeline de anonimización seguro para bases de datos operativas de chatbots, extrayendo información sociodemográfica bajo las regulaciones de privacidad de la LFPDPPP.",
+    "impacts": [
+      "Construyó un pipeline de NLP avanzado utilizando modelos de spaCy en español y BERTopic para el análisis de sentimiento y modelado de temas en registros conversacionales.",
+      "Desarrolló un dashboard interactivo en Streamlit con modo dual (interno con PII / compartido anonimizado) y scripts de Quarto para reportes de las partes interesadas.",
+      "Modeló las interacciones de los usuarios como un grafo social con NetworkX y agrupó cohortes de usuarios utilizando agrupamiento HDBSCAN y scikit-learn."
+    ]
+  },
+  {
+    "title": "Radar Comercial Querétaro V2: Dashboard de Analítica de Licencias Comerciales",
+    "company": "BlackPrint Technologies",
+    "date": "2026-05-18",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Volumen de Datos: ~110k Licencias", "Conexión: Redshift / Respaldo en CSV"],
+    "tags": ["Next.js 15", "TypeScript", "Tailwind CSS", "shadcn/ui", "MapLibre GL JS", "Amazon Redshift", "Consultas SQL", "Analítica Geospatial"],
+    "description": "Desarrolló un dashboard de analítica geoespacial de alto rendimiento para visualizar más de 110,000 licencias comerciales activas y bloqueadas en Querétaro, mapeando conjuntos de datos de Redshift con cajas delimitadoras interactivas y pipelines de exportación de metadatos.",
+    "impacts": [
+      "Diseñó una interfaz cartográfica interactiva con MapLibre GL JS que muestra la distribución espacial de los negocios y filtros de densidad en Querétaro.",
+      "Integró un sistema de obtención de datos de doble fuente, conectando un almacén de datos de producción Amazon Redshift con un parser de CSV local optimizado como respaldo.",
+      "Diseñó una interfaz de usuario moderna utilizando Next.js 15, Tailwind CSS y componentes de shadcn/ui para exportaciones rápidas de cajas delimitadoras y metadatos."
+    ]
+  },
+  {
+    "title": "BrokerAI: Agente de IA Conversacional y Motor de Calificación de Leads",
+    "company": "BlackPrint Technologies",
+    "date": "2026-05-15",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["SLA del Operador: <15 mins", "Conversión del Embudo: +34%"],
+    "tags": ["Next.js 15", "React 19", "Tailwind CSS 4", "FastAPI", "OpenAI GPT-4o", "Prisma ORM", "WhatsApp Cloud API", "Google Calendar API", "Server-Sent Events", "Turborepo"],
+    "description": "Diseñó y construyó un agente de ventas conversacional de WhatsApp listo para producción y un dashboard de operador en tiempo real para la calificación progresiva de leads y reserva automatizada de citas.",
+    "impacts": [
+      "Diseñó un orquestador de IA robusto usando OpenAI GPT-4o y WhatsApp Cloud API para calificación de leads en múltiples etapas y asignación dinámica de citas a través de Google Calendar API.",
+      "Desarrolló un espacio de trabajo para operadores en tiempo real usando Next.js 15, React 19, Tailwind CSS 4 y Server-Sent Events (SSE) para una intervención humana sin interrupciones.",
+      "Construyó un esquema de base de datos seguro con Prisma ORM en Cloud SQL (PostgreSQL), desplegando tareas cron para recordatorios de citas y alertas de escalamiento de SLA hacia Slack."
+    ]
+  },
+  {
+    "title": "Meridian: SaaS de Inteligencia Territorial Low-Code",
+    "company": "BlackPrint Technologies",
+    "date": "2026-05-14",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Escala de Base de Datos: ~577M Filas", "Huella de Datos: ~79GB"],
+    "tags": ["Next.js 14", "FastAPI", "LangGraph", "Google BigQuery", "Terraform", "Google Cloud Run", "GIS", "Análisis Geoespacial", "Sistemas Multi-Agente"],
+    "description": "Diseñó una plataforma SaaS low-code que mapea datos sociodemográficos y geográficos mexicanos a gran escala en Google BigQuery para generar aplicaciones geoespaciales dinámicas y explicables.",
+    "impacts": [
+      "Construyó un orquestador multi-agente en LangGraph con 7 agentes especializados (Profiler, Discovery, SQLGenerator, etc.) para traducir consultas en lenguaje natural a SQL verificado.",
+      "Integró un lago de datos a gran escala de ~577 millones de filas (~79 GB) en Google BigQuery utilizando filtros estrictos de costo por consulta y diccionarios topológicos para proteger presupuestos.",
+      "Diseñó IaC con Terraform para despliegue escalable en GCP Cloud Run e integró tokens de diseño 1:1 utilizando el Sistema de Diseño de BlackPrint."
+    ]
+  },
+  {
+    "title": "SJS Sales Intelligence: Modelado Predictivo Geoespacial",
+    "company": "BlackPrint Technologies",
+    "date": "2026-04-20",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Pronósticos: ElasticNet / XGBoost", "Manzanas Activas: 100k+ en Querétaro"],
+    "tags": ["React", "FastAPI", "MapLibre GL JS", "XGBoost", "Zustand", "OSMnx", "H3 Index", "GeoJSON", "Analítica Predictiva"],
+    "description": "Desarrolló un sistema predictivo de inteligencia de ventas y un simulador interactivo de SIG para modelar el rendimiento de sucursales y analizar la atracción competitiva en Querétaro.",
+    "impacts": [
+      "Diseñó un pipeline de machine learning utilizando XGBoost y ElasticNet para predecir ventas basadas en competencia espacial, atractores urbanos y parámetros de movilidad.",
+      "Construyó un frontend de React de alta fidelidad con MapLibre GL JS para mostrar mercados objetivo interactivos, gráficos de radar personalizados y comparaciones de escenarios lado a lado.",
+      "Implementó un servidor FastAPI que ofrece inferencias rápidas bajo demanda para simulaciones de colocación de nuevas sucursales con actualizaciones de la UI en tiempo real."
+    ]
+  },
+  {
+    "title": "Índice de Riesgo de Seguridad Proxy: Modelado de Seguridad a Nivel de Manzana",
+    "company": "BlackPrint Technologies",
+    "date": "2026-03-26",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Clasificación de Riesgo: Jenks 5", "Granularidad del Censo: AGEB/Manzana"],
+    "tags": ["Python", "GeoPandas", "QGIS", "mapclassify", "Estadística Espacial", "Moran's I (LISA)", "Estimación de Densidad de Kernel"],
+    "description": "Diseñó un índice geoespacial proxy de seguridad multifactorial a nivel de colonia para Ecatepec, modelando la correlación espacial del crimen y métricas de exposición pública.",
+    "impacts": [
+      "Desarrolló un pipeline de ETL con GeoPandas integrando datos de censos de población (INEGI), directorios comerciales (DENUE), principales corredores de transporte y cifras de delincuencia municipal (SESNSP).",
+      "Calculó índices de exposición per cápita normalizados usando proyecciones WGS 84 / UTM Zona 14N y clasificó los niveles de riesgo mediante Jenks Natural Breaks.",
+      "Realizó un análisis avanzado de autocorrelación espacial utilizando Moran's I Local (LISA) para detectar efectos de derrame de delincuencia y puntos calientes cerca de terminales de tránsito intermunicipales."
+    ]
+  },
+  {
+    "title": "Blackprint Radar: Pipeline de Emparejamiento de POI Multi-Fuente",
+    "company": "BlackPrint Technologies",
+    "date": "2026-03-18",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Tasa de Éxito: +9.1% (Gobierno)", "Volumen de Procesamiento: 230k+ POIs"],
+    "tags": ["Python", "Pandas", "NLP", "Embeddings de Oraciones", "Búsqueda Vectorial", "STRtree", "Rejilla Espacial", "Pytest", "BigQuery"],
+    "description": "Diseñó un pipeline de deduplicación y emparejamiento multietapa de alto rendimiento para fusionar, conciliar y enriquecer espacialmente datos de Puntos de Interés (POI) de fuentes comerciales y gubernamentales en Querétaro.",
+    "impacts": [
+      "Desarrolló un algoritmo de similitud de texto adaptativo que combina similitud Jaro-Winkler, Levenshtein y similitud semántica de categorías utilizando embeddings de oraciones multilingües de alta precisión.",
+      "Implementó un algoritmo de celdas de cuadrícula espacial (SpatialGrid) de alto rendimiento para optimizar la coincidencia de deduplicación en bucle cerrado de 215k x 34k registros en menos de 3 minutos.",
+      "Diseñó cruces espaciales catastrales utilizando STRtree para enriquecer los POI con las pautas de zonificación municipal de 2023 y verificar la compatibilidad comercial (clasificación AMAI / SCIAN)."
+    ]
+  },
+  {
+    "title": "H Barbería Colima: Aplicación Web de Reservas y Gestión de Clientes",
+    "company": "Proyecto Personal",
+    "date": "2026-02-16",
+    "imgSrc": "/images/personal_project.jpg",
+    "impact": ["Sincronización con Google Calendar", "Reserva con Cero Latencia"],
+    "tags": ["React 19", "TypeScript", "Vite 6", "React Router DOM", "React Helmet Async", "Módulos CSS", "Optimización SEO"],
+    "description": "Diseñó y desarrolló una aplicación web de reserva para clientes de una barbería local en Colima, integrando parámetros de programación de calendario personalizados por barbero y galerías modernas con optimización SEO.",
+    "impacts": [
+      "Desarrolló un flujo de reserva dinámico utilizando React 19 y Vite 6, incorporando sincronización con Google Calendar para eliminar la duplicación de citas.",
+      "Implementó módulos CSS responsivos con una estética de glassmorphism premium y micro-animaciones personalizadas para aumentar la interacción de los usuarios.",
+      "Optimizó los tiempos de carga y el posicionamiento SEO utilizando React Helmet Async y HTML semántico, garantizando transiciones de página instantáneas."
+    ]
+  },
+  {
+    "title": "OCR Gemini: Pipeline de Traducción Legal Certificada",
+    "company": "Oficinas Legales de Manuel Solís",
+    "date": "2026-01-15",
+    "imgSrc": "/images/manuel_solis_logo.png",
+    "impact": ["Preservación del Diseño: Sí", "Formato: DOCX Bilingüe"],
+    "tags": ["Python", "Google Gemini Vision API", "python-docx", "Traducción Certificada", "OCR", "Optimización de Resolución de Medios", "Pipelines de Datos", "Aplicación de IA", "OCR Multi-Página"],
+    "description": "Lideró y guió a un equipo de becarios para desarrollar un pipeline de CLI en Python de alta fidelidad utilizando la API de Gemini Vision, capacitándolos en mejores prácticas de OCR y mapeo de diseño espacial para automatizar traducciones certificadas de documentos legales de varias páginas.",
+    "impacts": [
+      "Mentoreó a becarios en la implementación de un pipeline de OCR basado en visión artificial utilizando Gemini Vision para extraer y traducir escaneos legales de baja resolución con excelente precisión.",
+      "Guió al equipo en la construcción de un compilador de DOCX que preserva la estructura espacial del texto original, tablas, firmas y encabezados en un formato bilingüe profesional.",
+      "Capacitó a desarrolladores junior en la integración de preprocesamiento automático de imágenes, reduciendo costos de tokens de IA al tiempo que se optimizaban las tasas de detección de firmas certificadas."
+    ]
+  },
+  {
+    "title": "Plataforma de Inteligencia de Reuniones para Equipos Legales",
+    "company": "Oficinas Legales de Manuel Solís",
+    "date": "2025-12-15",
+    "imgSrc": "/images/manuel_solis_logo.png",
+    "impact": ["Tiempo de Entrega: ~8 veces más rápido", "Resúmenes Estructurados Accionables"],
+    "tags": ["LLM", "NLP", "Speechmatics", "Pinecone", "RBAC", "Procesamiento de Datos", "FastAPI", "Base de Datos Vectorial"],
+    "description": "Dirigió el desarrollo y guió a un equipo de becarios para construir un sistema de inteligencia de reuniones que convierte grabaciones de Zoom/Teams/Meet en transcripciones legibles y resúmenes estructurados con control de acceso basado en roles.",
+    "impacts": [
+      "Capacitó a becarios en la automatización de flujos de transcripción y síntesis de resúmenes utilizando Speechmatics y APIs de LLM para la documentación de casos legales.",
+      "Guió al equipo en la implementación de búsqueda semántica a través de reuniones utilizando indexación y recuperación vectorial de Pinecone.",
+      "Dirigió a los becarios en la implementación de controles seguros de RBAC para niveles de acceso de administrador, supervisor y usuario general bajo mejores prácticas de la industria."
+    ]
+  },
+  {
+    "title": "DeclarationLetterOnline: Generador de Cartas de Declaración con IA",
+    "company": "Oficinas Legales de Manuel Solís",
+    "date": "2025-10-01",
+    "imgSrc": "/images/manuel_solis_logo.png",
+    "impact": ["Tiempo de Procesamiento: <60s", "Precisión del Formato: Century Schoolbook"],
+    "tags": ["FastAPI", "Python", "React", "Google Gemini AI", "SQLite", "python-docx", "Parseo XML", "Plantillas de IA Legal", "Generación de Documentos"],
+    "description": "Lideró y dirigió a un equipo de becarios para construir un generador de documentos legales de grado de producción con FastAPI y React utilizando Gemini 1.5 Pro, capacitándolos en ingeniería de prompts, formateo estricto de documentos y pistas de auditoría locales seguras.",
+    "impacts": [
+      "Guió a los becarios en el desarrollo de un pipeline de síntesis de NLP en múltiples etapas que procesa cuestionarios complejos y los traduce en declaraciones legales certificadas bajo formato Century Schoolbook.",
+      "Supervisó al equipo en la construcción de un flujo de procesamiento asíncrono con registros de auditoría locales en SQLite y parseo XML estructurado para compilación automatizada de DOCX.",
+      "Capacitó a los desarrolladores junior en el diseño de una interfaz de React que cuenta con retroalimentación en tiempo real, control de versiones de borradores y edición simultánea lado a lado."
+    ]
+  },
+  {
+    "title": "Plataforma GeoAI de LLM para Inteligencia Urbana",
+    "company": "BlackPrint Technologies",
+    "date": "2025-08-01",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Manzanas Urbanas: 2.5M+", "Inferencia en Tiempo Real"],
+    "tags": ["Análisis Geoespacial", "Machine Learning", "React", "Mapbox GL", "Turf.js", "LLM", "GeoAI", "Visualización de Datos"],
+    "description": "Construyó una plataforma de GeoAI impulsada por LLMs para modelar más de 2.5 millones de manzanas urbanas con inferencias en tiempo real y mapeo interactivo para una toma de decisiones eficiente.",
+    "impacts": [
+      "Desplegó pipelines estables de React, Mapbox GL y Turf.js para visualización geoespacial escalable en producción.",
+      "Integró capacidades de razonamiento de LLMs para extraer y mostrar insights de inteligencia de localización en tiempo real.",
+      "Entregó analíticas en tiempo real para respaldar flujos de trabajo de zonificación, planeación urbana y regularización de licencias."
+    ]
+  },
+  {
+    "title": "Sistema Multi-Agente para QA Médico",
+    "company": "UT San Antonio (Voluntario)",
+    "date": "2025-04-01",
+    "imgSrc": "/images/utsa_logo.png",
+    "impact": ["Precisión: 54.69%", "Incremento de Rendimiento: +24.24pp"],
+    "tags": ["LLM", "Agentes", "Grafo de Conocimiento", "Neo4j", "IA Médica", "NLP"],
+    "description": "Construyó un sistema multi-agente de LLMs respaldado y conectado con PrimeKG y Neo4j para mejorar la precisión en responder preguntas médicas complejas mediante razonamiento multi-salto (multi-hop).",
+    "impacts": [
+      "Diseñó agentes especializados en razonamiento clínico, extracción de entidades y recuperación de evidencia científica.",
+      "Integró consultas avanzadas a grafos de conocimiento de Neo4j para soportar explicaciones detalladas y razonadas de las respuestas de IA.",
+      "Evaluó el rendimiento del sistema mediante pruebas sistemáticas comparativas (benchmarking) y telemetría de respuestas."
+    ]
+  },
+  {
+    "title": "GeoAI Insights: Visualización Avanzada del Entorno Competitivo",
+    "company": "STRTGY",
+    "date": "2024-09-01",
+    "imgSrc": "/images/project-1.jpg",
+    "impact": ["Confianza en Decisiones: +82%", "Tiempo de Análisis: 70% ↓"],
+    "tags": ["Análisis Geoespacial", "Machine Learning", "Visualización de Datos", "OpenAI", "GIS", "Analítica de Redes Sociales", "Análisis de Mercado", "Planeación Estratégica", "Sistemas de Soporte a Decisiones"],
+    "description": "Aprovechó GPT-4 y GPT Vision para el análisis de competidores, utilizando razonamiento estructurado (chain of thought) para extraer insights sobre número de empleados, tamaño del establecimiento y ubicación de la competencia. Implementó herramientas de SIG con GeoJSON y ArcGIS Online, superando desafíos de limpieza de datos geoespaciales para crear mapas detallados de salas de exhibición y puntos de venta.",
+    "impacts": [
+      "Utilizó Storymaps en ArcGIS Online para una visualización efectiva y narrativa de los datos, equilibrando el procesamiento local y en la nube de acuerdo a las necesidades analíticas.",
+      "Desarrolló mapas de calor analíticos utilizando la API de ArcGIS para resaltar concentraciones de competencia comercial en EE. UU., asegurando una fácil interpretación mediante mapas interactivos.",
+      "Integró análisis impulsado por IA con información geográfica, validando los resultados mediante la API de GPT Vision para construir un panorama competitivo robusto."
+    ]
+  },
+  {
+    "title": "Análisis Geoespacial Electoral y Socioeconómico de México",
+    "company": "BlackPrint Technologies",
+    "date": "2025-05-01",
+    "imgSrc": "/images/villa_de_alvarez.jpg",
+    "impact": ["Datos Procesados: 2.5M+ Manzanas", "Efectividad Predictiva: +78%"],
+    "tags": ["Análisis Geoespacial", "Visualización de Datos", "React", "Python", "ETL", "GeoPandas", "Mapbox GL", "TypeScript", "Turf.js", "Procesamiento de Datos", "Optimización"],
+    "description": "Desarrolló una plataforma analítica avanzada que integra datos electorales históricos (2018-2024) con indicadores socioeconómicos a nivel de manzana para todo México, permitiendo análisis multidimensionales del comportamiento electoral. Diseñó el frontend con React 18, TypeScript 5.0 y Mapbox GL JS v2.15 con extensiones personalizadas de análisis espacial con Turf.js.",
+    "impacts": [
+      "Diseñó e implementó scripts de Python con GeoPandas para ETL geoespacial masivo, transformación de shapefiles y procesamiento de vectores para unificar coordenadas geográficas.",
+      "Procesó más de 2.5 millones de manzanas urbanas del INEGI con más de 30 variables sociodemográficas por entidad, implementando algoritmos de clasificación de la AMAI para calcular niveles socioeconómicos.",
+      "Implementó optimizaciones topológicas con simplificación adaptativa Douglas-Peucker y generación de esquemas de teselas vectoriales (vector tiling) con codificación eficiente para descargas rápidas."
+    ]
+  },
+  {
+    "title": "Sistema Inteligente de Extracción y Análisis de Documentos Comerciales",
+    "company": "PRODENSA",
+    "date": "2025-04-01",
+    "imgSrc": "/images/project-3.jpg",
+    "impact": ["Precisión de Extracción: 95%", "Tiempo de Procesamiento: 98% ↓"],
+    "tags": ["Aplicación de IA", "Procesamiento de Documentos", "React", "Vite", "FastAPI", "Procesamiento de PDFs", "LLM", "NLP", "Extracción de Datos", "OCR"],
+    "description": "Construyó un pipeline de extracción de documentos comerciales basado en OCR y Llama 3.3 para facturas, listas de empaque y pedimentos de aduana, entregando metadatos estructurados a gran escala.",
+    "impacts": [
+      "Desplegó la API de extracción con FastAPI y un frontend interactivo con React/Vite para procesamiento de PDFs en tiempo real.",
+      "Implementó ingesta multiformato (PDF, CSV, XLSX) con tareas asíncronas en background.",
+      "Mejoró la precisión del modelo en la lectura de tablas y datos estructurados mediante técnicas avanzadas de prompt tuning y lógica de validación cruzada."
+    ]
+  },
+  {
+    "title": "Chatbot Especializado en Bienes Raíces Industriales",
+    "company": "STRTGY",
+    "date": "2025-03-01",
+    "imgSrc": "/images/project-4.jpg",
+    "impact": ["Relevancia de Respuestas: +90%", "Tiempo de Consulta: 85% ↓"],
+    "tags": ["Machine Learning", "NLP", "Python", "Streamlit", "RAG", "LLM", "Base de Datos Vectorial", "Procesamiento de Datos", "Aplicación de IA", "Anthropic Claude", "OpenAI", "Generación de PDFs"],
+    "description": "Diseñó e implementó un sistema de RAG (Generación Aumentada por Recuperación) con chatbot especializado para el sector inmobiliario industrial, integrando APIs de Anthropic Claude 3.5 Sonnet y OpenAI. Desarrolló un pipeline de vectorización semántica de fichas industriales utilizando OpenAI Embeddings y FAISS para búsquedas instantáneas.",
+    "impacts": [
+      "Implementó técnicas avanzadas de ingeniería de prompts con un sistema de múltiples capas para contextualización, generación y formateo, aumentando significativamente la relevancia y precisión de las respuestas del bot.",
+      "Creador de un sistema de generación dinámica de reportes en PDF a partir de las conversaciones con los clientes, usando plantillas Jinja2 y herramientas de compilación HTML-PDF.",
+      "Desarrolló una interfaz de usuario fluida en Streamlit con sistema de autenticación multiusuario, temas de color interactivos y optimizaciones de accesibilidad."
+    ]
+  },
+  {
+    "title": "Plataforma Integral de Análisis de Datos para Empresa de TV Shopping",
+    "company": "STRTGY",
+    "date": "2025-02-01",
+    "imgSrc": "/images/project-5.jpg",
+    "impact": ["Tiempo de Análisis: 99% ↓", "Adopción de Usuarios: +85%"],
+    "tags": ["Análisis de Datos", "Inteligencia de Negocios", "FastAPI", "React", "MongoDB", "Desarrollo de Dashboards", "Desarrollo de APIs", "ETL", "Material UI", "Python", "JavaScript", "Visualización de Datos", "Microservicios", "SQL", "Gestión de Bases de Datos", "Integración de APIs", "Optimización de Rendimiento"],
+    "description": "Desarrolló un ecosistema de analítica comercial y visualización de negocios compuesto por tres aplicaciones interconectadas: un backend de API REST (FastAPI), un dashboard de operaciones (React) y una plataforma inteligente de informes. Construyó la API REST con FastAPI conectada a bases de datos de MongoDB Atlas.",
+    "impacts": [
+      "Diseñó y construyó un dashboard de operaciones interactivo con React 18 y Material UI 6 para visualizar KPIs del negocio, utilizando gráficos con Recharts, D3.js y mapas con React Leaflet.",
+      "Creó soluciones analíticas implementando visualizadores de tendencias de ventas, segmentación de clientes, rotación de inventario y efectividad publicitaria.",
+      "Utilizó agrupamiento K-means para segmentar perfiles de clientes y creó mapas coropléticos usando datos de GeoJSON, revelando patrones espaciales y clústeres geográficos de ventas.",
+      "Integró telemetría de Google Trends usando análisis de series temporales para anticipar el interés de consumo de los clientes, informando las estrategias de marketing y niveles de inventario.",
+      "Implementó pipelines de extracción y procesamiento de datos (ETL) desde bases de datos SQL relacionales corporativas hacia bases documentales en MongoDB, procesados con pandas y numpy."
+    ]
+  },
+  {
+    "title": "Sistema Avanzado de Pronóstico de Demanda y Optimización de Inventarios",
+    "company": "STRTGY",
+    "date": "2025-01-01",
+    "imgSrc": "/images/project-6.jpg",
+    "impact": ["Precisión de Pronósticos: +42%", "Costo de Inventario: 30% ↓"],
+    "tags": ["Análisis de Series Temporales", "Machine Learning", "Python", "React", "TypeScript", "Procesamiento de Datos", "Optimización de Inventario", "Prophet", "SARIMA", "ETL", "Visualización de Datos", "Chart.js"],
+    "description": "Desarrolló un sistema integral de modelado estadístico, predicción de demanda y optimización de suministros para la industria de bebidas. Diseñó e implementó un pipeline de ETL robusto para datos históricos de ventas, con limpieza automática de datos y detección de valores atípicos.",
+    "impacts": [
+      "Implementó un motor de predicciones adaptativo que selecciona algoritmos óptimos según el comportamiento y volumen del SKU: Prophet para series históricas robustas, SARIMA para productos medianos y promedios móviles optimizados como respaldo.",
+      "Desarrolló un modelo matemático de optimización de inventarios que incorpora cálculos de tiempos de entrega (lead times), cálculo de stock de seguridad, restricciones de capacidad física en almacenes y optimización del índice de rotación.",
+      "Diseñó un dashboard moderno y responsivo con React y TypeScript, integrando visualizaciones con Chart.js, arquitectura basada en componentes y optimización de rendimiento a través de memoización y lazy loading."
+    ]
+  },
+  {
+    "title": "Desarrollo de Portafolio Personal Interactivo Premium",
+    "company": "Proyecto Personal",
+    "date": "2024-06-01",
+    "imgSrc": "/images/project-7.jpg",
+    "impact": ["Velocidad de Carga: 97/100", "Accesibilidad: 100%"],
+    "tags": ["Desarrollo Web", "Diseño UI/UX", "Optimización de Rendimiento", "React", "Tailwind CSS", "Astro", "Gestión de Contenidos", "Git", "Control de Versiones", "Diseño Responsivo", "Accesibilidad", "Arquitectura de Componentes", "Animaciones"],
+    "description": "Diseñó y desarrolló un portafolio personal interactivo utilizando Astro, React y Tailwind CSS, optimizando el rendimiento web y el posicionamiento SEO, al tiempo que aprovechaba componentes modernos para una experiencia de usuario sobresaliente.",
+    "impacts": [
+      "Creó componentes reutilizables y limpios para mantener una alta legibilidad del código, incluyendo menús de navegación, pies de página y formularios de contacto que facilitan la interacción fluida del usuario.",
+      "Integró animaciones con Animate.css para mejorar la interactividad y dinamismo del sitio, contribuyendo a una excelente narrativa visual y de datos.",
+      "Optimizó el rendimiento del sitio web evaluando con Lighthouse y Google PageSpeed Insights, logrando tiempos de carga récord y una experiencia de navegación sumamente fluida en móviles y escritorios."
+    ]
+  },
+  {
+    "title": "Sistema Automatizado de Análisis de Datos para Empresa Automotriz",
+    "company": "STRTGY",
+    "date": "2024-03-01",
+    "imgSrc": "/images/project-8.jpg",
+    "impact": ["Tiempo de Análisis: 90% ↓", "Calidad de Reportes: +45%"],
+    "tags": ["Automatización", "ETL", "Análisis de Datos", "Documentación", "Datos de Encuestas", "Limpieza de Datos", "Generación de Insights por IA", "Diseño de Interfaz de Usuario", "Selección de Datos", "Generación Rápida de Reportes"],
+    "description": "Desarrolló un sistema automatizado para el análisis eficiente de datos de analítica web a gran escala utilizando métricas y dimensiones de Google Analytics, con extracción de datos bajo demanda y procesamiento por lotes.",
+    "impacts": [
+      "Creó un dashboard intuitivo con filtros y KPIs en tiempo real utilizando HTML, CSS y JavaScript, permitiendo a directivos y clientes consultar datos y generar reportes ejecutivos fácilmente sin conocimientos técnicos.",
+      "Realizó análisis específicos por país de los datos web, analizando comportamientos culturales a nivel de usuarios activos, tasa de interacción y preferencias de dispositivos móviles, además de KPIs específicos como reservas de pruebas de manejo y cotizaciones.",
+      "Estableció rigurosas prácticas de documentación técnica e instructivos, aumentando la transparencia, la replicabilidad de los análisis y la facilidad de mantenimiento."
+    ]
+  },
+  {
+    "title": "Proyecto Integral de Análisis y Pronóstico de Series Temporales",
+    "company": "STRTGY",
+    "date": "2024-01-01",
+    "imgSrc": "/images/project-9.jpg",
+    "impact": ["Precisión de Pronósticos: +37%", "Reducción de Costos: ~25%"],
+    "tags": ["Análisis de Series Temporales", "Pronósticos", "Python", "Machine Learning", "Deep Learning", "Preprocesamiento de Datos", "Visualización", "Optimización de Inventario", "Aceleración por GPU", "Optimización de Hiperparámetros", "Análisis Geoespacial"],
+    "description": "Desarrolló una plataforma analítica robusta de series de tiempo y modelos predictivos en Python, incorporando algoritmos avanzados como SARIMA, Prophet, XGBoost, redes LSTM y Transformers. Implementó preprocesamiento con limpieza de nulos y feature engineering avanzado.",
+    "impacts": [
+      "Utilizó procesamiento concurrente con ThreadPoolExecutor para procesar de forma paralela múltiples productos y sucursales comerciales, reduciendo los tiempos de ejecución de cómputo en un 80%.",
+      "Integró técnicas analíticas de visualización interactiva con Plotly y Matplotlib para generar gráficos dinámicos que faciliten la comparación de escenarios predictivos y tendencias.",
+      "Diseñó algoritmos de optimización de inventarios, incluyendo cálculos de lote económico de compras (EOQ) y stock de seguridad, integrando factores ecológicos del impacto de huella de carbono.",
+      "Aprovechó aceleración de GPU para modelos de deep learning (LSTM y Transformers) mediante PyTorch y TensorFlow, acelerando sustancialmente las fases de entrenamiento del sistema.",
+      "Implementó optimización automatizada de hiperparámetros con Optuna, mejorando el rendimiento de los algoritmos mediante búsquedas bayesianas automáticas.",
+      "Integró análisis geoespacial utilizando Folium para mapear y visualizar concentraciones de demanda comercial y cuellos de botella en centros de distribución."
+    ]
+  },
+  {
+    "title": "Sistema Automatizado de Análisis de Encuestas y Comentarios de Empleados",
+    "company": "STRTGY",
+    "date": "2023-07-01",
+    "imgSrc": "/images/project-10.jpg",
+    "impact": ["Tiempo de Procesamiento: 99.9% ↓", "Profundidad de Insights: +75%"],
+    "tags": ["Automatización", "Análisis de Datos", "Visualización de Datos", "SurveyMonkey", "Análisis de Encuestas", "Python", "Pandas", "Multi-Index", "Plotly", "HTML", "Visualización Interactiva", "Visualizaciones Personalizadas", "Comentarios de Empleados", "Análisis de Desempeño", "Mejora Organizacional"],
+    "description": "Automatizó por completo el análisis y visualización de datos de encuestas organizacionales complejas de SurveyMonkey, reduciendo un proceso que tomaba de 1 a 2 meses de análisis manual a tan solo unos segundos de ejecución.",
+    "impacts": [
+      "Implementó modelos de procesamiento de lenguaje natural para análisis de sentimiento y modelado de temas sobre respuestas de texto libre, extrayendo las principales quejas e ideas de forma automatizada.",
+      "Utilizó pandas con indexación multinivel (Multi-Index) para manipulaciones de estructuras complejas de datos, facilitando análisis cruzados segmentados por ubicación, departamento y antigüedad.",
+      "Optimizó la velocidad del código a través de operaciones vectorizadas y procesamiento por lotes para un manejo rápido de bases de datos de gran tamaño.",
+      "Generó gráficos dinámicos interactivos de radar y de líneas en Plotly embebidos directamente en reportes HTML independientes, asegurando su visualización en cualquier dispositivo.",
+      "Aplicó pruebas estadísticas robustas de ANOVA y chi-cuadrado para identificar desviaciones y problemas significativos de rendimiento en sucursales o grupos demográficos específicos.",
+      "Creó un portal de visualización dinámico para la alta gerencia que facilita la exploración de los datos y filtra instantáneamente insights accionables para la mejora del clima laboral."
+    ]
+  },
+  {
+    "title": "Plataforma de Simulación y Backtesting de Estrategias Financieras",
+    "company": "Proyecto Personal",
+    "date": "2023-02-01",
+    "imgSrc": "/images/project-11.jpg",
+    "impact": ["Velocidad de Pruebas: 10x", "Variantes del Modelo: 24"],
+    "tags": ["Análisis Financiero", "Análisis de Datos", "Integración de APIs", "Python", "Plotly", "MongoDB", "Gestión de Bases de Datos", "Estrategias de Inversión", "Datos Económicos", "Tendencias de Mercado", "Análisis de Correlación", "Desarrollo de Estrategias", "Backtesting"],
+    "description": "Extrajo datos financieros históricos mediante la API de Alpha Vantage y construyó visualizaciones dinámicas de patrones comerciales usando Plotly en Python, incorporando límites de llamadas y manejo de excepciones para garantizar la consistencia analítica. Configuró una base de datos de MongoDB con esquema dinámico para almacenar calendarios económicos complejos de forma eficiente.",
+    "impacts": [
+      "Condujo análisis avanzados de correlación entre indicadores macroeconómicos clave (PIB, desempleo, tasas de interés, inflación) versus tendencias del mercado bursátil, incorporando análisis de desfase temporal (lags).",
+      "Descubrió a través de pruebas empíricas rigurosas el bajo rendimiento a largo plazo de estrategias clásicas de cruce de medias, utilizando métricas avanzadas como el Sharpe Ratio y Max Drawdown, lo que reforzó la necesidad de emplear técnicas más sofisticadas de predicción."
+    ]
+  },
+  {
+    "title": "Análisis Geoespacial Sísmico de Ciudad Guzmán",
+    "company": "Storymaps Proyecto Personal",
+    "date": "2022-09-01",
+    "imgSrc": "/images/project-12.jpg",
+    "impact": ["Predicción de Riesgo: +63%", "Puntos de Datos: 4,700+"],
+    "tags": ["Análisis Geoespacial", "Visualización de Datos", "ArcGIS", "Análisis Sísmico", "Análisis de Elevación", "Mapeo Interactivo", "Planeación Urbana", "Prevención de Desastres"],
+    "description": "Realizó un análisis geoespacial exploratorio en ArcGIS utilizando registros de la Red Sísmica de Jalisco, empleando barras de deslizamiento de tiempo (time sliders) para visualizaciones de propagación temporal. Analizó la correlación espacial entre la intensidad sísmica y la elevación topográfica del terreno mediante estadísticas espaciales de Getis-Ord Gi* y Regresión Geográficamente Ponderada.",
+    "impacts": [
+      "Creó una experiencia cartográfica interactiva y narrativa mediante Storymaps de ArcGIS, utilizando pop-ups descriptivos y leyendas claras para presentar análisis sísmicos complejos de forma sumamente accesible."
+    ]
+  },
+  {
+    "title": "Analítica de Datos para Sistema Inteligente de Administración de Propiedades",
+    "company": "BlackPrint Technologies",
+    "date": "2022-03-01",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Precisión de Geocodificación: 92%", "Precisión del Entregable: 99.9%"],
+    "tags": ["Análisis de Datos", "Análisis Geoespacial", "Gestión de Bases de Datos", "Gestión de Propiedades", "Integridad de Datos", "Eficiencia Operativa", "Python", "Pandas", "Numpy", "Manipulación de Datos", "Preparación de Datos", "Geocodificación Avanzada", "Localización de Datos"],
+    "description": "Entregó analítica inmobiliaria avanzada con geocodificación de Google Maps y pipelines estables de ETL en pandas/SQL para la generación de reportes de alta confiabilidad en Querétaro y Colima.",
+    "impacts": [
+      "Logró un 92% de precisión en geocodificación catastral mediante normalización sintáctica de direcciones y reglas de validación espacial.",
+      "Construyó pipelines de ETL en pandas/SQL que aseguraron un 99.9% de precisión en el análisis final de propiedades de los clientes."
+    ]
+  },
+  {
+    "title": "Análisis de Interacción y Retención de Usuarios para Plataforma SaaS",
+    "company": "Proyecto Colaborativo: AGM Analytics",
+    "date": "2021-11-01",
+    "imgSrc": "/images/project-14.jpg",
+    "impact": ["Retención de Usuarios: +28%", "Adopción de Funciones: +41%"],
+    "tags": ["Análisis de Datos", "Visualización de Datos", "Inteligencia de Negocios", "Plataforma SaaS", "Interacción de Usuarios", "Análisis de Comportamiento", "Tendencias de Uso", "Comportamiento del Cliente", "Técnicas de Visualización", "Insights Accionables", "Toma de Decisiones", "Objetivos Estratégicos"],
+    "description": "Analizó la retención y el uso de funciones de la plataforma SaaS con métricas complejas como DAU/MAU y tasas de abandono (churn), segmentando el comportamiento por nivel de suscripción y frecuencia de uso. Desarrolló visualizaciones avanzadas en Looker Studio y dashboards analíticos interactivos.",
+    "impacts": [
+      "Tradujo los hallazgos analíticos en recomendaciones estratégicas para el equipo de producto, creando dashboards en Looker Studio adaptados para diferentes niveles de conocimiento técnico de los directivos."
+    ]
+  }
+]

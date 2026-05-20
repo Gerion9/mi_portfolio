@@ -1,0 +1,930 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import projectsData from '../../data/projects_es.json';
+
+function getCategoryIcon(category: string) {
+  const icons = {
+    "Análisis y Visualización de Datos": "📊",
+    "Desarrollo y Tecnologías Web": "💻",
+    "Bases de Datos y Gestión de Datos": "🗄️",
+    "Optimización y Rendimiento": "⚡",
+    "Diseño y Experiencia de Usuario": "🎨",
+    "Inteligencia Artificial y Aprendizaje Automático": "🤖",
+    "Gestión de Proyectos y Metodologías": "📅",
+    "Análisis Específicos": "🔍",
+    "Herramientas y Plataformas": "🛠️"
+  };
+  return icons[category] || "📌";
+}
+
+const tagCategories = {
+  "Análisis y Visualización de Datos": ["Análisis de Datos", "Visualización de Datos", "Inteligencia de Negocios", "Análisis Geoespacial", "GeoAI"],
+  "Desarrollo y Tecnologías Web": ["Desarrollo Web", "React", "FastAPI", "Astro", "Tailwind CSS", "Node.js", "Vite", "Model Context Protocol (MCP)", "Zod"],
+  "Bases de Datos y Gestión de Datos": ["MongoDB", "SQL", "ETL", "Gestión de Bases de Datos", "Procesamiento de Datos", "Migración de Datos", "Base de Datos Vectorial", "Pinecone", "Neo4j", "Grafo de Conocimiento", "Qdrant", "MySQL", "MariaDB", "SQLite"],
+  "Optimización y Rendimiento": ["Optimización de Rendimiento", "Automatización", "Sistemas en Tiempo Real", "Optimización de Latencia", "Optimización de Resolución de Medios"],
+  "Diseño y Experiencia de Usuario": ["Diseño UI/UX", "Diseño Responsivo", "Accesibilidad", "Animación", "Animaciones"],
+  "Inteligencia Artificial y Aprendizaje Automático": ["Machine Learning", "Aprendizaje Automático", "Aprendizaje Profundo", "OpenAI", "Análisis de Series Temporales", "LLM", "RAG", "Agentes", "NLP", "Embeddings", "IA Multimodal", "IA Médica", "Google Gemini AI", "Google Gemini Vision API", "OCR", "Traducción Certificada", "OpenAI Embeddings", "Embeddings de Oraciones", "Búsqueda Vectorial", "Sistemas Multi-Agente"],
+  "Gestión de Proyectos y Metodologías": ["Gestión de Proyectos", "Git", "Control de Versiones", "Documentación"],
+  "Análisis Específicos": ["Análisis Financiero", "Análisis de Encuestas", "Análisis de Mercado", "Engagement del Usuario", "Comportamiento del Cliente", "Interacción de Usuarios", "Análisis de Comportamiento"],
+  "Herramientas y Plataformas": ["Python", "JavaScript", "ArcGIS", "Plataforma SaaS", "Pandas", "Numpy", "TensorFlow", "PyTorch", "Mapbox GL", "Turf.js", "Google Cloud", "Speechmatics", "FAISS", "RBAC", "python-docx", "Parseo XML", "BigQuery", "QGIS", "mapclassify", "Estadística Espacial", "Moran's I (LISA)", "Estimación de Densidad de Kernel"]
+};
+
+// Sort projects by date (most recent to oldest)
+const projects = [...projectsData].sort((a, b) => {
+  return new Date(b.date).getTime() - new Date(a.date).getTime();
+});
+
+// Structured data for SEO (localised)
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Gairo Peralta",
+    "alternateName": [
+      "Gairo Yostin Peralta",
+      "Gairo Yostin Peralta Alvarez",
+      "Gairo Y. Peralta"
+    ],
+    "jobTitle": "Ingeniero de IA/ML",
+    "knowsAbout": Array.from(new Set(projects.flatMap(p => p.tags || [])))
+  },
+  "about": {
+    "@type": "ItemList",
+    "itemListElement": projects.map((project, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Project",
+        "name": project.title,
+        "description": project.description
+      }
+    }))
+  }
+};
+---
+
+<Layout title="Experiencia y Proyectos - Gairo Peralta" description="Explora proyectos de IA/ML, LLM y GeoAI que muestran sistemas en producción, analítica y pipelines de datos escalables." isWide={true}>
+  <div class="fade-container px-2 sm:px-4" data-experience-page>
+    <!-- Background overlay for Mobile Drawer backdrop -->
+    <div id="filters-backdrop" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300 pointer-events-none lg:hidden"></div>
+
+    <div class="scrollable-content custom-scrollbar px-1">
+      <h1 class="text-3xl sm:text-5xl font-extrabold mb-6 sm:mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-pink-400 to-indigo-300 tracking-tight">Experiencia y Proyectos</h1>
+      
+      <!-- Stats Overview Telemetry Dashboard -->
+      <div class="bg-slate-900/40 backdrop-blur-md p-5 sm:p-6 rounded-2xl mb-6 sm:mb-8 border border-slate-800/80 shadow-2xl relative overflow-hidden" data-stats-overview data-reveal>
+        <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/5 to-pink-500/5 pointer-events-none" aria-hidden="true"></div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center divide-x-0 md:divide-x divide-slate-800/60 relative z-10">
+          <div class="p-2">
+            <div class="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-400 stat-number" data-target={projects.length}>0</div>
+            <div class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 mt-1">Proyectos Totales</div>
+          </div>
+          <div class="p-2">
+            <div class="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-400 stat-number" data-target={new Set(projects.map(p => p.company)).size}>0</div>
+            <div class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 mt-1">Empresas</div>
+          </div>
+          <div class="p-2">
+            <div class="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-400 stat-number" data-target={new Set(projects.flatMap(p => p.tags || [])).size}>0</div>
+            <div class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 mt-1">Tecnologías</div>
+          </div>
+          <div class="p-2">
+            <div class="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-400 stat-number" data-target={Math.max(...projects.map(p => new Date(p.date).getFullYear())) - Math.min(...projects.map(p => new Date(p.date).getFullYear())) + 1}>0</div>
+            <div class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 mt-1">Años Activo</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Interactive Controls Panel: Search + View Switcher -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-6 sm:mb-8 bg-slate-900/30 p-3 rounded-2xl border border-slate-800/40" data-reveal>
+        <!-- Search bar -->
+        <div class="relative flex-grow max-w-md">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <i class="fa-solid fa-magnifying-glass text-slate-500 text-sm"></i>
+          </span>
+          <input 
+            type="text" 
+            id="project-search" 
+            placeholder="Buscar por tecnología, título, descripción..." 
+            class="w-full bg-slate-950/80 text-slate-200 pl-9 pr-8 py-2.5 rounded-xl border border-slate-800 focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/20 outline-none text-xs sm:text-sm transition-all placeholder:text-slate-500 shadow-inner" 
+          />
+          <button id="search-clear" class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-500 hover:text-white transition-colors hidden cursor-pointer select-none">
+            <i class="fa-solid fa-circle-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Filter and View Switcher side-by-side -->
+        <div class="flex items-center gap-3 shrink-0">
+          <!-- Mobile Filters Drawer Toggle Button -->
+          <button 
+            id="mobile-filter-toggle" 
+            class="lg:hidden bg-slate-900 hover:bg-slate-800 text-slate-300 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center border border-slate-800 hover:border-slate-700/50 cursor-pointer select-none touch-manipulation active:scale-95"
+          >
+            <span>Filtros</span>
+            <i class="fa-solid fa-filter ml-2 text-indigo-400"></i>
+          </button>
+
+          <!-- Pill Toggle Switcher -->
+          <div class="flex items-center bg-slate-950/80 p-1 rounded-xl border border-slate-800/80 relative w-fit shrink-0 select-none">
+            <!-- Sliding background indicator -->
+            <div class="absolute top-1 bottom-1 left-1 bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-lg transition-all duration-300 ease-out shadow-md" id="view-indicator" style="width: 80px; transform: translateX(0px);"></div>
+            
+            <button 
+              id="toggle-timeline" 
+              class="relative z-10 text-white font-bold text-xs py-2 px-3 rounded-lg flex items-center gap-1.5 transition-colors duration-300 cursor-pointer touch-manipulation"
+              data-view="timeline"
+            >
+              <i class="fa-solid fa-timeline text-[10px]"></i> Línea de Tiempo
+            </button>
+            
+            <button 
+              id="toggle-grid" 
+              class="relative z-10 text-slate-400 font-bold text-xs py-2 px-3 rounded-lg flex items-center gap-1.5 transition-colors duration-300 cursor-pointer touch-manipulation"
+              data-view="grid"
+            >
+              <i class="fa-solid fa-grip-vertical text-[10px]"></i> Cuadrícula
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Filters and Content Layout -->
+      <div class="flex flex-col lg:flex-row gap-6 sm:gap-8 mb-16 relative">
+        
+        <!-- Main Projects Container -->
+        <div class="w-full lg:w-3/4 order-2 lg:order-1 relative">
+          
+          <div id="projects-container" class="view-mode-timeline relative transition-all duration-500">
+            
+            <!-- Dynamic SVG Timeline Progress Bar -->
+            <div id="timeline-bar-wrapper" class="absolute left-0 top-6 bottom-6 w-[3px] bg-slate-900 rounded-full overflow-hidden select-none pointer-events-none">
+              <div id="timeline-progress-bar" class="w-full h-0 bg-gradient-to-b from-indigo-500 via-pink-500 to-indigo-500 rounded transition-all duration-100 ease-out"></div>
+            </div>
+
+            <!-- Empty results showcase -->
+            <div id="empty-projects-state" class="hidden text-center py-16 px-4 bg-slate-900/20 rounded-2xl border border-dashed border-slate-800/80">
+              <i class="fa-solid fa-magnifying-glass text-slate-600 text-4xl mb-4 block"></i>
+              <h3 class="text-white font-bold text-lg mb-1">Ningún proyecto coincide con tu búsqueda</h3>
+              <p class="text-slate-400 text-xs sm:text-sm max-w-xs mx-auto">Intenta borrar el texto de búsqueda o restablecer las etiquetas de filtro activas para descubrir más.</p>
+            </div>
+            
+            <div id="projects-list-wrapper" class="transition-all duration-300">
+              {projects.map((project) => (
+                <div 
+                  class="project-wrapper relative" 
+                  data-date={project.date} 
+                  data-tags={project.tags?.join(',')}
+                  data-title={project.title}
+                  data-company={project.company}
+                  data-description={typeof project.description === 'string' ? project.description : (project.description as any).join(' ')}
+                >
+                  <!-- Timeline Node Dot -->
+                  <div class="timeline-dot-wrapper absolute left-0 top-24 transform -translate-x-1.5 z-20 pointer-events-none select-none">
+                    <div class="timeline-dot w-3.5 h-3.5 bg-slate-900 rounded-full border-2 border-slate-700 transition-all duration-300 shadow-md"></div>
+                  </div>
+                  
+                  <!-- Timeline Date Badge (Desktop-only next to card) -->
+                  <div class="timeline-year-label absolute -left-20 top-24 -translate-x-1/2 hidden xl:block select-none text-right">
+                    <span class="text-xs font-black tracking-widest text-slate-500 uppercase block">
+                      {new Date(project.date).getFullYear()}
+                    </span>
+                    <span class="text-[9px] font-semibold text-slate-600 tracking-wider block mt-0.5">
+                      {(() => {
+                        const mStr = new Date(project.date).toLocaleDateString('es-ES', { month: 'short' });
+                        return mStr.replace('.', '').replace(/^\w/, (c) => c.toUpperCase());
+                      })()}
+                    </span>
+                  </div>
+                  
+                  <div class="project-card-outer">
+                    <ProjectCard project={project} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <!-- Filters Sidebar & Mobile Drawer Panel -->
+        <div 
+          id="filters-container" 
+          class="w-full lg:w-1/4 lg:sticky lg:top-8 self-start order-1 lg:order-2 fixed inset-x-0 bottom-0 z-50 bg-slate-950/95 backdrop-blur-2xl border-t border-slate-800 rounded-t-3xl shadow-2xl p-6 transition-transform duration-500 ease-in-out translate-y-full lg:translate-y-0 lg:bg-transparent lg:border-0 lg:p-0 lg:rounded-none lg:shadow-none lg:z-auto"
+          data-reveal
+        >
+          <!-- Mobile Drawer Drag Handle -->
+          <div class="w-12 h-1 bg-slate-800 rounded-full mx-auto mb-5 pointer-events-none lg:hidden select-none"></div>
+
+          <div class="bg-slate-900/50 backdrop-blur-md lg:bg-slate-900/80 p-0 lg:p-5 rounded-2xl lg:border border-slate-800/80 shadow-none lg:shadow-2xl relative overflow-hidden flex flex-col max-h-[80vh] lg:max-h-none">
+            
+            <!-- Filters Header -->
+            <div class="flex items-center justify-between mb-4 border-b border-slate-800/60 pb-3">
+              <h2 class="text-base font-extrabold uppercase tracking-widest text-pink-500 flex items-center gap-2">
+                <i class="fa-solid fa-filter text-xs"></i> Filtrar Proyectos
+              </h2>
+              <!-- Close button for mobile drawer -->
+              <button id="mobile-filter-close" class="lg:hidden text-slate-500 hover:text-white transition-colors cursor-pointer select-none p-1.5 rounded-lg hover:bg-slate-800/60">
+                <i class="fa-solid fa-xmark text-lg"></i>
+              </button>
+            </div>
+
+            <!-- Collapsible Filters Categories Scroll Area -->
+            <div class="space-y-3 overflow-y-auto pr-1 flex-grow scrollable-filters custom-scrollbar pb-3">
+              {Object.entries(tagCategories)
+                .filter(([_, tags]) => tags.some(tag => projects.some(p => p.tags?.includes(tag))))
+                .map(([category, tags]) => (
+                <div class="bg-slate-950/40 rounded-xl border border-slate-900 p-2.5 transition-all duration-300 hover:border-slate-800">
+                  <button 
+                    class="category-filter w-full text-left font-bold text-indigo-300 hover:text-indigo-100 transition-colors duration-300 flex items-center justify-between select-none touch-manipulation cursor-pointer" 
+                    data-selected="false"
+                    data-category={category}
+                  >
+                    <span class="flex items-center gap-2">
+                      <span class="text-sm shrink-0 select-none">{getCategoryIcon(category)}</span>
+                      <span class="text-xs font-bold leading-tight">{category}</span>
+                    </span>
+                    <span class="ml-2 text-[10px] bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 font-extrabold px-1.5 py-0.5 rounded-full select-none">
+                      {tags.filter(tag => projects.some(p => p.tags?.includes(tag))).length}
+                    </span>
+                  </button>
+                  <div class="mt-2.5 grid grid-cols-1 gap-1 hidden" data-tag-container>
+                    {tags.filter(tag => projects.some(p => p.tags?.includes(tag))).map((tag) => (
+                      <button 
+                        class="tag-filter w-full text-left text-slate-300 text-[10px] font-bold py-1.5 px-3 rounded-lg transition duration-300 hover:bg-slate-900 border border-transparent hover:border-slate-800 flex justify-between items-center touch-manipulation select-none cursor-pointer active:scale-98" 
+                        data-selected="false" 
+                        data-tag={tag}
+                      >
+                        <span class="line-clamp-1">{tag}</span>
+                        <span class="text-[9px] bg-slate-900/80 border border-slate-800 px-1.5 py-0.5 rounded-md font-extrabold text-slate-500 shrink-0">
+                          {projects.filter(p => p.tags?.includes(tag)).length}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <!-- Clear Action Area -->
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center gap-3 shrink-0">
+              <button 
+                id="clear-filters" 
+                class="flex-grow bg-slate-950 hover:bg-slate-900 text-slate-400 hover:text-white py-2.5 rounded-xl text-xs font-bold border border-slate-800/80 hover:border-slate-700/60 shadow-lg transition duration-300 touch-manipulation select-none cursor-pointer flex items-center justify-center gap-1.5"
+              >
+                <i class="fa-solid fa-rotate-left text-[10px]"></i> Restablecer
+              </button>
+              <button 
+                id="mobile-drawer-apply" 
+                class="flex-grow bg-gradient-to-r from-pink-500 to-indigo-600 hover:from-pink-600 hover:to-indigo-700 text-white py-2.5 rounded-xl text-xs font-bold shadow-lg shadow-indigo-500/10 hover:shadow-indigo-500/20 transition-all duration-300 touch-manipulation select-none cursor-pointer lg:hidden"
+              >
+                Aplicar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Add structured data for SEO -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+</Layout>
+
+<script>
+  const initExperience = () => {
+    const root = document.querySelector('[data-experience-page]') as HTMLElement | null;
+    if (!root || root.dataset.initialized === 'true') return;
+    root.dataset.initialized = 'true';
+
+    document.documentElement.classList.remove('no-js');
+    document.documentElement.classList.add('js');
+
+    const searchInput = root.querySelector('#project-search') as HTMLInputElement | null;
+    const searchClear = root.querySelector('#search-clear') as HTMLElement | null;
+    const categoryButtons = root.querySelectorAll('.category-filter');
+    const tagButtons = root.querySelectorAll('.tag-filter');
+    const projectWrappers = root.querySelectorAll('.project-wrapper');
+    const clearFiltersButton = root.querySelector('#clear-filters');
+    const toggleTimeline = root.querySelector('#toggle-timeline');
+    const toggleGrid = root.querySelector('#toggle-grid');
+    const viewIndicator = root.querySelector('#view-indicator') as HTMLElement | null;
+    const projectsContainer = root.querySelector('#projects-container');
+    const progressBar = root.querySelector('#timeline-progress-bar') as HTMLElement | null;
+    const emptyState = root.querySelector('#empty-projects-state');
+    
+    // Mobile Drawer Elements
+    const mobileFilterToggle = root.querySelector('#mobile-filter-toggle');
+    const filtersContainer = root.querySelector('#filters-container');
+    const mobileFilterClose = root.querySelector('#mobile-filter-close');
+    const filtersBackdrop = root.querySelector('#filters-backdrop') as HTMLElement | null;
+    const mobileDrawerApply = root.querySelector('#mobile-drawer-apply');
+
+    const selectedTags = new Set<string>();
+    let searchQuery = '';
+
+    // ==========================================
+    // 1. DUAL VIEW SYSTEM (TIMELINE VS GRID)
+    // ==========================================
+    const updateScrollProgress = () => {
+      if (!projectsContainer || projectsContainer.classList.contains('view-mode-grid')) {
+        if (progressBar) progressBar.style.height = '0%';
+        return;
+      }
+
+      const activeWrappers = Array.from(projectWrappers).filter(el => (el as HTMLElement).style.display !== 'none');
+      if (activeWrappers.length === 0) {
+        if (progressBar) progressBar.style.height = '0%';
+        return;
+      }
+
+      // Calculate scroll progress relative to the scrollable content or window
+      let scrollTop = 0;
+      let scrollHeight = 0;
+      let clientHeight = 0;
+      
+      const scrollableDiv = document.querySelector('.scrollable-content');
+      const isMobile = window.innerWidth < 1024;
+
+      if (!isMobile && scrollableDiv instanceof HTMLElement) {
+        scrollTop = scrollableDiv.scrollTop;
+        scrollHeight = scrollableDiv.scrollHeight;
+        clientHeight = scrollableDiv.clientHeight;
+      } else {
+        scrollTop = window.scrollY;
+        scrollHeight = document.documentElement.scrollHeight;
+        clientHeight = window.innerHeight;
+      }
+
+      const totalScrollable = scrollHeight - clientHeight;
+      const progressPercent = totalScrollable > 0 ? (scrollTop / totalScrollable) * 115 : 0; // slight boost for visual coverage
+      if (progressBar) progressBar.style.height = `${Math.min(progressPercent, 100)}%`;
+
+      // Active Timeline Dot highlighting
+      activeWrappers.forEach((wrapper) => {
+        if (wrapper instanceof HTMLElement) {
+          const rect = wrapper.getBoundingClientRect();
+          const dot = wrapper.querySelector('.timeline-dot');
+          if (dot instanceof HTMLElement) {
+            // Highlight dot when card is in core reading zone (45% viewport height)
+            if (rect.top < window.innerHeight * 0.45 && rect.bottom > window.innerHeight * 0.15) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          }
+        }
+      });
+    };
+
+    const setViewMode = (mode: 'timeline' | 'grid') => {
+      if (!projectsContainer || !viewIndicator) return;
+      
+      localStorage.setItem('projects-view-preference', mode);
+
+      if (mode === 'timeline') {
+        projectsContainer.classList.remove('view-mode-grid');
+        projectsContainer.classList.add('view-mode-timeline');
+        
+        toggleTimeline?.classList.add('text-white');
+        toggleTimeline?.classList.remove('text-slate-400');
+        toggleGrid?.classList.add('text-slate-400');
+        toggleGrid?.classList.remove('text-white');
+        
+        if (toggleTimeline instanceof HTMLElement) {
+          viewIndicator.style.width = `${toggleTimeline.offsetWidth}px`;
+          viewIndicator.style.transform = `translateX(${toggleTimeline.offsetLeft - 4}px)`;
+        }
+      } else {
+        projectsContainer.classList.remove('view-mode-timeline');
+        projectsContainer.classList.add('view-mode-grid');
+        
+        toggleGrid?.classList.add('text-white');
+        toggleGrid?.classList.remove('text-slate-400');
+        toggleTimeline?.classList.add('text-slate-400');
+        toggleTimeline?.classList.remove('text-white');
+        
+        if (toggleGrid instanceof HTMLElement) {
+          viewIndicator.style.width = `${toggleGrid.offsetWidth}px`;
+          viewIndicator.style.transform = `translateX(${toggleGrid.offsetLeft - 4}px)`;
+        }
+      }
+      
+      // Fire scroll progress update on view change
+      setTimeout(updateScrollProgress, 100);
+    };
+
+    toggleTimeline?.addEventListener('click', () => setViewMode('timeline'));
+    toggleGrid?.addEventListener('click', () => setViewMode('grid'));
+
+    // Init View Preferences
+    const savedPreference = localStorage.getItem('projects-view-preference') as 'timeline' | 'grid' | null;
+    setViewMode(savedPreference || 'timeline');
+
+    // Scroll Listeners
+    const scrollableDiv = document.querySelector('.scrollable-content');
+    if (scrollableDiv instanceof HTMLElement) {
+      scrollableDiv.addEventListener('scroll', updateScrollProgress);
+    }
+    window.addEventListener('scroll', updateScrollProgress);
+
+    // ==========================================
+    // 2. DYNAMIC MOUSE COORDINATE SPOTLIGHT GLOW
+    // ==========================================
+    const setupCardSpotlight = () => {
+      const cards = root.querySelectorAll('[data-card-root]');
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (event) => {
+          const e = event as MouseEvent;
+          const rect = (card as HTMLElement).getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          (card as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
+          (card as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    };
+    setupCardSpotlight();
+
+    // ==========================================
+    // 3. STATS COUNT-UP TELEMETRY ANIMATION
+    // ==========================================
+    const animateStats = () => {
+      const statNumbers = root.querySelectorAll('.stat-number');
+      statNumbers.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-target') || '0', 10);
+        const duration = 1200; // ms
+        const startTime = performance.now();
+        
+        const updateNumber = (currentTime: number) => {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out Quad
+          const ease = progress * (2 - progress);
+          const currentVal = Math.floor(ease * target);
+          stat.textContent = currentVal.toString();
+          
+          if (progress < 1) {
+            requestAnimationFrame(updateNumber);
+          } else {
+            stat.textContent = target.toString();
+          }
+        };
+        requestAnimationFrame(updateNumber);
+      });
+    };
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateStats();
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    
+    const statsOverview = root.querySelector('[data-stats-overview]');
+    if (statsOverview) statsObserver.observe(statsOverview);
+
+    // ==========================================
+    // 4. ACCORDION EXPANDABLE PANE SYSTEM
+    // ==========================================
+    const setupAccordions = () => {
+      const triggers = root.querySelectorAll('[data-accordion-trigger]');
+      triggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const card = trigger.closest('[data-card-root]');
+          const pane = card?.querySelector('[data-accordion-pane]') as HTMLElement | null;
+          const icon = trigger.querySelector('[data-accordion-icon]') as HTMLElement | null;
+          const label = trigger.querySelector('span');
+
+          if (pane) {
+            const isExpanded = pane.style.maxHeight && pane.style.maxHeight !== '0px';
+            
+            if (isExpanded) {
+              pane.style.maxHeight = '0px';
+              icon?.classList.remove('rotate-180');
+              if (label) label.textContent = 'Explorar Detalles Técnicos';
+              card?.classList.remove('glowing-border-active');
+            } else {
+              pane.style.maxHeight = `${pane.scrollHeight}px`;
+              icon?.classList.add('rotate-180');
+              if (label) label.textContent = 'Colapsar Detalles';
+              card?.classList.add('glowing-border-active');
+              
+              // Smooth scroll to card if partially cut off
+              setTimeout(() => {
+                card?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }, 300);
+            }
+          }
+        });
+      });
+    };
+    setupAccordions();
+
+    // ==========================================
+    // 5. COMBINED REACTIVE FILTER & SEARCH LOGIC
+    // ==========================================
+    function filterProjects() {
+      let matchCount = 0;
+
+      projectWrappers.forEach(wrapper => {
+        if (wrapper instanceof HTMLElement) {
+          const tags = wrapper.dataset.tags?.split(',') || [];
+          const title = (wrapper.dataset.title || '').toLowerCase();
+          const company = (wrapper.dataset.company || '').toLowerCase();
+          const description = (wrapper.dataset.description || '').toLowerCase();
+          const searchContent = `${title} ${company} ${description} ${tags.join(' ')}`.toLowerCase();
+
+          // 1. Search Query Match
+          const matchesSearch = searchQuery === '' || searchContent.includes(searchQuery);
+
+          // 2. Category Tags Match (Matches if project includes ANY of the selected tags)
+          const matchesTags = selectedTags.size === 0 || Array.from(selectedTags).some(tag => tags.includes(tag));
+
+          const shouldShow = matchesSearch && matchesTags;
+
+          if (shouldShow) {
+            // Cancel any pending hide timeouts
+            if (wrapper.dataset.hideTimeoutId) {
+              clearTimeout(parseInt(wrapper.dataset.hideTimeoutId, 10));
+              delete wrapper.dataset.hideTimeoutId;
+            }
+            wrapper.style.display = 'block';
+            wrapper.classList.remove('hide-item');
+            wrapper.classList.add('reveal-item');
+            matchCount++;
+          } else {
+            wrapper.classList.remove('reveal-item');
+            wrapper.classList.add('hide-item');
+            
+            // Only set timeout if it's not already pending
+            if (!wrapper.dataset.hideTimeoutId) {
+              const timeoutId = setTimeout(() => {
+                if (wrapper.classList.contains('hide-item')) {
+                  wrapper.style.display = 'none';
+                }
+                delete wrapper.dataset.hideTimeoutId;
+              }, 300);
+              wrapper.dataset.hideTimeoutId = timeoutId.toString();
+            }
+          }
+        }
+      });
+
+      // Handle Empty Results Showcase
+      if (emptyState) {
+        if (matchCount === 0) {
+          emptyState.classList.remove('hidden');
+        } else {
+          emptyState.classList.add('hidden');
+        }
+      }
+
+      // Recalculate dynamic scroll bar progress since cards layout shifted
+      setTimeout(updateScrollProgress, 350);
+    }
+
+    // A) Search Input Handler
+    searchInput?.addEventListener('input', () => {
+      searchQuery = (searchInput.value || '').toLowerCase().trim();
+      
+      if (searchClear) {
+        if (searchQuery.length > 0) {
+          searchClear.classList.remove('hidden');
+        } else {
+          searchClear.classList.add('hidden');
+        }
+      }
+      
+      filterProjects();
+    });
+
+    searchClear?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      searchClear?.classList.add('hidden');
+      filterProjects();
+    });
+
+    // B) Category Expand/Collapse Toggle
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isSelected = button.getAttribute('data-selected') === 'true';
+        const tagContainer = button.nextElementSibling;
+        
+        if (isSelected) {
+          button.setAttribute('data-selected', 'false');
+          button.classList.remove('bg-slate-900');
+          button.classList.add('bg-transparent');
+          tagContainer?.classList.add('hidden');
+        } else {
+          button.setAttribute('data-selected', 'true');
+          button.classList.add('bg-slate-900');
+          button.classList.remove('bg-transparent');
+          tagContainer?.classList.remove('hidden');
+        }
+      });
+    });
+
+    // C) Tag Select/Deselect Handler
+    tagButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const tag = button.getAttribute('data-tag') || button.textContent?.trim() || '';
+        const isSelected = button.getAttribute('data-selected') === 'true';
+        
+        if (isSelected) {
+          selectedTags.delete(tag);
+          button.setAttribute('data-selected', 'false');
+          button.classList.remove('bg-indigo-600', 'border-indigo-500/30', 'text-white');
+          button.classList.add('bg-transparent', 'border-transparent', 'text-slate-300');
+        } else {
+          selectedTags.add(tag);
+          button.setAttribute('data-selected', 'true');
+          button.classList.add('bg-indigo-600', 'border-indigo-500/30', 'text-white');
+          button.classList.remove('bg-transparent', 'border-transparent', 'text-slate-300');
+        }
+        
+        // Immediate filtering on desktop
+        if (window.innerWidth >= 1024) {
+          filterProjects();
+        }
+      });
+    });
+
+    // E) Reset/Clear Action
+    clearFiltersButton?.addEventListener('click', () => {
+      selectedTags.clear();
+      
+      tagButtons.forEach(button => {
+        button.setAttribute('data-selected', 'false');
+        button.classList.remove('bg-indigo-600', 'border-indigo-500/30', 'text-white');
+        button.classList.add('bg-transparent', 'border-transparent', 'text-slate-300');
+      });
+
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      if (searchClear) searchClear.classList.add('hidden');
+      
+      filterProjects();
+      
+      // On mobile, close drawer after resetting
+      if (window.innerWidth < 1024) {
+        closeMobileDrawer();
+      }
+    });
+
+    // ==========================================
+    // 6. MOBILE FILTERS BOTTOM SHEET / DRAWER
+    // ==========================================
+    const openMobileDrawer = () => {
+      if (filtersContainer && filtersBackdrop) {
+        filtersBackdrop.classList.remove('hidden');
+        // Force layout repaint
+        void filtersBackdrop.offsetWidth;
+        filtersBackdrop.classList.remove('opacity-0');
+        filtersBackdrop.classList.add('opacity-100');
+
+        filtersContainer.classList.remove('translate-y-full');
+        filtersContainer.classList.add('translate-y-0');
+        document.body.style.overflow = 'hidden'; // Lock background scroll
+      }
+    };
+
+    const closeMobileDrawer = () => {
+      if (filtersContainer && filtersBackdrop) {
+        filtersContainer.classList.remove('translate-y-0');
+        filtersContainer.classList.add('translate-y-full');
+
+        filtersBackdrop.classList.remove('opacity-100');
+        filtersBackdrop.classList.add('opacity-0');
+        
+        // Auto-apply current selections on dismissal for absolute seamless flow
+        filterProjects();
+        
+        setTimeout(() => {
+          filtersBackdrop.classList.add('hidden');
+          document.body.style.overflow = ''; // Unlock background scroll
+        }, 300);
+      }
+    };
+
+    mobileFilterToggle?.addEventListener('click', openMobileDrawer);
+    mobileFilterClose?.addEventListener('click', closeMobileDrawer);
+    filtersBackdrop?.addEventListener('click', closeMobileDrawer);
+    
+    mobileDrawerApply?.addEventListener('click', () => {
+      filterProjects();
+      closeMobileDrawer();
+    });
+
+    // Handle viewport resize: fix filters classes if desktop layout restores
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        document.body.style.overflow = '';
+        if (filtersContainer) {
+          filtersContainer.classList.remove('translate-y-full', 'translate-y-0');
+        }
+        if (filtersBackdrop) {
+          filtersBackdrop.classList.add('hidden');
+          filtersBackdrop.classList.remove('opacity-100');
+        }
+      }
+      setViewMode(localStorage.getItem('projects-view-preference') as 'timeline' | 'grid' || 'timeline');
+    };
+    window.addEventListener('resize', handleResize);
+
+    // ==========================================
+    // 7. CARD REVEAL ON SCROLL (FADE IN UP STAGGER)
+    // ==========================================
+    const setupRevealOnScroll = () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        projectWrappers.forEach(el => {
+          if (el instanceof HTMLElement) el.style.opacity = '1';
+        });
+        return;
+      }
+
+      const cardRevealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fadeInUp');
+            cardRevealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
+
+      projectWrappers.forEach(el => cardRevealObserver.observe(el));
+    };
+    setupRevealOnScroll();
+  };
+
+  // Astro page cycle handlers
+  document.addEventListener('DOMContentLoaded', initExperience);
+  document.addEventListener('astro:page-load', initExperience);
+</script>
+
+<style>
+  /* Responsive Scroll Container Fixes */
+  @media (max-width: 1024px) {
+    .scrollable-content {
+      height: auto !important;
+      overflow-y: visible !important;
+      padding-right: 0 !important;
+      mask-image: none !important;
+      -webkit-mask-image: none !important;
+    }
+    .fade-container {
+      height: auto !important;
+      overflow: visible !important;
+    }
+    .fade-container::after {
+      display: none !important;
+    }
+  }
+
+  /* Grid vs Timeline Styling Transition */
+  .view-mode-grid #projects-list-wrapper {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 640px) {
+    .view-mode-grid #projects-list-wrapper {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .view-mode-grid #projects-list-wrapper {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem;
+    }
+  }
+
+  /* Hide Timeline components in Grid View */
+  .view-mode-grid #timeline-bar-wrapper,
+  .view-mode-grid .timeline-dot-wrapper,
+  .view-mode-grid .timeline-year-label {
+    display: none !important;
+  }
+
+  .view-mode-grid .project-wrapper {
+    padding-left: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Timeline View Padding and spacing */
+  .view-mode-timeline .project-wrapper {
+    padding-left: 2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .view-mode-timeline .project-wrapper {
+      padding-left: 3rem;
+      margin-bottom: 4.5rem;
+    }
+  }
+
+  /* Active Timeline Node Coloring */
+  .timeline-dot.active {
+    background: #ec4899 !important; /* Glow Pink */
+    border-color: #818cf8 !important; /* Indigo ring */
+    transform: scale(1.3);
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.8), 0 0 5px rgba(129, 140, 248, 0.4);
+  }
+
+  /* Fade Stagger Animation for items display shift */
+  .reveal-item {
+    animation: scaleFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hide-item {
+    animation: scaleFadeOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes scaleFadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes scaleFadeOut {
+    from {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+    }
+  }
+
+  /* Fade In Up Entrance on scroll */
+  .project-wrapper {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scrollbar filters block styling */
+  .scrollable-filters {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(99, 102, 241, 0.3) rgba(15, 23, 42, 0.6);
+  }
+
+  .scrollable-filters::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .scrollable-filters::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.4);
+    border-radius: 4px;
+  }
+
+  /* Spotlight glow outline effect */
+  .glowing-border-active {
+    border-color: rgba(236, 72, 153, 0.4) !important;
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.4), 0 0 25px rgba(236, 72, 153, 0.15) !important;
+  }
+
+  /* Text Shadow Helper */
+  .text-shadow-sm {
+    text-shadow: 0 2px 4px rgba(15, 23, 42, 0.8);
+  }
+
+  /* Custom scrollbar override */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, rgba(236, 72, 153, 0.4), rgba(79, 70, 229, 0.4));
+    border-radius: 10px;
+  }
+
+  .category-filter[data-selected="true"] {
+    border-color: rgba(99, 102, 241, 0.25);
+  }
+</style>

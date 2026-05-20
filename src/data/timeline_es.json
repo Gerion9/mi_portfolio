@@ -1,0 +1,42 @@
+[
+  {
+    "year": 2026,
+    "event": "Ingeniero Líder de AI/ML y Software en BlackPrint Technologies",
+    "description": "Diseño y desarrollo de monorepos de producción (Turborepo), sistemas multi-agente (LangGraph), agentes de ventas con IA en tiempo real (Next.js 15 y WhatsApp Cloud API) y pipelines de emparejamiento geoespacial de alto rendimiento."
+  },
+  {
+    "year": 2025,
+    "event": "Ingeniero de AI/ML en BlackPrint Technologies",
+    "description": "Desarrollo de plataformas GeoAI impulsadas por LLMs para más de 2.5 millones de manzanas urbanas con inferencia en tiempo real y mapas interactivos."
+  },
+  {
+    "year": 2025,
+    "event": "Ingeniero Líder de AI/ML (Consultoría) en Law Offices of Manuel Solis",
+    "description": "Desarrollo de agentes LLM personalizados para documentos legales y una plataforma de inteligencia de reuniones con RBAC (control de acceso basado en roles)."
+  },
+  {
+    "year": 2025,
+    "event": "Estudiante de Investigación Visitante en UT San Antonio",
+    "description": "Investigación en IA médica con grafos de conocimiento y pipelines de evaluación multi-agente."
+  },
+  {
+    "year": 2024,
+    "event": "Ingeniero de IA en PRODENSA (Contrato)",
+    "description": "Desarrollo de pipelines de extracción OCR y Llama 3.3 con FastAPI + React/Vite para procesamiento de PDFs en tiempo real."
+  },
+  {
+    "year": 2023,
+    "event": "Ingeniero de AI/ML en STRTGY",
+    "description": "Arquitectura de sistemas GeoAI multimodales y sistemas RAG empresariales con recuperación híbrida."
+  },
+  {
+    "year": 2022,
+    "event": "Graduado de UC Berkeley",
+    "description": "Licenciatura en Ciencia de Datos, con enfoque en aprendizaje automático (Machine Learning) y análisis estadístico."
+  },
+  {
+    "year": 2022,
+    "event": "Científico de Datos en BlackPrint Technologies",
+    "description": "Entrega de analítica de geocodificación y pipelines ETL en pandas/SQL para inteligencia de propiedades."
+  }
+]
