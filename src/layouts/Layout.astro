@@ -137,12 +137,14 @@ if (isEs) {
 		<ViewTransitions />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style is:global>
-  html, body {
-    background-color: #0a192f;
+  html {
+    background-image: linear-gradient(135deg, #0a192f 0%, #1a0a1f 100%);
+    background-attachment: fixed;
     overflow-x: hidden;
   }
 
   body {
+    background-color: transparent !important;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -151,9 +153,26 @@ if (isEs) {
     line-height: 1.5;
   }
 
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, transparent 20%, #0a192f 20%, #0a192f 80%, transparent 80%, transparent);
+    background-size: 50px 50px;
+    opacity: 0.06;
+    z-index: -1;
+    pointer-events: none;
+  }
+
   @media (min-width: 768px) {
     body {
       font-size: 18px;
+    }
+    body::before {
+      opacity: 0.1;
     }
   }
 
@@ -448,10 +467,7 @@ if (isEs) {
 </style>
 	</head>
 	<body class="flex flex-col min-h-screen">
-		<!-- Dynamic Interactive Premium Background Layers -->
-		<div class="fixed inset-0 pointer-events-none" style="z-index: -3; background: linear-gradient(135deg, #0a192f 0%, #1a0a1f 100%);"></div>
 		<div id="global-pointer-aura"></div>
-		<div class="fixed inset-0 pointer-events-none opacity-[0.06] md:opacity-[0.1]" style="z-index: -1; background: radial-gradient(circle at 50% 50%, transparent 20%, #0a192f 20%, #0a192f 80%, transparent 80%, transparent); background-size: 50px 50px;"></div>
 		<header class="p-4 md:p-6">
 			<nav>
 				<ul class="flex flex-wrap justify-center space-x-4 md:space-x-8 items-center">
