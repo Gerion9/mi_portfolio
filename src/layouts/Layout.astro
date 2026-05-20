@@ -354,6 +354,22 @@ if (isEs) {
     transform: translateX(120%);
   }
 
+  /* Premium Global Mouse-following Background Aura */
+  #global-pointer-aura {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    opacity: 0;
+    background: radial-gradient(
+      600px circle at var(--global-mouse-x, 0px) var(--global-mouse-y, 0px),
+      rgba(99, 102, 241, 0.1) 0%,
+      rgba(236, 72, 153, 0.04) 40%,
+      transparent 80%
+    );
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
   .card-hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
@@ -449,6 +465,7 @@ if (isEs) {
 </style>
 	</head>
 	<body class="flex flex-col min-h-screen">
+		<div id="global-pointer-aura"></div>
 		<header class="p-4 md:p-6">
 			<nav>
 				<ul class="flex flex-wrap justify-center space-x-4 md:space-x-8 items-center">
@@ -509,6 +526,24 @@ if (isEs) {
 				});
 			};
 
+			const setupGlobalAura = () => {
+				const aura = document.getElementById('global-pointer-aura');
+				if (!aura) return;
+				
+				if (window.globalAuraInitialized) return;
+				window.globalAuraInitialized = true;
+
+				window.addEventListener('mousemove', (e) => {
+					aura.style.setProperty('--global-mouse-x', `${e.clientX}px`);
+					aura.style.setProperty('--global-mouse-y', `${e.clientY}px`);
+					aura.style.opacity = '1';
+				});
+
+				document.addEventListener('mouseleave', () => {
+					aura.style.opacity = '0';
+				});
+			};
+
 			const setup3DTilt = () => {
 				const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 				
@@ -559,12 +594,14 @@ if (isEs) {
 			document.addEventListener('DOMContentLoaded', () => {
 				markJs();
 				setupReveal();
+				setupGlobalAura();
 				setup3DTilt();
 			});
 
 			document.addEventListener('astro:page-load', () => {
 				markJs();
 				setupReveal();
+				setupGlobalAura();
 				setup3DTilt();
 			});
 		</script>
