@@ -1,13 +1,8 @@
 [
   {
-    "year": 2026,
-    "event": "Ingeniero Líder de AI/ML y Software en BlackPrint Technologies",
-    "description": "Diseño y desarrollo de monorepos de producción (Turborepo), sistemas multi-agente (LangGraph), agentes de ventas con IA en tiempo real (Next.js 15 y WhatsApp Cloud API) y pipelines de emparejamiento geoespacial de alto rendimiento."
-  },
-  {
-    "year": 2025,
-    "event": "Ingeniero de AI/ML en BlackPrint Technologies",
-    "description": "Desarrollo de plataformas GeoAI impulsadas por LLMs para más de 2.5 millones de manzanas urbanas con inferencia en tiempo real y mapas interactivos."
+    "year": "2025 - 2026",
+    "event": "Ingeniero Líder de AI/ML en BlackPrint Technologies",
+    "description": "Diseño y desarrollo de plataformas GeoAI impulsadas por LLMs para más de 2.5 millones de manzanas urbanas, sistemas multi-agente (LangGraph), agentes de ventas con IA en tiempo real (Next.js 15 y WhatsApp Cloud API) y pipelines de emparejamiento geoespacial de alto rendimiento."
   },
   {
     "year": 2025,
