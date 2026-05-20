@@ -427,14 +427,57 @@ if (isEs) {
     z-index: 10;
   }
 
-  /* Trigger glows on hover */
-  .card-hover:hover::before, .timeline-card:hover::before, .stat-card:hover::before, .project-card:hover::before, form:hover::before, .form-container:hover::before, [data-tilt]:hover::before, [data-card-root]:hover::before, [data-stats-overview]:hover::before, .bg-gray-800\/50:hover::before, .bg-gray-800\/70:hover::before, .bg-gray-800\/80:hover::before, .bg-slate-900\/40:hover::before, .bg-slate-900\/50:hover::before, .bg-slate-900\/30:hover::before, .bg-slate-950\/40:hover::before,
-  .card-hover:hover::after, .timeline-card:hover::after, .stat-card:hover::after, .project-card:hover::after, form:hover::after, .form-container:hover::after, [data-tilt]:hover::after, [data-card-root]:hover::after, [data-stats-overview]:hover::after, .bg-gray-800\/50:hover::after, .bg-gray-800\/70:hover::after, .bg-gray-800\/80:hover::after, .bg-slate-900\/40:hover::after, .bg-slate-900\/50:hover::after, .bg-slate-900\/30:hover::after, .bg-slate-950\/40:hover::after {
+  /* Trigger glows on hover & touch active states */
+  .card-hover:hover::before, .card-hover.touch-active::before,
+  .timeline-card:hover::before, .timeline-card.touch-active::before,
+  .stat-card:hover::before, .stat-card.touch-active::before,
+  .project-card:hover::before, .project-card.touch-active::before,
+  form:hover::before, form.touch-active::before,
+  .form-container:hover::before, .form-container.touch-active::before,
+  [data-tilt]:hover::before, [data-tilt].touch-active::before,
+  [data-card-root]:hover::before, [data-card-root].touch-active::before,
+  [data-stats-overview]:hover::before, [data-stats-overview].touch-active::before,
+  .bg-gray-800\/50:hover::before, .bg-gray-800\/50.touch-active::before,
+  .bg-gray-800\/70:hover::before, .bg-gray-800\/70.touch-active::before,
+  .bg-gray-800\/80:hover::before, .bg-gray-800\/80.touch-active::before,
+  .bg-slate-900\/40:hover::before, .bg-slate-900\/40.touch-active::before,
+  .bg-slate-900\/50:hover::before, .bg-slate-900\/50.touch-active::before,
+  .bg-slate-900\/30:hover::before, .bg-slate-900\/30.touch-active::before,
+  .bg-slate-950\/40:hover::before, .bg-slate-950\/40.touch-active::before,
+  .card-hover:hover::after, .card-hover.touch-active::after,
+  .timeline-card:hover::after, .timeline-card.touch-active::after,
+  .stat-card:hover::after, .stat-card.touch-active::after,
+  .project-card:hover::after, .project-card.touch-active::after,
+  form:hover::after, form.touch-active::after,
+  .form-container:hover::after, .form-container.touch-active::after,
+  [data-tilt]:hover::after, [data-tilt].touch-active::after,
+  [data-card-root]:hover::after, [data-card-root].touch-active::after,
+  [data-stats-overview]:hover::after, [data-stats-overview].touch-active::after,
+  .bg-gray-800\/50:hover::after, .bg-gray-800\/50.touch-active::after,
+  .bg-gray-800\/70:hover::after, .bg-gray-800\/70.touch-active::after,
+  .bg-gray-800\/80:hover::after, .bg-gray-800\/80.touch-active::after,
+  .bg-slate-900\/40:hover::after, .bg-slate-900\/40.touch-active::after,
+  .bg-slate-900\/50:hover::after, .bg-slate-900\/50.touch-active::after,
+  .bg-slate-900\/30:hover::after, .bg-slate-900\/30.touch-active::after,
+  .bg-slate-950\/40:hover::after, .bg-slate-950\/40.touch-active::after {
     opacity: 1;
   }
 
-  /* Backlight neon drop-shadows on hover */
-  .card-hover:hover, .timeline-card:hover, .stat-card:hover, .project-card:hover, [data-tilt]:hover, [data-card-root]:hover, [data-stats-overview]:hover, .bg-gray-800\/50:hover, .bg-gray-800\/70:hover, .bg-gray-800\/80:hover, .bg-slate-900\/40:hover, .bg-slate-900\/50:hover, .bg-slate-900\/30:hover, .bg-slate-950\/40:hover {
+  /* Backlight neon drop-shadows on hover & touch active states */
+  .card-hover:hover, .card-hover.touch-active,
+  .timeline-card:hover, .timeline-card.touch-active,
+  .stat-card:hover, .stat-card.touch-active,
+  .project-card:hover, .project-card.touch-active,
+  [data-tilt]:hover, [data-tilt].touch-active,
+  [data-card-root]:hover, [data-card-root].touch-active,
+  [data-stats-overview]:hover, [data-stats-overview].touch-active,
+  .bg-gray-800\/50:hover, .bg-gray-800\/50.touch-active,
+  .bg-gray-800\/70:hover, .bg-gray-800\/70.touch-active,
+  .bg-gray-800\/80:hover, .bg-gray-800\/80.touch-active,
+  .bg-slate-900\/40:hover, .bg-slate-900\/40.touch-active,
+  .bg-slate-900\/50:hover, .bg-slate-900\/50.touch-active,
+  .bg-slate-900\/30:hover, .bg-slate-900\/30.touch-active,
+  .bg-slate-950\/40:hover, .bg-slate-950\/40.touch-active {
     box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45), 
                 0 0 25px rgba(242, 73, 104, 0.15), 
                 0 0 40px rgba(99, 102, 241, 0.1);
@@ -541,7 +584,33 @@ if (isEs) {
 					aura.style.opacity = '1';
 				});
 
+				window.addEventListener('touchstart', (e) => {
+					if (e.touches.length > 0) {
+						const touch = e.touches[0];
+						aura.style.setProperty('--global-mouse-x', `${touch.clientX}px`);
+						aura.style.setProperty('--global-mouse-y', `${touch.clientY}px`);
+						aura.style.opacity = '1';
+					}
+				}, { passive: true });
+
+				window.addEventListener('touchmove', (e) => {
+					if (e.touches.length > 0) {
+						const touch = e.touches[0];
+						aura.style.setProperty('--global-mouse-x', `${touch.clientX}px`);
+						aura.style.setProperty('--global-mouse-y', `${touch.clientY}px`);
+						aura.style.opacity = '1';
+					}
+				}, { passive: true });
+
 				document.addEventListener('mouseleave', () => {
+					aura.style.opacity = '0';
+				});
+
+				window.addEventListener('touchend', () => {
+					aura.style.opacity = '0';
+				});
+
+				window.addEventListener('touchcancel', () => {
 					aura.style.opacity = '0';
 				});
 			};
@@ -586,6 +655,48 @@ if (isEs) {
 							card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
 						}
 					});
+
+					// Premium Touch Support for glow & lights tracking on Mobile & Tablets
+					card.addEventListener('touchstart', (e) => {
+						if (e.touches.length > 0) {
+							card.classList.add('touch-active');
+							const touch = e.touches[0];
+							const rect = card.getBoundingClientRect();
+							const x = touch.clientX - rect.left;
+							const y = touch.clientY - rect.top;
+							card.style.setProperty('--mouse-x', `${x}px`);
+							card.style.setProperty('--mouse-y', `${y}px`);
+						}
+					}, { passive: true });
+
+					card.addEventListener('touchmove', (e) => {
+						if (e.touches.length > 0) {
+							const touch = e.touches[0];
+							const rect = card.getBoundingClientRect();
+							const x = touch.clientX - rect.left;
+							const y = touch.clientY - rect.top;
+							
+							if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+								card.classList.add('touch-active');
+								card.style.setProperty('--mouse-x', `${x}px`);
+								card.style.setProperty('--mouse-y', `${y}px`);
+							} else {
+								card.classList.remove('touch-active');
+							}
+						}
+					}, { passive: true });
+
+					card.addEventListener('touchend', () => {
+						card.classList.remove('touch-active');
+						card.style.setProperty('--mouse-x', `0px`);
+						card.style.setProperty('--mouse-y', `0px`);
+					}, { passive: true });
+
+					card.addEventListener('touchcancel', () => {
+						card.classList.remove('touch-active');
+						card.style.setProperty('--mouse-x', `0px`);
+						card.style.setProperty('--mouse-y', `0px`);
+					}, { passive: true });
 				});
 			};
 
