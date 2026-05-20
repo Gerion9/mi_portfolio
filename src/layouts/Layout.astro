@@ -354,22 +354,6 @@ if (isEs) {
     transform: translateX(120%);
   }
 
-  /* Premium Global Mouse-following Background Aura */
-  #global-pointer-aura {
-    pointer-events: none;
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    opacity: 0;
-    background: radial-gradient(
-      600px circle at var(--global-mouse-x, 0px) var(--global-mouse-y, 0px),
-      rgba(99, 102, 241, 0.1) 0%,
-      rgba(236, 72, 153, 0.04) 40%,
-      transparent 80%
-    );
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
   .card-hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
@@ -379,13 +363,13 @@ if (isEs) {
   }
 
   /* Neon Spotlights & Highlights for Box Containers */
-  .card-hover, .timeline-card, .stat-card, .project-card, form, .form-container, [data-tilt] {
+  .card-hover, .timeline-card, .stat-card, .project-card, form, .form-container, [data-tilt], [data-card-root], [data-stats-overview], .bg-gray-800\/50, .bg-gray-800\/70, .bg-gray-800\/80, .bg-slate-900\/40, .bg-slate-900\/50, .bg-slate-900\/30, .bg-slate-950\/40 {
     position: relative;
     overflow: hidden;
   }
 
   /* Spotlight glow overlay inside the box */
-  .card-hover::after, .timeline-card::after, .stat-card::after, .project-card::after, form::after, .form-container::after, [data-tilt]::after {
+  .card-hover::after, .timeline-card::after, .stat-card::after, .project-card::after, form::after, .form-container::after, [data-tilt]::after, [data-card-root]::after, [data-stats-overview]::after, .bg-gray-800\/50::after, .bg-gray-800\/70::after, .bg-gray-800\/80::after, .bg-slate-900\/40::after, .bg-slate-900\/50::after, .bg-slate-900\/30::after, .bg-slate-950\/40::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -402,7 +386,7 @@ if (isEs) {
   }
 
   /* Border highlight overlay */
-  .card-hover::before, .timeline-card::before, .stat-card::before, .project-card::before, form::before, .form-container::before, [data-tilt]::before {
+  .card-hover::before, .timeline-card::before, .stat-card::before, .project-card::before, form::before, .form-container::before, [data-tilt]::before, [data-card-root]::before, [data-stats-overview]::before, .bg-gray-800\/50::before, .bg-gray-800\/70::before, .bg-gray-800\/80::before, .bg-slate-900\/40::before, .bg-slate-900\/50::before, .bg-slate-900\/30::before, .bg-slate-950\/40::before {
     content: '';
     position: absolute;
     inset: -1px;
@@ -420,19 +404,19 @@ if (isEs) {
   }
 
   /* Make sure children sit above the glow */
-  .card-hover > *, .timeline-card > *, .stat-card > *, .project-card > *, form > *, .form-container > *, [data-tilt] > * {
+  .card-hover > *, .timeline-card > *, .stat-card > *, .project-card > *, form > *, .form-container > *, [data-tilt] > *, [data-card-root] > *, [data-stats-overview] > *, .bg-gray-800\/50 > *, .bg-gray-800\/70 > *, .bg-gray-800\/80 > *, .bg-slate-900\/40 > *, .bg-slate-900\/50 > *, .bg-slate-900\/30 > *, .bg-slate-950\/40 > * {
     position: relative;
     z-index: 10;
   }
 
   /* Trigger glows on hover */
-  .card-hover:hover::before, .timeline-card:hover::before, .stat-card:hover::before, .project-card:hover::before, form:hover::before, .form-container:hover::before, [data-tilt]:hover::before,
-  .card-hover:hover::after, .timeline-card:hover::after, .stat-card:hover::after, .project-card:hover::after, form:hover::after, .form-container:hover::after, [data-tilt]:hover::after {
+  .card-hover:hover::before, .timeline-card:hover::before, .stat-card:hover::before, .project-card:hover::before, form:hover::before, .form-container:hover::before, [data-tilt]:hover::before, [data-card-root]:hover::before, [data-stats-overview]:hover::before, .bg-gray-800\/50:hover::before, .bg-gray-800\/70:hover::before, .bg-gray-800\/80:hover::before, .bg-slate-900\/40:hover::before, .bg-slate-900\/50:hover::before, .bg-slate-900\/30:hover::before, .bg-slate-950\/40:hover::before,
+  .card-hover:hover::after, .timeline-card:hover::after, .stat-card:hover::after, .project-card:hover::after, form:hover::after, .form-container:hover::after, [data-tilt]:hover::after, [data-card-root]:hover::after, [data-stats-overview]:hover::after, .bg-gray-800\/50:hover::after, .bg-gray-800\/70:hover::after, .bg-gray-800\/80:hover::after, .bg-slate-900\/40:hover::after, .bg-slate-900\/50:hover::after, .bg-slate-900\/30:hover::after, .bg-slate-950\/40:hover::after {
     opacity: 1;
   }
 
   /* Backlight neon drop-shadows on hover */
-  .card-hover:hover, .timeline-card:hover, .stat-card:hover, .project-card:hover, [data-tilt]:hover {
+  .card-hover:hover, .timeline-card:hover, .stat-card:hover, .project-card:hover, [data-tilt]:hover, [data-card-root]:hover, [data-stats-overview]:hover, .bg-gray-800\/50:hover, .bg-gray-800\/70:hover, .bg-gray-800\/80:hover, .bg-slate-900\/40:hover, .bg-slate-900\/50:hover, .bg-slate-900\/30:hover, .bg-slate-950\/40:hover {
     box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45), 
                 0 0 25px rgba(242, 73, 104, 0.15), 
                 0 0 40px rgba(99, 102, 241, 0.1);
@@ -465,7 +449,6 @@ if (isEs) {
 </style>
 	</head>
 	<body class="flex flex-col min-h-screen">
-		<div id="global-pointer-aura"></div>
 		<header class="p-4 md:p-6">
 			<nav>
 				<ul class="flex flex-wrap justify-center space-x-4 md:space-x-8 items-center">
@@ -526,29 +509,11 @@ if (isEs) {
 				});
 			};
 
-			const setupGlobalAura = () => {
-				const aura = document.getElementById('global-pointer-aura');
-				if (!aura) return;
-				
-				if (window.globalAuraInitialized) return;
-				window.globalAuraInitialized = true;
-
-				window.addEventListener('mousemove', (e) => {
-					aura.style.setProperty('--global-mouse-x', `${e.clientX}px`);
-					aura.style.setProperty('--global-mouse-y', `${e.clientY}px`);
-					aura.style.opacity = '1';
-				});
-
-				document.addEventListener('mouseleave', () => {
-					aura.style.opacity = '0';
-				});
-			};
-
 			const setup3DTilt = () => {
 				const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 				
 				// Match all cards, statistics, timelines, and forms
-				const cardSelectors = '.card-hover, [data-card-root], [data-tilt], .timeline-card, .stat-card, .project-card, form, .form-container, .bg-gray-800\\/50.p-4.rounded-xl, .bg-gray-800\\/50.p-3.md\\:p-4.rounded-lg';
+				const cardSelectors = '.card-hover, [data-card-root], [data-tilt], .timeline-card, .stat-card, .project-card, form, .form-container, [data-stats-overview], .bg-gray-800\\/50, .bg-gray-800\\/70, .bg-gray-800\\/80, .bg-slate-900\\/40, .bg-slate-900\\/50, .bg-slate-900\\/30, .bg-slate-950\\/40';
 				const cards = document.querySelectorAll(cardSelectors);
 
 				cards.forEach(card => {
@@ -567,7 +532,7 @@ if (isEs) {
 
 						if (prefersReducedMotion) return;
 
-						if (card.classList.contains('card-hover') || card.hasAttribute('data-tilt') || card.hasAttribute('data-card-root') || card.classList.contains('project-card')) {
+						if (card.classList.contains('card-hover') || card.hasAttribute('data-tilt') || card.hasAttribute('data-card-root') || card.classList.contains('project-card') || card.classList.contains('timeline-card') || card.classList.contains('stat-card') || card.hasAttribute('data-stats-overview')) {
 							const xc = rect.width / 2;
 							const yc = rect.height / 2;
 							const tiltX = (yc - y) / yc * 8;
@@ -580,7 +545,7 @@ if (isEs) {
 						card.style.setProperty('--mouse-x', `0px`);
 						card.style.setProperty('--mouse-y', `0px`);
 						if (prefersReducedMotion) return;
-						if (card.classList.contains('card-hover') || card.hasAttribute('data-tilt') || card.hasAttribute('data-card-root') || card.classList.contains('project-card')) {
+						if (card.classList.contains('card-hover') || card.hasAttribute('data-tilt') || card.hasAttribute('data-card-root') || card.classList.contains('project-card') || card.classList.contains('timeline-card') || card.classList.contains('stat-card') || card.hasAttribute('data-stats-overview')) {
 							card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
 						}
 					});
@@ -594,14 +559,12 @@ if (isEs) {
 			document.addEventListener('DOMContentLoaded', () => {
 				markJs();
 				setupReveal();
-				setupGlobalAura();
 				setup3DTilt();
 			});
 
 			document.addEventListener('astro:page-load', () => {
 				markJs();
 				setupReveal();
-				setupGlobalAura();
 				setup3DTilt();
 			});
 		</script>
