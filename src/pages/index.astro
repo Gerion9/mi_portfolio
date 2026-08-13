@@ -1,288 +1,331 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
 import projects from '../data/projects.json';
 
-// Define structured data for SEO
+// Define rich structured data for SEO
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Gairo Peralta",
-  "alternateName": [
-    "Gairo Yostin Peralta",
-    "Gairo Yostin Peralta Alvarez",
-    "Gairo Y. Peralta"
-  ],
-  "jobTitle": "AI/ML Engineer",
-  "url": "https://gairoperalta.com",
-  "image": "https://gairoperalta.com/images/profile.jpg",
-  "sameAs": [
-    "https://linkedin.com/in/gairoperalta",
-    "https://github.com/gairoperalta"
-  ],
-  "knowsAbout": ["LLM Systems", "RAG", "GeoAI", "MLOps", "Machine Learning", "Time Series Forecasting"],
-  "worksFor": {
-    "@type": "Organization",
-    "name": "BlackPrint Technologies"
-  },
-  "alumniOf": {
-    "@type": "EducationalOrganization",
-    "name": "University of California, Berkeley"
-  },
-  "description": "AI/ML engineer specializing in LLM systems, GeoAI platforms, and production ML pipelines."
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://gairoperalta.com/#person",
+      "name": "Gairo Peralta",
+      "alternateName": [
+        "Gairo Yostin Peralta",
+        "Gairo Yostin Peralta Alvarez",
+        "Gairo Y. Peralta"
+      ],
+      "jobTitle": "AI/ML Engineer",
+      "url": "https://gairoperalta.com",
+      "image": "https://gairoperalta.com/images/profile-192.webp",
+      "sameAs": [
+        "https://linkedin.com/in/gairoperalta",
+        "https://github.com/Gerion9"
+      ],
+      "knowsAbout": ["LLM Systems", "RAG Pipelines", "GeoAI", "MLOps", "Machine Learning", "Time Series Forecasting", "Python", "PyTorch"],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "BlackPrint Technologies"
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "University of California, Berkeley"
+      },
+      "description": "AI/ML engineer specializing in LLM systems, GeoAI platforms, and production ML pipelines."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://gairoperalta.com/#website",
+      "url": "https://gairoperalta.com",
+      "name": "Gairo Peralta - Portfolio",
+      "description": "AI/ML Engineer building LLM systems, GeoAI platforms, and production ML pipelines.",
+      "publisher": {
+        "@id": "https://gairoperalta.com/#person"
+      }
+    }
+  ]
 };
 
 // Define technical skills for animated showcase
 const technicalSkills = [
-  { name: "LLM Systems", icon: "fas fa-brain", color: "indigo" },
-  { name: "RAG + Agents", icon: "fas fa-robot", color: "pink" },
-  { name: "GeoAI", icon: "fas fa-map-marked-alt", color: "green" },
-  { name: "ML Pipelines", icon: "fas fa-cogs", color: "blue" },
-  { name: "Forecasting", icon: "fas fa-chart-line", color: "yellow" },
-  { name: "MLOps", icon: "fas fa-cloud", color: "purple" }
+  { name: "LLM Systems", icon: "brain", colorClass: "border-indigo-500/30 text-indigo-300 hover:border-indigo-400" },
+  { name: "RAG + Agents", icon: "robot", colorClass: "border-pink-500/30 text-pink-300 hover:border-pink-400" },
+  { name: "GeoAI", icon: "map", colorClass: "border-emerald-500/30 text-emerald-300 hover:border-emerald-400" },
+  { name: "ML Pipelines", icon: "cogs", colorClass: "border-cyan-500/30 text-cyan-300 hover:border-cyan-400" },
+  { name: "Forecasting", icon: "chart-line", colorClass: "border-amber-500/30 text-amber-300 hover:border-amber-400" },
+  { name: "MLOps", icon: "cloud", colorClass: "border-purple-500/30 text-purple-300 hover:border-purple-400" }
 ];
 
 // Map dynamically from projects.json to maintain consistency
 const iconMap: Record<string, string> = {
-  "LLM GeoAI Platform for Urban Intelligence": "fas fa-map-marked-alt",
-  "Meeting Intelligence Platform for Legal Teams": "fas fa-microphone",
-  "Medical QA Multi-Agent System": "fas fa-stethoscope"
+  "LLM GeoAI Platform for Urban Intelligence": "map",
+  "Meeting Intelligence Platform for Legal Teams": "microphone",
+  "Medical QA Multi-Agent System": "stethoscope"
 };
 
 const featuredProjects = projects.slice(0, 3).map(p => ({
   title: p.title.split(' for ')[0], // Keep it short for UI display
   description: p.description,
-  icon: iconMap[p.title] || "fas fa-laptop-code",
+  icon: iconMap[p.title] || "laptop-code",
   year: new Date(p.date).getFullYear().toString()
 }));
 ---
 
-<Layout title="Gairo Peralta - AI/ML Engineer | LLM Systems | GeoAI" description="AI/ML Engineer building LLM systems, GeoAI platforms, and production ML pipelines for measurable outcomes.">
+<Layout 
+  title="Gairo Peralta - AI/ML Engineer | LLM Systems & GeoAI" 
+  description="AI/ML Engineer building LLM systems, GeoAI platforms, and production ML pipelines for high-impact outcomes."
+  structuredData={structuredData}
+>
+  <link slot="head" rel="preload" as="image" href="/images/profile-192.webp" type="image/webp" fetchpriority="high" />
+
   <!-- Hero Section -->
-  <section class="text-center max-w-3xl mx-auto px-4 sm:px-6 mb-12 md:mb-20 relative overflow-hidden" data-home-page>
+  <section class="text-center max-w-3xl mx-auto px-4 sm:px-6 mb-12 md:mb-20 relative overflow-hidden" data-home-page aria-labelledby="hero-heading">
     <div class="relative z-10">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-14 md:mb-20 text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-pink-500 leading-tight mt-3 sm:mt-4 md:mt-6">Gairo Peralta</h1>
-      <div class="hero-node hero-node-offset relative w-28 h-28 md:w-40 md:h-40 lg:w-48 lg:h-48 mx-auto mb-14 md:mb-20 mt-12 sm:mt-10 md:mt-12 animate__animated animate__fadeIn">
+      <h1 id="hero-heading" class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-12 md:mb-16 text-transparent bg-clip-text bg-gradient-to-r from-indigo-200 via-pink-400 to-pink-500 leading-tight mt-3 sm:mt-4 md:mt-6 fade-in-entry tracking-tight">
+        Gairo Peralta
+      </h1>
+      
+      <div class="hero-node hero-node-offset relative w-32 h-32 md:w-44 md:h-44 lg:w-48 lg:h-48 mx-auto mb-12 md:mb-16 mt-8 sm:mt-10 fade-in-entry-1">
         <div class="hero-visual hero-visual--graph" aria-hidden="true">
           <div class="hero-visual-inner">
-            <svg viewBox="0 0 900 360" role="presentation" focusable="false">
-          <defs>
-            <linearGradient id="graphStroke" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#6366f1" stop-opacity="0.95" />
-              <stop offset="50%" stop-color="#ec4899" stop-opacity="0.85" />
-              <stop offset="100%" stop-color="#818cf8" stop-opacity="0.95" />
-            </linearGradient>
-            <radialGradient id="graphGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#f472b6" stop-opacity="0.7" />
-              <stop offset="100%" stop-color="#f472b6" stop-opacity="0" />
-            </radialGradient>
-          </defs>
+            <svg viewBox="0 0 900 360" role="presentation" focusable="false" aria-hidden="true">
+              <defs>
+                <linearGradient id="graphStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#6366f1" stop-opacity="0.95" />
+                  <stop offset="50%" stop-color="#ec4899" stop-opacity="0.85" />
+                  <stop offset="100%" stop-color="#818cf8" stop-opacity="0.95" />
+                </linearGradient>
+                <radialGradient id="graphGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#f472b6" stop-opacity="0.7" />
+                  <stop offset="100%" stop-color="#f472b6" stop-opacity="0" />
+                </radialGradient>
+              </defs>
 
-          <path id="edge-mlops" class="graph-edge" d="M160 80 L300 170 L450 180" />
-          <path id="edge-rag" class="graph-edge graph-edge--dim" d="M160 260 L300 190 L450 180" />
-          <path id="edge-geoai" class="graph-edge graph-edge--dim" d="M450 50 L450 180" />
-          <path id="edge-kg" class="graph-edge" d="M450 310 L450 180" />
-          <path id="edge-llm" class="graph-edge" d="M450 180 L600 170 L740 90" />
-          <path id="edge-vector" class="graph-edge graph-edge--dim" d="M450 180 L600 190 L740 260" />
-          <path id="edge-bridge-top" class="graph-edge graph-edge--dim" d="M300 170 L600 170" />
-          <path id="edge-bridge-bottom" class="graph-edge" d="M300 190 L600 190" />
+              <path id="edge-mlops" class="graph-edge" d="M160 80 L300 170 L450 180" />
+              <path id="edge-rag" class="graph-edge graph-edge--dim" d="M160 260 L300 190 L450 180" />
+              <path id="edge-geoai" class="graph-edge graph-edge--dim" d="M450 50 L450 180" />
+              <path id="edge-kg" class="graph-edge" d="M450 310 L450 180" />
+              <path id="edge-llm" class="graph-edge" d="M450 180 L600 170 L740 90" />
+              <path id="edge-vector" class="graph-edge graph-edge--dim" d="M450 180 L600 190 L740 260" />
+              <path id="edge-bridge-top" class="graph-edge graph-edge--dim" d="M300 170 L600 170" />
+              <path id="edge-bridge-bottom" class="graph-edge" d="M300 190 L600 190" />
 
-          <circle class="graph-packet" r="3">
-            <animateMotion dur="7s" repeatCount="indefinite">
-              <mpath href="#edge-mlops" />
-            </animateMotion>
-          </circle>
-          <circle class="graph-packet graph-packet--reverse" r="3">
-            <animateMotion dur="7s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
-              <mpath href="#edge-mlops" />
-            </animateMotion>
-          </circle>
-          <circle class="graph-packet graph-packet--alt" r="2.5">
-            <animateMotion dur="8.5s" repeatCount="indefinite">
-              <mpath href="#edge-rag" />
-            </animateMotion>
-          </circle>
-          <circle class="graph-packet graph-packet--alt graph-packet--reverse" r="2.5">
-            <animateMotion dur="8.5s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
-              <mpath href="#edge-rag" />
-            </animateMotion>
-          </circle>
-          <circle class="graph-packet" r="2.8">
-            <animateMotion dur="6.5s" repeatCount="indefinite">
-              <mpath href="#edge-llm" />
-            </animateMotion>
-          </circle>
-          <circle class="graph-packet graph-packet--reverse" r="2.8">
-            <animateMotion dur="6.5s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
-              <mpath href="#edge-llm" />
-            </animateMotion>
-          </circle>
-          <circle class="graph-packet graph-packet--alt" r="2.4">
-            <animateMotion dur="7.8s" repeatCount="indefinite">
-              <mpath href="#edge-vector" />
-            </animateMotion>
-          </circle>
-          <circle class="graph-packet graph-packet--alt graph-packet--reverse" r="2.4">
-            <animateMotion dur="7.8s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
-              <mpath href="#edge-vector" />
-            </animateMotion>
-          </circle>
-          <circle class="graph-packet" r="2.2">
-            <animateMotion dur="6s" repeatCount="indefinite">
-              <mpath href="#edge-geoai" />
-            </animateMotion>
-          </circle>
-          <circle class="graph-packet graph-packet--reverse" r="2.2">
-            <animateMotion dur="6s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
-              <mpath href="#edge-geoai" />
-            </animateMotion>
-          </circle>
-          <circle class="graph-packet graph-packet--alt" r="2.2">
-            <animateMotion dur="6.8s" repeatCount="indefinite">
-              <mpath href="#edge-kg" />
-            </animateMotion>
-          </circle>
-          <circle class="graph-packet graph-packet--alt graph-packet--reverse" r="2.2">
-            <animateMotion dur="6.8s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
-              <mpath href="#edge-kg" />
-            </animateMotion>
-          </circle>
+              <circle class="graph-packet" r="3">
+                <animateMotion dur="7s" repeatCount="indefinite">
+                  <mpath href="#edge-mlops" />
+                </animateMotion>
+              </circle>
+              <circle class="graph-packet graph-packet--reverse" r="3">
+                <animateMotion dur="7s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+                  <mpath href="#edge-mlops" />
+                </animateMotion>
+              </circle>
+              <circle class="graph-packet graph-packet--alt" r="2.5">
+                <animateMotion dur="8.5s" repeatCount="indefinite">
+                  <mpath href="#edge-rag" />
+                </animateMotion>
+              </circle>
+              <circle class="graph-packet graph-packet--alt graph-packet--reverse" r="2.5">
+                <animateMotion dur="8.5s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+                  <mpath href="#edge-rag" />
+                </animateMotion>
+              </circle>
+              <circle class="graph-packet" r="2.8">
+                <animateMotion dur="6.5s" repeatCount="indefinite">
+                  <mpath href="#edge-llm" />
+                </animateMotion>
+              </circle>
+              <circle class="graph-packet graph-packet--reverse" r="2.8">
+                <animateMotion dur="6.5s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+                  <mpath href="#edge-llm" />
+                </animateMotion>
+              </circle>
+              <circle class="graph-packet graph-packet--alt" r="2.4">
+                <animateMotion dur="7.8s" repeatCount="indefinite">
+                  <mpath href="#edge-vector" />
+                </animateMotion>
+              </circle>
+              <circle class="graph-packet graph-packet--alt graph-packet--reverse" r="2.4">
+                <animateMotion dur="7.8s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+                  <mpath href="#edge-vector" />
+                </animateMotion>
+              </circle>
+              <circle class="graph-packet" r="2.2">
+                <animateMotion dur="6s" repeatCount="indefinite">
+                  <mpath href="#edge-geoai" />
+                </animateMotion>
+              </circle>
+              <circle class="graph-packet graph-packet--reverse" r="2.2">
+                <animateMotion dur="6s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+                  <mpath href="#edge-geoai" />
+                </animateMotion>
+              </circle>
+              <circle class="graph-packet graph-packet--alt" r="2.2">
+                <animateMotion dur="6.8s" repeatCount="indefinite">
+                  <mpath href="#edge-kg" />
+                </animateMotion>
+              </circle>
+              <circle class="graph-packet graph-packet--alt graph-packet--reverse" r="2.2">
+                <animateMotion dur="6.8s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+                  <mpath href="#edge-kg" />
+                </animateMotion>
+              </circle>
 
-          <circle class="graph-core-glow" cx="450" cy="180" r="80" />
-          <circle class="graph-node graph-node--core graph-node--pulse" cx="450" cy="180" r="12" />
+              <circle class="graph-core-glow" cx="450" cy="180" r="80" />
+              <circle class="graph-node graph-node--core graph-node--pulse" cx="450" cy="180" r="12" />
 
-          <circle class="graph-node graph-node--pulse" cx="160" cy="80" r="8" />
-          <circle class="graph-node graph-node--pulse graph-node--slow" cx="160" cy="260" r="8" />
-          <circle class="graph-node graph-node--pulse" cx="450" cy="50" r="7" />
-          <circle class="graph-node graph-node--pulse graph-node--slow" cx="450" cy="310" r="7" />
-          <circle class="graph-node graph-node--pulse" cx="740" cy="90" r="8" />
-          <circle class="graph-node graph-node--pulse graph-node--slow" cx="740" cy="260" r="8" />
-          <circle class="graph-node graph-node--pulse" cx="300" cy="170" r="7" />
-          <circle class="graph-node graph-node--pulse graph-node--slow" cx="600" cy="170" r="7" />
-          <circle class="graph-node graph-node--pulse" cx="300" cy="190" r="6" />
-          <circle class="graph-node graph-node--pulse graph-node--slow" cx="600" cy="190" r="6" />
+              <circle class="graph-node graph-node--pulse" cx="160" cy="80" r="8" />
+              <circle class="graph-node graph-node--pulse graph-node--slow" cx="160" cy="260" r="8" />
+              <circle class="graph-node graph-node--pulse" cx="450" cy="50" r="7" />
+              <circle class="graph-node graph-node--pulse graph-node--slow" cx="450" cy="310" r="7" />
+              <circle class="graph-node graph-node--pulse" cx="740" cy="90" r="8" />
+              <circle class="graph-node graph-node--pulse graph-node--slow" cx="740" cy="260" r="8" />
+              <circle class="graph-node graph-node--pulse" cx="300" cy="170" r="7" />
+              <circle class="graph-node graph-node--pulse graph-node--slow" cx="600" cy="170" r="7" />
+              <circle class="graph-node graph-node--pulse" cx="300" cy="190" r="6" />
+              <circle class="graph-node graph-node--pulse graph-node--slow" cx="600" cy="190" r="6" />
 
-          <g class="graph-label-group">
-            <line class="graph-label-line" x1="450" y1="50" x2="450" y2="18" />
-            <text class="graph-label" x="450" y="14" text-anchor="middle">GEOAI</text>
-          </g>
-          <g class="graph-label-group">
-            <line class="graph-label-line" x1="160" y1="80" x2="120" y2="40" />
-            <text class="graph-label" x="120" y="34" text-anchor="middle">MLOPS</text>
-          </g>
-          <g class="graph-label-group">
-            <line class="graph-label-line" x1="160" y1="260" x2="120" y2="310" />
-            <text class="graph-label" x="120" y="326" text-anchor="middle">RAG PIPELINES</text>
-          </g>
-          <g class="graph-label-group">
-            <line class="graph-label-line" x1="740" y1="90" x2="780" y2="50" />
-            <text class="graph-label" x="780" y="44" text-anchor="middle">LLM SYSTEMS</text>
-          </g>
-          <g class="graph-label-group">
-            <line class="graph-label-line" x1="740" y1="260" x2="780" y2="310" />
-            <text class="graph-label" x="780" y="326" text-anchor="middle">VECTOR SEARCH</text>
-          </g>
-          <g class="graph-label-group">
-            <line class="graph-label-line" x1="450" y1="310" x2="450" y2="342" />
-            <text class="graph-label" x="450" y="356" text-anchor="middle">KNOWLEDGE GRAPHS</text>
-          </g>
+              <g class="graph-label-group">
+                <line class="graph-label-line" x1="450" y1="50" x2="450" y2="18" />
+                <text class="graph-label" x="450" y="14" text-anchor="middle">GEOAI</text>
+              </g>
+              <g class="graph-label-group">
+                <line class="graph-label-line" x1="160" y1="80" x2="120" y2="40" />
+                <text class="graph-label" x="120" y="34" text-anchor="middle">MLOPS</text>
+              </g>
+              <g class="graph-label-group">
+                <line class="graph-label-line" x1="160" y1="260" x2="120" y2="310" />
+                <text class="graph-label" x="120" y="326" text-anchor="middle">RAG PIPELINES</text>
+              </g>
+              <g class="graph-label-group">
+                <line class="graph-label-line" x1="740" y1="90" x2="780" y2="50" />
+                <text class="graph-label" x="780" y="44" text-anchor="middle">LLM SYSTEMS</text>
+              </g>
+              <g class="graph-label-group">
+                <line class="graph-label-line" x1="740" y1="260" x2="780" y2="310" />
+                <text class="graph-label" x="780" y="326" text-anchor="middle">VECTOR SEARCH</text>
+              </g>
+              <g class="graph-label-group">
+                <line class="graph-label-line" x1="450" y1="310" x2="450" y2="342" />
+                <text class="graph-label" x="450" y="356" text-anchor="middle">KNOWLEDGE GRAPHS</text>
+              </g>
 
-          <text class="graph-edge-label">
-            <textPath href="#edge-mlops" startOffset="50%" text-anchor="middle">DEPLOYMENT</textPath>
-          </text>
-          <text class="graph-edge-label">
-            <textPath href="#edge-rag" startOffset="50%" text-anchor="middle">CONTEXT</textPath>
-          </text>
-          <text class="graph-edge-label">
-            <textPath href="#edge-geoai" startOffset="50%" text-anchor="middle">SPATIAL SIGNAL</textPath>
-          </text>
-          <text class="graph-edge-label">
-            <textPath href="#edge-kg" startOffset="50%" text-anchor="middle">GROUNDING</textPath>
-          </text>
-          <text class="graph-edge-label">
-            <textPath href="#edge-llm" startOffset="50%" text-anchor="middle">GENERATION</textPath>
-          </text>
-          <text class="graph-edge-label">
-            <textPath href="#edge-vector" startOffset="50%" text-anchor="middle">RETRIEVAL</textPath>
-          </text>
+              <text class="graph-edge-label">
+                <textPath href="#edge-mlops" startOffset="50%" text-anchor="middle">DEPLOYMENT</textPath>
+              </text>
+              <text class="graph-edge-label">
+                <textPath href="#edge-rag" startOffset="50%" text-anchor="middle">CONTEXT</textPath>
+              </text>
+              <text class="graph-edge-label">
+                <textPath href="#edge-geoai" startOffset="50%" text-anchor="middle">SPATIAL SIGNAL</textPath>
+              </text>
+              <text class="graph-edge-label">
+                <textPath href="#edge-kg" startOffset="50%" text-anchor="middle">GROUNDING</textPath>
+              </text>
+              <text class="graph-edge-label">
+                <textPath href="#edge-llm" startOffset="50%" text-anchor="middle">GENERATION</textPath>
+              </text>
+              <text class="graph-edge-label">
+                <textPath href="#edge-vector" startOffset="50%" text-anchor="middle">RETRIEVAL</textPath>
+              </text>
             </svg>
           </div>
         </div>
         <div class="hero-node-glow absolute inset-0 bg-gradient-to-r from-indigo-500 to-pink-500 rounded-full blur-xl opacity-75"></div>
-        <img src="/images/profile.jpg" alt="Gairo Peralta - AI/ML Engineer" class="hero-node-image relative w-full h-full object-cover rounded-full shadow-xl" loading="eager" width="192" height="192">
+        <picture>
+          <source srcset="/images/profile-192.webp 1x, /images/profile.webp 2x" type="image/webp" />
+          <source srcset="/images/profile.avif" type="image/avif" />
+          <img 
+            src="/images/profile-192.webp" 
+            alt="Portrait of Gairo Peralta, AI and ML Engineer" 
+            class="hero-node-image relative w-full h-full object-cover rounded-full shadow-2xl border-2 border-indigo-400/40" 
+            loading="eager" 
+            fetchpriority="high"
+            decoding="async"
+            width="192" 
+            height="192" 
+          />
+        </picture>
       </div>
-    <h2 class="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6 text-pink-500 font-semibold animate__animated animate__fadeIn animate__delay-1s">AI/ML Engineer | LLM Systems | GeoAI</h2>
-    <p class="text-base md:text-xl text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto animate__animated animate__fadeIn animate__delay-1s leading-relaxed">
-      Building <span class="text-indigo-300">LLM systems</span>, <span class="text-indigo-300">GeoAI platforms</span>, and <span class="text-indigo-300">production ML pipelines</span> that deliver measurable business outcomes.
-    </p>
-    <div class="text-base md:text-lg text-gray-400 mb-8 md:mb-12 max-w-2xl mx-auto italic animate__animated animate__fadeIn animate__delay-2s relative">
-      <div class="absolute -left-2 top-0 text-3xl md:text-4xl text-indigo-500 opacity-30">"</div>
-      <p class="relative z-10 px-4 md:px-0">
-        I focus on shipping reliable AI systems that turn complex data into clear decisions and real-world impact.
+
+      <h2 class="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6 text-pink-400 font-bold fade-in-entry-2">
+        AI/ML Engineer | LLM Systems | GeoAI
+      </h2>
+      <p class="text-base md:text-xl text-slate-200 mb-6 md:mb-8 max-w-2xl mx-auto fade-in-entry-2 leading-relaxed font-normal">
+        Building <span class="text-indigo-200 font-semibold">LLM systems</span>, <span class="text-indigo-200 font-semibold">GeoAI platforms</span>, and <span class="text-indigo-200 font-semibold">production ML pipelines</span> that deliver measurable business outcomes.
       </p>
-      <div class="absolute -right-2 bottom-0 text-3xl md:text-4xl text-indigo-500 opacity-30">"</div>
-    </div>
-    
-    <!-- Stats -->
-    <div class="mb-10 md:mb-12 grid grid-cols-3 gap-2 md:gap-6 max-w-2xl mx-auto" data-reveal>
-      <div class="bg-gray-800/50 p-3 md:p-4 rounded-lg text-center border border-gray-700 card-hover">
-        <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">6+</span>
-        <span class="text-xs md:text-sm text-gray-400">Years Experience</span>
+      
+      <div class="text-base md:text-lg text-slate-300 mb-8 md:mb-12 max-w-2xl mx-auto italic fade-in-entry-3 relative">
+        <div class="absolute -left-2 top-0 text-3xl md:text-4xl text-indigo-400 opacity-40 select-none" aria-hidden="true">"</div>
+        <p class="relative z-10 px-4 md:px-0">
+          I focus on shipping reliable AI systems that turn complex data into clear decisions and real-world impact.
+        </p>
+        <div class="absolute -right-2 bottom-0 text-3xl md:text-4xl text-indigo-400 opacity-40 select-none" aria-hidden="true">"</div>
       </div>
-      <div class="bg-gray-800/50 p-3 md:p-4 rounded-lg text-center border border-gray-700 card-hover">
-        <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">{projects.length}+</span>
-        <span class="text-xs md:text-sm text-gray-400">Projects Completed</span>
+      
+      <!-- Stats -->
+      <div class="mb-10 md:mb-12 grid grid-cols-3 gap-2 md:gap-6 max-w-2xl mx-auto" data-reveal>
+        <div class="bg-gray-800/60 p-3 md:p-4 rounded-xl text-center border border-gray-700/80 card-hover shadow-lg">
+          <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">6+</span>
+          <span class="text-xs md:text-sm text-slate-300 font-medium">Years Experience</span>
+        </div>
+        <div class="bg-gray-800/60 p-3 md:p-4 rounded-xl text-center border border-gray-700/80 card-hover shadow-lg">
+          <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">{projects.length}+</span>
+          <span class="text-xs md:text-sm text-slate-300 font-medium">Projects Completed</span>
+        </div>
+        <div class="bg-gray-800/60 p-3 md:p-4 rounded-xl text-center border border-gray-700/80 card-hover shadow-lg">
+          <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">20+</span>
+          <span class="text-xs md:text-sm text-slate-300 font-medium">Core Tools Mastered</span>
+        </div>
       </div>
-      <div class="bg-gray-800/50 p-3 md:p-4 rounded-lg text-center border border-gray-700 card-hover">
-        <span class="text-xl md:text-3xl mb-1 md:mb-2 block text-indigo-300 font-bold">20+</span>
-        <span class="text-xs md:text-sm text-gray-400">Core Tools Mastered</span>
-      </div>
-    </div>
-    
-    <!-- Technical Skills -->
-    <div class="mb-10 md:mb-16" data-reveal>
-      <h3 class="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">Technical Expertise</h3>
-      <div class="flex flex-wrap justify-center gap-2 md:gap-4">
-        {technicalSkills.map(skill => (
-          <div class={`bg-gray-800/50 px-3 py-2 md:px-4 md:py-3 rounded-lg border border-gray-700 flex items-center gap-2 transform transition-all duration-300 hover:scale-110 touch-manipulation hover:border-${skill.color}-500/40 hover:shadow-lg hover:shadow-${skill.color}-500/10`}>
-            <i class={`${skill.icon} text-${skill.color}-400 text-sm md:text-base`}></i>
-            <span class="text-gray-300 text-sm md:text-base">{skill.name}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-    
-    <!-- Featured Projects -->
-    <div class="mb-10 md:mb-16" data-reveal>
-      <h3 class="text-xl md:text-2xl font-semibold mb-4 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-indigo-400">Featured Projects</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-        {featuredProjects.map(project => (
-          <div class="bg-gray-800/50 p-4 md:p-6 rounded-xl border border-gray-700 text-left transform hover:scale-105 transition-all duration-300 hover:border-indigo-500/30 group touch-manipulation card-hover">
-            <div class="flex items-center mb-3 md:mb-4">
-              <div class="bg-gradient-to-br from-pink-500 to-indigo-600 w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
-                <i class={`${project.icon} text-white text-sm md:text-base`}></i>
-              </div>
-              <span class="text-xs text-gray-500">{project.year}</span>
+      
+      <!-- Technical Skills -->
+      <div class="mb-10 md:mb-16" data-reveal>
+        <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-indigo-300">
+          Technical Expertise
+        </h2>
+        <div class="flex flex-wrap justify-center gap-2 md:gap-4">
+          {technicalSkills.map(skill => (
+            <div class={`bg-gray-800/60 px-3 py-2 md:px-4 md:py-3 rounded-xl border flex items-center gap-2.5 transform transition-all duration-300 hover:scale-105 touch-manipulation shadow-md ${skill.colorClass}`}>
+              <Icon name={skill.icon} class="w-4 h-4 md:w-5 md:h-5" />
+              <span class="text-slate-200 text-sm md:text-base font-medium">{skill.name}</span>
             </div>
-            <h4 class="text-base md:text-lg font-semibold text-white mb-1 md:mb-2">{project.title}</h4>
-            <p class="text-xs md:text-sm text-gray-400">{project.description}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-    
-    <!-- CTA Buttons -->
-    <div class="flex flex-wrap justify-center gap-3 md:gap-4 animate__animated animate__fadeIn animate__delay-3s" data-reveal>
-      <a href="/about" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px] micro-cta" aria-label="Learn more about Gairo Peralta">About Me</a>
-      <a href="/experience" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px] micro-cta" aria-label="View Gairo's experience and projects">My Experience</a>
-      <a href="/resume" class="bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[100px] micro-cta" aria-label="View Gairo's resume">My Resume</a>
-    </div>
+      
+      <!-- Featured Projects -->
+      <div class="mb-10 md:mb-16" data-reveal>
+        <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-indigo-300">
+          Featured Projects
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          {featuredProjects.map(project => (
+            <article class="bg-gray-800/60 p-4 md:p-6 rounded-xl border border-gray-700/80 text-left transform hover:scale-105 transition-all duration-300 hover:border-indigo-500/40 group touch-manipulation card-hover shadow-lg flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3 md:mb-4">
+                  <div class="bg-gradient-to-br from-pink-500 to-indigo-600 w-9 h-9 md:w-10 md:h-10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 p-2 shadow-md">
+                    <Icon name={project.icon} class="w-5 h-5 text-white" />
+                  </div>
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-900/80 text-indigo-200 border border-indigo-500/20">{project.year}</span>
+                </div>
+                <h3 class="text-base md:text-lg font-bold text-white mb-2 group-hover:text-indigo-200 transition-colors">{project.title}</h3>
+                <p class="text-xs md:text-sm text-slate-300 leading-relaxed">{project.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+      
+      <!-- CTA Buttons -->
+      <div class="flex flex-wrap justify-center gap-3 md:gap-5 fade-in-entry-3" data-reveal>
+        <a href="/about" class="bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[130px] inline-flex items-center justify-center micro-cta border border-indigo-400/30">About Me</a>
+        <a href="/experience" class="bg-pink-600 hover:bg-pink-500 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[130px] inline-flex items-center justify-center micro-cta border border-pink-400/30">My Experience</a>
+        <a href="/resume" class="bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105 text-sm md:text-base touch-manipulation min-w-[130px] inline-flex items-center justify-center micro-cta border border-indigo-400/30">My Resume</a>
+      </div>
     </div>
   </section>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  
-  <!-- Add structured data for SEO -->
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
   
   <style>
     .hero-node {
@@ -318,6 +361,7 @@ const featuredProjects = projects.slice(0, 3).map(p => ({
 
     .hero-visual-inner {
       animation: heroFloat 12s ease-in-out infinite;
+      will-change: transform;
     }
 
     .hero-visual svg {
@@ -428,6 +472,31 @@ const featuredProjects = projects.slice(0, 3).map(p => ({
       stroke: rgba(236, 72, 153, 0.9);
     }
 
+    /* Performant Inlined Entrance Animations */
+    .fade-in-entry {
+      animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .fade-in-entry-1 {
+      animation: fadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+    }
+    .fade-in-entry-2 {
+      animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+    .fade-in-entry-3 {
+      animation: fadeIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     @keyframes heroFloat {
       0% { transform: translateY(0); }
       50% { transform: translateY(-12px); }
@@ -454,20 +523,18 @@ const featuredProjects = projects.slice(0, 3).map(p => ({
     /* Animation for skill tags */
     @keyframes float {
       0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-6px); }
       100% { transform: translateY(0px); }
     }
     
     .animate-float {
-      animation: float 3s ease-in-out infinite;
+      animation: float 4s ease-in-out infinite;
     }
     
-    /* Improved touch target for mobile */
     .touch-manipulation {
       touch-action: manipulation;
     }
     
-    /* Prevent overflow issues on smaller screens */
     @media (max-width: 1024px) {
       .hero-node-offset {
         top: 18px;
@@ -513,11 +580,9 @@ const featuredProjects = projects.slice(0, 3).map(p => ({
       }
     }
 
-    /* Prevent overflow issues on small screens */
     @media (max-width: 640px) {
       .animate-float {
-        animation: float 3s ease-in-out infinite;
-        animation-duration: 4s; /* Slower on mobile */
+        animation: float 4s ease-in-out infinite;
       }
 
       .hero-visual {
@@ -535,47 +600,36 @@ const featuredProjects = projects.slice(0, 3).map(p => ({
       }
     }
 
-    @media (max-width: 480px) {
-      .hero-node-offset {
-        top: 26px;
-      }
-
-      .graph-label-group {
-        opacity: 0.55;
-      }
-    }
-
     @media (prefers-reduced-motion: reduce) {
+      .fade-in-entry,
+      .fade-in-entry-1,
+      .fade-in-entry-2,
+      .fade-in-entry-3,
       .hero-visual-inner,
       .graph-edge,
       .graph-node,
       .graph-core-glow,
-      .graph-packet {
+      .graph-packet,
+      .animate-float {
         animation: none !important;
+        transform: none !important;
       }
     }
   </style>
   
   <script>
     const initHomeEffects = () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) return;
+
       const root = document.querySelector('[data-home-page]') as HTMLElement | null;
       if (!root || root.dataset.initialized === 'true') return;
       root.dataset.initialized = 'true';
 
-      // Add floating animation to skill tags with random delays
-      const skillElements = root.querySelectorAll('.bg-gray-800\\/50.px-3.py-2, .bg-gray-800\\/50.px-4.py-3');
-      
-      skillElements.forEach((el) => {
+      const skillElements = root.querySelectorAll('.bg-gray-800\\/60');
+      skillElements.forEach((el, index) => {
         el.classList.add('animate-float');
-        (el as HTMLElement).style.animationDelay = `${Math.random() * 2}s`;
-      });
-      
-      // Fix for touch events on mobile
-      const touchElements = root.querySelectorAll('.touch-manipulation');
-      touchElements.forEach(el => {
-        el.addEventListener('touchstart', function() {
-          // This empty handler ensures the hover state works on first tap
-        }, {passive: true});
+        (el as HTMLElement).style.animationDelay = `${(index * 0.3) % 2}s`;
       });
     };
 

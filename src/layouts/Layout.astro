@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
+import Icon from '../components/Icon.astro';
 
 interface Props {
 	title: string;
@@ -15,23 +16,27 @@ const isEs = pathname.startsWith('/es/') || pathname === '/es';
 
 const defaultDesc = isEs
 	? "Gairo Peralta - Ingeniero de AI/ML especializado en sistemas LLM, GeoAI y pipelines de ML en producción."
-	: "Gairo Peralta - AI/ML Engineer specializing in LLM systems, GeoAI, and production ML pipelines.";
+	: "Gairo Peralta - AI/ML Engineer building LLM systems, GeoAI platforms, and production ML pipelines.";
 
 const {
 	title,
 	description = defaultDesc,
-	image = "/images/profile-banner.jpg",
+	image = "/images/profile.webp",
 	noIndex = false,
 	structuredData,
 	isWide = false
 } = Astro.props;
 
-const faviconVersion = "2026-01-19";
-
 // Base URL for canonical links and OG images
 const baseUrl = "https://gairoperalta.com";
 const canonicalUrl = new URL(Astro.url.pathname, baseUrl).toString();
 const imageUrl = new URL(image.startsWith('http') ? image : image, baseUrl).toString();
+
+const enPath = pathname.replace(/^\/es/, '') || '/';
+const esPath = '/es' + (pathname.replace(/^\/es/, '') === '/' ? '' : pathname.replace(/^\/es/, ''));
+
+const enUrl = new URL(enPath, baseUrl).toString();
+const esUrl = new URL(esPath, baseUrl).toString();
 
 const navItems = isEs ? [
 	{ href: '/es', label: 'Inicio' },
@@ -47,20 +52,7 @@ const navItems = isEs ? [
 	{ href: '/contact', label: 'Contact' }
 ];
 
-let toggleLangLink = '/';
-if (isEs) {
-	if (pathname === '/es' || pathname === '/es/') {
-		toggleLangLink = '/';
-	} else {
-		toggleLangLink = pathname.replace(/^\/es/, '');
-	}
-} else {
-	if (pathname === '/' || pathname === '') {
-		toggleLangLink = '/es';
-	} else {
-		toggleLangLink = `/es${pathname}`;
-	}
-}
+let toggleLangLink = isEs ? enPath : esPath;
 ---
 
 <!DOCTYPE html>
@@ -68,21 +60,24 @@ if (isEs) {
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href={`/favicon.svg?v=${faviconVersion}`} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<!-- Primary Meta Tags -->
 		<title>{title}</title>
 		<meta name="title" content={title} />
 		<meta name="description" content={description} />
 		<meta name="author" content="Gairo Peralta (Gairo Yostin Peralta Alvarez)" />
 		
-		<!-- Canonical URL -->
+		<!-- Canonical & Hreflang URLs -->
 		<link rel="canonical" href={canonicalUrl} />
+		<link rel="alternate" hreflang="en" href={enUrl} />
+		<link rel="alternate" hreflang="es" href={esUrl} />
+		<link rel="alternate" hreflang="x-default" href={baseUrl + "/"} />
 		
 		<!-- Robots directive -->
 		{noIndex ? (
 			<meta name="robots" content="noindex, nofollow" />
 		) : (
-			<meta name="robots" content="index, follow" />
+			<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 		)}
 		
 		<!-- Open Graph / Facebook -->
@@ -101,46 +96,30 @@ if (isEs) {
 		<meta property="twitter:description" content={description} />
 		<meta property="twitter:image" content={imageUrl} />
 		
-		<!-- Favicon -->
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="manifest" href={`/site.webmanifest?v=${faviconVersion}`}>
-		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-		<meta name="msapplication-TileColor" content="#603cba">
-		<meta name="theme-color" content="#1a1a2e">
-		
-		<!-- Font Awesome -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+		<!-- Favicon & PWA Icons -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4F46E5" />
+		<meta name="msapplication-TileColor" content="#0a192f" />
+		<meta name="theme-color" content="#0a192f" />
 		
 		<!-- Structured Data if provided -->
 		{structuredData && (
 			<script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 		)}
 		
-		<!-- Google tag (gtag.js) -->
-		<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-		<script is:inline>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'G-XXXXXXXXXX');
-		</script>
-		
-		<!-- Preconnect to external domains -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link rel="preconnect" href="https://cdnjs.cloudflare.com">
-		
-		<!-- Custom styles -->
+		<!-- Custom page head slots (preloads, fonts, etc.) -->
 		<slot name="head" />
 		<ViewTransitions />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style is:global>
   html {
     background-image: linear-gradient(135deg, #0a192f 0%, #1a0a1f 100%);
     background-attachment: fixed;
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -151,6 +130,7 @@ if (isEs) {
     color: #e2e8f0;
     font-size: 16px;
     line-height: 1.5;
+    min-height: 100vh;
   }
 
   body::before {
@@ -177,103 +157,12 @@ if (isEs) {
   }
 
   .interactive-element {
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .interactive-element:hover {
     transform: scale(1.05);
     box-shadow: 0 0 15px rgba(242, 73, 104, 0.5);
-  }
-
-  .timeline-indicator {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(to bottom, var(--color-primary), var(--color-accent));
-    opacity: 0.3;
-    z-index: 1000;
-  }
-
-  .timeline-indicator::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: var(--scroll, 0%);
-    background: var(--color-accent);
-    transition: height 0.3s ease-out;
-  }
-
-  [data-date] {
-    position: relative;
-    transition: opacity 0.3s ease-out;
-  }
-
-  [data-date]::before {
-    content: '';
-    position: absolute;
-    left: -20px;
-    top: 50%;
-    width: 12px;
-    height: 12px;
-    background: var(--color-accent);
-    border-radius: 50%;
-    transform: translateY(-50%) scale(0);
-    transition: transform 0.3s ease-out;
-  }
-
-  [data-date].active::before {
-    transform: translateY(-50%) scale(1);
-  }
-
-  .date-markers {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .date-marker {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    padding: 5px;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    font-size: 12px;
-    text-align: center;
-    transition: all 0.3s ease-out;
-  }
-
-  .date-marker.active {
-    background: var(--color-accent);
-    font-weight: bold;
-  }
-
-  .scrollable-content {
-    height: calc(100vh - 310px);
-    overflow-y: auto;
-    padding-right: 60px;
-    margin-bottom: 0px;
-    mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-  }
-
-  .scrollable-content::-webkit-scrollbar {
-    display: none;
-  }
-
-  .scrollable-content {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  html {
-    scroll-behavior: smooth;
   }
 
   ::selection {
@@ -290,7 +179,7 @@ if (isEs) {
   }
 
   a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-accent, #F24968);
     outline-offset: 2px;
     box-shadow: 0 0 0 4px rgba(242, 73, 104, 0.2);
   }
@@ -303,10 +192,10 @@ if (isEs) {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -6px;
+    bottom: -4px;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, var(--color-accent), var(--color-primary));
+    background: linear-gradient(90deg, #F24968, #4F46E5);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
@@ -322,12 +211,15 @@ if (isEs) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 0.5rem;
     transform: translateZ(0);
   }
 
   .social-link:hover {
-    transform: translateY(-2px) scale(1.05);
-    text-shadow: 0 0 18px rgba(242, 73, 104, 0.5);
+    transform: translateY(-2px) scale(1.08);
+    color: #ffffff;
   }
 
   .micro-cta {
@@ -355,7 +247,7 @@ if (isEs) {
     transform: translateX(120%);
   }
 
-  /* Premium Global Mouse-following Background Aura */
+  /* Global Mouse-following Background Aura */
   #global-pointer-aura {
     pointer-events: none;
     position: fixed;
@@ -363,31 +255,32 @@ if (isEs) {
     z-index: -2;
     opacity: 0;
     background: radial-gradient(
-      700px circle at var(--global-mouse-x, 0px) var(--global-mouse-y, 0px),
-      rgba(99, 102, 241, 0.22) 0%,
-      rgba(168, 85, 247, 0.12) 35%,
-      rgba(242, 73, 104, 0.05) 70%,
+      600px circle at var(--global-mouse-x, 0px) var(--global-mouse-y, 0px),
+      rgba(99, 102, 241, 0.18) 0%,
+      rgba(168, 85, 247, 0.1) 35%,
+      rgba(242, 73, 104, 0.04) 70%,
       transparent 100%
     );
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: background;
   }
 
   .card-hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  }
-
-  .card-hover:hover {
-    transform: translateY(-4px);
-  }
-
-  /* Neon Spotlights & Highlights for Box Containers */
-  .card-hover, .timeline-card, .stat-card, .project-card, form, .form-container, [data-tilt], [data-card-root], [data-stats-overview], .bg-gray-800\/50, .bg-gray-800\/70, .bg-gray-800\/80, .bg-slate-900\/40, .bg-slate-900\/50, .bg-slate-900\/30, .bg-slate-950\/40 {
     position: relative;
     overflow: hidden;
   }
 
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45), 
+                0 0 25px rgba(242, 73, 104, 0.15), 
+                0 0 40px rgba(99, 102, 241, 0.1);
+    border-color: rgba(242, 73, 104, 0.4) !important;
+  }
+
   /* Spotlight glow overlay inside the box */
-  .card-hover::after, .timeline-card::after, .stat-card::after, .project-card::after, form::after, .form-container::after, [data-tilt]::after, [data-card-root]::after, [data-stats-overview]::after, .bg-gray-800\/50::after, .bg-gray-800\/70::after, .bg-gray-800\/80::after, .bg-slate-900\/40::after, .bg-slate-900\/50::after, .bg-slate-900\/30::after, .bg-slate-950\/40::after {
+  .card-hover::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -403,92 +296,21 @@ if (isEs) {
     transition: opacity 0.5s ease;
   }
 
-  /* Border highlight overlay */
-  .card-hover::before, .timeline-card::before, .stat-card::before, .project-card::before, form::before, .form-container::before, [data-tilt]::before, [data-card-root]::before, [data-stats-overview]::before, .bg-gray-800\/50::before, .bg-gray-800\/70::before, .bg-gray-800\/80::before, .bg-slate-900\/40::before, .bg-slate-900\/50::before, .bg-slate-900\/30::before, .bg-slate-950\/40::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    background: radial-gradient(
-      200px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-      rgba(242, 73, 104, 0.3) 0%,
-      rgba(99, 102, 241, 0.12) 50%,
-      transparent 80%
-    );
-    z-index: -1;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-  }
-
-  /* Make sure children sit above the glow */
-  .card-hover > *, .timeline-card > *, .stat-card > *, .project-card > *, form > *, .form-container > *, [data-tilt] > *, [data-card-root] > *, [data-stats-overview] > *, .bg-gray-800\/50 > *, .bg-gray-800\/70 > *, .bg-gray-800\/80 > *, .bg-slate-900\/40 > *, .bg-slate-900\/50 > *, .bg-slate-900\/30 > *, .bg-slate-950\/40 > * {
-    position: relative;
-    z-index: 10;
-  }
-
-  /* Trigger glows on hover & touch active states */
-  .card-hover:hover::before, .card-hover.touch-active::before,
-  .timeline-card:hover::before, .timeline-card.touch-active::before,
-  .stat-card:hover::before, .stat-card.touch-active::before,
-  .project-card:hover::before, .project-card.touch-active::before,
-  form:hover::before, form.touch-active::before,
-  .form-container:hover::before, .form-container.touch-active::before,
-  [data-tilt]:hover::before, [data-tilt].touch-active::before,
-  [data-card-root]:hover::before, [data-card-root].touch-active::before,
-  [data-stats-overview]:hover::before, [data-stats-overview].touch-active::before,
-  .bg-gray-800\/50:hover::before, .bg-gray-800\/50.touch-active::before,
-  .bg-gray-800\/70:hover::before, .bg-gray-800\/70.touch-active::before,
-  .bg-gray-800\/80:hover::before, .bg-gray-800\/80.touch-active::before,
-  .bg-slate-900\/40:hover::before, .bg-slate-900\/40.touch-active::before,
-  .bg-slate-900\/50:hover::before, .bg-slate-900\/50.touch-active::before,
-  .bg-slate-900\/30:hover::before, .bg-slate-900\/30.touch-active::before,
-  .bg-slate-950\/40:hover::before, .bg-slate-950\/40.touch-active::before,
-  .card-hover:hover::after, .card-hover.touch-active::after,
-  .timeline-card:hover::after, .timeline-card.touch-active::after,
-  .stat-card:hover::after, .stat-card.touch-active::after,
-  .project-card:hover::after, .project-card.touch-active::after,
-  form:hover::after, form.touch-active::after,
-  .form-container:hover::after, .form-container.touch-active::after,
-  [data-tilt]:hover::after, [data-tilt].touch-active::after,
-  [data-card-root]:hover::after, [data-card-root].touch-active::after,
-  [data-stats-overview]:hover::after, [data-stats-overview].touch-active::after,
-  .bg-gray-800\/50:hover::after, .bg-gray-800\/50.touch-active::after,
-  .bg-gray-800\/70:hover::after, .bg-gray-800\/70.touch-active::after,
-  .bg-gray-800\/80:hover::after, .bg-gray-800\/80.touch-active::after,
-  .bg-slate-900\/40:hover::after, .bg-slate-900\/40.touch-active::after,
-  .bg-slate-900\/50:hover::after, .bg-slate-900\/50.touch-active::after,
-  .bg-slate-900\/30:hover::after, .bg-slate-900\/30.touch-active::after,
-  .bg-slate-950\/40:hover::after, .bg-slate-950\/40.touch-active::after {
+  .card-hover:hover::after,
+  .card-hover.touch-active::after {
     opacity: 1;
   }
 
-  /* Backlight neon drop-shadows on hover & touch active states */
-  .card-hover:hover, .card-hover.touch-active,
-  .timeline-card:hover, .timeline-card.touch-active,
-  .stat-card:hover, .stat-card.touch-active,
-  .project-card:hover, .project-card.touch-active,
-  [data-tilt]:hover, [data-tilt].touch-active,
-  [data-card-root]:hover, [data-card-root].touch-active,
-  [data-stats-overview]:hover, [data-stats-overview].touch-active,
-  .bg-gray-800\/50:hover, .bg-gray-800\/50.touch-active,
-  .bg-gray-800\/70:hover, .bg-gray-800\/70.touch-active,
-  .bg-gray-800\/80:hover, .bg-gray-800\/80.touch-active,
-  .bg-slate-900\/40:hover, .bg-slate-900\/40.touch-active,
-  .bg-slate-900\/50:hover, .bg-slate-900\/50.touch-active,
-  .bg-slate-900\/30:hover, .bg-slate-900\/30.touch-active,
-  .bg-slate-950\/40:hover, .bg-slate-950\/40.touch-active {
-    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45), 
-                0 0 25px rgba(242, 73, 104, 0.15), 
-                0 0 40px rgba(99, 102, 241, 0.1);
-    border-color: rgba(242, 73, 104, 0.4) !important;
+  .card-hover > * {
+    position: relative;
+    z-index: 10;
   }
 
   html.js [data-reveal] {
     opacity: 0;
     transform: translateY(16px);
-    filter: blur(6px);
-    transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+    filter: blur(4px);
+    transition: opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease;
   }
 
   html.js [data-reveal].is-visible {
@@ -506,42 +328,56 @@ if (isEs) {
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+    html.js [data-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
   }
 </style>
 	</head>
 	<body class="flex flex-col min-h-screen">
-		<div id="global-pointer-aura"></div>
+		<div id="global-pointer-aura" aria-hidden="true"></div>
 		<header class="p-4 md:p-6">
-			<nav>
-				<ul class="flex flex-wrap justify-center space-x-4 md:space-x-8 items-center">
+			<nav aria-label={isEs ? "Navegación principal" : "Main Navigation"}>
+				<ul class="flex flex-wrap justify-center gap-3 sm:gap-6 md:gap-8 items-center">
 					{navItems.map(item => (
 						<li>
-							<a href={item.href} class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold">
+							<a href={item.href} class="nav-link micro-link text-indigo-200 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold py-1 px-2 inline-block">
 								{item.label}
 							</a>
 						</li>
 					))}
 					<li>
-						<a href={toggleLangLink} class="nav-link micro-link text-indigo-300 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold flex items-center gap-1">
-							<i class="fas fa-globe text-xs md:text-sm"></i>
-							{isEs ? 'EN' : 'ES'}
+						<a href={toggleLangLink} class="nav-link micro-link text-indigo-200 hover:text-white transition-colors duration-300 text-sm md:text-lg font-semibold flex items-center gap-1.5 py-1 px-2" aria-label={isEs ? "EN - Switch language to English" : "ES - Cambiar idioma a Español"}>
+							<Icon name="globe" class="w-4 h-4 text-indigo-300" />
+							<span>{isEs ? 'EN' : 'ES'}</span>
 						</a>
 					</li>
 				</ul>
 			</nav>
 		</header>
-		<main class={`container mx-auto px-4 py-12 flex-grow ${isWide ? 'max-w-7xl lg:px-8 xl:max-w-[1400px]' : 'max-w-4xl'}`}>
+		<main class={`container mx-auto px-4 py-8 md:py-12 flex-grow ${isWide ? 'max-w-7xl lg:px-8 xl:max-w-[1400px]' : 'max-w-4xl'}`}>
 			<slot />
 		</main>
-		<footer class="py-8 text-center mt-auto">
-			<div class="social-media space-x-6 mb-4">
-				<a href="https://linkedin.com/in/gairoperalta" class="social-link text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-linkedin fa-2x"></i></a>
-				<a href="https://github.com/Gerion9" class="social-link text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-github fa-2x"></i></a>
-				<a href="https://www.facebook.com/gairo.yostin" class="social-link text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-facebook fa-2x"></i></a>
-				<a href="https://www.instagram.com/gairo_peralta" class="social-link text-indigo-300 hover:text-white transition-colors duration-300"><i class="fab fa-instagram fa-2x"></i></a>
+		<footer class="py-8 text-center mt-auto" role="contentinfo">
+			<div class="social-media flex justify-center items-center gap-4 sm:gap-6 mb-4">
+				<a href="https://linkedin.com/in/gairoperalta" target="_blank" rel="noopener noreferrer" class="social-link text-indigo-300 hover:text-pink-400 transition-colors duration-300 p-2" aria-label="LinkedIn profile of Gairo Peralta">
+					<Icon name="linkedin" class="w-6 h-6 sm:w-7 sm:h-7" />
+				</a>
+				<a href="https://github.com/Gerion9" target="_blank" rel="noopener noreferrer" class="social-link text-indigo-300 hover:text-pink-400 transition-colors duration-300 p-2" aria-label="GitHub profile of Gairo Peralta">
+					<Icon name="github" class="w-6 h-6 sm:w-7 sm:h-7" />
+				</a>
+				<a href="https://www.facebook.com/gairo.yostin" target="_blank" rel="noopener noreferrer" class="social-link text-indigo-300 hover:text-pink-400 transition-colors duration-300 p-2" aria-label="Facebook profile of Gairo Peralta">
+					<Icon name="facebook" class="w-6 h-6 sm:w-7 sm:h-7" />
+				</a>
+				<a href="https://www.instagram.com/gairo_peralta" target="_blank" rel="noopener noreferrer" class="social-link text-indigo-300 hover:text-pink-400 transition-colors duration-300 p-2" aria-label="Instagram profile of Gairo Peralta">
+					<Icon name="instagram" class="w-6 h-6 sm:w-7 sm:h-7" />
+				</a>
 			</div>
-			<p class="text-gray-400 text-sm">&copy; 2025 Gairo Peralta</p>
+			<p class="text-slate-300 text-xs sm:text-sm font-medium">&copy; {new Date().getFullYear()} Gairo Peralta. All rights reserved.</p>
 		</footer>
+
 		<script is:inline>
 			const setupReveal = () => {
 				const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -556,77 +392,65 @@ if (isEs) {
 					return;
 				}
 
-				const observer = new IntersectionObserver((entries) => {
-					entries.forEach(entry => {
-						if (entry.isIntersecting) {
-							entry.target.classList.add('is-visible');
-							observer.unobserve(entry.target);
-						}
-					});
-				}, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+				if ('IntersectionObserver' in window) {
+					const observer = new IntersectionObserver((entries) => {
+						entries.forEach(entry => {
+							if (entry.isIntersecting) {
+								entry.target.classList.add('is-visible');
+								observer.unobserve(entry.target);
+							}
+						});
+					}, { threshold: 0.1, rootMargin: '0px 0px -5% 0px' });
 
-				revealElements.forEach(el => {
-					el.setAttribute('data-reveal-ready', 'true');
-					observer.observe(el);
-				});
+					revealElements.forEach(el => {
+						el.setAttribute('data-reveal-ready', 'true');
+						observer.observe(el);
+					});
+				} else {
+					revealElements.forEach(el => {
+						el.classList.add('is-visible');
+					});
+				}
 			};
 
 			const setupGlobalAura = () => {
 				const aura = document.getElementById('global-pointer-aura');
-				if (!aura) return;
-				
-				if (window.globalAuraInitialized) return;
+				if (!aura || window.globalAuraInitialized) return;
 				window.globalAuraInitialized = true;
 
+				if (window.matchMedia('(pointer: coarse)').matches) return;
+
+				let rafId = null;
+				let mouseX = 0;
+				let mouseY = 0;
+
+				const updateAura = () => {
+					aura.style.setProperty('--global-mouse-x', `${mouseX}px`);
+					aura.style.setProperty('--global-mouse-y', `${mouseY}px`);
+					rafId = null;
+				};
+
 				window.addEventListener('mousemove', (e) => {
-					aura.style.setProperty('--global-mouse-x', `${e.clientX}px`);
-					aura.style.setProperty('--global-mouse-y', `${e.clientY}px`);
+					mouseX = e.clientX;
+					mouseY = e.clientY;
 					aura.style.opacity = '1';
-				});
-
-				window.addEventListener('touchstart', (e) => {
-					if (e.touches.length > 0) {
-						const touch = e.touches[0];
-						aura.style.setProperty('--global-mouse-x', `${touch.clientX}px`);
-						aura.style.setProperty('--global-mouse-y', `${touch.clientY}px`);
-						aura.style.opacity = '1';
-					}
-				}, { passive: true });
-
-				window.addEventListener('touchmove', (e) => {
-					if (e.touches.length > 0) {
-						const touch = e.touches[0];
-						aura.style.setProperty('--global-mouse-x', `${touch.clientX}px`);
-						aura.style.setProperty('--global-mouse-y', `${touch.clientY}px`);
-						aura.style.opacity = '1';
+					if (!rafId) {
+						rafId = requestAnimationFrame(updateAura);
 					}
 				}, { passive: true });
 
 				document.addEventListener('mouseleave', () => {
 					aura.style.opacity = '0';
-				});
-
-				window.addEventListener('touchend', () => {
-					aura.style.opacity = '0';
-				});
-
-				window.addEventListener('touchcancel', () => {
-					aura.style.opacity = '0';
-				});
+				}, { passive: true });
 			};
 
 			const setup3DTilt = () => {
-				const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-				
-				// Match all cards, statistics, timelines, and forms
-				const cardSelectors = '.card-hover, [data-card-root], [data-tilt], .timeline-card, .stat-card, .project-card, form, .form-container, [data-stats-overview], .bg-gray-800\\/50, .bg-gray-800\\/70, .bg-gray-800\\/80, .bg-slate-900\\/40, .bg-slate-900\\/50, .bg-slate-900\\/30, .bg-slate-950\\/40';
-				const cards = document.querySelectorAll(cardSelectors);
+				if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+				const cards = document.querySelectorAll('.card-hover');
 
 				cards.forEach(card => {
 					if (card.dataset.tiltInitialized === 'true') return;
 					card.dataset.tiltInitialized = 'true';
-
-					card.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, border-color 0.3s ease';
 
 					card.addEventListener('mousemove', (e) => {
 						const rect = card.getBoundingClientRect();
@@ -635,88 +459,28 @@ if (isEs) {
 
 						card.style.setProperty('--mouse-x', `${x}px`);
 						card.style.setProperty('--mouse-y', `${y}px`);
-
-						if (prefersReducedMotion) return;
-
-						if (card.classList.contains('card-hover') || card.hasAttribute('data-tilt') || card.hasAttribute('data-card-root') || card.classList.contains('project-card') || card.classList.contains('timeline-card') || card.classList.contains('stat-card') || card.hasAttribute('data-stats-overview')) {
-							const xc = rect.width / 2;
-							const yc = rect.height / 2;
-							const tiltX = (yc - y) / yc * 8;
-							const tiltY = (x - xc) / xc * 8;
-							card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02) translateY(-2px)`;
-						}
-					});
+					}, { passive: true });
 
 					card.addEventListener('mouseleave', () => {
-						card.style.setProperty('--mouse-x', `0px`);
-						card.style.setProperty('--mouse-y', `0px`);
-						if (prefersReducedMotion) return;
-						if (card.classList.contains('card-hover') || card.hasAttribute('data-tilt') || card.hasAttribute('data-card-root') || card.classList.contains('project-card') || card.classList.contains('timeline-card') || card.classList.contains('stat-card') || card.hasAttribute('data-stats-overview')) {
-							card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-						}
-					});
-
-					// Premium Touch Support for glow & lights tracking on Mobile & Tablets
-					card.addEventListener('touchstart', (e) => {
-						if (e.touches.length > 0) {
-							card.classList.add('touch-active');
-							const touch = e.touches[0];
-							const rect = card.getBoundingClientRect();
-							const x = touch.clientX - rect.left;
-							const y = touch.clientY - rect.top;
-							card.style.setProperty('--mouse-x', `${x}px`);
-							card.style.setProperty('--mouse-y', `${y}px`);
-						}
-					}, { passive: true });
-
-					card.addEventListener('touchmove', (e) => {
-						if (e.touches.length > 0) {
-							const touch = e.touches[0];
-							const rect = card.getBoundingClientRect();
-							const x = touch.clientX - rect.left;
-							const y = touch.clientY - rect.top;
-							
-							if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-								card.classList.add('touch-active');
-								card.style.setProperty('--mouse-x', `${x}px`);
-								card.style.setProperty('--mouse-y', `${y}px`);
-							} else {
-								card.classList.remove('touch-active');
-							}
-						}
-					}, { passive: true });
-
-					card.addEventListener('touchend', () => {
-						card.classList.remove('touch-active');
-						card.style.setProperty('--mouse-x', `0px`);
-						card.style.setProperty('--mouse-y', `0px`);
-					}, { passive: true });
-
-					card.addEventListener('touchcancel', () => {
-						card.classList.remove('touch-active');
 						card.style.setProperty('--mouse-x', `0px`);
 						card.style.setProperty('--mouse-y', `0px`);
 					}, { passive: true });
 				});
 			};
 
-			const markJs = () => {
+			const initApp = () => {
 				document.documentElement.classList.add('js');
+				setupReveal();
+				setupGlobalAura();
+				setup3DTilt();
 			};
 
-			document.addEventListener('DOMContentLoaded', () => {
-				markJs();
-				setupReveal();
-				setupGlobalAura();
-				setup3DTilt();
-			});
-
-			document.addEventListener('astro:page-load', () => {
-				markJs();
-				setupReveal();
-				setupGlobalAura();
-				setup3DTilt();
-			});
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initApp);
+			} else {
+				initApp();
+			}
+			document.addEventListener('astro:page-load', initApp);
 		</script>
 	</body>
 </html>
