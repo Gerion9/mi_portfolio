@@ -1,0 +1,250 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import SplitWords from '../components/SplitWords.astro';
+import { SITE_URL, localizePath, useCopy, type Lang } from '../i18n';
+import { PROFILE, SOCIALS } from '../data/site';
+import { graph, personSchema } from '../lib/schema';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useCopy(lang).contact;
+const f = t.form;
+const pageUrl = new URL(localizePath('/contact', lang), SITE_URL).toString();
+const required = lang === 'es' ? 'obligatorio' : 'required';
+
+const structuredData = graph({
+  '@type': 'ContactPage',
+  '@id': `${pageUrl}#page`,
+  url: pageUrl,
+  name: t.metaTitle,
+  inLanguage: lang === 'es' ? 'es-MX' : 'en-US',
+  mainEntity: personSchema(lang),
+});
+
+const serviceIcons = ['bot', 'map', 'chart', 'database'];
+---
+
+<Layout title={t.metaTitle} description={t.metaDescription} structuredData={structuredData}>
+  <section class="relative isolate overflow-hidden pb-14 pt-36 sm:pt-44" aria-labelledby="contact-title">
+    <div class="contact-glow" aria-hidden="true"></div>
+    <div class="container-site">
+      <p class="eyebrow fade-load" style="--base: 0ms">{t.eyebrow}</p>
+      <SplitWords as="h1" id="contact-title" text={t.title} mode="load" base={80} class="mt-6 block max-w-4xl text-display-xl font-semibold text-fg" />
+      <p class="lede fade-load mt-6 max-w-2xl" style="--base: 380ms">{t.intro}</p>
+    </div>
+  </section>
+
+  <section class="container-site grid gap-6 pb-12 lg:grid-cols-12 lg:gap-8" aria-label={lang === 'es' ? 'Formulario y contacto directo' : 'Form and direct contact'}>
+    <div class="surface fade-load p-6 sm:p-9 lg:col-span-7" style="--base: 460ms">
+      <form
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="space-y-6"
+        data-contact-form
+        data-msg-required={f.required}
+        data-msg-email={f.invalidEmail}
+        data-msg-short={f.tooShort}
+        data-msg-sending={f.sending}
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="subject" value="Nuevo mensaje desde gairoperalta.com" />
+        <input type="hidden" name="language" value={lang} />
+        <p class="hidden" aria-hidden="true">
+          <label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
+
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label for="cf-name" class="form-label">{f.name} <span class="text-brand-pink" aria-hidden="true">*</span><span class="sr-only">({required})</span></label>
+            <input id="cf-name" name="name" type="text" autocomplete="name" required data-validate class="field mt-2" placeholder={f.namePh} aria-describedby="cf-name-error" />
+            <p id="cf-name-error" class="form-error" data-error-for="name" hidden></p>
+          </div>
+          <div>
+            <label for="cf-email" class="form-label">{f.email} <span class="text-brand-pink" aria-hidden="true">*</span><span class="sr-only">({required})</span></label>
+            <input id="cf-email" name="email" type="email" autocomplete="email" inputmode="email" required data-validate class="field mt-2" placeholder={f.emailPh} aria-describedby="cf-email-error" />
+            <p id="cf-email-error" class="form-error" data-error-for="email" hidden></p>
+          </div>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label for="cf-company" class="form-label">{f.company}</label>
+            <input id="cf-company" name="company" type="text" autocomplete="organization" class="field mt-2" placeholder={f.companyPh} />
+          </div>
+          <div>
+            <label for="cf-topic" class="form-label">{f.topic}</label>
+            <select id="cf-topic" name="topic" class="field mt-2">
+              <option value="">{f.topicPh}</option>
+              {f.topics.map((topic) => <option value={topic}>{topic}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="cf-message" class="form-label">{f.message} <span class="text-brand-pink" aria-hidden="true">*</span><span class="sr-only">({required})</span></label>
+          <p id="cf-message-hint" class="mt-1 text-sm text-fg-muted">{lang === 'es' ? 'Mínimo 20 caracteres.' : 'At least 20 characters.'}</p>
+          <textarea id="cf-message" name="message" rows="6" required minlength="20" data-validate class="field mt-2 resize-y" placeholder={f.messagePh} aria-describedby="cf-message-hint cf-message-error"></textarea>
+          <p id="cf-message-error" class="form-error" data-error-for="message" hidden></p>
+        </div>
+
+        <div class="flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p class="text-sm text-fg-subtle">
+            <span class="text-brand-pink" aria-hidden="true">*</span>
+            {lang === 'es' ? 'Campos obligatorios' : 'Required fields'}
+          </p>
+          <button type="submit" class="btn btn-primary">
+            <span data-submit-label>{f.submit}</span>
+            <Icon name="send" class="h-4 w-4" />
+          </button>
+        </div>
+      </form>
+
+      <div data-form-success hidden tabindex="-1" role="status" class="py-10 text-center outline-none">
+        <span class="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-full border border-brand-lime/30 bg-brand-lime/10 text-[#86efac]">
+          <Icon name="check" class="h-6 w-6" />
+        </span>
+        <h2 class="mt-6 text-2xl font-semibold tracking-[-0.02em] text-fg">{f.successTitle}</h2>
+        <p class="mx-auto mt-3 max-w-md text-fg-muted">{f.successBody}</p>
+        <a href={localizePath('/experience', lang)} class="btn btn-secondary mt-8">
+          {useCopy(lang).nav.work}
+          <Icon name="arrow-right" class="btn-arrow h-4 w-4" />
+        </a>
+      </div>
+
+      <div data-form-error hidden tabindex="-1" role="alert" class="mt-6 rounded-2xl border border-brand-coral/40 bg-brand-coral/10 p-5 outline-none">
+        <p class="font-semibold text-fg">{f.errorTitle}</p>
+        <p class="mt-1 text-sm text-fg-muted">
+          {f.errorBody}
+          <a href={`mailto:${PROFILE.email}`} class="ml-1 text-fg underline underline-offset-4">{PROFILE.email}</a>
+        </p>
+      </div>
+    </div>
+
+    <aside class="space-y-6 lg:col-span-5">
+      <div class="surface fade-load p-6 sm:p-8" style="--base: 540ms">
+        <h2 class="contact-label">{t.direct.title}</h2>
+        <a href={`mailto:${PROFILE.email}`} class="mt-4 block break-all text-2xl font-semibold tracking-[-0.03em] text-fg transition-colors hover:text-[#c4b5fd] sm:text-[1.75rem]">
+          {PROFILE.email}
+        </a>
+        <div class="mt-5 flex flex-wrap items-center gap-2">
+          <button type="button" class="btn btn-secondary btn-sm group" data-copy={PROFILE.email} data-copied={t.direct.copied}>
+            <Icon name="copy" class="h-3.5 w-3.5 group-data-[state=copied]:hidden" />
+            <Icon name="check" class="hidden h-3.5 w-3.5 text-[#86efac] group-data-[state=copied]:block" />
+            <span data-copy-label>{t.direct.copy}</span>
+          </button>
+          <a href={SOCIALS.linkedin.href} target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">
+            <Icon name="linkedin" class="h-3.5 w-3.5" /> LinkedIn
+          </a>
+          <a href={SOCIALS.github.href} target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">
+            <Icon name="github" class="h-4 w-4" /> GitHub
+          </a>
+        </div>
+        <p class="mt-6 flex items-center gap-2 text-sm text-fg-muted">
+          <Icon name="clock" class="h-4 w-4 opacity-70" />
+          {t.direct.responseTime}
+        </p>
+      </div>
+
+      <div class="surface fade-load p-6 sm:p-8" style="--base: 620ms">
+        <h2 class="contact-label">{t.next.title}</h2>
+        <ol class="mt-5 space-y-5" role="list">
+          {
+            t.next.steps.map((step, i) => (
+              <li class="grid grid-cols-[2rem_1fr] gap-3">
+                <span class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-line-strong font-mono text-xs text-fg tabular">{i + 1}</span>
+                <div>
+                  <p class="font-medium text-fg">{step.title}</p>
+                  <p class="mt-1 text-sm leading-relaxed text-fg-muted">{step.body}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </aside>
+  </section>
+
+  <section class="section" aria-labelledby="services-title">
+    <div class="container-site">
+      <p class="eyebrow reveal">{lang === 'es' ? 'Servicios' : 'Services'}</p>
+      <SplitWords as="h2" id="services-title" text={t.services.title} class="section-title mt-5" />
+      <div class="mt-12 grid gap-4 sm:gap-5 md:grid-cols-2">
+        {
+          t.services.items.map((s, i) => (
+            <article class="surface spotlight reveal p-7 sm:p-8" style={`--d: ${(i % 2) * 90}`}>
+              <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line-strong bg-fg/[0.04] text-[#c4b5fd]">
+                <Icon name={serviceIcons[i % serviceIcons.length]} class="h-5 w-5" />
+              </span>
+              <h3 class="mt-6 text-xl font-semibold tracking-[-0.02em] text-fg">{s.title}</h3>
+              <p class="mt-3 text-[0.9375rem] leading-relaxed text-fg-muted">{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section pt-0" aria-labelledby="collab-title">
+    <div class="container-site">
+      <SplitWords as="h2" id="collab-title" text={t.collab.title} class="section-title" />
+      <ul class="mt-10 grid gap-px overflow-hidden rounded-[1.75rem] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4" role="list">
+        {
+          t.collab.items.map((c, i) => (
+            <li class="reveal bg-ink-2 p-7" style={`--d: ${i * 70}`}>
+              <span class="font-mono text-xs text-fg-subtle tabular">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="mt-6 text-lg font-semibold tracking-[-0.02em] text-fg">{c.title}</h3>
+              <p class="mt-2.5 text-[0.9375rem] leading-relaxed text-fg-muted">{c.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { initContactForm } from '../scripts/contact';
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  if (form) initContactForm(form);
+</script>
+
+<style>
+  .contact-glow {
+    position: absolute;
+    inset: -20% -10% auto 30%;
+    height: 38rem;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(40% 50% at 65% 35%, rgb(var(--pink) / 0.16), transparent 70%),
+      radial-gradient(30% 40% at 85% 20%, rgb(var(--violet) / 0.16), transparent 70%);
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(var(--fg));
+  }
+
+  .form-error {
+    margin-top: 0.5rem;
+    font-size: 0.8125rem;
+    color: #fda4af;
+  }
+
+  .contact-label {
+    font-family: theme('fontFamily.mono');
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgb(var(--fg-subtle));
+  }
+</style>

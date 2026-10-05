@@ -1,42 +1,48 @@
 import type { APIRoute } from 'astro';
+import { SITE_URL, localizePath, type Lang } from '../i18n';
+import { getProjects } from '../lib/projects';
+import { SITE_UPDATED } from '../data/site';
 
-// Define all pages with their relative priority and change frequency
-const pages = [
-  { url: '/', lastmod: new Date().toISOString(), changefreq: 'weekly', priority: 1.0 },
-  { url: '/about', lastmod: new Date().toISOString(), changefreq: 'monthly', priority: 0.8 },
-  { url: '/experience', lastmod: new Date().toISOString(), changefreq: 'weekly', priority: 0.9 },
-  { url: '/resume', lastmod: new Date().toISOString(), changefreq: 'monthly', priority: 0.8 },
-  { url: '/contact', lastmod: new Date().toISOString(), changefreq: 'monthly', priority: 0.7 },
-  { url: '/privacy-policy', lastmod: new Date().toISOString(), changefreq: 'yearly', priority: 0.3 },
-  { url: '/terms', lastmod: new Date().toISOString(), changefreq: 'yearly', priority: 0.3 },
-];
+// Every page exists in English and Spanish; each <url> lists both versions
+// (and x-default) so the annotations point back to each other.
+const LANGS: Lang[] = ['en', 'es'];
 
-// Generate sitemap XML
-export const GET: APIRoute = async () => {
-  // Base URL of your website
-  const baseUrl = 'https://gairoperalta.com';
-  
-  // Generate sitemap XML content
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  ${pages.map(page => `
-  <url>
-    <loc>${baseUrl}${page.url}</loc>
-    <lastmod>${page.lastmod}</lastmod>
-    <changefreq>${page.changefreq}</changefreq>
-    <priority>${page.priority}</priority>
+const staticPages = ['/', '/experience', '/about', '/resume', '/contact'];
+
+function entry(path: string, lastmod: string) {
+  const alternates = LANGS.map(
+    (l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${new URL(localizePath(path, l), SITE_URL).href}"/>`,
+  ).join('\n');
+  const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${new URL(localizePath(path, 'en'), SITE_URL).href}"/>`;
+  return LANGS.map(
+    (l) => `  <url>
+    <loc>${new URL(localizePath(path, l), SITE_URL).href}</loc>
+    <lastmod>${lastmod}</lastmod>
+${alternates}
+${xDefault}
+  </url>`,
+  ).join('\n');
+}
+
+export const GET: APIRoute = () => {
+  const projects = getProjects('en');
+  const urls = [
+    ...staticPages.map((p) => entry(p, SITE_UPDATED)),
+    ...projects.map((p) => entry(`/experience/${p.slug}`, p.date)),
+    `  <url>
+    <loc>${SITE_URL}/privacy-policy/</loc>
   </url>
-  `).join('')}
+  <url>
+    <loc>${SITE_URL}/terms/</loc>
+  </url>`,
+  ];
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${urls.join('\n')}
 </urlset>`;
-  
-  // Return the XML with appropriate headers
+
   return new Response(xml, {
-    headers: {
-      'Content-Type': 'application/xml',
-      'Cache-Control': 'max-age=3600'
-    }
+    headers: { 'Content-Type': 'application/xml; charset=utf-8' },
   });
-}; 
+};

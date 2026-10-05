@@ -1,25 +1,26 @@
 [
   {
-    "title": "NetAiCore: Ecosistema de NLP y Análisis de Redes de Afinidad",
+    "title": "NetAiCore: Ecosistema de NLP y análisis de redes de afinidad",
     "company": "BlackPrint Technologies",
     "date": "2026-05-19",
     "imgSrc": "/images/blackprint_logo.png",
-    "impact": ["Exportaciones Anonimizadas", "NLP con spaCy y BERTopic"],
-    "tags": ["Python", "spaCy", "BERTopic", "NetworkX", "HDBSCAN", "Streamlit", "Quarto", "Privacidad de Datos (LFPDPPP)", "Pipelines de Datos"],
+    "impact": ["Modelo de privacidad: k-anonimato ≥ 5 + SHA-256 con sal", "Sitio analítico: 15 rutas (Next.js 16)"],
+    "tags": ["Python", "spaCy", "BERTopic", "NetworkX", "HDBSCAN", "Streamlit", "Quarto", "Privacidad de Datos (LFPDPPP)", "Pipelines de Datos", "Next.js 16", "Cytoscape", "deck.gl", "DuckDB", "Polars"],
     "description": "Diseñó un ecosistema analítico de 360 grados y un pipeline de anonimización seguro para bases de datos operativas de chatbots, extrayendo información sociodemográfica bajo las regulaciones de privacidad de la LFPDPPP.",
     "impacts": [
       "Construyó un pipeline de NLP avanzado utilizando modelos de spaCy en español y BERTopic para el análisis de sentimiento y modelado de temas en registros conversacionales.",
       "Desarrolló un dashboard interactivo en Streamlit con modo dual (interno con PII / compartido anonimizado) y scripts de Quarto para reportes de las partes interesadas.",
-      "Modeló las interacciones de los usuarios como un grafo social con NetworkX y agrupó cohortes de usuarios utilizando agrupamiento HDBSCAN y scikit-learn."
+      "Modeló las interacciones de los usuarios como un grafo social con NetworkX y agrupó cohortes de usuarios utilizando agrupamiento HDBSCAN y scikit-learn.",
+      "Publicó un sitio analítico estático en Next.js 16 (15 rutas) con gráficas visx, grafos de red en Cytoscape y mapas MapLibre + deck.gl, alimentado por 23 notebooks ejecutados con papermill y cubierto por 48 pruebas de pytest."
     ]
   },
   {
-    "title": "Radar Comercial Querétaro V2: Dashboard de Analítica de Licencias Comerciales",
+    "title": "Radar Comercial Querétaro V2: Dashboard de analítica de licencias comerciales",
     "company": "BlackPrint Technologies",
     "date": "2026-05-18",
     "imgSrc": "/images/blackprint_logo.png",
-    "impact": ["Volumen de Datos: ~110k Licencias", "Conexión: Redshift / Respaldo en CSV"],
-    "tags": ["Next.js 15", "TypeScript", "Tailwind CSS", "shadcn/ui", "MapLibre GL JS", "Amazon Redshift", "Consultas SQL", "Analítica Geospatial"],
+    "impact": ["Volumen de datos: ~110 mil licencias", "Conexión: Redshift / respaldo en CSV"],
+    "tags": ["Next.js 15", "TypeScript", "Tailwind CSS", "shadcn/ui", "MapLibre GL JS", "Amazon Redshift", "Consultas SQL", "Analítica geoespacial"],
     "description": "Desarrolló un dashboard de analítica geoespacial de alto rendimiento para visualizar más de 110,000 licencias comerciales activas y bloqueadas en Querétaro, mapeando conjuntos de datos de Redshift con cajas delimitadoras interactivas y pipelines de exportación de metadatos.",
     "impacts": [
       "Diseñó una interfaz cartográfica interactiva con MapLibre GL JS que muestra la distribución espacial de los negocios y filtros de densidad en Querétaro.",
@@ -28,165 +29,166 @@
     ]
   },
   {
-    "title": "BrokerAI: Agente de IA Conversacional y Motor de Calificación de Leads",
+    "title": "BrokerAI: Agente de IA conversacional y motor de calificación de leads",
     "company": "BlackPrint Technologies",
-    "date": "2026-05-15",
+    "date": "2026-08-12",
     "imgSrc": "/images/blackprint_logo.png",
-    "impact": ["SLA del Operador: <15 mins", "Conversión del Embudo: +34%"],
-    "tags": ["Next.js 15", "React 19", "Tailwind CSS 4", "FastAPI", "OpenAI GPT-4o", "Prisma ORM", "WhatsApp Cloud API", "Google Calendar API", "Server-Sent Events", "Turborepo"],
-    "description": "Diseñó y construyó un agente de ventas conversacional de WhatsApp listo para producción y un dashboard de operador en tiempo real para la calificación progresiva de leads y reserva automatizada de citas.",
+    "impact": ["Evals dorados: 13 conversaciones", "Pruebas unitarias: 475 casos de Vitest"],
+    "tags": ["Next.js 15", "React 19", "TypeScript", "Turborepo", "Prisma ORM", "PostgreSQL (Cloud SQL)", "OpenAI API", "Whisper", "WhatsApp Cloud API", "Google Calendar API", "Server-Sent Events", "Vitest"],
+    "description": "Diseñó y construyó un agente de ventas de WhatsApp en producción y un dashboard de operador en tiempo real que califica leads y agenda citas con asesores para dos desarrollos inmobiliarios que comparten un mismo número de WhatsApp.",
     "impacts": [
-      "Diseñó un orquestador de IA robusto usando OpenAI GPT-4o y WhatsApp Cloud API para calificación de leads en múltiples etapas y asignación dinámica de citas a través de Google Calendar API.",
-      "Desarrolló un espacio de trabajo para operadores en tiempo real usando Next.js 15, React 19, Tailwind CSS 4 y Server-Sent Events (SSE) para una intervención humana sin interrupciones.",
-      "Construyó un esquema de base de datos seguro con Prisma ORM en Cloud SQL (PostgreSQL), desplegando tareas cron para recordatorios de citas y alertas de escalamiento de SLA hacia Slack."
+      "Construyó un orquestador con tool calling de OpenAI y un prompt de tres capas (núcleo de voz invariable, perfil por proyecto y contexto del turno), junto con un validador determinista de respuestas que bloquea fechas y horarios que el calendario nunca ofreció.",
+      "Diseñó el ruteo por hilo (referral de anuncios Click-to-WhatsApp, huella del primer mensaje e historial) con locks de arrendamiento por conversación, agrupación de mensajes entrantes, transcripción de audio con Whisper y reserva atómica por asesor mediante ofertas de horario con vencimiento.",
+      "Entregó una PWA móvil para operadores con monitoreo en vivo e intervención humana, alertas internas priorizadas en Telegram con teléfonos enmascarados y una red de calidad de 13 evals dorados de conversación más 475 casos de Vitest en 43 archivos de prueba."
     ]
   },
   {
-    "title": "Meridian: SaaS de Inteligencia Territorial Low-Code",
+    "title": "Meridian: SaaS de inteligencia territorial low-code",
     "company": "BlackPrint Technologies",
     "date": "2026-05-14",
     "imgSrc": "/images/blackprint_logo.png",
-    "impact": ["Escala de Base de Datos: ~577M Filas", "Huella de Datos: ~79GB"],
-    "tags": ["Next.js 14", "FastAPI", "LangGraph", "Google BigQuery", "Terraform", "Google Cloud Run", "GIS", "Análisis Geoespacial", "Sistemas Multi-Agente"],
-    "description": "Diseñó una plataforma SaaS low-code que mapea datos sociodemográficos y geográficos mexicanos a gran escala en Google BigQuery para generar aplicaciones geoespaciales dinámicas y explicables.",
+    "impact": ["Compuertas de costo: 4 niveles (0.01 / 1 / 10 USD)", "Lago de datos mapeado: ~577 M de filas (BigQuery)"],
+    "tags": ["Next.js 14", "FastAPI", "LangGraph", "Google BigQuery", "Terraform", "Google Cloud Run", "GIS", "Análisis Geoespacial", "Sistemas multiagente", "sqlglot", "pgvector"],
+    "description": "Diseñó y construyó la base de un SaaS low-code de inteligencia territorial que convierte datos sociodemográficos y geográficos de México a escala BigQuery en aplicaciones geoespaciales explicables.",
     "impacts": [
-      "Construyó un orquestador multi-agente en LangGraph con 7 agentes especializados (Profiler, Discovery, SQLGenerator, etc.) para traducir consultas en lenguaje natural a SQL verificado.",
-      "Integró un lago de datos a gran escala de ~577 millones de filas (~79 GB) en Google BigQuery utilizando filtros estrictos de costo por consulta y diccionarios topológicos para proteger presupuestos.",
-      "Diseñó IaC con Terraform para despliegue escalable en GCP Cloud Run e integró tokens de diseño 1:1 utilizando el Sistema de Diseño de BlackPrint."
+      "Diseñó un orquestador en LangGraph de 7 agentes especializados (Profiler, Discovery, SQLGenerator y otros) para texto a SQL, con un ciclo de crítica que reintenta el SQL generado hasta dos veces.",
+      "Implementó un validador de SQL sobre sqlglot con seis reglas y compuertas de costo de BigQuery en cuatro niveles para revisar cada consulta generada antes de ejecutarla contra un lago de ~577 M de filas (~79 GB).",
+      "Montó un gateway en FastAPI con servicios de RBAC, auditoría, detección de PII y cuotas, migraciones de Postgres + pgvector, Terraform para Cloud Run y 5 registros de decisiones de arquitectura."
     ]
   },
   {
-    "title": "SJS Sales Intelligence: Modelado Predictivo Geoespacial",
+    "title": "SJS Sales Intelligence: Modelado predictivo geoespacial",
     "company": "BlackPrint Technologies",
     "date": "2026-04-20",
     "imgSrc": "/images/blackprint_logo.png",
-    "impact": ["Pronósticos: ElasticNet / XGBoost", "Manzanas Activas: 100k+ en Querétaro"],
+    "impact": ["Validación del modelo: R² LOOCV ≈ 0.63 (82 sucursales)", "Manzanas activas: más de 100 mil en Querétaro"],
     "tags": ["React", "FastAPI", "MapLibre GL JS", "XGBoost", "Zustand", "OSMnx", "H3 Index", "GeoJSON", "Analítica Predictiva"],
     "description": "Desarrolló un sistema predictivo de inteligencia de ventas y un simulador interactivo de SIG para modelar el rendimiento de sucursales y analizar la atracción competitiva en Querétaro.",
     "impacts": [
-      "Diseñó un pipeline de machine learning utilizando XGBoost y ElasticNet para predecir ventas basadas en competencia espacial, atractores urbanos y parámetros de movilidad.",
+      "Diseñó un pipeline de machine learning utilizando XGBoost y Elastic Net para predecir ventas a partir de competencia espacial, atractores urbanos y parámetros de movilidad.",
       "Construyó un frontend de React de alta fidelidad con MapLibre GL JS para mostrar mercados objetivo interactivos, gráficos de radar personalizados y comparaciones de escenarios lado a lado.",
-      "Implementó un servidor FastAPI que ofrece inferencias rápidas bajo demanda para simulaciones de colocación de nuevas sucursales con actualizaciones de la UI en tiempo real."
+      "Implementó un servidor FastAPI que ofrece inferencias rápidas bajo demanda para simulaciones de colocación de nuevas sucursales con actualizaciones de la UI en tiempo real.",
+      "Comparó seis modelos (dos variantes de OLS, Elastic Net, Random Forest, XGBoost y SVR) con validación cruzada dejando uno fuera sobre 82 sucursales y 19 variables, y sirvió el Elastic Net logarítmico seleccionado con una API de FastAPI de 11 endpoints."
     ]
   },
   {
-    "title": "Índice de Riesgo de Seguridad Proxy: Modelado de Seguridad a Nivel de Manzana",
+    "title": "Índice de riesgo de seguridad proxy: Modelado de seguridad a nivel de colonia",
     "company": "BlackPrint Technologies",
     "date": "2026-03-26",
     "imgSrc": "/images/blackprint_logo.png",
-    "impact": ["Clasificación de Riesgo: Jenks 5", "Granularidad del Censo: AGEB/Manzana"],
+    "impact": ["Población cubierta: 1,645,353", "Unidades de análisis: 370 celdas hexagonales"],
     "tags": ["Python", "GeoPandas", "QGIS", "mapclassify", "Estadística Espacial", "Moran's I (LISA)", "Estimación de Densidad de Kernel"],
     "description": "Diseñó un índice geoespacial proxy de seguridad multifactorial a nivel de colonia para Ecatepec, modelando la correlación espacial del crimen y métricas de exposición pública.",
     "impacts": [
       "Desarrolló un pipeline de ETL con GeoPandas integrando datos de censos de población (INEGI), directorios comerciales (DENUE), principales corredores de transporte y cifras de delincuencia municipal (SESNSP).",
       "Calculó índices de exposición per cápita normalizados usando proyecciones WGS 84 / UTM Zona 14N y clasificó los niveles de riesgo mediante Jenks Natural Breaks.",
-      "Realizó un análisis avanzado de autocorrelación espacial utilizando Moran's I Local (LISA) para detectar efectos de derrame de delincuencia y puntos calientes cerca de terminales de tránsito intermunicipales."
+      "Realizó un análisis avanzado de autocorrelación espacial utilizando el índice I de Moran local (LISA) para detectar efectos de derrame de delincuencia y puntos calientes cerca de terminales de transporte intermunicipales."
     ]
   },
   {
-    "title": "Blackprint Radar: Pipeline de Emparejamiento de POI Multi-Fuente",
+    "title": "BlackPrint Radar: Pipeline de emparejamiento de POI multifuente",
     "company": "BlackPrint Technologies",
-    "date": "2026-03-18",
+    "date": "2026-04-03",
     "imgSrc": "/images/blackprint_logo.png",
-    "impact": ["Tasa de Éxito: +9.1% (Gobierno)", "Volumen de Procesamiento: 230k+ POIs"],
-    "tags": ["Python", "Pandas", "NLP", "Embeddings de Oraciones", "Búsqueda Vectorial", "STRtree", "Rejilla Espacial", "Pytest", "BigQuery"],
-    "description": "Diseñó un pipeline de deduplicación y emparejamiento multietapa de alto rendimiento para fusionar, conciliar y enriquecer espacialmente datos de Puntos de Interés (POI) de fuentes comerciales y gubernamentales en Querétaro.",
+    "impact": ["Registros conciliados: 230,553", "Coincidencias con licencias: 19,509"],
+    "tags": ["Python", "Pandas", "Resolución de Entidades", "Sentence-Transformers", "Embeddings Multilingües", "Shapely STRtree", "H3", "Rejilla Espacial", "Pytest", "BigQuery"],
+    "description": "Diseñó un pipeline de resolución de entidades en varias etapas que fusionó, deduplicó y enriqueció con datos catastrales 230,553 registros de negocios de fuentes comerciales y gubernamentales en Querétaro, base de datos de la plataforma Radar Comercial.",
     "impacts": [
-      "Desarrolló un algoritmo de similitud de texto adaptativo que combina similitud Jaro-Winkler, Levenshtein y similitud semántica de categorías utilizando embeddings de oraciones multilingües de alta precisión.",
-      "Implementó un algoritmo de celdas de cuadrícula espacial (SpatialGrid) de alto rendimiento para optimizar la coincidencia de deduplicación en bucle cerrado de 215k x 34k registros en menos de 3 minutos.",
-      "Diseñó cruces espaciales catastrales utilizando STRtree para enriquecer los POI con las pautas de zonificación municipal de 2023 y verificar la compatibilidad comercial (clasificación AMAI / SCIAN)."
+      "Desarrolló una puntuación ponderada de nombre, dirección, teléfono, categoría y distancia que combina coincidencia de tokens (Jaccard y contención), redistribución adaptativa de pesos, una vía rápida para cadenas conocidas y embeddings multilingües MiniLM de 384 dimensiones para emparejar las categorías en inglés de Dataplor con las del DENUE en español.",
+      "Emparejó 6,795 pares Dataplor–DENUE en un radio de 25 m y vinculó 19,509 POI con licencias municipales a 350 m mediante una rejilla espacial del doble del radio de búsqueda, resolviendo 215 mil × 34 mil candidatos en unos 3 minutos.",
+      "Enriqueció los POI con cruces STRtree en UTM 14N contra la zonificación PMDUQ 2023, predios y unidades en condominio, y entregó una exportación de 53 columnas para el backend con un poi_id basado en H3 res-12 y BLAKE2b, cubierta por 87 pruebas de pytest."
     ]
   },
   {
-    "title": "H Barbería Colima: Aplicación Web de Reservas y Gestión de Clientes",
-    "company": "Proyecto Personal",
+    "title": "H Barbería Colima: Aplicación web de reservas y gestión de clientes",
+    "company": "Proyecto personal",
     "date": "2026-02-16",
     "imgSrc": "/images/personal_project.jpg",
-    "impact": ["Sincronización con Google Calendar", "Reserva con Cero Latencia"],
+    "impact": ["Sincronización con Google Calendar", "Reserva con cero latencia"],
     "tags": ["React 19", "TypeScript", "Vite 6", "React Router DOM", "React Helmet Async", "Módulos CSS", "Optimización SEO"],
     "description": "Diseñó y desarrolló una aplicación web de reserva para clientes de una barbería local en Colima, integrando parámetros de programación de calendario personalizados por barbero y galerías modernas con optimización SEO.",
     "impacts": [
       "Desarrolló un flujo de reserva dinámico utilizando React 19 y Vite 6, incorporando sincronización con Google Calendar para eliminar la duplicación de citas.",
-      "Implementó módulos CSS responsivos con una estética de glassmorphism premium y micro-animaciones personalizadas para aumentar la interacción de los usuarios.",
+      "Implementó módulos CSS responsivos con una estética de glassmorphism premium y microanimaciones personalizadas para aumentar la interacción de los usuarios.",
       "Optimizó los tiempos de carga y el posicionamiento SEO utilizando React Helmet Async y HTML semántico, garantizando transiciones de página instantáneas."
     ]
   },
   {
-    "title": "OCR Gemini: Pipeline de Traducción Legal Certificada",
-    "company": "Oficinas Legales de Manuel Solís",
+    "title": "OCR Gemini: Pipeline de traducción legal certificada",
+    "company": "Law Offices of Manuel Solis",
     "date": "2026-01-15",
     "imgSrc": "/images/manuel_solis_logo.png",
-    "impact": ["Preservación del Diseño: Sí", "Formato: DOCX Bilingüe"],
-    "tags": ["Python", "Google Gemini Vision API", "python-docx", "Traducción Certificada", "OCR", "Optimización de Resolución de Medios", "Pipelines de Datos", "Aplicación de IA", "OCR Multi-Página"],
-    "description": "Lideró y guió a un equipo de becarios para desarrollar un pipeline de CLI en Python de alta fidelidad utilizando la API de Gemini Vision, capacitándolos en mejores prácticas de OCR y mapeo de diseño espacial para automatizar traducciones certificadas de documentos legales de varias páginas.",
+    "impact": ["Preservación del diseño: Sí", "Formato: DOCX bilingüe"],
+    "tags": ["Python", "Google Gemini Vision API", "python-docx", "Traducción Certificada", "OCR", "Optimización de Resolución de Medios", "Pipelines de Datos", "Aplicación de IA", "OCR multipágina"],
+    "description": "Lideró y guio a un equipo de becarios para desarrollar un pipeline de CLI en Python de alta fidelidad utilizando la API de Gemini Vision, capacitándolos en mejores prácticas de OCR y mapeo de diseño espacial para automatizar traducciones certificadas de documentos legales de varias páginas.",
     "impacts": [
       "Mentoreó a becarios en la implementación de un pipeline de OCR basado en visión artificial utilizando Gemini Vision para extraer y traducir escaneos legales de baja resolución con excelente precisión.",
-      "Guió al equipo en la construcción de un compilador de DOCX que preserva la estructura espacial del texto original, tablas, firmas y encabezados en un formato bilingüe profesional.",
+      "Guio al equipo en la construcción de un compilador de DOCX que preserva la estructura espacial del texto original, tablas, firmas y encabezados en un formato bilingüe profesional.",
       "Capacitó a desarrolladores junior en la integración de preprocesamiento automático de imágenes, reduciendo costos de tokens de IA al tiempo que se optimizaban las tasas de detección de firmas certificadas."
     ]
   },
   {
-    "title": "Plataforma de Inteligencia de Reuniones para Equipos Legales",
-    "company": "Oficinas Legales de Manuel Solís",
+    "title": "Plataforma de inteligencia de reuniones para equipos legales",
+    "company": "Law Offices of Manuel Solis",
     "date": "2025-12-15",
     "imgSrc": "/images/manuel_solis_logo.png",
-    "impact": ["Tiempo de Entrega: ~8 veces más rápido", "Resúmenes Estructurados Accionables"],
+    "impact": ["Niveles de acceso: 3 (RBAC)", "Resúmenes estructurados accionables"],
     "tags": ["LLM", "NLP", "Speechmatics", "Pinecone", "RBAC", "Procesamiento de Datos", "FastAPI", "Base de Datos Vectorial"],
-    "description": "Dirigió el desarrollo y guió a un equipo de becarios para construir un sistema de inteligencia de reuniones que convierte grabaciones de Zoom/Teams/Meet en transcripciones legibles y resúmenes estructurados con control de acceso basado en roles.",
+    "description": "Dirigió el desarrollo y guio a un equipo de becarios para construir un sistema de inteligencia de reuniones que convierte grabaciones de Zoom/Teams/Meet en transcripciones consultables y resúmenes estructurados con control de acceso por grupos.",
     "impacts": [
-      "Capacitó a becarios en la automatización de flujos de transcripción y síntesis de resúmenes utilizando Speechmatics y APIs de LLM para la documentación de casos legales.",
-      "Guió al equipo en la implementación de búsqueda semántica a través de reuniones utilizando indexación y recuperación vectorial de Pinecone.",
+      "Capacitó a becarios en la automatización de flujos de transcripción y síntesis de resúmenes utilizando Speechmatics y API de LLM para la documentación de casos legales.",
+      "Guio al equipo en la implementación de búsqueda semántica a través de reuniones utilizando indexación y recuperación vectorial de Pinecone.",
       "Dirigió a los becarios en la implementación de controles seguros de RBAC para niveles de acceso de administrador, supervisor y usuario general bajo mejores prácticas de la industria."
     ]
   },
   {
-    "title": "DeclarationLetterOnline: Generador de Cartas de Declaración con IA",
-    "company": "Oficinas Legales de Manuel Solís",
+    "title": "DeclarationLetterOnline: Generador de cartas de declaración con IA",
+    "company": "Law Offices of Manuel Solis",
     "date": "2025-10-01",
     "imgSrc": "/images/manuel_solis_logo.png",
-    "impact": ["Tiempo de Procesamiento: <60s", "Precisión del Formato: Century Schoolbook"],
+    "impact": ["Tiempo de procesamiento: <60 s", "Precisión del formato: Century Schoolbook"],
     "tags": ["FastAPI", "Python", "React", "Google Gemini AI", "SQLite", "python-docx", "Parseo XML", "Plantillas de IA Legal", "Generación de Documentos"],
-    "description": "Lideró y dirigió a un equipo de becarios para construir un generador de documentos legales de grado de producción con FastAPI y React utilizando Gemini 1.5 Pro, capacitándolos en ingeniería de prompts, formateo estricto de documentos y pistas de auditoría locales seguras.",
+    "description": "Lideró y dirigió a un equipo de becarios para construir un generador de documentos legales listo para producción con FastAPI y React utilizando Gemini 1.5 Pro, capacitándolos en ingeniería de prompts, formateo estricto de documentos y bitácoras de auditoría locales seguras.",
     "impacts": [
-      "Guió a los becarios en el desarrollo de un pipeline de síntesis de NLP en múltiples etapas que procesa cuestionarios complejos y los traduce en declaraciones legales certificadas bajo formato Century Schoolbook.",
+      "Guio a los becarios en el desarrollo de un pipeline de síntesis de NLP en múltiples etapas que procesa cuestionarios complejos y los traduce en declaraciones legales certificadas bajo formato Century Schoolbook.",
       "Supervisó al equipo en la construcción de un flujo de procesamiento asíncrono con registros de auditoría locales en SQLite y parseo XML estructurado para compilación automatizada de DOCX.",
       "Capacitó a los desarrolladores junior en el diseño de una interfaz de React que cuenta con retroalimentación en tiempo real, control de versiones de borradores y edición simultánea lado a lado."
     ]
   },
   {
-    "title": "Plataforma GeoAI de LLM para Inteligencia Urbana",
+    "title": "Plataforma GeoAI de LLM para inteligencia urbana",
     "company": "BlackPrint Technologies",
     "date": "2025-08-01",
     "imgSrc": "/images/blackprint_logo.png",
-    "impact": ["Manzanas Urbanas: 2.5M+", "Inferencia en Tiempo Real"],
+    "impact": ["Manzanas urbanas: 2.5 M+", "Inferencia en tiempo real"],
     "tags": ["Análisis Geoespacial", "Machine Learning", "React", "Mapbox GL", "Turf.js", "LLM", "GeoAI", "Visualización de Datos"],
-    "description": "Construyó una plataforma de GeoAI impulsada por LLMs para modelar más de 2.5 millones de manzanas urbanas con inferencias en tiempo real y mapeo interactivo para una toma de decisiones eficiente.",
+    "description": "Construyó una plataforma de GeoAI impulsada por LLM para modelar más de 2.5 millones de manzanas urbanas con inferencias en tiempo real y mapeo interactivo para una toma de decisiones eficiente.",
     "impacts": [
       "Desplegó pipelines estables de React, Mapbox GL y Turf.js para visualización geoespacial escalable en producción.",
-      "Integró capacidades de razonamiento de LLMs para extraer y mostrar insights de inteligencia de localización en tiempo real.",
+      "Integró capacidades de razonamiento de LLM para extraer y mostrar insights de inteligencia de ubicación en tiempo real.",
       "Entregó analíticas en tiempo real para respaldar flujos de trabajo de zonificación, planeación urbana y regularización de licencias."
     ]
   },
   {
-    "title": "Sistema Multi-Agente para QA Médico",
-    "company": "UT San Antonio (Voluntario)",
+    "title": "Sistema multiagente para QA médico",
+    "company": "UT San Antonio (voluntario)",
     "date": "2025-04-01",
     "imgSrc": "/images/utsa_logo.png",
-    "impact": ["Precisión: 54.69%", "Incremento de Rendimiento: +24.24pp"],
+    "impact": ["Precisión: 54.69 %", "Incremento de rendimiento: +24.24 pp"],
     "tags": ["LLM", "Agentes", "Grafo de Conocimiento", "Neo4j", "IA Médica", "NLP"],
-    "description": "Construyó un sistema multi-agente de LLMs respaldado y conectado con PrimeKG y Neo4j para mejorar la precisión en responder preguntas médicas complejas mediante razonamiento multi-salto (multi-hop).",
+    "description": "Construyó un sistema multiagente de LLM respaldado y conectado con PrimeKG y Neo4j para mejorar la precisión al responder preguntas médicas complejas mediante razonamiento multisalto (multi-hop).",
     "impacts": [
       "Diseñó agentes especializados en razonamiento clínico, extracción de entidades y recuperación de evidencia científica.",
-      "Integró consultas avanzadas a grafos de conocimiento de Neo4j para soportar explicaciones detalladas y razonadas de las respuestas de IA.",
+      "Integró consultas avanzadas a grafos de conocimiento de Neo4j para sustentar explicaciones detalladas y razonadas de las respuestas de IA.",
       "Evaluó el rendimiento del sistema mediante pruebas sistemáticas comparativas (benchmarking) y telemetría de respuestas."
     ]
   },
   {
-    "title": "GeoAI Insights: Visualización Avanzada del Entorno Competitivo",
+    "title": "GeoAI Insights: Visualización avanzada del entorno competitivo",
     "company": "STRTGY",
     "date": "2024-09-01",
     "imgSrc": "/images/project-1.jpg",
-    "impact": ["Confianza en Decisiones: +82%", "Tiempo de Análisis: 70% ↓"],
+    "impact": ["Confianza en decisiones: +82 %", "Tiempo de análisis: 70 % ↓"],
     "tags": ["Análisis Geoespacial", "Machine Learning", "Visualización de Datos", "OpenAI", "GIS", "Analítica de Redes Sociales", "Análisis de Mercado", "Planeación Estratégica", "Sistemas de Soporte a Decisiones"],
     "description": "Aprovechó GPT-4 y GPT Vision para el análisis de competidores, utilizando razonamiento estructurado (chain of thought) para extraer insights sobre número de empleados, tamaño del establecimiento y ubicación de la competencia. Implementó herramientas de SIG con GeoJSON y ArcGIS Online, superando desafíos de limpieza de datos geoespaciales para crear mapas detallados de salas de exhibición y puntos de venta.",
     "impacts": [
@@ -196,13 +198,13 @@
     ]
   },
   {
-    "title": "Análisis Geoespacial Electoral y Socioeconómico de México",
+    "title": "Análisis geoespacial electoral y socioeconómico de México",
     "company": "BlackPrint Technologies",
     "date": "2025-05-01",
     "imgSrc": "/images/villa_de_alvarez.jpg",
-    "impact": ["Datos Procesados: 2.5M+ Manzanas", "Efectividad Predictiva: +78%"],
+    "impact": ["Datos procesados: 2.5 M+ manzanas", "Efectividad predictiva: +78 %"],
     "tags": ["Análisis Geoespacial", "Visualización de Datos", "React", "Python", "ETL", "GeoPandas", "Mapbox GL", "TypeScript", "Turf.js", "Procesamiento de Datos", "Optimización"],
-    "description": "Desarrolló una plataforma analítica avanzada que integra datos electorales históricos (2018-2024) con indicadores socioeconómicos a nivel de manzana para todo México, permitiendo análisis multidimensionales del comportamiento electoral. Diseñó el frontend con React 18, TypeScript 5.0 y Mapbox GL JS v2.15 con extensiones personalizadas de análisis espacial con Turf.js.",
+    "description": "Desarrolló una plataforma analítica avanzada que integra datos electorales históricos (2018–2024) con indicadores socioeconómicos a nivel de manzana para todo México, permitiendo análisis multidimensionales del comportamiento electoral. Diseñó el frontend con React 18, TypeScript 5.0 y Mapbox GL JS v2.15 con extensiones personalizadas de análisis espacial con Turf.js.",
     "impacts": [
       "Diseñó e implementó scripts de Python con GeoPandas para ETL geoespacial masivo, transformación de shapefiles y procesamiento de vectores para unificar coordenadas geográficas.",
       "Procesó más de 2.5 millones de manzanas urbanas del INEGI con más de 30 variables sociodemográficas por entidad, implementando algoritmos de clasificación de la AMAI para calcular niveles socioeconómicos.",
@@ -210,55 +212,55 @@
     ]
   },
   {
-    "title": "Sistema Inteligente de Extracción y Análisis de Documentos Comerciales",
+    "title": "Sistema inteligente de extracción y análisis de documentos comerciales",
     "company": "PRODENSA",
     "date": "2025-04-01",
     "imgSrc": "/images/project-3.jpg",
-    "impact": ["Precisión de Extracción: 95%", "Tiempo de Procesamiento: 98% ↓"],
-    "tags": ["Aplicación de IA", "Procesamiento de Documentos", "React", "Vite", "FastAPI", "Procesamiento de PDFs", "LLM", "NLP", "Extracción de Datos", "OCR"],
+    "impact": ["Precisión de extracción: 95 %", "Tiempo de procesamiento: 98 % ↓"],
+    "tags": ["Aplicación de IA", "Procesamiento de Documentos", "React", "Vite", "FastAPI", "Procesamiento de PDF", "LLM", "NLP", "Extracción de Datos", "OCR"],
     "description": "Construyó un pipeline de extracción de documentos comerciales basado en OCR y Llama 3.3 para facturas, listas de empaque y pedimentos de aduana, entregando metadatos estructurados a gran escala.",
     "impacts": [
-      "Desplegó la API de extracción con FastAPI y un frontend interactivo con React/Vite para procesamiento de PDFs en tiempo real.",
-      "Implementó ingesta multiformato (PDF, CSV, XLSX) con tareas asíncronas en background.",
+      "Desplegó la API de extracción con FastAPI y un frontend interactivo con React/Vite para procesamiento de PDF en tiempo real.",
+      "Implementó ingesta multiformato (PDF, CSV, XLSX) con tareas asíncronas en segundo plano.",
       "Mejoró la precisión del modelo en la lectura de tablas y datos estructurados mediante técnicas avanzadas de prompt tuning y lógica de validación cruzada."
     ]
   },
   {
-    "title": "Chatbot Especializado en Bienes Raíces Industriales",
+    "title": "Chatbot especializado en bienes raíces industriales",
     "company": "STRTGY",
     "date": "2025-03-01",
     "imgSrc": "/images/project-4.jpg",
-    "impact": ["Relevancia de Respuestas: +90%", "Tiempo de Consulta: 85% ↓"],
-    "tags": ["Machine Learning", "NLP", "Python", "Streamlit", "RAG", "LLM", "Base de Datos Vectorial", "Procesamiento de Datos", "Aplicación de IA", "Anthropic Claude", "OpenAI", "Generación de PDFs"],
-    "description": "Diseñó e implementó un sistema de RAG (Generación Aumentada por Recuperación) con chatbot especializado para el sector inmobiliario industrial, integrando APIs de Anthropic Claude 3.5 Sonnet y OpenAI. Desarrolló un pipeline de vectorización semántica de fichas industriales utilizando OpenAI Embeddings y FAISS para búsquedas instantáneas.",
+    "impact": ["Relevancia de respuestas: +90 %", "Tiempo de consulta: 85 % ↓"],
+    "tags": ["Machine Learning", "NLP", "Python", "Streamlit", "RAG", "LLM", "Base de Datos Vectorial", "Procesamiento de Datos", "Aplicación de IA", "Anthropic Claude", "OpenAI", "Generación de PDF"],
+    "description": "Diseñó e implementó un sistema de RAG (generación aumentada por recuperación) con chatbot especializado para el sector inmobiliario industrial, integrando las API de Anthropic Claude 3.5 Sonnet y OpenAI. Desarrolló un pipeline de vectorización semántica de fichas industriales utilizando OpenAI Embeddings y FAISS para búsquedas instantáneas.",
     "impacts": [
       "Implementó técnicas avanzadas de ingeniería de prompts con un sistema de múltiples capas para contextualización, generación y formateo, aumentando significativamente la relevancia y precisión de las respuestas del bot.",
-      "Creador de un sistema de generación dinámica de reportes en PDF a partir de las conversaciones con los clientes, usando plantillas Jinja2 y herramientas de compilación HTML-PDF.",
+      "Creó un sistema de generación dinámica de reportes en PDF a partir de las conversaciones con los clientes, usando plantillas Jinja2 y herramientas de compilación HTML-PDF.",
       "Desarrolló una interfaz de usuario fluida en Streamlit con sistema de autenticación multiusuario, temas de color interactivos y optimizaciones de accesibilidad."
     ]
   },
   {
-    "title": "Plataforma Integral de Análisis de Datos para Empresa de TV Shopping",
+    "title": "Plataforma integral de análisis de datos para empresa de TV shopping",
     "company": "STRTGY",
     "date": "2025-02-01",
     "imgSrc": "/images/project-5.jpg",
-    "impact": ["Tiempo de Análisis: 99% ↓", "Adopción de Usuarios: +85%"],
-    "tags": ["Análisis de Datos", "Inteligencia de Negocios", "FastAPI", "React", "MongoDB", "Desarrollo de Dashboards", "Desarrollo de APIs", "ETL", "Material UI", "Python", "JavaScript", "Visualización de Datos", "Microservicios", "SQL", "Gestión de Bases de Datos", "Integración de APIs", "Optimización de Rendimiento"],
+    "impact": ["Tiempo de análisis: 99 % ↓", "Adopción de usuarios: +85 %"],
+    "tags": ["Análisis de Datos", "Inteligencia de Negocios", "FastAPI", "React", "MongoDB", "Desarrollo de Dashboards", "Desarrollo de API", "ETL", "Material UI", "Python", "JavaScript", "Visualización de Datos", "Microservicios", "SQL", "Gestión de Bases de Datos", "Integración de API", "Optimización de Rendimiento"],
     "description": "Desarrolló un ecosistema de analítica comercial y visualización de negocios compuesto por tres aplicaciones interconectadas: un backend de API REST (FastAPI), un dashboard de operaciones (React) y una plataforma inteligente de informes. Construyó la API REST con FastAPI conectada a bases de datos de MongoDB Atlas.",
     "impacts": [
-      "Diseñó y construyó un dashboard de operaciones interactivo con React 18 y Material UI 6 para visualizar KPIs del negocio, utilizando gráficos con Recharts, D3.js y mapas con React Leaflet.",
+      "Diseñó y construyó un dashboard de operaciones interactivo con React 18 y Material UI 6 para visualizar KPI del negocio, utilizando gráficos con Recharts, D3.js y mapas con React Leaflet.",
       "Creó soluciones analíticas implementando visualizadores de tendencias de ventas, segmentación de clientes, rotación de inventario y efectividad publicitaria.",
       "Utilizó agrupamiento K-means para segmentar perfiles de clientes y creó mapas coropléticos usando datos de GeoJSON, revelando patrones espaciales y clústeres geográficos de ventas.",
-      "Integró telemetría de Google Trends usando análisis de series temporales para anticipar el interés de consumo de los clientes, informando las estrategias de marketing y niveles de inventario.",
-      "Implementó pipelines de extracción y procesamiento de datos (ETL) desde bases de datos SQL relacionales corporativas hacia bases documentales en MongoDB, procesados con pandas y numpy."
+      "Integró telemetría de Google Trends usando análisis de series temporales para anticipar el interés de consumo de los clientes y orientar las estrategias de marketing y los niveles de inventario.",
+      "Implementó pipelines de extracción y procesamiento de datos (ETL) desde bases de datos SQL relacionales corporativas hacia bases documentales en MongoDB, procesados con pandas y NumPy."
     ]
   },
   {
-    "title": "Sistema Avanzado de Pronóstico de Demanda y Optimización de Inventarios",
+    "title": "Sistema avanzado de pronóstico de demanda y optimización de inventarios",
     "company": "STRTGY",
     "date": "2025-01-01",
     "imgSrc": "/images/project-6.jpg",
-    "impact": ["Precisión de Pronósticos: +42%", "Costo de Inventario: 30% ↓"],
+    "impact": ["Precisión de pronósticos: +42 %", "Costo de inventario: 30 % ↓"],
     "tags": ["Análisis de Series Temporales", "Machine Learning", "Python", "React", "TypeScript", "Procesamiento de Datos", "Optimización de Inventario", "Prophet", "SARIMA", "ETL", "Visualización de Datos", "Chart.js"],
     "description": "Desarrolló un sistema integral de modelado estadístico, predicción de demanda y optimización de suministros para la industria de bebidas. Diseñó e implementó un pipeline de ETL robusto para datos históricos de ventas, con limpieza automática de datos y detección de valores atípicos.",
     "impacts": [
@@ -268,11 +270,11 @@
     ]
   },
   {
-    "title": "Desarrollo de Portafolio Personal Interactivo Premium",
-    "company": "Proyecto Personal",
+    "title": "Desarrollo de portafolio personal interactivo premium",
+    "company": "Proyecto personal",
     "date": "2024-06-01",
     "imgSrc": "/images/project-7.jpg",
-    "impact": ["Velocidad de Carga: 97/100", "Accesibilidad: 100%"],
+    "impact": ["Velocidad de carga: 97/100", "Accesibilidad: 100 %"],
     "tags": ["Desarrollo Web", "Diseño UI/UX", "Optimización de Rendimiento", "React", "Tailwind CSS", "Astro", "Gestión de Contenidos", "Git", "Control de Versiones", "Diseño Responsivo", "Accesibilidad", "Arquitectura de Componentes", "Animaciones"],
     "description": "Diseñó y desarrolló un portafolio personal interactivo utilizando Astro, React y Tailwind CSS, optimizando el rendimiento web y el posicionamiento SEO, al tiempo que aprovechaba componentes modernos para una experiencia de usuario sobresaliente.",
     "impacts": [
@@ -282,42 +284,44 @@
     ]
   },
   {
-    "title": "Sistema Automatizado de Análisis de Datos para Empresa Automotriz",
+    "title": "Sistema automatizado de análisis de datos para empresa automotriz",
     "company": "STRTGY",
     "date": "2024-03-01",
     "imgSrc": "/images/project-8.jpg",
-    "impact": ["Tiempo de Análisis: 90% ↓", "Calidad de Reportes: +45%"],
+    "impact": ["Tiempo de análisis: 90 % ↓", "Calidad de reportes: +45 %"],
     "tags": ["Automatización", "ETL", "Análisis de Datos", "Documentación", "Datos de Encuestas", "Limpieza de Datos", "Generación de Insights por IA", "Diseño de Interfaz de Usuario", "Selección de Datos", "Generación Rápida de Reportes"],
     "description": "Desarrolló un sistema automatizado para el análisis eficiente de datos de analítica web a gran escala utilizando métricas y dimensiones de Google Analytics, con extracción de datos bajo demanda y procesamiento por lotes.",
     "impacts": [
-      "Creó un dashboard intuitivo con filtros y KPIs en tiempo real utilizando HTML, CSS y JavaScript, permitiendo a directivos y clientes consultar datos y generar reportes ejecutivos fácilmente sin conocimientos técnicos.",
-      "Realizó análisis específicos por país de los datos web, analizando comportamientos culturales a nivel de usuarios activos, tasa de interacción y preferencias de dispositivos móviles, además de KPIs específicos como reservas de pruebas de manejo y cotizaciones.",
+      "Creó un dashboard intuitivo con filtros y KPI en tiempo real utilizando HTML, CSS y JavaScript, permitiendo a directivos y clientes consultar datos y generar reportes ejecutivos fácilmente sin conocimientos técnicos.",
+      "Realizó análisis específicos por país de los datos web, analizando comportamientos culturales en métricas como usuarios activos, tasa de interacción y preferencias de dispositivos móviles, además de KPI específicos como reservas de pruebas de manejo y cotizaciones.",
       "Estableció rigurosas prácticas de documentación técnica e instructivos, aumentando la transparencia, la replicabilidad de los análisis y la facilidad de mantenimiento."
     ]
   },
   {
-    "title": "Proyecto Integral de Análisis y Pronóstico de Series Temporales",
+    "title": "Proyecto integral de análisis y pronóstico de series temporales",
     "company": "STRTGY",
     "date": "2024-01-01",
     "imgSrc": "/images/project-9.jpg",
-    "impact": ["Precisión de Pronósticos: +37%", "Reducción de Costos: ~25%"],
+    "impact": ["Precisión de pronósticos: +37 %", "Reducción de costos: ~25 %"],
     "tags": ["Análisis de Series Temporales", "Pronósticos", "Python", "Machine Learning", "Deep Learning", "Preprocesamiento de Datos", "Visualización", "Optimización de Inventario", "Aceleración por GPU", "Optimización de Hiperparámetros", "Análisis Geoespacial"],
-    "description": "Desarrolló una plataforma analítica robusta de series de tiempo y modelos predictivos en Python, incorporando algoritmos avanzados como SARIMA, Prophet, XGBoost, redes LSTM y Transformers. Implementó preprocesamiento con limpieza de nulos y feature engineering avanzado.",
+    "description": "Desarrolló una plataforma analítica robusta de series de tiempo y modelos predictivos en Python, incorporando algoritmos avanzados como SARIMA, Prophet, XGBoost, redes LSTM y Transformers. Implementó técnicas de preprocesamiento como el manejo de valores faltantes, el remuestreo y la ingeniería de variables para mejorar el desempeño de los modelos.",
     "impacts": [
-      "Utilizó procesamiento concurrente con ThreadPoolExecutor para procesar de forma paralela múltiples productos y sucursales comerciales, reduciendo los tiempos de ejecución de cómputo en un 80%.",
+      "Utilizó procesamiento concurrente con ThreadPoolExecutor para procesar de forma paralela múltiples productos y sucursales comerciales, reduciendo los tiempos de ejecución.",
       "Integró técnicas analíticas de visualización interactiva con Plotly y Matplotlib para generar gráficos dinámicos que faciliten la comparación de escenarios predictivos y tendencias.",
       "Diseñó algoritmos de optimización de inventarios, incluyendo cálculos de lote económico de compras (EOQ) y stock de seguridad, integrando factores ecológicos del impacto de huella de carbono.",
       "Aprovechó aceleración de GPU para modelos de deep learning (LSTM y Transformers) mediante PyTorch y TensorFlow, acelerando sustancialmente las fases de entrenamiento del sistema.",
+      "Desarrolló una arquitectura Transformer propia para pronosticar series temporales, adaptada a datos secuenciales complejos.",
+      "Implementó mecanismos robustos de manejo de errores y registro para asegurar una ejecución confiable sobre grandes volúmenes de datos.",
       "Implementó optimización automatizada de hiperparámetros con Optuna, mejorando el rendimiento de los algoritmos mediante búsquedas bayesianas automáticas.",
       "Integró análisis geoespacial utilizando Folium para mapear y visualizar concentraciones de demanda comercial y cuellos de botella en centros de distribución."
     ]
   },
   {
-    "title": "Sistema Automatizado de Análisis de Encuestas y Comentarios de Empleados",
+    "title": "Sistema automatizado de análisis de encuestas y comentarios de empleados",
     "company": "STRTGY",
     "date": "2023-07-01",
     "imgSrc": "/images/project-10.jpg",
-    "impact": ["Tiempo de Procesamiento: 99.9% ↓", "Profundidad de Insights: +75%"],
+    "impact": ["Tiempo de procesamiento: 99.9 % ↓", "Profundidad de insights: +75 %"],
     "tags": ["Automatización", "Análisis de Datos", "Visualización de Datos", "SurveyMonkey", "Análisis de Encuestas", "Python", "Pandas", "Multi-Index", "Plotly", "HTML", "Visualización Interactiva", "Visualizaciones Personalizadas", "Comentarios de Empleados", "Análisis de Desempeño", "Mejora Organizacional"],
     "description": "Automatizó por completo el análisis y visualización de datos de encuestas organizacionales complejas de SurveyMonkey, reduciendo un proceso que tomaba de 1 a 2 meses de análisis manual a tan solo unos segundos de ejecución.",
     "impacts": [
@@ -330,53 +334,563 @@
     ]
   },
   {
-    "title": "Plataforma de Simulación y Backtesting de Estrategias Financieras",
-    "company": "Proyecto Personal",
+    "title": "Plataforma de simulación y backtesting de estrategias financieras",
+    "company": "Proyecto personal",
     "date": "2023-02-01",
     "imgSrc": "/images/project-11.jpg",
-    "impact": ["Velocidad de Pruebas: 10x", "Variantes del Modelo: 24"],
-    "tags": ["Análisis Financiero", "Análisis de Datos", "Integración de APIs", "Python", "Plotly", "MongoDB", "Gestión de Bases de Datos", "Estrategias de Inversión", "Datos Económicos", "Tendencias de Mercado", "Análisis de Correlación", "Desarrollo de Estrategias", "Backtesting"],
+    "impact": ["Velocidad de pruebas: 10×", "Variantes del modelo: 24"],
+    "tags": ["Análisis Financiero", "Análisis de Datos", "Integración de API", "Python", "Plotly", "MongoDB", "Gestión de Bases de Datos", "Estrategias de Inversión", "Datos Económicos", "Tendencias de Mercado", "Análisis de Correlación", "Desarrollo de Estrategias", "Backtesting"],
     "description": "Extrajo datos financieros históricos mediante la API de Alpha Vantage y construyó visualizaciones dinámicas de patrones comerciales usando Plotly en Python, incorporando límites de llamadas y manejo de excepciones para garantizar la consistencia analítica. Configuró una base de datos de MongoDB con esquema dinámico para almacenar calendarios económicos complejos de forma eficiente.",
     "impacts": [
-      "Condujo análisis avanzados de correlación entre indicadores macroeconómicos clave (PIB, desempleo, tasas de interés, inflación) versus tendencias del mercado bursátil, incorporando análisis de desfase temporal (lags).",
-      "Descubrió a través de pruebas empíricas rigurosas el bajo rendimiento a largo plazo de estrategias clásicas de cruce de medias, utilizando métricas avanzadas como el Sharpe Ratio y Max Drawdown, lo que reforzó la necesidad de emplear técnicas más sofisticadas de predicción."
+      "Realizó análisis avanzados de correlación entre indicadores macroeconómicos clave (PIB, desempleo, tasas de interés, inflación) versus tendencias del mercado bursátil, incorporando análisis de desfase temporal (lags).",
+      "Descubrió a través de pruebas empíricas rigurosas el bajo rendimiento a largo plazo de estrategias clásicas de cruce de medias, utilizando métricas avanzadas como el índice de Sharpe y el drawdown máximo, lo que reforzó la necesidad de emplear técnicas más sofisticadas de predicción."
     ]
   },
   {
-    "title": "Análisis Geoespacial Sísmico de Ciudad Guzmán",
-    "company": "Storymaps Proyecto Personal",
+    "title": "Análisis geoespacial sísmico de Ciudad Guzmán",
+    "company": "Proyecto personal (Storymaps)",
     "date": "2022-09-01",
     "imgSrc": "/images/project-12.jpg",
-    "impact": ["Predicción de Riesgo: +63%", "Puntos de Datos: 4,700+"],
+    "impact": ["Predicción de riesgo: +63 %", "Puntos de datos: 4,700+"],
     "tags": ["Análisis Geoespacial", "Visualización de Datos", "ArcGIS", "Análisis Sísmico", "Análisis de Elevación", "Mapeo Interactivo", "Planeación Urbana", "Prevención de Desastres"],
-    "description": "Realizó un análisis geoespacial exploratorio en ArcGIS utilizando registros de la Red Sísmica de Jalisco, empleando barras de deslizamiento de tiempo (time sliders) para visualizaciones de propagación temporal. Analizó la correlación espacial entre la intensidad sísmica y la elevación topográfica del terreno mediante estadísticas espaciales de Getis-Ord Gi* y Regresión Geográficamente Ponderada.",
+    "description": "Realizó un análisis geoespacial exploratorio en ArcGIS utilizando registros de la Red Sísmica de Jalisco, empleando barras de deslizamiento de tiempo (time sliders) para visualizaciones de propagación temporal. Analizó la correlación espacial entre la intensidad sísmica y la elevación topográfica del terreno mediante estadísticas espaciales de Getis-Ord Gi* y regresión geográficamente ponderada.",
     "impacts": [
       "Creó una experiencia cartográfica interactiva y narrativa mediante Storymaps de ArcGIS, utilizando pop-ups descriptivos y leyendas claras para presentar análisis sísmicos complejos de forma sumamente accesible."
     ]
   },
   {
-    "title": "Analítica de Datos para Sistema Inteligente de Administración de Propiedades",
+    "title": "Analítica de datos para sistema inteligente de administración de propiedades",
     "company": "BlackPrint Technologies",
     "date": "2022-03-01",
     "imgSrc": "/images/blackprint_logo.png",
-    "impact": ["Precisión de Geocodificación: 92%", "Precisión del Entregable: 99.9%"],
+    "impact": ["Precisión de geocodificación: 92 %", "Precisión del entregable: 99.9 %"],
     "tags": ["Análisis de Datos", "Análisis Geoespacial", "Gestión de Bases de Datos", "Gestión de Propiedades", "Integridad de Datos", "Eficiencia Operativa", "Python", "Pandas", "Numpy", "Manipulación de Datos", "Preparación de Datos", "Geocodificación Avanzada", "Localización de Datos"],
     "description": "Entregó analítica inmobiliaria avanzada con geocodificación de Google Maps y pipelines estables de ETL en pandas/SQL para la generación de reportes de alta confiabilidad en Querétaro y Colima.",
     "impacts": [
-      "Logró un 92% de precisión en geocodificación catastral mediante normalización sintáctica de direcciones y reglas de validación espacial.",
-      "Construyó pipelines de ETL en pandas/SQL que aseguraron un 99.9% de precisión en el análisis final de propiedades de los clientes."
+      "Logró un 92 % de precisión en geocodificación catastral mediante normalización sintáctica de direcciones y reglas de validación espacial.",
+      "Construyó pipelines de ETL en pandas/SQL que aseguraron un 99.9 % de precisión en el análisis final de propiedades de los clientes."
     ]
   },
   {
-    "title": "Análisis de Interacción y Retención de Usuarios para Plataforma SaaS",
-    "company": "Proyecto Colaborativo: AGM Analytics",
+    "title": "Análisis de interacción y retención de usuarios para plataforma SaaS",
+    "company": "Proyecto colaborativo: AGM Analytics",
     "date": "2021-11-01",
     "imgSrc": "/images/project-14.jpg",
-    "impact": ["Retención de Usuarios: +28%", "Adopción de Funciones: +41%"],
+    "impact": ["Retención de usuarios: +28 %", "Adopción de funciones: +41 %"],
     "tags": ["Análisis de Datos", "Visualización de Datos", "Inteligencia de Negocios", "Plataforma SaaS", "Interacción de Usuarios", "Análisis de Comportamiento", "Tendencias de Uso", "Comportamiento del Cliente", "Técnicas de Visualización", "Insights Accionables", "Toma de Decisiones", "Objetivos Estratégicos"],
     "description": "Analizó la retención y el uso de funciones de la plataforma SaaS con métricas complejas como DAU/MAU y tasas de abandono (churn), segmentando el comportamiento por nivel de suscripción y frecuencia de uso. Desarrolló visualizaciones avanzadas en Looker Studio y dashboards analíticos interactivos.",
     "impacts": [
       "Tradujo los hallazgos analíticos en recomendaciones estratégicas para el equipo de producto, creando dashboards en Looker Studio adaptados para diferentes niveles de conocimiento técnico de los directivos."
+    ]
+  },
+  {
+    "slug": "pharma-field-sales",
+    "title": "Ventas farmacéuticas en campo: Plataforma de ejecución con rutas optimizadas",
+    "company": "BlackPrint Technologies",
+    "date": "2026-07-26",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Universo piloto: 3,100+ farmacias", "Superficie de API: 260+ endpoints", "Suite de pruebas: 1,100+ casos"],
+    "tags": ["Node.js", "Express", "PostgreSQL", "PostGIS", "Knex.js", "Vercel Cron", "Google Route Optimization API", "Google Routes API", "MapLibre GL JS", "Server-Sent Events", "Google Cloud Storage", "Ruteo de vehículos (VRP)"],
+    "description": "Construyó una plataforma de ejecución de ventas en campo, lista para piloto, que digitaliza para una distribuidora farmacéutica nacional la asignación de territorios, el ruteo diario con tiempos de manejo reales, las visitas a farmacias rastreadas por GPS con evidencia fotográfica obligatoria y la revisión de supervisores en una jerarquía comercial de cinco roles.",
+    "impacts": [
+      "Diseñó un planificador de rutas basado en tiempos de manejo que agrupa las paradas de cada representante con k-means anclado a su domicilio, las secuencia con un solucionador multiarranque determinista (vecino más cercano, Or-opt, 2-opt y 3-opt) y delega las jornadas de 23 paradas, con habilidades por representante, tiempos de servicio de 15 a 45 min y cuentas prioritarias, a la Route Optimization API de Google como un VRP administrado.",
+      "Construyó un backend en Node.js/Express y PostgreSQL/PostGIS sobre Vercel con 34 módulos, más de 260 endpoints y 106 migraciones de Knex, que aplica el alcance territorial en la capa de consultas y transmite la actividad de campo en vivo por SSE mediante un outbox en Postgres con LISTEN/NOTIFY.",
+      "Automatizó la operación con 16 cron jobs de Vercel (sincronización de datos fuente, reglas de alertas, purgas de retención de GPS y reportes diarios, semanales y mensuales) y endureció la plataforma con más de 1,100 casos de prueba y un programa de auditoría de 16 reportes en varios dominios."
+    ]
+  },
+  {
+    "slug": "blackprint-copilot-v2",
+    "title": "BlackPrint Copilot v2: Asistente agéntico de mapas basado en herramientas",
+    "company": "BlackPrint Technologies",
+    "date": "2026-09-29",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Herramientas del agente: 38 (FastMCP)", "Regresión de backend: 2,742 pruebas"],
+    "tags": ["Python", "FastAPI", "FastMCP (MCP)", "Pydantic", "PostgreSQL", "Anthropic Claude", "LLM de pesos abiertos (Modal)", "Evaluación de LLM", "Astro", "React 19", "Mapbox GL JS", "OpenAPI / JSON Schema"],
+    "description": "Encabezó el rediseño v2 del copiloto de mapas de BlackPrint y lo convirtió de un widget de chat en un asistente basado en herramientas que opera la plataforma de inteligencia territorial mediante acciones tipadas que la persona usuaria confirma.",
+    "impacts": [
+      "Reconstruyó el backend FastMCP/FastAPI sobre un protocolo de turnos v2 con streaming y una escalera de proveedores de modelos, y envolvió las 38 herramientas en un ToolEnvelope común con autorización por herramienta, telemetría de auditoría y contratos que generan OpenAPI, JSON Schema y tipos de TypeScript desde una sola fuente.",
+      "Amplió el bus tipado de acciones de interfaz de 34 a 53 tipos, detrás de una compuerta de confirmación en el servidor con acuse de resultado, para que el asistente opere el mapa de Mapbox, los paneles, el portafolio y los reportes del frontend en Astro y React 19.",
+      "Reforzó el servicio con 10 correcciones de seguridad, entre ellas JWT verificados por firma y cookies de sesión reducidas de ≈166.7 días a 4 h; preparó el esquema para múltiples organizaciones (org_id en 10 tablas) y construyó arneses de evaluación, desde 12 casos dorados hasta un conjunto de 778 preguntas anotadas a ciegas, respaldados por una regresión de 2,742 pruebas de backend."
+    ]
+  },
+  {
+    "slug": "blackprint-ai-homepage",
+    "title": "Página de inicio de BlackPrint.ai: Experiencia web 3D con datos reales",
+    "company": "BlackPrint Technologies",
+    "date": "2026-09-19",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["JS inicial: 793 → 187 KB gz", "LCP: 7.8 s → 0.5 s"],
+    "tags": ["React 19", "TypeScript", "Vite", "deck.gl", "MapLibre GL JS", "h3-js", "Tailwind CSS 4", "Motion", "Astro", "Vercel", "Rendimiento Web", "Puppeteer"],
+    "description": "Construyó el sitio de marketing bilingüe de BlackPrint como una experiencia de mapas con datos reales, que muestra capas catastrales, de actividad y de mercado de la compañía con deck.gl y MapLibre.",
+    "impacts": [
+      "Desarrolló 16 componentes de sección en React 19, Vite y Tailwind 4 con escenas de deck.gl, MapLibre y h3-js guiadas por scroll, alimentadas por un pipeline de exportación de solo lectura con lista blanca que excluye datos personales; el sitio publica 27 capas de datos precalculadas, entre ellas 1,500 predios reales de la CDMX extruidos según su valor de suelo.",
+      "Redujo el JavaScript de carga inicial de 793 KB a 187 KB comprimidos mediante el montaje diferido de mapas con póster previo y chunking manual, y comprimió los logos de clientes de 1.9 MB a 190 KB, con una suite headless de 13 verificaciones y un presupuesto de rendimiento en el despliegue.",
+      "Optimizó el sitio de producción en Astro: difirió la inicialización de MapLibre y deck.gl hasta la interacción del usuario (LCP de 7.8 s a 0.5 s) y aplicó carga y decodificación diferidas a imágenes temáticas para ahorrar 1.2 MB en la carga inicial."
+    ]
+  },
+  {
+    "slug": "bp-regularizador",
+    "title": "BP Regularizador: Plataforma de verificación en campo y optimización de rutas",
+    "company": "BlackPrint Technologies",
+    "date": "2026-08-03",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Secuenciador de rutas: 0.00 % de brecha vs. óptimo exacto", "Esquema: 36 migraciones de PostgreSQL"],
+    "tags": ["Next.js 16", "React 19", "TypeScript", "PostgreSQL", "MapLibre GL JS", "Ruteo de Vehículos (VRPTW)", "Búsqueda en Vecindarios Grandes (LNS)", "PWA / IndexedDB", "Zod", "Zustand", "WhatsApp Cloud API", "Anthropic Claude"],
+    "description": "Construyó una plataforma de operación en campo para programas municipales de regularización de negocios que planea rutas optimizadas para brigadas, captura evidencia a prueba de manipulación sin conexión y gestiona el contacto por WhatsApp con reglas de cumplimiento.",
+    "impacts": [
+      "Diseñó un motor de rutas en TypeScript sin infraestructura adicional (k-means balanceado por capacidad, vecino más cercano con 2-opt/Or-opt y LNS sensible a ventanas de tiempo) cuyo secuenciador por brigadista igualó el óptimo exacto de Held-Karp (0.00 % de brecha, n ≤ 12) y resolvió 200 paradas en menos de 80 ms, con benchmark en CI sobre 56 instancias Solomon de VRPTW.",
+      "Construyó una PWA offline-first para brigadas con cola en IndexedDB y sincronización idempotente, respaldada por un registro de evidencia encadenado con HMAC, sellos de foto y firma, geocercas y exportaciones auditadas sobre 36 migraciones de PostgreSQL.",
+      "Agregó un embudo de regularización con un bot de WhatsApp impulsado por Claude, verificación de firma del webhook de Meta y salvaguardas de cumplimiento para bajas, validado con pruebas de humo, entre ellas una corrida de contacto de 20/20 y una compuerta de formularios de 21 verificaciones."
+    ]
+  },
+  {
+    "slug": "sealed-field-evidence",
+    "title": "Plataforma de evidencia de campo sellada para bancos y aseguradoras",
+    "company": "BlackPrint Technologies",
+    "date": "2026-09-24",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Rutas de la app: 11 de punta a punta", "Pruebas automatizadas: 221 casos"],
+    "tags": ["Next.js 16", "React 19", "TypeScript", "MapLibre GL JS", "PMTiles", "PostgreSQL", "Vercel Blob", "OCR (RapidOCR / tesseract.js)", "Sentinel-2 / Copernicus DEM", "Cadenas de Hash Criptográficas", "Segunda Opinión con LLM (Modal)", "node:test"],
+    "description": "Construyó una demo de verificación en campo para un emprendimiento de verificación que atiende a bancos y aseguradoras, que convierte cada captura del teléfono en un paquete de evidencia sellado por hash, con mapa del sitio, desglose del puntaje y cadena de custodia, visible en la pantalla de la sala segundos después.",
+    "impacts": [
+      "Construyó una app en Next.js 16 y React 19 con 11 rutas, desde la captura en el teléfono iniciada por QR (video con hash por fragmentos, foto de placa, selfie de testigo y GPS) hasta un modo sala para proyectar, una consola de operador, una página pública de verificación y un acta imprimible en PDF.",
+      "Enriqueció cada captura con datos abiertos (clima de MET Norway, elevación Copernicus GLO-30, color real y NDVI de Sentinel-2) y con capas de nivel socioeconómico y empleo H3 de BlackPrint extraídas con consultas de solo lectura, y etiquetó cada cifra con una de seis clases de dato.",
+      "Leyó seriales con OCR local y una segunda opinión acotada de GLM-5.3-Flash en Modal que nunca recibe rostros, cubrió la librería central con 221 casos de node:test y agregó un modo nube en Vercel con PostgreSQL y almacenamiento Blob."
+    ]
+  },
+  {
+    "slug": "site-score-demo",
+    "title": "Demo de Site Score: Selección de sitios por manzana y estimador de ventas",
+    "company": "BlackPrint Technologies",
+    "date": "2026-06-26",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Manzanas evaluadas: 16,472", "Capas H3 de mercado: 10"],
+    "tags": ["Next.js 16", "React 19", "TypeScript", "Leaflet", "h3-js", "Regresión OLS", "Selección de Sitios", "Geocodificación (Photon / Nominatim)", "Zod", "Tailwind CSS 4", "Python", "Vercel"],
+    "description": "Construyó una demo interactiva de inteligencia de sitios que califica 16,472 manzanas de Mérida y estima la venta mensual de una sucursal candidata con un modelo de regresión log-lineal.",
+    "impacts": [
+      "Representó 16,472 manzanas de Mérida con un Site Score de 0 a 100 en Leaflet, con 10 capas H3 activables que cubren 7 cadenas competidoras públicas y superficies de recomendación por formato propio.",
+      "Implementó un estimador de ventas OLS log-lineal (Site Score, logaritmo de la superficie y variables de formato) con búsqueda inversa que resalta las manzanas capaces de alcanzar una meta de venta, y reportó una validación honesta: R² de 0.92 dentro de muestra frente a 0.51 con validación leave-one-out en 11 sucursales.",
+      "Agregó geocodificación del lado del servidor (Photon con respaldo en Nominatim), ubicaciones guardadas, una puerta de acceso y carga de datos validada con Zod en Next.js 16 y React 19, con scripts de Python que regeneran las capas JSON."
+    ]
+  },
+  {
+    "slug": "gromai-report-studio",
+    "title": "GromAI Report Studio: Fábrica de reportes de sitio con IA verificada",
+    "company": "BlackPrint Technologies",
+    "date": "2026-08-18",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Pruebas automatizadas: 2,809", "Catálogo: 23 módulos · 15 tipos de reporte"],
+    "tags": ["Next.js 16", "React 19", "TypeScript", "PostgreSQL", "Drizzle ORM", "API de Anthropic Claude", "Grounding y Evals de LLM", "XGBoost", "Leaflet", "Playwright", "Stripe", "Vercel"],
+    "description": "Construyó una fábrica de reportes con IA que convierte un predio elegido en el mapa en un estudio de mayor y mejor uso verificado, publicado como reporte web, PDF, presentación narrada y chat asesor.",
+    "impacts": [
+      "Diseñó un registro de 23 módulos y 15 tipos de reporte guiado por datos, cuyo reporte web, PDF con Playwright y presentación narrada se generan desde un mismo snapshot inmutable, sin acceso a base de datos en tiempo de ejecución.",
+      "Ancló las narrativas de Claude Sonnet 5 con un firewall numérico, un registro de afirmaciones y un muro antifuga con respaldo determinista, validados con 15 suites de evaluación propias y una batería de 2,809 pruebas.",
+      "Aisló un plano de origen en Postgres de solo lectura (tres capas de protección) de un plano de estado escribible con Drizzle, ejecutó en proceso un modelo XGBoost de uso de suelo y agregó, detrás de una bandera de funcionalidad, un flujo de autoservicio con checkout de Stripe, webhooks verificados por HMAC y una cola de trabajos con SKIP LOCKED."
+    ]
+  },
+  {
+    "slug": "qsr-site-intelligence",
+    "title": "QSR Site Intelligence: Plataforma multimarca de Site Score y predicción de ventas",
+    "company": "BlackPrint Technologies",
+    "date": "2026-09-18",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Cobertura: 63,724 manzanas · 117 municipios", "Error del modelo de ventas (LOOCV): 106 % → 22 %"],
+    "tags": ["Next.js 16", "React 19", "TypeScript", "Leaflet", "h3-js", "Python", "GeoPandas", "OSMnx", "PostgreSQL", "Regresión Log-Lineal (LOOCV)", "Isócronas de Mapbox", "LaTeX"],
+    "description": "Construyó una plataforma multimarca de selección de sitios para un grupo de restaurantes de comida rápida que califica cada manzana de sus mercados, estima ventas por tienda y muestra dónde abrir sin canibalizar las tiendas existentes.",
+    "impacts": [
+      "Escaló la plataforma de una marca en dos ciudades a tres secciones de marca sobre un universo de 63,724 manzanas en 117 municipios, con Site Score, capas H3 de competencia y estimaciones de venta por manzana servidas desde paquetes de modelo versionados con verificación SHA-256.",
+      "Implementó una búsqueda inversa que ordena cada manzana candidata, excluye las que quedan dentro de un radio configurable (1.5 km por defecto) o de una isócrona de 5, 10 o 15 minutos en auto de las tiendas propias y agrupa las ganadoras en zonas con supresión de no máximos a 300 m.",
+      "Integró la versión 1.2 del modelo log-lineal de ventas, que corrige cuatro causas raíz documentadas del error de la versión anterior y reduce el MAPE de validación cruzada dejando uno fuera de 106 % a 22 %, y agregó cuentas con alcance por marca, aperturas simuladas y reportes PDF de una página en LaTeX."
+    ]
+  },
+  {
+    "slug": "carrier-partner-intelligence",
+    "title": "Inteligencia de socios para paquetería: Plataforma de decisión para la red de socios",
+    "company": "BlackPrint Technologies",
+    "date": "2026-09-02",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Rejilla de mercado: 2,452 hexágonos de 400 m", "Semillas reales: 165 ServicePoints · 856 competidores"],
+    "tags": ["React 18", "TypeScript", "Vite", "Tailwind CSS 4", "MapLibre GL", "Recharts", "Puppeteer", "Análisis de Áreas de Influencia", "Análisis de White Space", "Generación de Datos Sintéticos"],
+    "description": "Construyó una plataforma conceptual de inteligencia de socios que muestra a una paquetería exprés global dónde crecer su red de socios en la Ciudad de México y a cuáles priorizar, con puntajes explicables que se entregan al CRM.",
+    "impacts": [
+      "Construyó una plataforma de 16 rutas en React 18 y MapLibre GL con resumen ejecutivo, mapa de red, segmentación de socios, white space, evaluación Go / No-Go e inteligencia competitiva, con 6 escenarios de demostración precargados.",
+      "Alimentó un generador determinista con 165 puntos de servicio públicos de la paquetería y 856 ubicaciones de competidores sobre una rejilla de mercado de 2,452 hexágonos, y etiquetó cada tarjeta con una de cuatro clases de procedencia para que el dato sintético nunca pase por real.",
+      "Implementó un evaluador Go / No-Go que recalcula los puntajes en el navegador con un clic en cualquier punto del mapa y reproduce 35 de 40 decisiones del generador (88 %), además de medir la canibalización con áreas de influencia de 10 minutos a pie ponderadas por demanda."
+    ]
+  },
+  {
+    "slug": "carrier-command-center",
+    "title": "Centro de mando para paquetería: Recuperación de demanda con solo ubicaciones",
+    "company": "BlackPrint Technologies",
+    "date": "2026-09-02",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Módulos de decisión: 12", "Dato requerido del cliente: Solo archivo de ubicaciones"],
+    "tags": ["React 18", "TypeScript", "Vite", "Tailwind CSS 4", "MapLibre GL", "Recharts", "Puppeteer", "LaTeX", "Puntaje Compuesto", "Inteligencia Territorial"],
+    "description": "Construyó un centro de mando demostrativo que prioriza las sucursales de una paquetería global según su urgencia de recuperación, usando solo su archivo de ubicaciones, inteligencia territorial y señales públicas.",
+    "impacts": [
+      "Construyó un centro de mando de 12 módulos en React y MapLibre GL que prioriza 14 ubicaciones públicas de la paquetería en Querétaro con un puntaje de Recovery Priority que combina demanda, fricción del cliente, presión competitiva, brechas de cobertura y riesgo por reseñas públicas.",
+      "Reorientó el producto a una edición basada solo en ubicaciones que pide al cliente siete campos y deriva cada alerta y recomendación de datos territoriales, 32 ubicaciones de competidores y reseñas públicas agregadas.",
+      "Escribió un generador de datos determinista con arquetipos calibrados, scripts de captura con Puppeteer para la presentación comercial y una guía de la plataforma en LaTeX, en español, que documenta cada cifra mostrada en la demo."
+    ]
+  },
+  {
+    "slug": "big-box-site-dictamen",
+    "title": "Dictamen de sitio para gran formato: Reporte de prefactibilidad comercial",
+    "company": "BlackPrint Technologies",
+    "date": "2026-09-07",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Registro de evidencia: 30 fichas", "Cifras aprobadas: 45"],
+    "tags": ["Next.js 15", "React 18", "TypeScript", "Node.js", "Python", "Mapas Base de Esri", "Georreferenciación Web Mercator", "Cartografía SVG", "PDF con Chrome Headless", "Registro de Evidencia"],
+    "description": "Construyó un dictamen de factibilidad que evalúa un predio en una ciudad turística de México para una tienda de mejoramiento del hogar de gran formato, con cada cifra trazada a su fuente, universo y fecha de corte.",
+    "impacts": [
+      "Construyó un generador de reportes estáticos en Node.js sin dependencias, en el que las cifras del texto se resuelven desde un registro de 45 cifras aprobadas y la compilación se detiene ante entradas faltantes, referencias rotas o violaciones del contrato.",
+      "Rehízo el dictamen en Next.js 15 con el sistema de diseño Polaris v2, nueve secciones y un registro de evidencia de 30 fichas, con un chip de estado (medido, modelado, estimado, declarado, derivado o sin dato) en cada panel.",
+      "Georreferenció tres escalas de mapa sobre mapas base de Esri con aritmética Web Mercator y diseñó estilos de impresión tamaño carta para exportar un PDF fiel con Chrome headless."
+    ]
+  },
+  {
+    "slug": "spatial-strategist-research",
+    "title": "Investigación Spatial Strategist: Catálogo de decisiones GeoAI y panorama competitivo",
+    "company": "BlackPrint Technologies",
+    "date": "2026-10-03",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Fuentes: 66 referencias documentadas", "Trazabilidad numérica: 985 cifras ancladas"],
+    "tags": ["Investigación Profunda", "GeoAI", "Inteligencia de ubicación", "Análisis Competitivo", "Estrategia de Producto", "Python", "LaTeX", "Trazabilidad de Evidencia", "Flujos multiagente"],
+    "description": "Dirigió un programa de investigación con disciplina de evidencia que definió las preguntas, los proxies de datos y la posición competitiva de un estratega espacial con IA para clientes de inteligencia de ubicación en México y Latinoamérica.",
+    "impacts": [
+      "Produjo un catálogo verificado de 20 preguntas territoriales de alto impacto, 10 puntos ciegos de decisión y una matriz de producto de 30 filas, que contrasta el dato ideal con los proxies disponibles en México para cada pregunta.",
+      "Construyó validadores en Python que rastrean 985 menciones numéricas y 66 fuentes hasta sus anclas, y condicionó la entrega a auditorías independientes de método y de reporte antes de compilar en LaTeX y HTML.",
+      "Integró un expediente de 171 páginas sobre la competencia europea que mapea plataformas de inteligencia de ubicación, proveedores de datos y agentes de IA contra una taxonomía de 25 capacidades, con la factibilidad para Latinoamérica de cada capacidad."
+    ]
+  },
+  {
+    "slug": "mall-mobility-report",
+    "title": "Reporte de movilidad en centros comerciales: Ritmos de afluencia en cinco plazas",
+    "company": "BlackPrint Technologies",
+    "date": "2026-07-16",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Cobertura: 5 centros comerciales", "Granularidad: Mapas de calor día × hora 24×7"],
+    "tags": ["Python", "PostgreSQL", "psycopg2", "Node.js", "JavaScript", "HTML/CSS", "Content Security Policy", "Analítica de Movilidad", "Saneamiento de Datos", "Vercel"],
+    "description": "Construyó un reporte autocontenido de movilidad para un minorista nacional de calzado deportivo que compara la afluencia medida por dispositivos, el ritmo semanal y las horas pico de cinco centros comerciales.",
+    "impacts": [
+      "Construyó un reporte de un solo archivo, sin dependencias, con datos embebidos y una Content Security Policy que bloquea toda llamada de red en tiempo de ejecución, para comparar la afluencia de 5 centros comerciales medida en la huella de cada edificio más 500 m.",
+      "Escribió la extracción en Python desde PostgreSQL y un paso de build que sanea el enriquecimiento: elimina nombres internos y coordenadas, y agrega el nivel socioeconómico en tres rangos antes de inyectarlo.",
+      "Agregó un script de verificación en Node que comprueba que los datos embebidos sean idénticos a los agregados de origen y aplica las reglas de términos prohibidos antes de la entrega."
+    ]
+  },
+  {
+    "slug": "comparables-explorer",
+    "title": "Explorador de comparables: Inteligencia geoespacial de precios inmobiliarios",
+    "company": "BlackPrint Technologies",
+    "date": "2026-06-25",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Propiedades unificadas: 36,027 (Guadalajara)", "Cobertura en mapa: ≈88 % geolocalizadas", "Consistencia del veredicto: 0 contradicciones en 19,034 propiedades"],
+    "tags": ["Next.js", "Python", "pandas", "PostgreSQL", "Parquet", "Leaflet", "Leaflet.markercluster", "Winsorización", "Comparación por medianas", "Vercel", "Política de seguridad de contenido (CSP)"],
+    "description": "Construyó para un cliente inmobiliario un explorador de comparables con acceso por contraseña que unificó 36,027 propiedades en venta y renta de Guadalajara en referencias de precio por zona basadas en la mediana, con un veredicto de bajo, en línea o sobre mercado para cada inmueble.",
+    "impacts": [
+      "Diseñó un ETL en Python de solo lectura (staging de Postgres → Parquet → contrato JSON versionado) que normaliza la moneda, separa terreno de construcción y winsoriza precios por segmento, sin base de datos en tiempo de ejecución.",
+      "Definió un veredicto de precio por cohorte adaptativa (N ≥ 8, bandas de ±15 %) calculado una sola vez en el ETL, con 0 contradicciones verificadas entre pines y fichas en 19,034 propiedades en venta.",
+      "Replicó el producto para un segundo mercado de la Ciudad de México (565 propiedades de 3 fuentes, 100 % geolocalizadas) y lo reforzó con escape contra XSS, librerías de mapa autohospedadas, cabeceras CSP y controles accesibles con ARIA."
+    ]
+  },
+  {
+    "slug": "fulfillment-intelligence",
+    "title": "Inteligencia de surtido: Plataforma de decisión de última milla para una farmacia digital",
+    "company": "BlackPrint Technologies",
+    "date": "2026-10-03",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Manzanas modeladas: 66,311 → 193 zonas", "POI de salud integrados: 13,168", "Matriz vial real: 4,851 pares OSRM"],
+    "tags": ["Next.js 16", "React 19", "TypeScript", "MapLibre GL", "deck.gl", "H3", "OSRM", "MILP (HiGHS)", "Zustand", "Vercel AI SDK", "Zod", "Python"],
+    "description": "Construyó para una farmacia digital líder en México una plataforma de inteligencia de surtido que cruza sus pedidos observados con datos públicos de censo, directorio de negocios y red vial en un espacio de decisión sobre un solo mapa para promesa de entrega, despacho, demanda, surtido y red.",
+    "impacts": [
+      "Diseñó la arquitectura de un espacio de trabajo en Next.js 16 con seis lentes de decisión sobre un único mapa persistente de MapLibre (deck.gl para el despacho en vivo), contexto en la URL y un recorrido guiado resuelto en el servidor, iterado con contratos de diseño versionados y seis ADR.",
+      "Modeló el territorio en zonas H3 de resolución 7 a partir de 66,311 manzanas censales y 13,168 POI de salud, con una matriz vial real de OSRM (4,851 pares nodo–zona) ajustada por congestión horaria y un optimizador MILP exacto (HiGHS) para elegir aliados.",
+      "Incorporó desde el diseño la privacidad y la honestidad de los datos con supresión k ≥ 5 y secundaria, una etiqueta Real/Estimado/DEMO en cada cifra y scripts de validación que bloquean el build."
+    ]
+  },
+  {
+    "slug": "leasing-os",
+    "title": "Leasing OS: Plataforma multiactor de arrendamiento de equipo con candados antifraude",
+    "company": "BlackPrint Technologies",
+    "date": "2026-06-30",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Flujo de originación: 10 pasos con candado", "Consolas por actor: 4", "Investigación de integraciones: 32 fuentes / 75 afirmaciones verificadas"],
+    "tags": ["Next.js 16", "React 19", "TypeScript", "Prisma", "PostgreSQL (Neon)", "SQLite", "iron-session", "Server Actions", "Zod", "Vitest", "react-leaflet", "Máquina de estados finitos"],
+    "description": "Prototipó para una fintech mexicana de arrendamiento de equipo una plataforma full-stack y multiactor en la que una máquina de estados de originación de 10 pasos solo avanza cuando la evidencia del responsable existe en la base de datos.",
+    "impacts": [
+      "Construyó cuatro consolas con alcance por rol (operador, fondeador, proveedor y arrendatario) sobre Next.js 16, Prisma y Postgres, donde cada paso es un candado antifraude que se recalcula en el servidor y cada transición se refleja en vivo para todos.",
+      "Implementó módulos deterministas de precio, crédito, facturación electrónica, número de serie, valor residual, ESG y cuenta bancaria, cubiertos por nueve suites de evaluación en Vitest, y una bitácora encadenada por hash para cada activo arrendado.",
+      "Elaboró el informe de viabilidad, la especificación técnica y un estudio de integraciones para la Fase 1 (32 fuentes, 75 afirmaciones con verificación adversarial) que define qué comprar y qué construir en pagos, facturación, KYC, PLD y firma electrónica."
+    ]
+  },
+  {
+    "slug": "corridor-pick-up-site-study",
+    "title": "Estudio de pick-up en corredor: Dimensionamiento de mercado con movilidad para una marca de electrónica",
+    "company": "BlackPrint Technologies",
+    "date": "2026-07-03",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Área de influencia: 20 min en auto (~312 mil personas)", "Hogares objetivo dimensionados: 50,970", "Flujo del corredor anclado: 122,683 personas únicas al mes"],
+    "tags": ["Python", "Analítica de movilidad de dispositivos", "Isócronas de Mapbox", "Censo INEGI y NSE por AGEB", "ENIGH 2024", "DENUE", "Aforos SICT TDPA", "Análisis origen-destino", "Google Cloud Storage", "Visualización de datos en SVG", "Vercel"],
+    "description": "Entregó un estudio de ubicación interactivo para un punto de pick-up de una marca global de electrónica de consumo sobre un corredor industrial de la zona metropolitana de Guadalajara, que dimensiona su mercado accesible en demanda residencial, de paso y laboral.",
+    "impacts": [
+      "Cuantificó tres capas de demanda aditivas: 50,970 hogares objetivo en un área de 20 minutos en auto (~312 mil personas), flujo de paso anclado al aforo oficial SICT TDPA 2024 (122,683 personas únicas al mes) y 21,432 empleos declarados en DENUE en un radio de 2 km.",
+      "Calibró los factores de expansión del panel de dispositivos por nivel socioeconómico, rastreó el origen de los pasantes a escala nacional y midió, en lugar de suponerla, la participación del flujo con destino al aeropuerto.",
+      "Iteró el reporte en nueve versiones (v1.0–v1.8), corrigió desde la causa raíz siete errores numéricos y sustituyó un índice compuesto sesgado por comparaciones en ejes homologables."
+    ]
+  },
+  {
+    "slug": "territory-growth-system",
+    "title": "Sistema de crecimiento territorial: Planeación de distribución asistida por IA para un fabricante de recubrimientos",
+    "company": "BlackPrint Technologies",
+    "date": "2026-09-12",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Municipios analizados: 16 (zona metropolitana de Monterrey)", "Tiendas de competencia mapeadas: 421", "Prospectos calificados: 378"],
+    "tags": ["Next.js 16", "React 19", "TypeScript", "MapLibre GL", "Vercel AI SDK", "Tool calling con Claude", "Zustand", "Recharts", "Tailwind CSS v4", "Vitest", "ETL en Python", "GitHub Actions"],
+    "description": "Construyó para un fabricante mexicano de pinturas y recubrimientos un sistema de crecimiento territorial asistido por IA que cruza su cartera comercial con datos censales del territorio para decidir a qué clientes transformar, dónde prospectar y dónde abrir tiendas insignia en 16 municipios de la zona metropolitana de Monterrey.",
+    "impacts": [
+      "Diseñó 10 módulos de decisión sobre un lienzo compartido de MapLibre: brechas competitivas, prioridades de transformación de clientes, 378 prospectos calificados con rutas semanales de visita y 10 zonas candidatas para tiendas insignia.",
+      "Construyó un analista de IA de dos cerebros (tool calling con Claude y un enrutador determinista de respaldo que ejecuta las mismas herramientas), de modo que cada cifra sale del código con su clase de procedencia visible.",
+      "Congeló la salida de un ETL en Python determinista byte a byte como datasets tipados con scoring explicable y con compuertas, un recorrido guiado de 10 escenas verificado por máquina y una suite de 110 archivos de Vitest."
+    ]
+  },
+  {
+    "slug": "official-store-locator-registry",
+    "title": "Padrón de sucursales: Framework mensual de extracción desde localizadores oficiales",
+    "company": "BlackPrint Technologies",
+    "date": "2026-09-28",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Sucursales aceptadas: 20,805", "Adaptadores de marca: 90", "Marcas registradas: 406"],
+    "tags": ["Python", "httpx", "Playwright", "Pydantic", "Typer", "BeautifulSoup", "JSON-LD", "H3", "Shapely", "Parquet", "GeoJSON", "pytest"],
+    "description": "Construyó un padrón mensual de sucursales de cadenas en México basado solo en fuentes oficiales: extrae el localizador de tiendas de cada marca, normaliza las ubicaciones a un esquema único y compara corridas para detectar aperturas y cierres.",
+    "impacts": [
+      "Diseñó un framework de adaptadores declarativos con seis estrategias de extracción (API JSON, JSON embebido, sitemap/JSON-LD, listados HTML, barridos por malla y captura de XHR en navegador real) y entregó 90 adaptadores de marca que produjeron 20,805 sucursales aceptadas en la corrida de septiembre de 2026.",
+      "Impuso una regla de fuente única: ni agregadores ni API de mapas como fuente de ubicaciones, y geocodificación solo para direcciones que publicó la propia marca. La regla se respalda con compuertas de calidad, fixtures congelados y 206 pruebas en pytest.",
+      "Abordó los localizadores con protección antibot de forma conservadora, con un perfil real de Chrome con ventana que se detiene ante cualquier CAPTCHA, sin resolverlo ni reintentar. Exportó los resultados a Parquet y GeoJSON con un tablero de avance por lote sobre 406 marcas registradas."
+    ]
+  },
+  {
+    "slug": "state-geo-intelligence-platform",
+    "title": "Plataforma estatal de geointeligencia: Explorador del censo económico con agente RAG",
+    "company": "BlackPrint Technologies",
+    "date": "2026-06-01",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Municipios cubiertos: 18", "Módulos operativos: 3", "Censo sintético de prueba: 220,000 unidades"],
+    "tags": ["Next.js 16", "React 19", "TypeScript", "MapLibre GL", "Supabase", "PostGIS", "pgvector", "Seguridad a nivel de fila", "API de Claude", "RAG con BM25", "PWA (Dexie/IndexedDB)", "Webhooks de WhatsApp Business"],
+    "description": "Prototipó una plataforma estatal de geointeligencia para la dependencia de desarrollo sustentable de un estado mexicano que integra módulos ambiental, industrial y de programas sobre un solo mapa del censo económico, con roles, bitácora de auditoría y un agente de IA que cita sus fuentes.",
+    "impacts": [
+      "Implementó tres módulos operativos en los 18 municipios del estado: inspecciones ambientales con 16 filtros de categoría y captura en campo sin conexión, mapeo de parques industriales con vinculación pymes–industria y un conjunto de cinco programas con beneficiarios y cobertura.",
+      "Construyó un agente RAG con citación de fuentes y guardarraíles que responde con Claude cuando está configurado y recurre a un recuperador BM25 local, disponible en chat web y en WhatsApp.",
+      "Diseñó una capa de datos que alterna entre datos semilla y Supabase (PostGIS/pgvector con seguridad a nivel de fila) y un filtrado en servidor que sostuvo un censo sintético de 220,000 unidades."
+    ]
+  },
+  {
+    "slug": "big-box-site-study",
+    "title": "Estudio de tienda de gran formato: Inteligencia de ubicación para mejoramiento del hogar",
+    "company": "BlackPrint Technologies",
+    "date": "2026-08-02",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Modelos analíticos: 10 documentados y auditados", "Capas GeoJSON publicadas: 16", "Matriz origen-destino analizada: 21 millones de filas"],
+    "tags": ["Python", "PostgreSQL", "PostGIS", "H3", "Análisis origen-destino", "Modelo gravitacional de Huff", "Isócronas", "NSE ENIGH/AMAI", "Vite", "Leaflet", "Validadores en Node.js", "Automatización de PPTX y PDF"],
+    "description": "Entregó un estudio de ubicación multiformato para una posible tienda de gran formato de una cadena latinoamericana de mejoramiento del hogar en la zona metropolitana de Monterrey. Integra diez modelos documentados, desde la canasta de gasto de los hogares y la movilidad de paso hasta la captación origen-destino y la canibalización, en un reporte web, una presentación y un paquete de datos auditables.",
+    "impacts": [
+      "Construyó modelos en Python de solo lectura sobre censo, NSE, gasto ENIGH 2024, DENUE en H3, movilidad de dispositivos y una matriz origen-destino de 21 millones de filas. Cada modelo emite un resumen que el integrador solo copia, así que ninguna cifra se escribe a mano.",
+      "Midió la canibalización frente a las tiendas existentes de la cadena con una escalera de capas (solape geométrico, solape de orígenes O-D, covisitas y conveniencia en tiempo de manejo) y calibró el flujo de paso con factores por NSE propios de cada sitio.",
+      "Publicó un reporte interactivo con 16 capas GeoJSON, una presentación de 33 láminas, un PDF, un XLSX y un ZIP de datos, protegidos por validadores que detienen el build, tras una revisión experta con 47 correcciones."
+    ]
+  },
+  {
+    "slug": "vacation-rental-intelligence",
+    "title": "Inteligencia de renta vacacional: Plataforma del mercado de hospedaje para un gobierno estatal",
+    "company": "BlackPrint Technologies",
+    "date": "2026-05-28",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Anuncios mapeados: 42,357", "Municipios cubiertos: 10+", "Ángulos de política pública: 4 (fiscal, turismo, vivienda, hotelería)"],
+    "tags": ["Next.js 16", "React 19", "TypeScript", "Leaflet", "Leaflet.markercluster", "h3-js", "Recharts", "Zod", "Python", "Kepler.gl", "Vercel"],
+    "description": "Construyó para un gobierno estatal mexicano una plataforma de inteligencia de renta vacacional con acceso por contraseña que mapea 42,357 anuncios para mostrar la brecha del impuesto al hospedaje, el desempeño turístico, la presión sobre la vivienda y la competencia con la hotelería formal.",
+    "impacts": [
+      "Entregó una pestaña editorial de hallazgos y un explorador de mapa con clústeres municipales de carga diferida y capas de calor H3 sobre 42,357 anuncios en más de 10 municipios.",
+      "Dimensionó la brecha de visibilidad fiscal del impuesto al hospedaje en anuncios no registrados y midió ocupación, ADR, RevPAR y días disponibles por destino frente a las estadísticas hoteleras oficiales.",
+      "Construyó un pipeline en Python reanudable e idempotente que unifica la oferta de renta vacacional y hotelera en una sola capa de hospedaje, empaquetada por debajo de 5 MB comprimidos."
+    ]
+  },
+  {
+    "slug": "acceptance-radar",
+    "title": "Acceptance Radar: Plataforma de propensión a la aceptación de pagos en comercios",
+    "company": "BlackPrint Technologies",
+    "date": "2026-07-27",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Comercios extraídos: ~5.5 millones (nacional)", "Alcance inicial: 594,068 POI en CDMX", "Artefacto servible: de 45 GB a 70 MB en Parquet"],
+    "tags": ["Next.js 16", "React 19", "TypeScript", "DuckDB", "PostgreSQL", "Parquet (zstd)", "MapLibre GL", "H3", "Modelo de propensión log-odds", "Vercel Blob", "Zustand", "Radix UI"],
+    "description": "Construyó para una red global de pagos una plataforma territorial de aceptación que califica los ~5.5 millones de comercios de México con un modelo explicable de propensión de conversión y permite a los equipos filtrar, mapear y exportar comercios priorizados con sus coordenadas.",
+    "impacts": [
+      "Desarrolló un ETL en Node que extrae 5.49 millones de POI con indicadores de método de pago desde un almacén Postgres de solo lectura de 45 GB hacia DuckDB y publica un artefacto servible de 70 MB en Parquet+zstd.",
+      "Diseñó un núcleo de propensión geométrico (valor transaccional × brecha de aceptación × viabilidad × presión del entorno) con evidencia de pago de tres estados y encogimiento por completitud por debajo de 0.35 de confianza.",
+      "Redujo de más de 40 minutos a 12 segundos un paso de cálculo de percentiles con percentiles mid-rank exactos sobre valores distintos, y logró que los conteos del mapa, la lista y la exportación siempre coincidan."
+    ]
+  },
+  {
+    "slug": "motorcycle-retail-area-study",
+    "title": "Estudio de zona para venta de motocicletas: Atractivo de corredores y proyección de ventas",
+    "company": "BlackPrint Technologies",
+    "date": "2026-08-10",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Corredores comparados: 4 + 1 referencia", "Índice de atractivo: 7 factores ponderados", "Robustez: ganador estable ante cambios de ±50 % en los pesos"],
+    "tags": ["Python", "PostgreSQL", "Censo INEGI 2020", "Registro vehicular INEGI (VMRC)", "ENIGH 2024", "DENUE", "H3", "Movilidad origen-destino", "MapLibre GL", "ECharts", "Vercel"],
+    "description": "Entregó un estudio de zona bilingüe para un nuevo punto de venta de una marca de motocicletas en un municipio grande del Estado de México, que jerarquiza cuatro corredores comerciales con un índice de atractivo de siete factores y proyecta la venta mensual de unidades de abajo hacia arriba con datos oficiales de registro vehicular y del censo.",
+    "impacts": [
+      "Construyó un pipeline de 30 scripts en Python que alimenta un reporte estático en MapLibre + ECharts donde cada cifra se lee de JSON en tiempo de ejecución, sin números escritos a mano.",
+      "Diseñó un índice de corredores de siete factores y lo sometió a una prueba de estrés moviendo cada peso ±50 %; el corredor ganador no cambió en ningún caso.",
+      "Proyectó la demanda como una banda triangulando la serie definitiva de registro vehicular del INEGI (+212,481 motocicletas en el Estado de México en 2024) con la tenencia de motos del censo, y publicó ediciones en español e inglés sobre un mismo contrato de datos."
+    ]
+  },
+  {
+    "slug": "expansion-intelligence-os",
+    "title": "Expansion Intelligence OS: Planeación de expansión retail operada por IA",
+    "company": "BlackPrint Technologies",
+    "date": "2026-07-26",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Despliegues: 3 cadenas", "Calibración financiera: +0.27 % vs. divulgación pública", "Auditoría de preguntas a la IA: 58/58"],
+    "tags": ["Next.js 16", "React 19", "TypeScript", "Vercel AI SDK", "Anthropic Claude", "MapLibre GL JS", "Turf.js", "H3", "Zustand", "Zod", "Modelado financiero determinista", "Vitest"],
+    "description": "Construyó un sistema operativo de expansión operado por IA, desplegado como demo ejecutiva para dos cadenas comerciales nacionales y una marca global de comida rápida, que lleva a los equipos de expansión del análisis territorial a la evaluación de sitios, finanzas mensuales deterministas y un plan de aperturas a cinco años.",
+    "impacts": [
+      "Construyó un analista de IA de doble cerebro: tool calling de Claude sobre servicios deterministas, con un enrutador de intenciones de respaldo cuando el modelo en vivo no está disponible, que opera el mapa mediante un bus tipado de acciones visuales (87 % de aciertos en la caché de prompts).",
+      "Diseñó un motor financiero mensual determinista calibrado con la divulgación pública (+0.27 % en la productividad de ventas publicada) que alimenta la evaluación de sitios, los escenarios y un plan a cinco años.",
+      "Integró datos del almacén con un ETL de solo lectura (184 isócronas sobre la red vial, 19 ediciones del DENUE y una capa H3 de 4,894 celdas de demanda) y adaptó el motor financiero del autoservicio a formatos de comida rápida, con 235 a 286 pruebas automatizadas por despliegue."
+    ]
+  },
+  {
+    "slug": "mall-brand-fit-study",
+    "title": "Afinidad de marcas con un centro comercial: Scorecard de expansión de moda",
+    "company": "BlackPrint Technologies",
+    "date": "2026-07-29",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Marcas evaluadas: 8", "Grano espacial: 13,358 manzanas"],
+    "tags": ["Node.js", "PostgreSQL", "SQL", "Leaflet", "API de isócronas de Mapbox", "Renderizado en canvas", "Censo del INEGI", "ENIGH", "DENUE", "Modelado de scorecards", "Análisis geoespacial"],
+    "description": "Construyó un pipeline reproducible en Node.js y PostgreSQL y un reporte editorial en un solo archivo que calificó ocho marcas de un grupo global de moda para una apertura en un centro comercial importante del noroeste de México.",
+    "impacts": [
+      "Escribió controles de verificación en SQL que cambiaron conclusiones: un filtro exacto del centro comercial (165 locales, 133 abiertos, igual a la cifra que publica el operador) y un bloqueo al tamaño de mercado en pesos cuando la periodicidad del gasto de la encuesta de hogares resultó indeterminable.",
+      "Sustituyó los anillos euclidianos por isócronas de manejo de Mapbox: la isócrona de 15 minutos tiene 34 % menos hogares que un anillo de 7 km (81,827 contra 124,838), así que los anillos sobreestimaban el mercado alcanzable.",
+      "Dibujó 13,358 polígonos de manzana en un canvas de Leaflet con geometría codificada en deltas enteros, dentro de un build determinista que reproduce el análisis y el reporte byte por byte."
+    ]
+  },
+  {
+    "slug": "industrial-development-model",
+    "title": "Modelo de desarrollo industrial: Estudio de decisiones con paridad de Excel",
+    "company": "BlackPrint Technologies",
+    "date": "2026-06-15",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Paridad con Excel: 420/420 celdas", "Horizonte: 20 mercados × 21 años"],
+    "tags": ["TypeScript", "React 18", "Vite", "Zustand", "Recharts", "Vitest", "Modelado financiero", "TIR / VPN / MOIC", "Análisis de sensibilidad", "Vercel"],
+    "description": "Reconstruyó un libro de Excel de desarrollo inmobiliario industrial como una app web en TypeScript cuyo motor financiero determinista coincide celda por celda con el modelo original.",
+    "impacts": [
+      "Construyó un motor en TypeScript puro para banco de tierra, construcción, arrendamiento, vacancia y participación de mercado en 20 mercados y 21 años (2027–2047), que coincide en 420 de 420 celdas de la proyección de mercado y en las 105 columnas de proyecto con tolerancia de 1e-4 en un arnés de paridad con Vitest.",
+      "Completó la capa de retornos que el libro dejaba en blanco (TIR, VPN, MOIC y rendimiento sobre costo) y documentó correcciones a errores de la plantilla, como un HLOOKUP indexado por año calendario que asignaba a todos los proyectos los costos del año 21.",
+      "Añadió comparación de escenarios, barridos de sensibilidad con gráficas de tornado, resúmenes narrados en vivo, alertas de rango y escenarios compartibles comprimidos en la URL, en una SPA que corre solo en el navegador y sin vulnerabilidades de producción en npm audit."
+    ]
+  },
+  {
+    "slug": "pulso-del-centro",
+    "title": "Pulso del Centro: Plataforma de movilidad del centro de Monterrey",
+    "company": "BlackPrint Technologies",
+    "date": "2026-06-02",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Dial de radio: 100–1,000 m", "Zonas comparadas: 7"],
+    "tags": ["Next.js 15", "React 19", "TypeScript", "Leaflet", "nuqs", "Python", "pandas / PyArrow", "Parquet", "Vercel", "Analítica de movilidad", "k-anonimato"],
+    "description": "Construyó una plataforma interactiva en Next.js que convirtió el estudio de movilidad de un colega sobre el centro de Monterrey en indicadores de pasantes, mapas de origen y comparaciones entre zonas fáciles de explorar.",
+    "impacts": [
+      "Implementó un dial de radio de 100 a 1,000 m que recalcula en vivo los indicadores, el mapa y el perfil de la audiencia, con un endpoint de indicadores en el servidor y un estado que se comparte desde la URL.",
+      "Compiló un dataset tipado a partir de los agregados JSON y Parquet del estudio con un paso de build en Python, usando solo salidas con k-anonimato (al menos 5 personas por celda) derivadas de un panel de 460 millones de pings.",
+      "Integró una corrección socioeconómica a nivel de AGEB y un panel de robustez, unificó el escalamiento a población en todas las vistas y agregó un acceso con contraseña que mantiene el sitio cerrado si falta la clave, antes de desplegar en Vercel."
+    ]
+  },
+  {
+    "slug": "geokg-lab",
+    "title": "GeoKG Lab: Grafo de conocimiento geoespacial gobernado con herramientas de Claude",
+    "company": "BlackPrint Technologies",
+    "date": "2026-08-07",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Pruebas aprobadas: 149 de backend + 31 de frontend", "Snapshot: 16 municipios · 128 celdas H3"],
+    "tags": ["Python", "Flask", "NetworkX", "PostgreSQL (solo lectura)", "OWL / Turtle", "SHACL", "GeoSPARQL", "H3", "Claude Haiku 4.5", "Uso de herramientas", "Análisis de Pareto", "Grafos de conocimiento"],
+    "description": "Investigó y construyó una demo reproducible de grafo de conocimiento geoespacial que mantiene la base de datos espacial como fuente de verdad y entrega un snapshot validado de solo lectura a consultas de grafo, a un laboratorio de expansión y, de forma opcional, a herramientas de Claude.",
+    "impacts": [
+      "Construyó una ruta de extracción de solo lectura (consultas SELECT permitidas, transacciones de solo lectura y rollback) hacia un snapshot con hash de contenido de 16 municipios y 128 celdas H3, descrito con un vocabulario OWL y restricciones SHACL.",
+      "Implementó un Expansion Lab con listas cortas de Pareto, pruebas de sensibilidad y secuenciación de portafolio, además de consultas de grafo de varios saltos que devuelven cadenas de evidencia y advierten que la adyacencia no es una ruta.",
+      "Condicionó una conversación opcional con Claude Haiku 4.5 a una activación explícita, herramientas locales tipadas, controles de anclaje numérico y topes de costo por turno y por sesión, todo ello verificado con 149 pruebas de backend y 31 de frontend."
+    ]
+  },
+  {
+    "slug": "landoptima",
+    "title": "LandOptima: Herramienta de captura de huellas satelitales para análisis HBU",
+    "company": "BlackPrint Technologies",
+    "date": "2026-06-01",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Huellas de ML indexadas: 79,746 (Tijuana)", "Respaldo al hacer clic: Open Buildings → OSM → manual"],
+    "tags": ["JavaScript (módulos ES)", "API de Google Maps JavaScript", "API de Google Places", "Google Open Buildings", "API Overpass de OpenStreetMap", "DuckDB", "Python", "GeoJSON", "SIG"],
+    "description": "Construyó una herramienta web que captura huellas de edificios y predios desde imagen satelital con una búsqueda o un clic, las clasifica y las exporta en una sola colección GeoJSON para un tablero de mayor y mejor uso (HBU) de Tijuana.",
+    "impacts": [
+      "Sustituyó el trazo de polígonos vértice por vértice por un ciclo de búsqueda o clic que trae contornos de Google, huellas de Google Open Buildings generadas con ML o huellas de OpenStreetMap, con el dibujo manual como último recurso.",
+      "Escribió un extractor en DuckDB que descarga solo el recuadro de la ciudad desde el bucket público de Open Buildings (79,746 huellas de Tijuana con confianza ≥ 0.75 y ≥ 150 m²) en lugar del conjunto completo de 178 GB.",
+      "Definió un contrato GeoJSON con metadatos tipados de plazas y un único módulo de conversión del orden de ejes, y sirvió la clave de Maps desde un servidor local en lugar de incrustarla en el HTML."
+    ]
+  },
+  {
+    "slug": "laya-decision-studio",
+    "title": "Laya Decision Studio: Banco de trabajo local de decisiones multimodales tipadas",
+    "company": "Proyecto personal",
+    "date": "2026-09-20",
+    "imgSrc": "/images/personal_project.jpg",
+    "impact": ["Benchmark independiente: 24 solicitudes", "Métricas de calibración: Brier · NLL · ECE"],
+    "tags": ["Python", "FastAPI", "PyTorch", "Hugging Face Transformers", "Qwen3-VL-2B", "SmolVLM2", "Laya", "Model Context Protocol (MCP)", "Pytest", "Calibración de modelos", "CUDA"],
+    "description": "Construyó un banco de trabajo local en FastAPI para decisiones tipadas de sí o no, opción y puntaje sobre texto, imágenes y cuadros de video, con un arnés de evaluación que separa el software que funciona de la calidad del modelo.",
+    "impacts": [
+      "Sirvió localmente el modelo de decisiones Laya y la visión de Qwen3-VL-2B con revisiones de modelo fijadas, reporte explícito del dispositivo y entradas acotadas de imágenes y cuadros con marca de tiempo, además de una evaluación etiquetada que reporta exactitud, Brier, NLL y ECE.",
+      "Corrió un benchmark independiente de 24 solicitudes en el Coding Lab, donde Laya acertó más decisiones individuales que una línea base de reglas (238/288 contra 226/288) pero menos especificaciones completas (2/24 contra 5/24), y reportó ese resultado tal como se midió.",
+      "Conectó el modelo con Codex mediante un servidor MCP y una CLI con bitácora versionada de reparaciones, y lo mantuvo fuera del filtrado de revisiones después de que un diagnóstico reservado detectó solo 1 de 12 casos positivos."
+    ]
+  },
+  {
+    "slug": "qsr-franchise-expansion",
+    "title": "Expansión de una franquicia de comida rápida: Reporte interactivo de selección de sitios",
+    "company": "BlackPrint Technologies",
+    "date": "2026-06-09",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Sitios comparados: 4", "Fuente: PDF de 29 páginas → web interactiva"],
+    "tags": ["JavaScript", "HTML/CSS", "Leaflet", "Vercel Edge Middleware", "HMAC-SHA256", "Content Security Policy", "Python", "Análisis de isócronas", "Analítica de movilidad", "Narrativa con datos"],
+    "description": "Reconstruyó un PDF de inteligencia de ubicación de 29 páginas como un reporte web interactivo y protegido con contraseña que comparó dos restaurantes en operación de un franquiciatario de pizza contra dos sitios prospecto en el sureste de México.",
+    "impacts": [
+      "Estructuró el reporte para lecturas de 10 segundos, 2 minutos y 10 minutos, encabezado por un veredicto por sitio basado en un benchmark de «ADN de ubicación» de nueve dimensiones construido con las tiendas existentes.",
+      "Añadió mapas de Leaflet con calor de origen de visitantes, coropletas AGEB por colonia y flujos origen-destino sobre isócronas de manejo de 5, 8 y 10 minutos y zonas peatonales de 400 y 800 m, a partir de una ventana de movilidad de 32 días.",
+      "Protegió el sitio estático con un acceso en Vercel Edge Middleware que firma un token de cookie con HMAC-SHA256 y lo compara en tiempo constante, además de cabeceras CSP, HSTS y noindex."
+    ]
+  },
+  {
+    "slug": "mireporte-ai",
+    "title": "mireporte.ai: Generador de estudios de mercado por punto",
+    "company": "BlackPrint Technologies",
+    "date": "2026-09-28",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Cobertura: 11 zonas metropolitanas", "Pruebas: 5,043 aprobadas"],
+    "tags": ["Next.js 15", "React 19", "TypeScript", "Zod", "H3", "Vitest", "Vercel Blob", "Stripe", "Docker", "PostgreSQL (ETL de solo lectura)", "INEGI / ENIGH / DENUE", "Registros de decisiones de arquitectura"],
+    "description": "Dirigió el desarrollo de mireporte.ai, un producto de BlackPrint que convierte un punto en el mapa en un estudio de mercado congelado de 25 secciones con diez capas de datos, PDF imprimible, folio y hashes de sus fuentes.",
+    "impacts": [
+      "Amplió la cobertura de tres a once zonas metropolitanas con contratos de datos por ciudad que detienen el build si cambian los conteos, manifiestos sha256 por archivo fuente y compuertas de cobertura declaradas.",
+      "Comprimió el índice espacial para que once ciudades cupieran en el límite de 250 MB por función de Vercel: de unos 400 MB sin comprimir a 149 MB en la función más grande.",
+      "Registró las decisiones de diseño en 19 ADR y mantuvo en verde una suite de 5,043 pruebas en Vitest repartidas en 179 archivos, con reportes dorados congelados por ciudad."
+    ]
+  },
+  {
+    "slug": "cataract-care-expansion",
+    "title": "Expansión de cirugía oftalmológica: Plataforma de priorización territorial",
+    "company": "BlackPrint Technologies",
+    "date": "2026-07-02",
+    "imgSrc": "/images/blackprint_logo.png",
+    "impact": ["Establecimientos mapeados: 11,405", "Municipios calificados: 2,469"],
+    "tags": ["Next.js 16", "React 19", "TypeScript", "MapLibre GL JS", "Tailwind CSS v4", "Zod", "Python", "GeoPandas", "EPSG:6372", "Sensibilidad Monte Carlo", "DENUE / CLUES", "Analítica de acceso a la salud"],
+    "description": "Construyó una plataforma de priorización territorial y reportes para una empresa social mexicana que amplía el acceso a la cirugía oftalmológica a bajo costo, con calificaciones de estados y municipios según la demanda y la brecha de oferta modeladas.",
+    "impacts": [
+      "Construyó una plataforma en Next.js 16 cuyo mapa en MapLibre agrupa 11,405 establecimientos oftalmológicos y de salud georreferenciados del DENUE y la CLUES, con una coropleta SVG accesible como respaldo.",
+      "Diseñó un pipeline offline en GeoPandas que mide distancias en EPSG:6372 y asigna establecimientos a 2,469 municipios mediante uniones de punto en polígono, con esquemas de Zod que validan los datos al compilar.",
+      "Probó la robustez del ranking con un análisis Monte Carlo de reponderación (rangos de posición P5–P95) y rotuló en la interfaz cada puntaje de prioridad como modelado, no medido."
     ]
   }
 ]

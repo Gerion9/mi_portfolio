@@ -1,0 +1,153 @@
+---
+import Icon from '../Icon.astro';
+import SplitWords from '../SplitWords.astro';
+import { localizePath, useCopy, type Lang } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useCopy(lang).home.path;
+---
+
+<section class="section cv-section" style="--cis: 36rem; --cis-sm: 58rem" aria-labelledby="path-title">
+  <div class="container-site">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <div class="max-w-2xl">
+        <p class="eyebrow reveal">{t.eyebrow}</p>
+        <SplitWords as="h2" id="path-title" text={t.title} class="section-title mt-5" />
+      </div>
+      <a href={localizePath('/about', lang)} class="btn btn-secondary reveal shrink-0 self-start lg:self-auto">
+        {t.cta}
+        <Icon name="arrow-right" class="btn-arrow h-4 w-4" />
+      </a>
+    </div>
+
+    <div class="path relative mt-16" data-scroll-progress>
+      <div class="path-track" aria-hidden="true"><span class="path-fill"></span></div>
+      <ol class="grid gap-10 md:grid-cols-5 md:gap-6">
+        {
+          t.milestones.map((m, i) => (
+            <li class="path-item reveal relative" style={`--d: ${i * 90}`}>
+              <span class="path-node" aria-hidden="true" />
+              <p class="font-mono text-xs uppercase tracking-[0.14em] text-fg-subtle">{m.year}</p>
+              <p class="mt-2 text-[1.0625rem] font-medium leading-snug tracking-[-0.01em] text-fg">{m.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Full line by default (reduced motion, no JS); scroll drives it otherwise */
+  .path {
+    --progress: 1;
+  }
+
+  :global(html.motion:not(.reveal-all)) .path {
+    --progress: 0;
+  }
+
+  .path-track {
+    position: absolute;
+    left: 0.3125rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 1px;
+    background: rgb(var(--fg) / 0.1);
+  }
+
+  .path-fill {
+    position: absolute;
+    inset: 0;
+    transform-origin: top;
+    transform: scaleY(var(--progress));
+    background: linear-gradient(180deg, #818cf8, #c084fc, #fb7185);
+    box-shadow: 0 0 12px rgb(var(--pink) / 0.6);
+  }
+
+  .path-item {
+    padding-left: 2.25rem;
+  }
+
+  .path-node {
+    position: absolute;
+    left: 0;
+    top: 0.2rem;
+    width: 0.6875rem;
+    height: 0.6875rem;
+    border-radius: 999px;
+    background: rgb(var(--ink));
+    border: 1px solid rgb(var(--fg) / 0.35);
+  }
+
+  .path-item:last-child .path-node {
+    background: #f0abfc;
+    border-color: #f0abfc;
+    box-shadow: 0 0 14px rgb(var(--pink) / 0.8);
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .path-fill {
+        animation: path-grow-y linear both;
+        animation-timeline: view(block);
+        animation-range: entry 25% cover 55%;
+      }
+    }
+  }
+
+  @keyframes path-grow-y {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes path-grow-x {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (min-width: 768px) {
+    @supports (animation-timeline: view()) {
+      @media (prefers-reduced-motion: no-preference) {
+        .path-fill {
+          animation-name: path-grow-x;
+        }
+      }
+    }
+
+    .path-track {
+      left: 0;
+      right: 0;
+      top: 0.3125rem;
+      bottom: auto;
+      width: auto;
+      height: 1px;
+    }
+
+    .path-fill {
+      transform-origin: left;
+      transform: scaleX(var(--progress));
+    }
+
+    .path-item {
+      padding-left: 0;
+      padding-top: 2.25rem;
+    }
+
+    .path-node {
+      top: 0;
+    }
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+import { useCopy, type Lang } from '../../i18n';
+import { ORGANIZATIONS } from '../../data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useCopy(lang).home;
+const loop = [...ORGANIZATIONS, ...ORGANIZATIONS];
+---
+
+<section class="relative border-y border-line bg-ink-2/40" aria-labelledby="affiliations-label">
+  <div class="container-site flex flex-col gap-5 py-9 md:flex-row md:items-center md:gap-10">
+    <p id="affiliations-label" class="eyebrow shrink-0 md:w-52">{t.affiliationsLabel}</p>
+    <div class="marquee min-w-0 flex-1" data-loop>
+      <ul class="marquee__track" style="--marquee-duration: 48s">
+        {
+          loop.map((org, i) => (
+            <li
+              class="flex items-center gap-10 whitespace-nowrap pr-10 text-[1.0625rem] font-medium tracking-[-0.02em] text-fg-muted sm:text-lg"
+              aria-hidden={i >= ORGANIZATIONS.length ? 'true' : undefined}
+            >
+              {org}
+              <svg class="h-2.5 w-2.5 text-fg/25" viewBox="0 0 10 10" aria-hidden="true">
+                <path d="M5 0.6 8.8 2.8v4.4L5 9.4 1.2 7.2V2.8z" fill="none" stroke="currentColor" />
+              </svg>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

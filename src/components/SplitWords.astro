@@ -1,0 +1,55 @@
+---
+/**
+ * Word-by-word reveal (in the spirit of React Bits' BlurText / SplitText),
+ * split at build time so it never waits on JavaScript.
+ * Accent words are marked in copy with *asterisks* and rendered in the
+ * serif-italic gradient style. Punctuation that touches an accent word stays
+ * glued to it ("*data*?" never wraps or gaps before the "?").
+ *   mode="load": CSS animation on first paint (hero)
+ *   mode="view": transition when scrolled into view (toggled by interactions.ts)
+ */
+import { parseAccents, plain } from '../i18n';
+
+interface Props {
+  text: string;
+  as?: 'h1' | 'h2' | 'h3' | 'p' | 'span' | 'div';
+  class?: string;
+  mode?: 'load' | 'view';
+  /** Delay before the first word, in ms. */
+  base?: number;
+  id?: string;
+}
+
+const { text, as: Tag = 'span', class: className, mode = 'view', base = 0, id } = Astro.props;
+
+type Piece = { text: string; accent: boolean };
+type Word = Piece[];
+
+// Tokenize into words; a word may mix accent and plain pieces when no space
+// separates them. Non-breaking spaces stay inside their word ("~5.5 M").
+const SPACE = /([^\S\u00a0\u202f]+)/;
+const words: Word[] = [];
+let current: Word = [];
+for (const seg of parseAccents(text)) {
+  seg.text.split(SPACE).forEach((chunk) => {
+    if (!chunk) return;
+    if (/^[^\S\u00a0\u202f]+$/.test(chunk)) {
+      if (current.length) words.push(current);
+      current = [];
+    } else {
+      current.push({ text: chunk, accent: seg.accent });
+    }
+  });
+}
+if (current.length) words.push(current);
+
+// Long camelCase names ("DeclarationLetterOnline") may break between their parts
+const parts = (t: string) => (t.length > 14 ? t.split(/(?<=[a-z])(?=[A-Z])/) : [t]);
+---
+
+<Tag id={id} class:list={['split', mode === 'load' && 'split-load', className]} style={`--base:${base}ms`}>
+  {/* Screen readers get the phrase once; the animated words are presentation */}
+  <span class="sr-only select-none">{plain(text)}</span>
+  {/* Keep each word on one line: whitespace inside .w would render as extra gaps */}
+  <span aria-hidden="true">{words.map((word, i) => (<>{i > 0 && ' '}<span class="w" style={`--i:${i}`}>{word.map((piece) => (piece.accent ? <span class="accent">{piece.text}</span> : parts(piece.text).map((part, k) => (<>{k > 0 && <wbr />}{part}</>))))}</span></>))}</span>
+</Tag>

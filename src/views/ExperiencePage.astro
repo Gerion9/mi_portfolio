@@ -1,0 +1,579 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import SplitWords from '../components/SplitWords.astro';
+import ProjectCover from '../components/ProjectCover.astro';
+import { SITE_URL, fmt, formatMonthYear, localizePath, useCopy, type Lang } from '../i18n';
+import { COMPANY_LABELS, DOMAINS, DOMAIN_COLOR, getProjectStats, getProjects, type CompanyKey } from '../lib/projects';
+import { graph, personSchema } from '../lib/schema';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = useCopy(lang);
+const t = copy.work;
+const projects = getProjects(lang);
+const stats = getProjectStats(lang);
+
+const years = [...new Set(projects.map((p) => p.year))].sort((a, b) => b - a);
+const byYear = years.map((year) => ({ year, items: projects.filter((p) => p.year === year) }));
+
+const domainCounts = Object.fromEntries(DOMAINS.map((d) => [d, projects.filter((p) => p.domains.includes(d)).length]));
+const domains = DOMAINS.filter((d) => domainCounts[d] > 0);
+
+const companyCounts = new Map<CompanyKey, number>();
+projects.forEach((p) => companyCounts.set(p.companyKey, (companyCounts.get(p.companyKey) ?? 0) + 1));
+const companies = [...companyCounts.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .map(([key, count]) => ({ key, count, label: COMPANY_LABELS[lang][key] }));
+
+const numeric = (values: { label: string; value: string }[]) => values.filter((m) => /\d/.test(m.value));
+const pageUrl = new URL(localizePath('/experience', lang), SITE_URL).toString();
+
+const structuredData = graph(personSchema(lang), {
+  '@type': 'CollectionPage',
+  '@id': `${pageUrl}#page`,
+  url: pageUrl,
+  name: t.metaTitle,
+  inLanguage: lang === 'es' ? 'es-MX' : 'en-US',
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: projects.length,
+    // Summary-page pattern: each item points to its case page, which carries
+    // the full CreativeWork
+    itemListElement: projects.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: new URL(localizePath(`/experience/${p.slug}`, lang), SITE_URL).toString(),
+      name: p.title,
+    })),
+  },
+});
+---
+
+<Layout title={t.metaTitle} description={t.metaDescription} structuredData={structuredData}>
+  <section class="relative isolate overflow-hidden pb-10 pt-36 sm:pt-44" aria-labelledby="work-heading">
+    <div class="page-glow" aria-hidden="true"></div>
+    <div class="container-site">
+      <p class="eyebrow fade-load" style="--base: 0ms">{t.eyebrow}</p>
+      <SplitWords as="h1" id="work-heading" text={t.title} mode="load" base={80} class="mt-6 block max-w-4xl text-display-xl font-semibold text-fg" />
+      <p class="lede fade-load mt-6 max-w-2xl" style="--base: 420ms">{fmt(t.intro, { count: stats.projects })}</p>
+
+      <dl class="fade-load mt-10 flex flex-wrap gap-x-10 gap-y-4 font-mono text-xs uppercase tracking-[0.12em] text-fg-subtle" style="--base: 560ms">
+        <div class="flex items-baseline gap-2">
+          <dt class="sr-only">{lang === 'es' ? 'Proyectos' : 'Projects'}</dt>
+          <dd><span class="text-2xl font-semibold tracking-tight text-fg">{stats.projects}</span> {lang === 'es' ? 'proyectos' : 'projects'}</dd>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <dt class="sr-only">{lang === 'es' ? 'Organizaciones' : 'Organizations'}</dt>
+          <dd><span class="text-2xl font-semibold tracking-tight text-fg">{stats.companies}</span> {lang === 'es' ? 'organizaciones' : 'organizations'}</dd>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <dt class="sr-only">{lang === 'es' ? 'Desde' : 'Since'}</dt>
+          <dd>{lang === 'es' ? 'desde' : 'since'} <span class="text-2xl font-semibold tracking-tight text-fg">{stats.since}</span></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section
+    class="xp relative"
+    data-explorer
+    data-results-many={t.results}
+    data-results-one={t.resultsOne}
+    aria-label={t.eyebrow}
+  >
+    <div class="xp-toolbar z-30 py-3 md:sticky md:top-[5.1rem]">
+      <div class="container-site">
+        <div class="xp-toolbar__inner flex flex-col gap-2 rounded-[1.25rem] p-2">
+          <div class="flex items-center gap-2">
+            <label class="xp-search relative flex min-w-0 flex-1 items-center">
+              <span class="sr-only">{t.searchPlaceholder}</span>
+              <Icon name="search" class="pointer-events-none absolute left-3.5 h-4 w-4 text-fg-subtle" />
+              <input
+                type="search"
+                aria-keyshortcuts="Control+K Meta+K"
+                data-search
+                placeholder={t.searchPlaceholder}
+                autocomplete="off"
+                spellcheck="false"
+                class="h-11 w-full rounded-xl border border-fg/40 bg-ink/60 pl-10 pr-20 text-[0.9375rem] text-fg placeholder:text-fg-subtle focus:border-brand-violet/90"
+              />
+              <kbd class="kbd pointer-events-none absolute right-3 hidden sm:inline-flex" aria-hidden="true" data-search-kbd>Ctrl K</kbd>
+            </label>
+            <label class="relative hidden shrink-0 sm:block">
+              <span class="sr-only">{t.companyLabel}</span>
+              <select data-company class="field h-11 w-52 py-0 text-sm lg:w-60">
+                <option value="">{t.allCompanies}</option>
+                {companies.map((c) => <option value={c.key}>{c.label} ({c.count})</option>)}
+              </select>
+            </label>
+            <div class="xp-views flex shrink-0 rounded-xl border border-line bg-ink/60 p-1" role="group" aria-label={lang === 'es' ? 'Vista' : 'View'}>
+              <button type="button" data-view="list" aria-pressed="true" title={t.viewList}>
+                <Icon name="list" class="h-4 w-4" />
+                <span class="sr-only">{t.viewList}</span>
+              </button>
+              <button type="button" data-view="grid" aria-pressed="false" title={t.viewGrid}>
+                <Icon name="grid" class="h-4 w-4" />
+                <span class="sr-only">{t.viewGrid}</span>
+              </button>
+            </div>
+          </div>
+
+          <div role="group" aria-label={t.filterLabel} class="no-scrollbar mask-fade-x-sm relative -mx-1.5 -my-1.5 flex min-w-0 gap-1 overflow-x-auto px-1.5 py-1.5 pr-10 lg:pr-1.5">
+            <button type="button" class="xp-chip" data-domain="all" aria-pressed="true">
+              {t.domains.all}<span class="xp-chip__count"><span class="sr-only">, </span>{projects.length}</span>
+            </button>
+            {
+              domains.map((d) => (
+                <button type="button" class="xp-chip" data-domain={d} aria-pressed="false" style={`--chip: ${DOMAIN_COLOR[d]}`}>
+                  <span class="xp-chip__dot" aria-hidden="true" />
+                  {t.domains[d]}
+                  <span class="xp-chip__count"><span class="sr-only">, </span>{domainCounts[d]}</span>
+                </button>
+              ))
+            }
+          </div>
+
+          <label class="relative sm:hidden">
+            <span class="sr-only">{t.companyLabel}</span>
+            <select data-company class="field h-11 py-0 text-sm">
+              <option value="">{t.allCompanies}</option>
+              {companies.map((c) => <option value={c.key}>{c.label} ({c.count})</option>)}
+            </select>
+          </label>
+        </div>
+        <div class="mt-3 flex items-center justify-between px-1">
+          <p class="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-fg-subtle" data-results aria-live="polite">
+            {fmt(t.results, { count: projects.length })}
+          </p>
+          <button type="button" class="xp-reset font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-fg-muted underline-offset-4 hover:text-fg hover:underline" data-reset>
+            {t.reset}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-site pb-28 pt-6">
+      <div data-list data-view="list" class="xp-list space-y-14">
+        {
+          byYear.map(({ year, items }) => (
+            <section class="xp-year grid gap-5 lg:grid-cols-[8.5rem_1fr] lg:gap-8" data-year-group aria-labelledby={`year-${year}`}>
+              <h2 id={`year-${year}`} class="xp-year__label flex items-baseline gap-3 self-start lg:sticky lg:top-[16.5rem] lg:flex-col lg:gap-1">
+                <span class="text-3xl font-semibold tracking-[-0.04em] text-fg lg:text-4xl">{year}</span>
+                <span class="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-fg-subtle">
+                  <span data-year-count>{items.length}</span> {lang === 'es' ? 'proyectos' : 'projects'}
+                </span>
+              </h2>
+              <ul class="xp-items" role="list">
+                {items.map((p) => (
+                  <li
+                    id={p.slug}
+                    class="xp-item"
+                    data-project
+                    data-slug={p.slug}
+                    data-uid={`w-${p.slug}`}
+                    data-domains={p.domains.join(' ')}
+                    data-company={p.companyKey}
+                    data-search={p.search}
+                  >
+                    <article class="xp-card surface spotlight group" data-case-root style={`--spot: ${DOMAIN_COLOR[p.primary]}`}>
+                      <div class="xp-card__cover" data-cover>
+                        <ProjectCover
+                          slug={p.slug}
+                          domain={p.primary}
+                          variant={p.cover}
+                          uid={`w-${p.slug}`}
+                          class="h-full w-full transition-transform duration-[1.2s] ease-out-expo group-hover:scale-[1.05]"
+                        />
+                      </div>
+                      <div class="xp-card__body">
+                        <p class="xp-card__meta">
+                          <time datetime={p.date}>{formatMonthYear(p.date, lang)}</time>
+                          <span aria-hidden="true">·</span>
+                          <span>{p.company}</span>
+                        </p>
+                        <h3 class="xp-card__title">
+                          <a href={localizePath(`/experience/${p.slug}`, lang)} class="xp-card__link" data-case>
+                            {p.shortTitle}
+                          </a>
+                        </h3>
+                        {p.subtitle && <p class="xp-card__sub">{p.subtitle}</p>}
+                        <p class="xp-card__desc">{p.description}</p>
+                        <div class="xp-card__foot">
+                          {numeric(p.metrics).length > 0 && (
+                            <ul class="flex flex-wrap gap-2" role="list">
+                              {numeric(p.metrics)
+                                .slice(0, 2)
+                                .map((m) => (
+                                  <li class="xp-metric">
+                                    <span class="xp-metric__value">{m.value}</span>
+                                    {m.label && <span class="xp-metric__label">{m.label}</span>}
+                                  </li>
+                                ))}
+                            </ul>
+                          )}
+                          <ul class="flex flex-wrap gap-1.5" role="list">
+                            {p.tags.slice(0, 3).map((tag) => (
+                              <li class="tag">{tag}</li>
+                            ))}
+                            {p.tags.length > 3 && <li class="tag text-fg-subtle">+{p.tags.length - 3}</li>}
+                          </ul>
+                        </div>
+                      </div>
+                      <span class="xp-card__arrow" aria-hidden="true">
+                        <Icon name="arrow-up-right" class="h-4 w-4" />
+                      </span>
+                    </article>
+
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))
+        }
+      </div>
+
+      <div data-empty hidden class="surface mx-auto mt-6 max-w-xl px-6 py-14 text-center">
+        <svg class="mx-auto h-16 w-16 text-fg/25" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M32 6 54.5 19v26L32 58 9.5 45V19L32 6Z" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 5"></path>
+          <circle cx="32" cy="32" r="5" stroke="currentColor" stroke-width="1.5"></circle>
+        </svg>
+        <h2 class="mt-6 text-xl font-semibold text-fg">{t.emptyTitle}</h2>
+        <p class="mt-2 text-fg-muted">{t.emptyBody}</p>
+        <button type="button" class="btn btn-secondary mt-7" data-reset>
+          <Icon name="reset" class="h-4 w-4" />
+          {t.reset}
+        </button>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+  import { initExplorer } from '../scripts/explorer';
+  const root = document.querySelector<HTMLElement>('[data-explorer]');
+  if (root) initExplorer(root);
+</script>
+
+<style is:global>
+  .page-glow {
+    position: absolute;
+    inset: -20% -10% auto 30%;
+    height: 38rem;
+    z-index: -1;
+    background:
+      radial-gradient(40% 50% at 70% 30%, rgb(var(--violet) / 0.2), transparent 70%),
+      radial-gradient(30% 40% at 85% 20%, rgb(var(--pink) / 0.12), transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Toolbar */
+  .xp-toolbar {
+    transition: background-color 0.4s var(--ease-out);
+  }
+
+  /* Sticky from md: the whole strip (incl. the results row) gets the page
+     background, and focus/anchors scroll clear of it (WCAG 2.4.11). */
+  @media (min-width: 768px) {
+    .xp-toolbar {
+      background: linear-gradient(rgb(var(--ink)) calc(100% - 0.75rem), rgb(var(--ink) / 0));
+    }
+
+    html:has([data-explorer]) {
+      scroll-padding-top: 16.5rem;
+    }
+  }
+
+  .xp-toolbar__inner {
+    border: 1px solid rgb(var(--fg) / 0.09);
+    background: rgb(var(--ink-2) / 0.82);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+    box-shadow: 0 18px 50px -28px rgb(0 0 0 / 0.9);
+  }
+
+  .xp-search input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
+
+  .xp-chip {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 0.5rem;
+    height: 2.75rem;
+    padding: 0 0.95rem;
+    border-radius: 0.8rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(var(--fg-muted));
+    border: 1px solid transparent;
+    transition:
+      color 0.25s var(--ease-out),
+      background-color 0.25s var(--ease-out),
+      border-color 0.25s var(--ease-out);
+  }
+
+  .xp-chip:hover {
+    color: rgb(var(--fg));
+    background: rgb(var(--fg) / 0.05);
+  }
+
+  /* Selected filter reads at a glance: solid light chip (WCAG 1.4.11) */
+  .xp-chip[aria-pressed='true'] {
+    color: rgb(var(--ink));
+    background: rgb(var(--fg));
+    border-color: rgb(var(--fg));
+  }
+
+  .xp-chip[aria-pressed='true'] .xp-chip__count {
+    color: rgb(var(--ink) / 0.72);
+  }
+
+  .xp-chip__dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: rgb(var(--chip, var(--fg)));
+    box-shadow: 0 0 8px rgb(var(--chip, var(--fg)) / 0.7);
+  }
+
+  .xp-chip__count {
+    font-family: theme('fontFamily.mono');
+    font-size: 0.6875rem;
+    color: rgb(var(--fg-subtle));
+  }
+
+  .xp-views button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.125rem;
+    border-radius: 0.6rem;
+    color: rgb(var(--fg-subtle));
+    transition:
+      color 0.25s var(--ease-out),
+      background-color 0.25s var(--ease-out);
+  }
+
+  .xp-views button[aria-pressed='true'] {
+    color: rgb(var(--ink));
+    background: rgb(var(--fg));
+  }
+
+  .xp-reset {
+    visibility: hidden;
+  }
+
+  .xp.is-filtered .xp-reset {
+    visibility: visible;
+  }
+
+  /* Items: list view (default) */
+  .xp-items {
+    display: grid;
+    gap: 1rem;
+  }
+
+  /* 61 cards: offscreen ones skip style, layout and paint until they near the
+     viewport (they stay in the accessibility tree and find-in-page) */
+  .xp-item {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 26rem;
+  }
+
+  .xp-card {
+    display: grid;
+    overflow: hidden;
+    border-radius: 1.4rem;
+    transition:
+      border-color 0.4s var(--ease-out),
+      transform 0.5s var(--ease-out);
+  }
+
+  .xp-card:hover {
+    border-color: rgb(var(--fg) / 0.16);
+  }
+
+  .xp-card__cover {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border-bottom: 1px solid rgb(var(--fg) / 0.08);
+  }
+
+  .xp-card__body {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    padding: 1.4rem 1.4rem 1.5rem;
+  }
+
+  .xp-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-family: theme('fontFamily.mono');
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgb(var(--fg-subtle));
+  }
+
+  .xp-card__title {
+    margin-top: 0.75rem;
+    font-size: 1.375rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: rgb(var(--fg));
+    overflow-wrap: anywhere;
+  }
+
+  .xp-card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+  }
+
+  .xp-card__link:focus-visible {
+    outline: none;
+  }
+
+  .xp-card:has(.xp-card__link:focus-visible) {
+    outline: 2px solid #c4b5fd;
+    outline-offset: 3px;
+  }
+
+  .xp-card__sub {
+    margin-top: 0.35rem;
+    font-size: 0.9375rem;
+    color: rgb(var(--fg-muted));
+  }
+
+  .xp-card__desc {
+    margin-top: 0.85rem;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: rgb(var(--fg-muted));
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .xp-card__foot {
+    margin-top: auto;
+    padding-top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .xp-card__arrow {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 999px;
+    color: rgb(var(--fg));
+    background: rgb(var(--ink) / 0.6);
+    border: 1px solid rgb(var(--fg) / 0.14);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 0.35s var(--ease-out),
+      transform 0.35s var(--ease-out);
+  }
+
+  .xp-card:hover .xp-card__arrow,
+  .xp-card:focus-within .xp-card__arrow {
+    opacity: 1;
+    transform: none;
+  }
+
+  .xp-metric {
+    border-radius: 0.75rem;
+    border: 1px solid rgb(var(--fg) / 0.08);
+    background: rgb(var(--fg) / 0.03);
+    padding: 0.45rem 0.7rem;
+  }
+
+  .xp-metric__value {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgb(var(--fg));
+  }
+
+  .xp-metric__label {
+    display: block;
+    margin-top: 0.1rem;
+    font-family: theme('fontFamily.mono');
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgb(var(--fg-subtle));
+  }
+
+  @media (min-width: 768px) {
+    [data-view='list'] .xp-card {
+      grid-template-columns: minmax(15rem, 34%) 1fr;
+    }
+
+    [data-view='list'] .xp-card__cover {
+      aspect-ratio: auto;
+      height: 100%;
+      min-height: 13.5rem;
+      border-bottom: 0;
+      border-right: 1px solid rgb(var(--fg) / 0.08);
+    }
+
+    [data-view='list'] .xp-card__body {
+      padding: 1.6rem 4rem 1.6rem 1.75rem;
+    }
+
+    [data-view='list'] .xp-card__foot {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  /* Grid view */
+  [data-view='grid'] .xp-items {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  }
+
+  [data-view='grid'] .xp-card__desc {
+    -webkit-line-clamp: 2;
+  }
+
+  /* Filter transitions (same-document View Transitions): keep the page still,
+     let only the cards morph. */
+  html.vt-filter::view-transition-old(root),
+  html.vt-filter::view-transition-new(root) {
+    animation: none;
+  }
+
+  html.vt-filter::view-transition-group(*) {
+    animation-duration: 0.45s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+</style>

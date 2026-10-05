@@ -1,0 +1,271 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import SplitWords from '../components/SplitWords.astro';
+import ProfileCard from '../components/ProfileCard.astro';
+import timelineEn from '../data/timeline.json';
+import timelineEs from '../data/timeline_es.json';
+import { SITE_URL, localizePath, useCopy, type Lang } from '../i18n';
+import { graph, personSchema } from '../lib/schema';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useCopy(lang).about;
+const timeline = (lang === 'es' ? timelineEs : timelineEn) as { year: string | number; event: string; description: string }[];
+const pageUrl = new URL(localizePath('/about', lang), SITE_URL).toString();
+
+// "Lead AI Engineer at BlackPrint Technologies" -> role + organization
+const splitEvent = (event: string) => {
+  const m = event.match(/^(.*?)\s+(?:at|en)\s+(.*)$/);
+  return m ? { role: m[1], org: m[2] } : { role: event, org: '' };
+};
+
+const structuredData = graph({
+  '@type': 'ProfilePage',
+  '@id': `${pageUrl}#page`,
+  url: pageUrl,
+  name: t.metaTitle,
+  inLanguage: lang === 'es' ? 'es-MX' : 'en-US',
+  mainEntity: personSchema(lang),
+});
+---
+
+<Layout title={t.metaTitle} description={t.metaDescription} structuredData={structuredData}>
+  <section class="relative isolate overflow-hidden pb-20 pt-36 sm:pt-44" aria-labelledby="about-title">
+    <div class="about-glow" aria-hidden="true"></div>
+    <div class="container-site grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
+      <div class="lg:col-span-7">
+        <p class="eyebrow fade-load" style="--base: 0ms">{t.eyebrow}</p>
+        <SplitWords as="h1" id="about-title" text={t.title} mode="load" base={80} class="mt-6 block text-display-lg font-semibold text-fg" />
+        <p class="lede fade-load mt-7 max-w-2xl" style="--base: 520ms">{t.intro}</p>
+
+        <dl class="fade-load mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2" style="--base: 680ms">
+          {
+            t.facts.map((f) => (
+              <div class="bg-ink-2 px-5 py-4">
+                <dt class="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-fg-subtle">{f.label}</dt>
+                <dd class="mt-1.5 text-[0.9375rem] leading-snug text-fg">{f.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+      <div class="fade-load mx-auto w-full max-w-[22rem] lg:col-span-5 lg:max-w-[24rem]" style="--base: 300ms">
+        <ProfileCard lang={lang} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section pt-8" aria-labelledby="story-title">
+    <div class="container-site grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <h2 id="story-title" class="eyebrow lg:sticky lg:top-28">{lang === 'es' ? 'La historia' : 'The story'}</h2>
+      </div>
+      <div class="space-y-7 lg:col-span-8">
+        {
+          t.bio.map((paragraph, i) => (
+            <p
+              class:list={['reveal', i === 0 ? 'text-xl leading-relaxed text-fg sm:text-[1.375rem]' : 'text-[1.0625rem] leading-[1.8] text-fg-muted']}
+              style={`--d: ${i * 60}`}
+            >
+              {paragraph}
+            </p>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="timeline-title">
+    <div class="container-site">
+      <div class="max-w-2xl">
+        <p class="eyebrow reveal">{lang === 'es' ? 'Trayectoria' : 'Timeline'}</p>
+        <SplitWords as="h2" id="timeline-title" text={t.timelineTitle} class="section-title mt-5" />
+        <p class="lede reveal mt-5">{t.timelineIntro}</p>
+      </div>
+
+      <div class="tl relative mt-14" data-scroll-progress>
+        <div class="tl-track" aria-hidden="true"><span class="tl-fill"></span></div>
+        <ol class="space-y-4" role="list">
+          {
+            timeline.map((item, i) => {
+              const { role, org } = splitEvent(item.event);
+              return (
+                <li class="tl-item reveal relative grid gap-3 sm:grid-cols-[12rem_1fr] sm:gap-8" style={`--d: ${(i % 3) * 70}`}>
+                  <span class="tl-node" aria-hidden="true" />
+                  <p class="whitespace-nowrap pl-10 font-mono text-xs uppercase tracking-[0.14em] text-fg-subtle sm:pl-12 sm:pt-6">{item.year}</p>
+                  <div class="surface spotlight ml-10 p-6 sm:ml-0 sm:p-7">
+                    <h3 class="text-lg font-semibold tracking-[-0.02em] text-fg">{role}</h3>
+                    {org && <p class="mt-1 text-[0.9375rem] text-[#a5b4fc]">{org}</p>}
+                    <p class="mt-3 text-[0.9375rem] leading-relaxed text-fg-muted">{item.description}</p>
+                  </div>
+                </li>
+              );
+            })
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="principles-title">
+    <div class="container-site">
+      <p class="eyebrow reveal">{lang === 'es' ? 'Principios' : 'Principles'}</p>
+      <SplitWords as="h2" id="principles-title" text={t.principles.title} class="section-title mt-5" />
+      <div class="mt-12 grid gap-4 sm:gap-5 md:grid-cols-2">
+        {
+          t.principles.items.map((item, i) => (
+            <article class="surface spotlight reveal flex flex-col p-7 sm:p-8" style={`--d: ${(i % 2) * 90}`}>
+              <span class="font-mono text-xs text-fg-subtle tabular">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="mt-8 text-xl font-semibold tracking-[-0.02em] text-fg">{item.title}</h3>
+              <p class="mt-3 text-[0.9375rem] leading-relaxed text-fg-muted">{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="approach-title">
+    <div class="container-site">
+      <p class="eyebrow reveal">{lang === 'es' ? 'Método' : 'Method'}</p>
+      <SplitWords as="h2" id="approach-title" text={t.approach.title} class="section-title mt-5" />
+      <ol class="mt-12 grid gap-px overflow-hidden rounded-[1.75rem] border border-line bg-line md:grid-cols-2 lg:grid-cols-4" role="list">
+        {
+          t.approach.steps.map((step, i) => (
+            <li class="reveal relative bg-ink-2 p-7 sm:p-8" style={`--d: ${i * 80}`}>
+              <div class="flex items-center gap-3">
+                <span class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-line-strong font-mono text-xs text-fg tabular">
+                  {i + 1}
+                </span>
+                {i < t.approach.steps.length - 1 && <span class="h-px flex-1 bg-gradient-to-r from-fg/20 to-transparent" aria-hidden="true" />}
+              </div>
+              <h3 class="mt-7 text-lg font-semibold tracking-[-0.02em] text-fg">{step.title}</h3>
+              <p class="mt-2.5 text-[0.9375rem] leading-relaxed text-fg-muted">{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="interests-title">
+    <div class="container-site grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <p class="eyebrow reveal">{lang === 'es' ? 'Exploración' : 'Exploring'}</p>
+        <SplitWords as="h2" id="interests-title" text={t.interests.title} class="section-title mt-5" />
+      </div>
+      <ul class="divide-y divide-line border-y border-line lg:col-span-8" role="list">
+        {
+          t.interests.items.map((item, i) => (
+            <li class="reveal group grid grid-cols-[2.5rem_1fr] gap-4 py-6 sm:grid-cols-[3rem_1fr_1.5fr] sm:gap-6" style={`--d: ${i * 60}`}>
+              <span class="font-mono text-sm text-fg-subtle tabular">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="text-[1.0625rem] font-semibold tracking-[-0.01em] text-fg">{item.title}</h3>
+              <p class="col-start-2 text-[0.9375rem] leading-relaxed text-fg-muted sm:col-start-3">{item.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section pb-16" aria-labelledby="about-cta">
+    <div class="container-site">
+      <div class="about-cta reveal relative overflow-hidden rounded-[2rem] border border-line px-6 py-16 text-center sm:px-12 sm:py-20">
+        <SplitWords as="h2" id="about-cta" text={t.cta.title} class="mx-auto block max-w-3xl text-display-md font-semibold text-fg" />
+        <p class="lede mx-auto mt-5 max-w-xl">{t.cta.sub}</p>
+        <div class="mt-9 flex flex-wrap justify-center gap-3">
+          <a href={localizePath('/contact', lang)} class="btn btn-primary">
+            {t.cta.primary}
+            <Icon name="arrow-right" class="btn-arrow h-4 w-4" />
+          </a>
+          <a href={localizePath('/experience', lang)} class="btn btn-secondary">{t.cta.secondary}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .about-glow {
+    position: absolute;
+    inset: -15% -15% auto 35%;
+    height: 44rem;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(40% 50% at 60% 40%, rgb(var(--violet) / 0.2), transparent 70%),
+      radial-gradient(30% 40% at 80% 20%, rgb(var(--teal) / 0.12), transparent 70%);
+  }
+
+  /* Full line by default (reduced motion, no JS); scroll drives it otherwise */
+  .tl {
+    --progress: 1;
+  }
+
+  :global(html.motion:not(.reveal-all)) .tl {
+    --progress: 0;
+  }
+
+  .tl-track {
+    position: absolute;
+    left: 0.3125rem;
+    top: 1.5rem;
+    bottom: 1.5rem;
+    width: 1px;
+    background: rgb(var(--fg) / 0.1);
+  }
+
+  .tl-fill {
+    position: absolute;
+    inset: 0;
+    transform-origin: top;
+    transform: scaleY(var(--progress));
+    background: linear-gradient(180deg, #818cf8, #c084fc 50%, #fb7185);
+    box-shadow: 0 0 12px rgb(var(--pink) / 0.55);
+  }
+
+  .tl-node {
+    position: absolute;
+    left: 0;
+    top: 1.65rem;
+    width: 0.6875rem;
+    height: 0.6875rem;
+    border-radius: 999px;
+    background: rgb(var(--ink));
+    border: 1px solid rgb(var(--fg) / 0.4);
+  }
+
+  .tl-item:first-child .tl-node {
+    background: #f0abfc;
+    border-color: #f0abfc;
+    box-shadow: 0 0 14px rgb(var(--pink) / 0.8);
+  }
+
+  .about-cta {
+    background:
+      radial-gradient(60% 90% at 50% 120%, rgb(var(--violet) / 0.28), transparent 70%),
+      rgb(var(--ink-2));
+  }
+
+  /* Native scroll-driven line where supported; Motion's scroll() is the fallback */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .tl-fill {
+        transform: scaleY(0);
+        animation: tl-grow linear both;
+        animation-timeline: view(block);
+        animation-range: entry 20% exit 60%;
+      }
+    }
+  }
+
+  @keyframes tl-grow {
+    to {
+      transform: scaleY(1);
+    }
+  }
+</style>

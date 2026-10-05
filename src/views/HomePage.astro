@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/home/Hero.astro';
+import Affiliations from '../components/home/Affiliations.astro';
+import Impact from '../components/home/Impact.astro';
+import Capabilities from '../components/home/Capabilities.astro';
+import SelectedWork from '../components/home/SelectedWork.astro';
+import Path from '../components/home/Path.astro';
+import Closing from '../components/home/Closing.astro';
+import { useCopy, type Lang } from '../i18n';
+import { graph, personSchema, websiteSchema } from '../lib/schema';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useCopy(lang);
+const structuredData = graph(personSchema(lang), websiteSchema(lang));
+---
+
+<Layout title={t.home.metaTitle} description={t.home.metaDescription} structuredData={structuredData}>
+  <Hero lang={lang} />
+  <Affiliations lang={lang} />
+  <Impact lang={lang} />
+  <SelectedWork lang={lang} />
+  <Capabilities lang={lang} />
+  <Path lang={lang} />
+  <Closing lang={lang} />
+</Layout>

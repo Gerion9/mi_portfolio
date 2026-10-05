@@ -1,0 +1,190 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { alternatePath, localizePath, useCopy, type Lang } from '../i18n';
+import { PROFILE, SOCIALS } from '../data/site';
+
+interface Props {
+  lang: Lang;
+  pathname: string;
+  /** False on single-language pages: the switch then goes to the other home. */
+  translated?: boolean;
+}
+
+const { lang, pathname, translated = true } = Astro.props;
+const otherLang: Lang = lang === 'es' ? 'en' : 'es';
+const t = useCopy(lang);
+const year = new Date().getFullYear();
+
+const pages = [
+  { href: '/', label: lang === 'es' ? 'Inicio' : 'Home' },
+  { href: '/experience', label: t.nav.work },
+  { href: '/about', label: t.nav.about },
+  { href: '/resume', label: t.nav.resume },
+  { href: '/contact', label: t.nav.contact },
+];
+
+const connect = [
+  { href: SOCIALS.linkedin.href, label: 'LinkedIn', icon: 'linkedin', external: true },
+  { href: SOCIALS.github.href, label: 'GitHub', icon: 'github', external: true },
+  { href: `mailto:${PROFILE.email}`, label: lang === 'es' ? 'Correo' : 'Email', icon: 'mail', external: false },
+];
+
+const elsewhere = [
+  { href: SOCIALS.instagram.href, label: 'Instagram', icon: 'instagram' },
+  { href: SOCIALS.facebook.href, label: 'Facebook', icon: 'facebook' },
+];
+---
+
+<footer class="relative isolate mt-16 overflow-hidden border-t border-line" role="contentinfo">
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-64 opacity-60"
+    style="background: radial-gradient(60% 100% at 50% 0%, rgb(var(--violet) / 0.12), transparent 70%)"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-site grid grid-cols-2 gap-x-6 gap-y-10 pb-10 pt-14 md:grid-cols-12 md:gap-8 md:pb-12 md:pt-16">
+    <div class="col-span-2 md:col-span-5">
+      <a href={localizePath('/', lang)} class="inline-flex items-center gap-3">
+        <Logo class="h-8 w-8" />
+        <span class="text-lg font-semibold tracking-[-0.02em]">Gairo Peralta</span>
+      </a>
+      <p class="mt-5 max-w-sm text-[0.9375rem] leading-relaxed text-fg-muted">{t.footer.tagline}</p>
+      <button
+        type="button"
+        class="group mt-6 inline-flex items-center gap-3 rounded-full border border-line-strong bg-fg/[0.03] py-2 pl-4 pr-2 font-mono text-sm text-fg transition-colors hover:bg-fg/[0.07]"
+        data-copy={PROFILE.email}
+        data-copied={t.home.closing.copied}
+      >
+        {PROFILE.email}
+        <span
+          class="inline-flex items-center gap-1.5 rounded-full bg-fg/10 px-2.5 py-1 font-sans text-xs text-fg-muted transition-colors group-hover:text-fg group-data-[state=copied]:bg-brand-lime/20 group-data-[state=copied]:text-fg"
+        >
+          <Icon name="copy" class="h-3.5 w-3.5" />
+          <span data-copy-label>{t.home.closing.copy}</span>
+        </span>
+      </button>
+    </div>
+
+    <nav class="col-span-1 md:col-span-2" aria-labelledby="footer-pages">
+      <h2 id="footer-pages" class="eyebrow eyebrow--plain mb-4">{t.footer.pages}</h2>
+      <ul class="space-y-2.5">
+        {
+          pages.map((p) => (
+            <li>
+              <a href={localizePath(p.href, lang)} class="link-underline text-[0.9375rem] text-fg-muted hover:text-fg">
+                {p.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="col-span-1 md:col-span-2">
+      <h2 class="eyebrow eyebrow--plain mb-4">{t.footer.connect}</h2>
+      <ul class="space-y-2.5">
+        {
+          connect.map((c) => (
+            <li>
+              <a
+                href={c.href}
+                class="group inline-flex items-center gap-2 text-[0.9375rem] text-fg-muted transition-colors hover:text-fg"
+                {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
+                <Icon name={c.icon} class="h-4 w-4 opacity-70" />
+                {c.label}
+                {c.external && (
+                  <Icon
+                    name="arrow-up-right"
+                    class="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-60"
+                  />
+                )}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="col-span-2 md:col-span-3">
+      <h2 class="eyebrow eyebrow--plain mb-4">{t.footer.elsewhere}</h2>
+      <ul class="flex flex-wrap gap-x-6 gap-y-2.5 md:block md:space-y-2.5">
+        {
+          elsewhere.map((c) => (
+            <li>
+              <a
+                href={c.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 text-[0.9375rem] text-fg-muted transition-colors hover:text-fg"
+              >
+                <Icon name={c.icon} class="h-4 w-4 opacity-70" />
+                {c.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="md:pt-2">
+          <a
+            href={translated ? alternatePath(pathname, otherLang) : localizePath('/', otherLang)}
+            hreflang={lang === 'es' ? 'en' : 'es'}
+            lang={lang === 'es' ? 'en' : 'es'}
+            class="inline-flex items-center gap-2 text-[0.9375rem] text-fg-muted transition-colors hover:text-fg"
+          >
+            <Icon name="globe" class="h-4 w-4 opacity-70" />
+            {lang === 'es' ? 'Read in English' : 'Leer en español'}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container-site">
+    <div
+      class="flex flex-col gap-4 border-t border-line py-6 text-[0.8125rem] text-fg-subtle sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>© {year} Gairo Peralta. {t.footer.rights}</p>
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <a href="/privacy-policy/" class="transition-colors hover:text-fg">{t.footer.privacy}</a>
+        <a href="/terms/" class="transition-colors hover:text-fg">{t.footer.terms}</a>
+        <span class="hidden lg:inline">{t.footer.builtWith}</span>
+        <a href="#top" class="inline-flex items-center gap-1.5 transition-colors hover:text-fg">
+          {t.footer.backToTop}
+          <Icon name="arrow-up" class="h-3.5 w-3.5" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-wordmark container-site select-none" aria-hidden="true">
+    <span>Gairo Peralta</span>
+  </div>
+</footer>
+
+<style>
+  /* The name spans the container exactly at any width: "Gairo Peralta" in
+     Geist 600 at -0.065em measures 5.35em, so 100cqi / 5.46 leaves ~2% air.
+     The span crops the lower part of the letters (height 0.74em). */
+  .footer-wordmark {
+    container-type: inline-size;
+    pointer-events: none;
+  }
+
+  .footer-wordmark span {
+    display: block;
+    height: 0.74em;
+    overflow: hidden;
+    font-size: min(16vw, 13.7rem);
+    font-size: calc(100cqi / 5.46);
+    font-weight: 600;
+    letter-spacing: -0.065em;
+    line-height: 0.8;
+    white-space: nowrap;
+    background: linear-gradient(180deg, rgb(var(--fg) / 0.16), rgb(var(--fg) / 0) 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+</style>

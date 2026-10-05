@@ -1,0 +1,115 @@
+---
+/** Data card visual: sources flowing through a pipeline into models and apps. */
+import type { Lang } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const L =
+  lang === 'es'
+    ? { sources: ['API', 'CSV', 'BigQuery'], stages: ['ingesta', 'cruce', 'almacén', 'modelos', 'apps'] }
+    : { sources: ['API', 'CSV', 'BigQuery'], stages: ['ingest', 'match', 'warehouse', 'models', 'apps'] };
+
+const W = 560;
+const H = 190;
+const srcY = [40, 95, 150];
+const stageX = [150, 250, 350, 450];
+const node = { w: 76, h: 26 };
+
+const links = [
+  ...srcY.map((y) => `M88 ${y}C120 ${y} 120 95 ${stageX[0] - node.w / 2} 95`),
+  `M${stageX[0] + node.w / 2} 95H${stageX[1] - node.w / 2}`,
+  `M${stageX[1] + node.w / 2} 95H${stageX[2] - node.w / 2}`,
+  `M${stageX[2] + node.w / 2} 95C${stageX[2] + 70} 95 ${stageX[3] - 70} 52 ${stageX[3] - node.w / 2} 52`,
+  `M${stageX[2] + node.w / 2} 95C${stageX[2] + 70} 95 ${stageX[3] - 70} 138 ${stageX[3] - node.w / 2} 138`,
+];
+---
+
+<div class="pipeline h-full w-full" aria-hidden="true">
+  <svg viewBox={`0 0 ${W} ${H}`} class="h-full w-full" data-smil focusable="false">
+    <defs>
+      <linearGradient id="pl-grad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#38bdf8"></stop>
+        <stop offset="1" stop-color="#818cf8"></stop>
+      </linearGradient>
+      <!-- Links need user-space units: a horizontal path has a zero-height
+           bounding box, and an objectBoundingBox gradient would not paint it. -->
+      <linearGradient id="pl-link" gradientUnits="userSpaceOnUse" x1="88" y1="0" x2="412" y2="0">
+        <stop offset="0" stop-color="#38bdf8"></stop>
+        <stop offset="1" stop-color="#818cf8"></stop>
+      </linearGradient>
+    </defs>
+    {links.map((d, i) => <path id={`pl-${i}`} d={d} fill="none" stroke="url(#pl-link)" stroke-opacity=".35" stroke-width="1.2" />)}
+
+    {
+      srcY.map((y, i) => (
+        <g>
+          <rect x="12" y={y - 13} width="76" height="26" rx="13" fill="#fff" fill-opacity=".05" stroke="#fff" stroke-opacity=".14" />
+          <text x="50" y={y + 4} text-anchor="middle" class="pl-label">
+            {L.sources[i]}
+          </text>
+        </g>
+      ))
+    }
+    {
+      [
+        { x: stageX[0], y: 95, label: L.stages[0] },
+        { x: stageX[1], y: 95, label: L.stages[1] },
+        { x: stageX[2], y: 95, label: L.stages[2] },
+        { x: stageX[3], y: 52, label: L.stages[3] },
+        { x: stageX[3], y: 138, label: L.stages[4] },
+      ].map((n, i) => (
+        <g>
+          <rect
+            x={n.x - node.w / 2}
+            y={n.y - node.h / 2}
+            width={node.w}
+            height={node.h}
+            rx="7"
+            fill={i >= 3 ? 'url(#pl-grad)' : '#fff'}
+            fill-opacity={i >= 3 ? 0.85 : 0.07}
+            stroke="#fff"
+            stroke-opacity=".18"
+          />
+          <text x={n.x} y={n.y + 4} text-anchor="middle" class:list={['pl-label', i >= 3 && 'pl-label--dark']}>
+            {n.label}
+          </text>
+        </g>
+      ))
+    }
+
+    <g class="pl-packets">
+      {
+        links.map((_, i) => (
+          <circle r="2.6" fill="#fff">
+            <animateMotion dur={`${2.4 + (i % 3) * 0.5}s`} begin={`${i * 0.35}s`} repeatCount="indefinite" rotate="auto">
+              <mpath href={`#pl-${i}`} />
+            </animateMotion>
+          </circle>
+        ))
+      }
+    </g>
+  </svg>
+</div>
+
+<style>
+  .pl-label {
+    font-family: 'Geist Mono Variable', ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    fill: rgb(var(--fg) / 0.75);
+  }
+
+  .pl-label--dark {
+    fill: rgb(var(--ink));
+    font-weight: 600;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pl-packets {
+      display: none;
+    }
+  }
+</style>

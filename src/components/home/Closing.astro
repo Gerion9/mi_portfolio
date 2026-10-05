@@ -1,0 +1,82 @@
+---
+import Icon from '../Icon.astro';
+import SplitWords from '../SplitWords.astro';
+import { useCopy, type Lang } from '../../i18n';
+import { PROFILE, SOCIALS } from '../../data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useCopy(lang).home.closing;
+---
+
+<section class="section cv-section pb-16 sm:pb-24" style="--cis: 53rem; --cis-sm: 49rem" aria-labelledby="closing-title">
+  <div class="container-site">
+    <div class="closing reveal relative isolate rounded-[2rem] border border-line px-6 py-20 text-center sm:px-12 sm:py-28">
+      <div class="closing-orb" aria-hidden="true" data-loop></div>
+      <div class="bg-grid closing-grid absolute inset-0 -z-10" aria-hidden="true"></div>
+
+      <p class="eyebrow justify-center text-fg-muted">{t.eyebrow}</p>
+      <SplitWords as="h2" id="closing-title" text={t.title} class="mx-auto mt-6 block max-w-3xl text-display-lg font-semibold text-fg" />
+      <p class="lede mx-auto mt-6 max-w-xl">{t.sub}</p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <a href={`mailto:${PROFILE.email}`} class="btn btn-primary">
+          <Icon name="mail" class="h-4 w-4" />
+          {t.email}
+        </a>
+        <button type="button" class="btn btn-secondary group" data-copy={PROFILE.email} data-copied={t.copied}>
+          <Icon name="copy" class="h-4 w-4 group-data-[state=copied]:hidden" />
+          <Icon name="check" class="hidden h-4 w-4 text-brand-lime group-data-[state=copied]:block" />
+          <span data-copy-label>{t.copy}</span>
+          <span class="sr-only">{PROFILE.email}</span>
+        </button>
+        <a href={SOCIALS.linkedin.href} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          <Icon name="linkedin" class="h-4 w-4" />
+          {t.linkedin}
+          <Icon name="arrow-up-right" class="h-3.5 w-3.5 opacity-60" />
+        </a>
+      </div>
+      <p class="mt-8 font-mono text-xs tracking-[0.08em] text-fg-muted">{PROFILE.email}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .closing {
+    background: rgb(var(--ink-2));
+    overflow: hidden;
+    overflow: clip;
+  }
+
+  .closing-orb {
+    position: absolute;
+    inset: -60% -20%;
+    z-index: -20;
+    background:
+      radial-gradient(closest-side at 38% 46%, rgb(var(--indigo) / 0.55), transparent),
+      radial-gradient(closest-side at 62% 54%, rgb(var(--pink) / 0.38), transparent),
+      radial-gradient(closest-side at 50% 66%, rgb(var(--violet) / 0.42), transparent);
+    opacity: 0.5;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .closing-orb {
+      animation: spin-slow 40s linear infinite;
+    }
+  }
+
+  @keyframes spin-slow {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  .closing-grid {
+    -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000, transparent);
+    mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000, transparent);
+    opacity: 0.5;
+  }
+</style>

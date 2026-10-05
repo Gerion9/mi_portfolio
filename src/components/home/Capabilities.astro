@@ -1,0 +1,146 @@
+---
+import Icon from '../Icon.astro';
+import SplitWords from '../SplitWords.astro';
+import HexField from '../viz/HexField.astro';
+import AgentTrace from '../viz/AgentTrace.astro';
+import ForecastViz from '../viz/ForecastViz.astro';
+import PipelineViz from '../viz/PipelineViz.astro';
+import { useCopy, type Lang } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useCopy(lang).home.capabilities;
+const [geo, llm, ml, data] = t.cards;
+
+const cards = [
+  { card: geo, icon: 'map', spot: 'var(--teal)', span: 'lg:col-span-7', viz: 'geo' },
+  { card: llm, icon: 'bot', spot: 'var(--violet)', span: 'lg:col-span-5', viz: 'llm' },
+  { card: ml, icon: 'chart', spot: 'var(--amber)', span: 'lg:col-span-5', viz: 'ml' },
+  { card: data, icon: 'workflow', spot: 'var(--sky)', span: 'lg:col-span-7', viz: 'data' },
+] as const;
+---
+
+<section class="section cv-section pt-8 sm:pt-12" style="--cis: 85rem; --cis-sm: 150rem" aria-labelledby="capabilities-title">
+  <div class="container-site">
+    <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-7">
+        <p class="eyebrow reveal">{t.eyebrow}</p>
+        <SplitWords as="h2" id="capabilities-title" text={t.title} class="section-title mt-5" />
+      </div>
+      <p class="lede reveal lg:col-span-5 lg:pb-1" style="--d: 120">{t.intro}</p>
+    </div>
+
+    <div class="mt-14 grid gap-4 sm:gap-5 lg:grid-cols-12">
+      {
+        cards.map(({ card, icon, spot, span, viz }, i) => (
+          <article
+            class:list={['cap-card surface spotlight reveal group flex flex-col overflow-hidden', span]}
+            style={`--spot: ${spot}; --d: ${(i % 2) * 90}`}
+            data-cap={viz}
+          >
+            <div class="cap-viz relative h-52 overflow-hidden border-b border-line sm:h-60">
+              <div class="bg-grid mask-fade-b absolute inset-0 opacity-60" aria-hidden="true" />
+              <div class="absolute inset-0 flex items-center justify-center p-5 sm:p-7">
+                {viz === 'geo' && <HexField />}
+                {viz === 'llm' && <AgentTrace lang={lang} />}
+                {viz === 'ml' && <ForecastViz />}
+                {viz === 'data' && <PipelineViz lang={lang} />}
+              </div>
+            </div>
+            <div class="flex flex-1 flex-col p-6 sm:p-8">
+              <div class="flex items-center gap-3">
+                <span
+                  class="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-line-strong bg-fg/[0.04]"
+                  style={`color: rgb(${spot})`}
+                >
+                  <Icon name={icon} class="h-[1.125rem] w-[1.125rem]" />
+                </span>
+                <h3 class="text-xl font-semibold tracking-[-0.02em] text-fg">{card.title}</h3>
+              </div>
+              <p class="mt-4 max-w-xl text-[0.9375rem] leading-relaxed text-fg-muted">{card.body}</p>
+              <ul class="mt-6 flex flex-wrap gap-2" aria-label={lang === 'es' ? 'Herramientas' : 'Tools'}>
+                {card.tags.map((tag) => (
+                  <li class="tag">{tag}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // GeoAI: hexes heat up under the pointer
+  document.querySelectorAll<HTMLElement>('[data-cap="geo"]').forEach((card) => {
+    const field = card.querySelector<HTMLElement>('[data-hexfield]');
+    const svg = field?.querySelector('svg');
+    if (!field || !svg || !fine) return;
+    const cells = Array.from(svg.querySelectorAll<SVGPathElement>('.hx')).map((el) => ({
+      el,
+      x: parseFloat(el.dataset.x || '0'),
+      y: parseFloat(el.dataset.y || '0'),
+    }));
+    let raf = 0;
+    let px = 0;
+    let py = 0;
+    const paint = () => {
+      raf = 0;
+      for (const c of cells) {
+        const h = Math.max(0, 1 - Math.hypot(c.x - px, c.y - py) / 64);
+        c.el.style.setProperty('--h', h.toFixed(2));
+      }
+    };
+    card.addEventListener('pointermove', (e) => {
+      const ctm = svg.getScreenCTM();
+      if (!ctm) return;
+      const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(ctm.inverse());
+      px = pt.x;
+      py = pt.y;
+      field.classList.add('is-hot');
+      if (!raf) raf = requestAnimationFrame(paint);
+    });
+    card.addEventListener('pointerleave', () => {
+      field.classList.remove('is-hot');
+      cells.forEach((c) => c.el.style.removeProperty('--h'));
+    });
+  });
+
+  // LLM: replay the agent trace on hover
+  document.querySelectorAll<HTMLElement>('[data-cap="llm"]').forEach((card) => {
+    const trace = card.querySelector<HTMLElement>('[data-trace]');
+    if (!trace || reduce || !fine) return;
+    let last = 0;
+    card.addEventListener('pointerenter', () => {
+      const now = performance.now();
+      if (!trace.classList.contains('is-in') || now - last < 3500) return;
+      last = now;
+      trace.classList.remove('is-in');
+      void trace.offsetWidth;
+      trace.classList.add('is-in');
+    });
+  });
+
+  // Data: SMIL packets only run while visible and when motion is allowed
+  document.querySelectorAll<SVGSVGElement>('svg[data-smil]').forEach((svg) => {
+    let visible = false;
+    const sync = () => {
+      const paused = reduce || document.documentElement.classList.contains('motion-paused') || !visible;
+      if (paused) svg.pauseAnimations();
+      else svg.unpauseAnimations();
+    };
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      sync();
+    }).observe(svg);
+    window.addEventListener('motion-pause', sync);
+    sync();
+  });
+</script>

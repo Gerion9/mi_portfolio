@@ -1,8 +1,28 @@
-   [build]
-     command = "npm run build"
-     publish = "dist"
-   
-   [[redirects]]
-     from = "/*"
-     to = "/index.html"
-     status = 200
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Static multi-page site: unknown URLs get dist/404.html with a real 404 status.
+# (The previous "/* -> /index.html 200" rule turned every missing page into a
+# soft 404 of the home page.)
+
+# Old in-page deep links to projects now live at /experience/<slug>; the work
+# page forwards "#slug" URLs client-side.
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Procedural project covers: stable per slug, regenerated on each deploy
+[[headers]]
+  for = "/covers/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"

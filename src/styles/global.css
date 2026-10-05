@@ -2,106 +2,818 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --color-background: #0a192f;
-  --color-text: #e2e8f0;
-  --color-primary: #4F46E5;
-  --color-accent: #F24968;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 2rem;
-  --spacing-xl: 4rem;
+/* The hidden attribute always wins over display utilities (.grid, .flex…). */
+[hidden] {
+  display: none !important;
 }
 
-body {
-  background-color: var(--color-background);
-  color: var(--color-text);
-}
+/* =========================================================================
+   Design tokens
+   Colors are RGB channels so Tailwind opacity modifiers work (see
+   tailwind.config.cjs). The palette evolves the original indigo + coral
+   identity into an ink-dark, high-contrast system.
+   ========================================================================= */
+@layer base {
+  :root {
+    color-scheme: dark;
 
-.fade-in {
-  animation: fadeIn 0.5s ease-in;
-}
+    --ink: 7 7 12;
+    --ink-2: 12 12 19;
+    --ink-3: 17 17 26;
+    --ink-4: 25 25 37;
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+    --fg: 244 244 247;
+    --fg-muted: 168 168 184;
+    --fg-subtle: 138 138 156;
 
-.interactive-element:hover {
-  box-shadow: 0 0 15px var(--color-accent);
-}
+    --indigo: 99 102 241;
+    --violet: 139 92 246;
+    --pink: 236 72 153;
+    --coral: 242 73 104;
+    --teal: 45 212 191;
+    --amber: 251 191 36;
+    --sky: 56 189 248;
+    --lime: 52 211 153;
 
-.scrollable-content {
-  height: calc(100vh - 310px);
-  overflow-y: auto;
-  padding-right: 0;
-  margin-bottom: 0px;
-  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-}
+    --grad-accent: linear-gradient(100deg, #a5b4fc 0%, #c4b5fd 32%, #f0abfc 62%, #fda4af 100%);
+    --grad-brand: linear-gradient(110deg, rgb(var(--indigo)) 0%, rgb(var(--violet)) 40%, rgb(var(--pink)) 75%, rgb(var(--coral)) 100%);
 
-@media (min-width: 768px) {
-  .scrollable-content {
-    padding-right: 60px;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+    --header-offset: 6rem;
+  }
+
+  html {
+    background-color: rgb(var(--ink));
+    color: rgb(var(--fg));
+    font-family: theme('fontFamily.sans');
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: var(--header-offset);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: rgb(var(--ink));
+    overflow-x: clip;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background: rgb(var(--violet) / 0.45);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #c4b5fd;
+    outline-offset: 3px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    display: block;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Thin, quiet scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--fg) / 0.18) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--fg) / 0.16);
+    border-radius: 999px;
+    border: 3px solid rgb(var(--ink));
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
   }
 }
 
-.scrollable-content::-webkit-scrollbar {
-  display: none;
+/* =========================================================================
+   Components
+   ========================================================================= */
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-5 sm:px-8 lg:px-10;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2.5 font-mono text-eyebrow uppercase text-fg-subtle;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 1px;
+    background: var(--grad-brand);
+    box-shadow: 0 0 12px rgb(var(--pink) / 0.6);
+    flex: none;
+  }
+
+  .eyebrow--plain::before {
+    display: none;
+  }
+
+  /* Serif-italic accent words inside display headings */
+  .accent {
+    font-family: theme('fontFamily.serif');
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    background: var(--grad-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* italic overhang would otherwise be clipped by background-clip */
+    padding-inline: 0.04em 0.1em;
+    margin-inline: -0.04em -0.1em;
+  }
+
+  .text-gradient {
+    background: var(--grad-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* --- Surfaces ---------------------------------------------------------- */
+  .surface {
+    position: relative;
+    border-radius: 1.5rem;
+    border: 1px solid rgb(var(--fg) / 0.08);
+    background:
+      linear-gradient(180deg, rgb(var(--fg) / 0.045), rgb(var(--fg) / 0.012) 60%),
+      rgb(var(--ink-2) / 0.72);
+    box-shadow:
+      inset 0 1px 0 0 rgb(var(--fg) / 0.06),
+      0 24px 60px -32px rgb(0 0 0 / 0.65);
+  }
+
+  /* Spotlight: radial glow + border light that follow the pointer.
+     Pointer position is written to --mx / --my by src/scripts/interactions.ts */
+  .spotlight {
+    --mx: 50%;
+    --my: 50%;
+    --spot: 139 92 246;
+    isolation: isolate;
+  }
+
+  .spotlight::before,
+  .spotlight::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out);
+  }
+
+  .spotlight::before {
+    z-index: -1;
+    background: radial-gradient(520px circle at var(--mx) var(--my), rgb(var(--spot) / 0.13), transparent 45%);
+  }
+
+  .spotlight::after {
+    padding: 1px;
+    background: radial-gradient(360px circle at var(--mx) var(--my), rgb(var(--spot) / 0.75), rgb(var(--fg) / 0.12) 40%, transparent 70%);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+  }
+
+  .spotlight:hover::before,
+  .spotlight:hover::after,
+  .spotlight:focus-within::before,
+  .spotlight:focus-within::after,
+  .spotlight.is-touch::before,
+  .spotlight.is-touch::after {
+    opacity: 1;
+  }
+
+  /* --- Buttons ----------------------------------------------------------- */
+  .btn {
+    @apply relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-3 text-[0.9375rem] font-medium leading-none tracking-[-0.01em];
+    min-height: 2.875rem;
+    transition:
+      background-color 0.3s var(--ease-out),
+      border-color 0.3s var(--ease-out),
+      color 0.3s var(--ease-out),
+      box-shadow 0.4s var(--ease-out),
+      transform 0.4s var(--ease-out);
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-primary {
+    color: rgb(var(--ink));
+    background: rgb(var(--fg));
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.6),
+      0 10px 30px -10px rgb(var(--violet) / 0.55),
+      inset 0 -2px 0 0 rgb(0 0 0 / 0.08);
+    overflow: hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.85) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.9s var(--ease-out);
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+  }
+
+  .btn-primary:hover {
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.8),
+      0 14px 40px -10px rgb(var(--pink) / 0.6),
+      inset 0 -2px 0 0 rgb(0 0 0 / 0.08);
+  }
+
+  .btn-primary:hover::after {
+    transform: translateX(120%);
+  }
+
+  .btn-secondary {
+    color: rgb(var(--fg));
+    background: rgb(var(--fg) / 0.05);
+    border: 1px solid rgb(var(--fg) / 0.14);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .btn-secondary:hover {
+    background: rgb(var(--fg) / 0.1);
+    border-color: rgb(var(--fg) / 0.24);
+  }
+
+  .btn-ghost {
+    @apply text-fg-muted;
+    padding-inline: 0.75rem;
+  }
+
+  .btn-ghost:hover {
+    color: rgb(var(--fg));
+    background: rgb(var(--fg) / 0.06);
+  }
+
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+    min-height: 2.25rem;
+  }
+
+  .btn .btn-arrow {
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .btn:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+
+  .btn:hover .btn-arrow-down {
+    transform: translateY(2px);
+  }
+
+  /* --- Chips / tags ------------------------------------------------------ */
+  .tag {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[0.6875rem] uppercase leading-none tracking-[0.08em];
+    border-color: rgb(var(--fg) / 0.1);
+    background: rgb(var(--fg) / 0.03);
+    color: rgb(var(--fg-muted));
+  }
+
+  .kbd {
+    @apply inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-md border px-1.5 font-mono text-[0.6875rem] leading-none;
+    border-color: rgb(var(--fg) / 0.16);
+    background: rgb(var(--fg) / 0.06);
+    color: rgb(var(--fg-muted));
+    box-shadow: inset 0 -1px 0 rgb(var(--fg) / 0.1);
+  }
+
+  .status-dot {
+    position: relative;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: rgb(var(--lime));
+    box-shadow: 0 0 10px rgb(var(--lime) / 0.8);
+    flex: none;
+  }
+
+  .status-dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgb(var(--lime));
+    animation: pulse-ring 2.4s var(--ease-out) 2s 2;
+  }
+
+  /* --- Links ------------------------------------------------------------- */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.45s var(--ease-out), color 0.3s var(--ease-out);
+  }
+
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* --- Section rhythm ---------------------------------------------------- */
+  .section {
+    @apply relative py-24 sm:py-32;
+  }
+
+  /* Long pages: sections below the fold skip style, layout and paint until
+     they approach the viewport. --cis / --cis-sm estimate their height (the
+     browser remembers the real one once rendered). */
+  .cv-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto var(--cis-sm, 60rem);
+  }
+
+  @media (min-width: 1024px) {
+    .cv-section {
+      contain-intrinsic-size: auto var(--cis, 60rem);
+    }
+  }
+
+  .section-title {
+    @apply text-display-md font-semibold text-fg;
+  }
+
+  .lede {
+    @apply text-lg leading-relaxed text-fg-muted sm:text-xl;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(var(--fg) / 0.12) 20%, rgb(var(--fg) / 0.12) 80%, transparent);
+  }
+
+  /* --- Marquee ----------------------------------------------------------- */
+  .marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation: marquee var(--marquee-duration, 40s) linear infinite;
+  }
+
+  .marquee:hover .marquee__track {
+    animation-play-state: paused;
+  }
+
+  /* --- Form controls ----------------------------------------------------- */
+  .field {
+    @apply w-full rounded-2xl border px-4 py-3.5 text-base text-fg placeholder:text-fg-subtle;
+    /* 3:1 boundary against the field and the surface (WCAG 1.4.11) */
+    border-color: rgb(var(--fg) / 0.4);
+    background: rgb(var(--ink) / 0.6);
+    transition: border-color 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out), background-color 0.25s var(--ease-out);
+  }
+
+  .field:hover {
+    border-color: rgb(var(--fg) / 0.55);
+  }
+
+  .field:focus {
+    outline: 2px solid #c4b5fd;
+    outline-offset: 2px;
+    border-color: rgb(var(--violet) / 0.9);
+    background: rgb(var(--ink) / 0.85);
+  }
+
+  .field[aria-invalid='true'] {
+    border-color: rgb(var(--coral) / 0.8);
+    box-shadow: 0 0 0 4px rgb(var(--coral) / 0.14);
+  }
+
+  select.field {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a8a8b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+    padding-right: 2.75rem;
+  }
+
+  select.field option {
+    background: rgb(var(--ink-3));
+    color: rgb(var(--fg));
+  }
+
+  /* --- Long-form text (legal pages, bios) -------------------------------- */
+  .prose-site {
+    @apply max-w-prose text-[1.0625rem] leading-[1.75] text-fg-muted;
+  }
+
+  .prose-site h2 {
+    @apply mb-4 mt-14 text-2xl font-semibold tracking-[-0.02em] text-fg;
+  }
+
+  .prose-site h3 {
+    @apply mb-3 mt-8 text-lg font-semibold text-fg;
+  }
+
+  .prose-site p {
+    @apply my-5;
+  }
+
+  .prose-site ul {
+    @apply my-5 space-y-2.5 pl-5;
+    list-style: none;
+  }
+
+  .prose-site ul > li {
+    position: relative;
+  }
+
+  .prose-site ul > li::before {
+    content: '';
+    position: absolute;
+    left: -1.1rem;
+    top: 0.75em;
+    width: 0.4rem;
+    height: 1px;
+    background: rgb(var(--fg) / 0.5);
+  }
+
+  .prose-site strong {
+    @apply font-semibold text-fg;
+  }
+
+  .prose-site a {
+    @apply text-fg underline decoration-fg/30 underline-offset-4 transition-colors hover:decoration-fg;
+  }
 }
 
-.scrollable-content {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+/* =========================================================================
+   Utilities
+   ========================================================================= */
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+    mask-image: linear-gradient(180deg, #000 60%, transparent);
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(rgb(var(--fg) / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--fg) / 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    @apply sr-only;
+  }
 }
 
-.fade-container {
-  position: relative;
-  height: calc(100vh - 310px);
-  overflow: hidden;
-}
-
-.fade-container::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background: linear-gradient(to bottom, rgba(10, 25, 47, 0), rgba(10, 25, 47, 1));
+/* =========================================================================
+   Film grain (site-wide, static, GPU-cheap)
+   ========================================================================= */
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 70;
   pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-.fade-container {
-  position: relative;
-}
-
-.fade-container::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background: linear-gradient(to bottom, rgba(10, 25, 47, 0), var(--color-background));
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity 0.3s ease-out;
-}
-
-.fade-container.at-bottom::after {
+/* =========================================================================
+   Motion: reveal system
+   html.motion is set by an inline script before first paint when the user
+   has no reduced-motion preference. If the interaction script never boots,
+   html.reveal-all (fail-safe timer) shows everything.
+   ========================================================================= */
+html.motion .reveal {
   opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 1s var(--ease-out),
+    transform 1s var(--ease-out);
+  transition-delay: calc(var(--d, 0) * 1ms);
 }
 
-main {
-  transition: opacity 0.3s ease-in-out;
+html.motion .reveal-blur {
+  filter: blur(10px);
+  transition:
+    opacity 1s var(--ease-out),
+    transform 1s var(--ease-out),
+    filter 1s var(--ease-out);
+  transition-delay: calc(var(--d, 0) * 1ms);
 }
 
-.fade-in {
-  animation: fadeIn 1.5s ease-in;
+html.motion .reveal.is-in,
+html.reveal-all .reveal {
+  opacity: 1;
+  transform: none;
+  filter: none;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* Word-by-word reveal (words are split at build time by SplitWords.astro) */
+/* A word wider than the line (long names on phones, 400% zoom) breaks at
+   its <wbr> points or hyphenates instead of being clipped. */
+.split .w {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+html.motion .split:not(.split-load) .w {
+  opacity: 0;
+  transform: translate3d(0, 0.5em, 0);
+  filter: blur(10px);
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out),
+    filter 0.9s var(--ease-out);
+  transition-delay: calc(var(--i) * 40ms + var(--base, 0ms));
+}
+
+html.motion .split.is-in .w,
+html.reveal-all .split .w {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Fail-safe for card visuals that hide their parts until .is-in
+   (AgentTrace, ForecastViz); their scoped selectors are more specific. */
+html.reveal-all .trace .trace-line,
+html.reveal-all .forecast .fc-draw,
+html.reveal-all .forecast .fc-band,
+html.reveal-all .forecast .fc-now {
+  opacity: 1 !important;
+  transform: none !important;
+  stroke-dashoffset: 0 !important;
+}
+
+/* Load-triggered split (hero): pure CSS so it never waits on JavaScript */
+html.motion .split-load .w {
+  animation: word-in 1.1s var(--ease-out) both;
+  animation-delay: calc(var(--i) * 55ms + var(--base, 80ms));
+}
+
+html.motion .fade-load {
+  animation: fade-up 1.1s var(--ease-out) both;
+  animation-delay: var(--base, 200ms);
+}
+
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.45em, 0);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  80%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* User-paused motion (button in the hero bar, persisted) */
+html.motion-paused .marquee__track,
+html.motion-paused .status-dot::after,
+html.motion-paused [data-loop] {
+  animation-play-state: paused !important;
+}
+
+html.motion-paused [data-loop] * {
+  animation-play-state: paused !important;
+}
+
+[data-loop][data-offscreen],
+[data-loop][data-offscreen] * {
+  animation-play-state: paused !important;
+}
+
+/* =========================================================================
+   Native dialogs (project details, mobile menu)
+   ========================================================================= */
+dialog {
+  color: inherit;
+}
+
+dialog::backdrop {
+  background: rgb(var(--ink) / 0.72);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog.animated,
+  dialog.animated::backdrop {
+    transition:
+      opacity 0.35s var(--ease-out),
+      transform 0.45s var(--ease-out),
+      overlay 0.45s var(--ease-out) allow-discrete,
+      display 0.45s var(--ease-out) allow-discrete;
+  }
+
+  dialog.animated {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.985);
+  }
+
+  dialog.animated::backdrop {
+    opacity: 0;
+  }
+
+  dialog.animated[open] {
+    opacity: 1;
+    transform: none;
+  }
+
+  dialog.animated[open]::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    dialog.animated[open] {
+      opacity: 0;
+      transform: translate3d(0, 24px, 0) scale(0.985);
+    }
+
+    dialog.animated[open]::backdrop {
+      opacity: 0;
+    }
+  }
+}
+
+/* =========================================================================
+   Cross-document view transitions (native, no client router)
+   ========================================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root) {
+    animation: vt-out 0.35s var(--ease-out) both;
+  }
+
+  ::view-transition-new(root) {
+    animation: vt-in 0.55s var(--ease-out) both;
+  }
+}
+
+::view-transition-group(site-header) {
+  animation-duration: 0.45s;
+}
+
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+}
+
+/* =========================================================================
+   Reduced motion: keep everything visible and still
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Still: show every organization instead of a frozen strip */
+  .marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .marquee__track {
+    animation: none !important;
+    flex-wrap: wrap;
+    width: auto;
+    row-gap: 0.75rem;
+  }
+
+  .marquee__track > [aria-hidden='true'] {
+    display: none;
+  }
+}
+
+/* Horizontal scrollers: hint there is more to the right on small screens */
+@media (max-width: 1023px) {
+  .mask-fade-x-sm {
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 2.5rem), transparent);
+    mask-image: linear-gradient(90deg, #000 calc(100% - 2.5rem), transparent);
+  }
 }

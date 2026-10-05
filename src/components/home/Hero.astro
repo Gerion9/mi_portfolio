@@ -1,0 +1,326 @@
+---
+import Icon from '../Icon.astro';
+import ProfileCard from '../ProfileCard.astro';
+import SplitWords from '../SplitWords.astro';
+import { localizePath, useCopy, type Lang } from '../../i18n';
+import { PROFILE } from '../../data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useCopy(lang).home;
+const roles = t.roles;
+---
+
+<section class="hero relative isolate flex min-h-[100svh] flex-col overflow-hidden" aria-labelledby="hero-title">
+  <div class="hero-fallback absolute inset-0 -z-30" aria-hidden="true"></div>
+  <canvas class="hero-canvas absolute inset-0 -z-20 h-full w-full" data-terrain aria-hidden="true"></canvas>
+  <div class="hero-scrim pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+
+  <div class="container-site relative flex flex-1 flex-col justify-end pb-10 pt-32 sm:pt-40 lg:justify-center lg:pb-8">
+    <div class="hero-layout">
+    <div class="max-w-[64rem]">
+      <div class="fade-load flex items-center gap-3" style="--base: 40ms">
+        {/* Phones and small tablets: the face next to the status; from 1024px, the portrait card */}
+        <img
+          src="/images/profile-192.webp"
+          width="96"
+          height="96"
+          alt=""
+          class="hero-avatar lg:hidden"
+          decoding="async"
+        />
+        <p class="status-chip">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>{t.status}</span>
+        </p>
+      </div>
+
+      <h1 id="hero-title" class="mt-7 font-semibold sm:mt-9">
+        <SplitWords text="Gairo Peralta" mode="load" base={100} class="block text-display-2xl text-fg" />
+        <SplitWords
+          text={t.headline}
+          mode="load"
+          base={360}
+          class="mt-4 block max-w-[17em] text-display-md text-fg-muted sm:mt-5"
+        />
+      </h1>
+
+      <p class="fade-load mt-7 max-w-xl text-base leading-relaxed text-fg-muted sm:text-lg" style="--base: 820ms">
+        {t.sub}
+      </p>
+
+      <div class="fade-load mt-9 flex flex-wrap items-center gap-3" style="--base: 960ms">
+        <a href={localizePath('/experience', lang)} class="btn btn-primary">
+          {t.ctaPrimary}
+          <Icon name="arrow-right" class="btn-arrow h-4 w-4" />
+        </a>
+        <a href={PROFILE.resumePdf} class="btn btn-secondary" download="Gairo_Peralta_Resume.pdf">
+          {t.ctaSecondary}
+          <Icon name="download" class="btn-arrow btn-arrow-down h-4 w-4" />
+        </a>
+      </div>
+    </div>
+
+    {/* From 1024px: a tilting glass portrait floating over the terrain */}
+    <div class="hero-portrait fade-load hidden lg:block" style="--base: 520ms">
+      <ProfileCard
+        lang={lang}
+        title={lang === 'es' ? 'Ingeniero líder de IA' : 'Lead AI Engineer'}
+        subtitle="BlackPrint Technologies"
+        sizes="(min-width: 1024px) 21rem, 1px"
+        media="(min-width: 1024px)"
+        badge={false}
+        lazy
+      />
+    </div>
+    </div>
+  </div>
+
+  <div class="container-site fade-load relative pb-6" style="--base: 1200ms">
+    <div class="flex items-center justify-between gap-6 border-t border-line pt-5 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-fg-subtle">
+      <p class="flex min-w-0 items-center gap-2" data-rotate={roles.join('|')}>
+        <span class="hidden sm:inline">{lang === 'es' ? 'Ingeniero de IA/ML' : 'AI/ML Engineer'}</span>
+        <span class="hidden text-fg/25 sm:inline" aria-hidden="true">/</span>
+        <span class="text-fg" data-rotate-word>{roles[0]}</span>
+      </p>
+
+      <p class="hidden items-center gap-3 md:flex" aria-hidden="true" data-hud>
+        <span class="hud-reticle"></span>
+        <span data-hud-state>{t.hudAuto}</span>
+        <span class="tabular text-fg-muted">x <span data-hud-x>0.000</span></span>
+        <span class="tabular text-fg-muted">y <span data-hud-y>0.000</span></span>
+      </p>
+
+      <div class="flex shrink-0 items-center gap-5">
+        <button
+          type="button"
+          class="motion-toggle flex items-center gap-2 uppercase transition-colors hover:text-fg"
+          data-motion-toggle
+          data-label-pause={lang === 'es' ? 'Pausar movimiento' : 'Pause motion'}
+          data-label-play={lang === 'es' ? 'Reanudar movimiento' : 'Play motion'}
+        >
+          <span class="motion-toggle__icon" aria-hidden="true"></span>
+          <span data-motion-label>{lang === 'es' ? 'Pausar movimiento' : 'Pause motion'}</span>
+        </button>
+        <a href="#impact" class="group hidden items-center gap-2 transition-colors hover:text-fg sm:flex">
+          {t.scroll}
+          <span class="scroll-cue" aria-hidden="true"><span></span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-fallback {
+    background:
+      radial-gradient(55% 65% at 74% 42%, rgb(90 63 216 / 0.42), transparent 62%),
+      radial-gradient(35% 45% at 84% 28%, rgb(238 79 151 / 0.26), transparent 60%),
+      rgb(var(--ink));
+  }
+
+  .hero-canvas {
+    opacity: 0;
+    transition: opacity 1.8s var(--ease-out);
+  }
+
+  .hero-canvas[data-state='ready'] {
+    opacity: 1;
+  }
+
+  /* Keeps type crisp and AA-contrast over the shader */
+  .hero-scrim {
+    background:
+      linear-gradient(180deg, rgb(var(--ink) / 0.55) 0%, transparent 22%),
+      linear-gradient(90deg, rgb(var(--ink) / 0.6) 0%, rgb(var(--ink) / 0.45) 55%, transparent 80%),
+      radial-gradient(75% 65% at 18% 72%, rgb(var(--ink) / 0.72), transparent 70%),
+      linear-gradient(0deg, rgb(var(--ink)) 0%, transparent 18%);
+  }
+
+  @media (max-width: 1023px) {
+    .hero-scrim {
+      background:
+        linear-gradient(180deg, rgb(var(--ink) / 0.5) 0%, transparent 25%),
+        linear-gradient(0deg, rgb(var(--ink) / 0.92) 8%, rgb(var(--ink) / 0.55) 55%, transparent 80%);
+    }
+  }
+
+  /* Phones: as tall as the two-line status chip beside it */
+  .hero-avatar {
+    width: 3.25rem;
+    height: 3.25rem;
+    flex: none;
+    padding: 2px;
+    border-radius: 999px;
+    object-fit: cover;
+    background: linear-gradient(135deg, #a5b4fc, #c084fc 50%, #fb7185);
+    box-shadow: 0 10px 28px -12px rgb(var(--violet) / 0.9);
+  }
+
+  @media (min-width: 640px) {
+    .hero-avatar {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) clamp(16rem, 24vw, 21rem);
+      align-items: center;
+      gap: clamp(2.5rem, 4.5vw, 6rem);
+    }
+  }
+
+  .status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.45rem 0.9rem 0.45rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgb(var(--fg) / 0.1);
+    background: rgb(var(--ink) / 0.45);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    font-size: 0.8125rem;
+    color: rgb(var(--fg-muted));
+  }
+
+  .hud-reticle {
+    position: relative;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgb(var(--fg) / 0.5);
+  }
+
+  .hud-reticle::after {
+    content: '';
+    position: absolute;
+    inset: 0.2rem;
+    border-radius: 999px;
+    background: #5eead4;
+    box-shadow: 0 0 8px #2dd4bf;
+  }
+
+  .scroll-cue {
+    position: relative;
+    width: 1px;
+    height: 1.5rem;
+    overflow: hidden;
+    background: rgb(var(--fg) / 0.15);
+  }
+
+  .scroll-cue span {
+    position: absolute;
+    inset: 0;
+    background: rgb(var(--fg));
+    animation: scroll-cue 2.2s var(--ease-in-out) 2;
+  }
+
+  .motion-toggle__icon {
+    position: relative;
+    width: 0.625rem;
+    height: 0.625rem;
+  }
+
+  /* Pause glyph (two bars) / play glyph (triangle) */
+  .motion-toggle__icon::before,
+  .motion-toggle__icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    border-radius: 1px;
+    background: currentColor;
+  }
+
+  .motion-toggle__icon::before {
+    left: 1px;
+  }
+
+  .motion-toggle__icon::after {
+    right: 1px;
+  }
+
+  :global(html.motion-paused) .motion-toggle__icon::before {
+    left: 1px;
+    width: 0;
+    border-radius: 0;
+    background: none;
+    border-style: solid;
+    border-width: 5px 0 5px 9px;
+    border-color: transparent transparent transparent currentColor;
+  }
+
+  :global(html.motion-paused) .motion-toggle__icon::after {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motion-toggle {
+      display: none;
+    }
+  }
+
+  @keyframes scroll-cue {
+    0% {
+      transform: translateY(-100%);
+    }
+    55%,
+    100% {
+      transform: translateY(100%);
+    }
+  }
+</style>
+
+<script>
+  import { mountTerrain } from '../../scripts/terrain';
+
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-terrain]');
+  const hudX = document.querySelector<HTMLElement>('[data-hud-x]');
+  const hudY = document.querySelector<HTMLElement>('[data-hud-y]');
+  const hudState = document.querySelector<HTMLElement>('[data-hud-state]');
+  const hud = document.querySelector<HTMLElement>('[data-hud]');
+  const labels = {
+    pointer: document.documentElement.lang === 'es' ? 'Inspeccionando' : 'Inspecting',
+    auto: document.documentElement.lang === 'es' ? 'Piloto automático' : 'Autopilot',
+  };
+
+  let frame = 0;
+  let lastPointer: boolean | null = null;
+  const hudVisible = () => hud && hud.offsetParent !== null;
+
+  const onLens = (x: number, y: number, pointer: boolean) => {
+    frame += 1;
+    if (frame % 4 !== 0 || !hudVisible()) return;
+    if (hudX) hudX.textContent = x.toFixed(3);
+    if (hudY) hudY.textContent = y.toFixed(3);
+    if (hudState && pointer !== lastPointer) {
+      hudState.textContent = pointer ? labels.pointer : labels.auto;
+      lastPointer = pointer;
+    }
+  };
+
+  const start = () => {
+    if (!canvas || canvas.dataset.mounted) return;
+    canvas.dataset.mounted = 'true';
+    const terrain = mountTerrain(canvas, { onLens });
+    terrain.setPaused(document.documentElement.classList.contains('motion-paused'));
+    window.addEventListener('motion-pause', (e) => terrain.setPaused((e as CustomEvent<boolean>).detail));
+  };
+
+  const doc = document as Document & { prerendering?: boolean };
+  if (doc.prerendering) {
+    doc.addEventListener('prerenderingchange', start, { once: true });
+  } else if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(start, { timeout: 700 });
+  } else {
+    setTimeout(start, 200);
+  }
+</script>

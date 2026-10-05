@@ -1,0 +1,101 @@
+---
+/**
+ * GeoAI card visual: an H3-style hexbin "city" that breathes with an ambient
+ * wave and heats up under the pointer (script in Capabilities.astro).
+ */
+const W = 360;
+const H = 210;
+const s = 12.5;
+const hw = (Math.sqrt(3) * s) / 2;
+
+// Deterministic organic footprint: sum of gaussians
+const blobs = [
+  { x: 150, y: 95, r: 85, w: 1 },
+  { x: 255, y: 135, r: 60, w: 0.75 },
+  { x: 90, y: 150, r: 45, w: 0.5 },
+];
+const field = (x: number, y: number) =>
+  blobs.reduce((acc, b) => acc + b.w * Math.exp(-((x - b.x) ** 2 + (y - b.y) ** 2) / (2 * b.r * b.r)), 0);
+
+const r1 = (n: number) => Math.round(n * 10) / 10;
+const cells: { d: string; x: number; y: number; v: number; delay: number }[] = [];
+for (let row = 0; row * s * 1.5 < H + s; row++) {
+  for (let col = 0; col * hw * 2 < W + hw; col++) {
+    const cx = col * hw * 2 + (row % 2 ? hw : 0);
+    const cy = row * s * 1.5;
+    const v = field(cx, cy);
+    if (v < 0.22) continue;
+    const inner = s - 1.4;
+    const ihw = r1((Math.sqrt(3) * inner) / 2);
+    cells.push({
+      d: `M${r1(cx)} ${r1(cy - inner)}l${ihw} ${r1(inner / 2)}v${r1(inner)}l-${ihw} ${r1(inner / 2)}l-${ihw} -${r1(inner / 2)}v-${r1(inner)}z`,
+      x: r1(cx),
+      y: r1(cy),
+      v: Math.min(1, v),
+      delay: Math.round(Math.hypot(cx - 150, cy - 95) * 9),
+    });
+  }
+}
+---
+
+<div class="hexfield relative h-full w-full" data-hexfield data-loop>
+  <svg viewBox={`0 0 ${W} ${H}`} class="h-full w-full" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="hexfield-grad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#5eead4"></stop>
+        <stop offset="1" stop-color="#818cf8"></stop>
+      </linearGradient>
+    </defs>
+    <g class="hexfield__rings" fill="none" stroke="#fff">
+      <ellipse cx="150" cy="95" rx="120" ry="70" stroke-opacity=".08"></ellipse>
+      <ellipse cx="150" cy="95" rx="80" ry="46" stroke-opacity=".1"></ellipse>
+      <ellipse cx="150" cy="95" rx="42" ry="24" stroke-opacity=".14"></ellipse>
+    </g>
+    <g fill="url(#hexfield-grad)">
+      {
+        cells.map((c) => (
+          <path
+            class="hx"
+            d={c.d}
+            data-x={c.x}
+            data-y={c.y}
+            style={`--b:${(0.07 + Math.pow(c.v, 1.6) * 0.78).toFixed(2)};--dl:${c.delay}ms`}
+          />
+        ))
+      }
+    </g>
+    <g class="hexfield__pin">
+      <circle cx="150" cy="95" r="10" fill="none" stroke="#fff" stroke-opacity=".75"></circle>
+      <circle cx="150" cy="95" r="3.4" fill="#fff"></circle>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .hx {
+    fill-opacity: calc(var(--b) + var(--h, 0) * 0.55);
+    transition: fill-opacity 0.35s var(--ease-out);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hexfield .hx {
+      animation: hx-wave 4.8s var(--ease-in-out) infinite;
+      animation-delay: var(--dl);
+    }
+  }
+
+  .hexfield.is-hot .hx {
+    animation: none;
+  }
+
+  @keyframes hx-wave {
+    0%,
+    70%,
+    100% {
+      fill-opacity: var(--b);
+    }
+    20% {
+      fill-opacity: calc(var(--b) + 0.32);
+    }
+  }
+</style>

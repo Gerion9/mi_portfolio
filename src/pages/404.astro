@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import en from '../i18n/locales/en';
+import es from '../i18n/locales/es';
+import { parseAccents } from '../i18n';
+
+// One static 404 for both languages (Netlify serves a single 404.html);
+// an inline script shows the Spanish copy under /es/.
+const copies = [
+  { lang: 'en', t: en.notFound, home: '/', work: '/experience/' },
+  { lang: 'es', t: es.notFound, home: '/es/', work: '/es/experience/' },
+];
+
+// Concentric "contour" rings around an off-map point
+const rings = Array.from({ length: 9 }, (_, i) => {
+  const r = 60 + i * 52;
+  const pts = Array.from({ length: 24 }, (_, k) => {
+    const a = (k / 24) * Math.PI * 2;
+    const wob = 1 + 0.07 * Math.sin(a * 3 + i * 0.7) + 0.04 * Math.sin(a * 5 - i);
+    return [800 + Math.cos(a) * r * wob * 1.35, 420 + Math.sin(a) * r * wob];
+  });
+  return `M${pts.map((p) => `${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join('L')}Z`;
+});
+---
+
+<Layout title={en.notFound.metaTitle} description={en.notFound.body} noIndex translated={false}>
+  <section class="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-28" aria-labelledby="nf-title">
+    <svg class="nf-map absolute inset-0 -z-10 h-full w-full" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <radialGradient id="nf-glow" cx="50%" cy="47%" r="45%">
+          <stop offset="0" stop-color="#8b5cf6" stop-opacity=".28"></stop>
+          <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"></stop>
+        </radialGradient>
+      </defs>
+      <rect width="1600" height="900" fill="url(#nf-glow)"></rect>
+      {rings.map((d, i) => <path d={d} fill="none" stroke="#fff" stroke-opacity={(0.16 - i * 0.012).toFixed(3)} stroke-width={i % 3 === 0 ? 1.4 : 1} />)}
+      <g transform="translate(800 420)">
+        <circle r="10" fill="none" stroke="#fda4af" stroke-opacity=".9"></circle>
+        <circle r="3.5" fill="#fda4af"></circle>
+        <path d="M-26 0h14M12 0h14M0 -26v14M0 12v14" stroke="#fda4af" stroke-opacity=".8"></path>
+      </g>
+    </svg>
+
+    <div class="container-site">
+      {
+        copies.map(({ lang, t, home, work }) => (
+          <div class="nf-copy mx-auto max-w-2xl text-center" data-lang={lang} lang={lang} hidden={lang === 'es'}>
+            <p class="eyebrow justify-center">{t.eyebrow}</p>
+            <h1 id={lang === 'en' ? 'nf-title' : undefined} class="mt-6 text-display-lg font-semibold text-fg">
+              {parseAccents(t.title).map((s) => (s.accent ? <span class="accent">{s.text}</span> : s.text))}
+            </h1>
+            <p class="lede mx-auto mt-6 max-w-lg">{t.body}</p>
+            <div class="mt-10 flex flex-wrap justify-center gap-3">
+              <a href={home} class="btn btn-primary">
+                <Icon name="arrow-left" class="h-4 w-4" />
+                {t.home}
+              </a>
+              <a href={work} class="btn btn-secondary">{t.work}</a>
+            </div>
+          </div>
+        ))
+      }
+      <p class="mt-14 text-center font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-fg-subtle" aria-hidden="true">
+        lat ∅ · lon ∅ · elev —
+      </p>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      if (!/^\/es(\/|$)/.test(location.pathname)) return;
+      document.querySelectorAll('.nf-copy').forEach(function (el) {
+        el.hidden = el.getAttribute('data-lang') !== 'es';
+      });
+      var h = document.querySelector('.nf-copy[data-lang="es"] h1');
+      if (h) h.id = 'nf-title';
+    })();
+  </script>
+</Layout>

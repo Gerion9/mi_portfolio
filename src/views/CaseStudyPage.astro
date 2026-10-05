@@ -1,0 +1,307 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import SplitWords from '../components/SplitWords.astro';
+import ProjectCover from '../components/ProjectCover.astro';
+import { SITE_URL, formatMonthYear, localizePath, useCopy, type Lang } from '../i18n';
+import { DOMAIN_COLOR, getProjects, type Project } from '../lib/projects';
+import { graph, personSchema } from '../lib/schema';
+import ogCases from '../data/og-cases.json';
+
+interface Props {
+  lang: Lang;
+  slug: string;
+}
+
+const { lang, slug } = Astro.props;
+const copy = useCopy(lang);
+const t = copy.work;
+const all = getProjects(lang);
+const index = all.findIndex((p) => p.slug === slug);
+const p = all[index] as Project;
+const newer = index > 0 ? all[index - 1] : undefined;
+const older = index < all.length - 1 ? all[index + 1] : undefined;
+
+const workPath = localizePath('/experience', lang);
+const pageUrl = new URL(localizePath(`/experience/${slug}`, lang), SITE_URL).toString();
+const date = formatMonthYear(p.date, lang);
+
+const structuredData = graph(
+  personSchema(lang),
+  {
+    '@type': 'CreativeWork',
+    '@id': `${pageUrl}#work`,
+    url: pageUrl,
+    name: p.title,
+    headline: p.title,
+    description: p.description,
+    dateCreated: p.date,
+    inLanguage: lang === 'es' ? 'es-MX' : 'en-US',
+    keywords: p.tags.join(', '),
+    creator: { '@id': `${SITE_URL}/#person` },
+    sourceOrganization: p.companyKey === 'personal' ? undefined : { '@type': 'Organization', name: p.company },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: t.case.breadcrumb, item: new URL(workPath, SITE_URL).toString() },
+      { '@type': 'ListItem', position: 2, name: p.shortTitle, item: pageUrl },
+    ],
+  },
+);
+
+// Share card from `npm run og` (listed in og-cases.json); others use the site card
+const ogImage = (ogCases as string[]).includes(`${slug}-${lang}`) ? `/og/cases/${slug}-${lang}.jpg` : undefined;
+const ogAlt = lang === 'es' ? `${p.shortTitle}: caso de estudio de Gairo Peralta` : `${p.shortTitle}: case study by Gairo Peralta`;
+
+// Hold first render until the morph target exists (cross-document View Transitions)
+const renderBlocking: Record<string, string> = { blocking: 'render' };
+
+const neighbors = [
+  newer && { dir: 'prev' as const, label: t.dialog.prev, project: newer },
+  older && { dir: 'next' as const, label: t.dialog.next, project: older },
+].filter(Boolean) as { dir: 'prev' | 'next'; label: string; project: Project }[];
+---
+
+<Layout
+  title={`${p.shortTitle}${p.subtitle ? ` · ${p.subtitle}` : ''} | Gairo Peralta`}
+  description={p.description}
+  image={ogImage}
+  imageAlt={ogImage ? ogAlt : undefined}
+  structuredData={structuredData}
+>
+  <link slot="head" rel="expect" href="#case-hero" {...renderBlocking} />
+
+  <article class="relative isolate overflow-x-clip" style={`--spot: ${DOMAIN_COLOR[p.primary]}`}>
+    <div class="case-glow" aria-hidden="true"></div>
+
+    <header class="container-site pt-32 sm:pt-40">
+      <nav aria-label={lang === 'es' ? 'Ruta de navegación' : 'Breadcrumb'} class="fade-load" style="--base: 0ms">
+        <ol class="flex flex-wrap items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-fg-subtle">
+          <li>
+            <a href={workPath} class="inline-flex items-center gap-1.5 transition-colors hover:text-fg">
+              <Icon name="arrow-left" class="h-3.5 w-3.5" />
+              {t.case.breadcrumb}
+            </a>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" class="text-fg-muted">{p.shortTitle}</li>
+        </ol>
+      </nav>
+
+      <p class="eyebrow fade-load mt-10" style="--base: 60ms">{p.company} · {date}</p>
+      <SplitWords as="h1" text={p.shortTitle} mode="load" base={80} class="mt-5 block max-w-5xl text-display-xl font-semibold text-fg" />
+      {p.subtitle && <p class="fade-load mt-5 max-w-3xl text-xl leading-snug text-fg-muted sm:text-2xl" style="--base: 300ms">{p.subtitle}</p>}
+
+      <div
+        id="case-hero"
+        class="case-cover fade-load mt-12 overflow-hidden rounded-[1.75rem] border border-line sm:rounded-[2rem]"
+        style="--base: 380ms; view-transition-name: case-cover"
+      >
+        <ProjectCover slug={p.slug} domain={p.primary} variant={p.cover} uid={`case-${p.slug}`} class="h-full w-full" eager />
+      </div>
+    </header>
+
+    <div class="container-site mt-14 grid gap-12 pb-8 lg:mt-20 lg:grid-cols-12 lg:gap-16">
+      <aside class="lg:col-span-4">
+        <div class="surface reveal space-y-7 p-6 sm:p-7 lg:sticky lg:top-28">
+          <dl class="grid grid-cols-2 gap-x-6 gap-y-5 lg:grid-cols-1">
+            <div>
+              <dt class="case-label">{t.case.organization}</dt>
+              <dd class="mt-1.5 text-[0.9375rem] text-fg">{p.company}</dd>
+            </div>
+            <div>
+              <dt class="case-label">{t.case.date}</dt>
+              <dd class="mt-1.5 text-[0.9375rem] text-fg"><time datetime={p.date}>{date}</time></dd>
+            </div>
+            <div class="col-span-2 lg:col-span-1">
+              <dt class="case-label">{t.case.domain}</dt>
+              <dd class="mt-2 flex flex-wrap gap-1.5">
+                {
+                  p.domains.map((d) => (
+                    <a
+                      href={`${workPath}?domain=${d}`}
+                      class="tag gap-2 transition-colors hover:border-fg/25 hover:text-fg"
+                      style={`--chip: ${DOMAIN_COLOR[d]}`}
+                    >
+                      <span class="h-1.5 w-1.5 rounded-full" style={`background: rgb(${DOMAIN_COLOR[d]})`} />
+                      {t.domains[d]}
+                    </a>
+                  ))
+                }
+              </dd>
+            </div>
+          </dl>
+
+          {
+            p.metrics.length > 0 && (
+              <div>
+                <h2 class="case-label">{t.dialog.results}</h2>
+                <ul class="mt-3 grid gap-2" role="list">
+                  {p.metrics.map((m) => (
+                    <li class="rounded-2xl border border-line bg-fg/[0.03] px-4 py-3">
+                      <span class="block text-lg font-semibold tracking-[-0.02em] text-fg">{m.value}</span>
+                      {m.label && <span class="mt-0.5 block font-mono text-[0.625rem] uppercase tracking-[0.12em] text-fg-subtle">{m.label}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
+
+          <a href={workPath} class="btn btn-secondary btn-sm w-full">
+            <Icon name="arrow-left" class="h-4 w-4" />
+            {t.case.back}
+          </a>
+        </div>
+      </aside>
+
+      <div class="space-y-16 lg:col-span-8">
+        <section aria-labelledby="case-overview">
+          <h2 id="case-overview" class="case-h">{t.dialog.overview}</h2>
+          <p class="reveal mt-5 text-xl leading-relaxed text-fg sm:text-[1.375rem]">{p.description}</p>
+        </section>
+
+        {
+          p.highlights.length > 0 && (
+            <section aria-labelledby="case-highlights">
+              <h2 id="case-highlights" class="case-h">{t.dialog.highlights}</h2>
+              <ol class="mt-6 divide-y divide-line border-y border-line" role="list">
+                {p.highlights.map((h, i) => (
+                  <li class="reveal grid grid-cols-[3rem_1fr] gap-4 py-6" style={`--d: ${i * 70}`}>
+                    <span class="font-mono text-sm text-fg-subtle tabular">{String(i + 1).padStart(2, '0')}</span>
+                    <p class="text-[1.0625rem] leading-relaxed text-fg-muted">{h}</p>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )
+        }
+
+        <section aria-labelledby="case-stack">
+          <h2 id="case-stack" class="case-h">{t.dialog.stack}</h2>
+          <ul class="reveal mt-5 flex flex-wrap gap-2" role="list">
+            {p.tags.map((tag) => <li class="tag">{tag}</li>)}
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    {
+      neighbors.length > 0 && (
+        <nav class="container-site mt-20" aria-label={t.case.more}>
+          <h2 class="eyebrow">{t.case.more}</h2>
+          <ul class="mt-6 grid gap-4 sm:grid-cols-2" role="list">
+            {neighbors.map(({ dir, label, project }) => (
+              <li>
+                <article class="case-next surface spotlight group relative flex h-full items-stretch overflow-hidden" data-case-root style={`--spot: ${DOMAIN_COLOR[project.primary]}`}>
+                  <div class="relative w-[38%] shrink-0 overflow-hidden border-r border-line" data-cover>
+                    <ProjectCover
+                      slug={project.slug}
+                      domain={project.primary}
+                      variant={project.cover}
+                      uid={`nb-${project.slug}`}
+                      class="h-full w-full transition-transform duration-[1.2s] ease-out-expo group-hover:scale-[1.06]"
+                    />
+                  </div>
+                  <div class="flex min-w-0 flex-1 flex-col justify-center p-5 sm:p-6">
+                    <p class="inline-flex items-center gap-1.5 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-fg-subtle">
+                      {dir === 'prev' && <Icon name="arrow-left" class="h-3.5 w-3.5" />}
+                      {label}
+                      {dir === 'next' && <Icon name="arrow-right" class="h-3.5 w-3.5" />}
+                    </p>
+                    <h3 class="mt-2 text-lg font-semibold tracking-[-0.02em] text-fg [overflow-wrap:anywhere]">
+                      <a href={localizePath(`/experience/${project.slug}`, lang)} class="case-next__link" data-case>
+                        {project.shortTitle}
+                      </a>
+                    </h3>
+                    <p class="mt-1 truncate text-sm text-fg-subtle">{project.company}</p>
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+
+    <section class="container-site mb-8 mt-24" aria-labelledby="case-cta">
+      <div class="case-cta reveal relative overflow-hidden rounded-[2rem] border border-line px-6 py-14 text-center sm:px-12 sm:py-16">
+        <SplitWords as="h2" id="case-cta" text={t.case.ctaTitle} class="mx-auto block max-w-2xl text-display-sm font-semibold text-fg" />
+        <p class="lede mx-auto mt-4 max-w-xl">{t.case.ctaBody}</p>
+        <a href={localizePath('/contact', lang)} class="btn btn-primary mt-8">
+          {t.case.ctaButton}
+          <Icon name="arrow-right" class="btn-arrow h-4 w-4" />
+        </a>
+      </div>
+    </section>
+  </article>
+</Layout>
+
+<style>
+  .case-glow {
+    position: absolute;
+    inset: -10% -10% auto 20%;
+    height: 40rem;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(40% 50% at 70% 30%, rgb(var(--spot) / 0.18), transparent 70%),
+      radial-gradient(30% 40% at 90% 15%, rgb(var(--violet) / 0.14), transparent 70%);
+  }
+
+  .case-cover {
+    aspect-ratio: 16 / 9;
+  }
+
+  @media (min-width: 768px) {
+    .case-cover {
+      aspect-ratio: 16 / 7;
+    }
+  }
+
+  .case-label {
+    font-family: theme('fontFamily.mono');
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgb(var(--fg-subtle));
+  }
+
+  .case-h {
+    font-family: theme('fontFamily.mono');
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgb(var(--fg-subtle));
+  }
+
+  .case-next__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .case-next__link:focus-visible {
+    outline: none;
+  }
+
+  .case-next:has(.case-next__link:focus-visible) {
+    outline: 2px solid #c4b5fd;
+    outline-offset: 3px;
+  }
+
+  .case-cta {
+    background:
+      radial-gradient(60% 90% at 50% 120%, rgb(var(--spot) / 0.22), transparent 70%),
+      rgb(var(--ink-2));
+  }
+
+  ::view-transition-group(case-cover) {
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+</style>

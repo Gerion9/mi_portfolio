@@ -1,0 +1,238 @@
+---
+/**
+ * Dev-only 1200×630 share cards for case studies. `npm run og` screenshots
+ * them into public/og/cases/ (see scripts/make-og.mjs); production builds
+ * generate no pages here. Data is the public, anonymized project copy.
+ * Styles are scoped to this page so they never reach the site's CSS.
+ */
+import '@fontsource-variable/geist/wght.css';
+import '@fontsource-variable/geist-mono/wght.css';
+import '../../../styles/global.css';
+import Logo from '../../../components/Logo.astro';
+import { coverSvg } from '../../../lib/covers';
+import { DOMAIN_COLOR, getProjects, type Project } from '../../../lib/projects';
+import { formatMonthYear, type Lang } from '../../../i18n';
+
+export function getStaticPaths() {
+  if (import.meta.env.PROD) return [];
+  return (['en', 'es'] as const).flatMap((lang) =>
+    getProjects(lang).map((project) => ({ params: { lang, slug: project.slug }, props: { lang, project } })),
+  );
+}
+
+interface Props {
+  lang: Lang;
+  project: Project;
+}
+
+const { lang, project: p } = Astro.props;
+const metrics = p.metrics.filter((m) => /\d/.test(m.value)).slice(0, 2);
+const size = p.shortTitle.length <= 14 ? 92 : p.shortTitle.length <= 22 ? 76 : 64;
+// Long camelCase names may break between their parts
+const parts = p.shortTitle.length > 14 ? p.shortTitle.split(/(?<=[a-z])(?=[A-Z])/) : [p.shortTitle];
+const art = coverSvg(p.slug, p.primary, 'og', 'og-svg', p.cover);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>{p.shortTitle}</title>
+  </head>
+  <body>
+    <svg width="0" height="0" aria-hidden="true" class="og-defs">
+      <defs>
+        <linearGradient id="gp-mark" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#a5b4fc"></stop>
+          <stop offset="0.5" stop-color="#c084fc"></stop>
+          <stop offset="1" stop-color="#fb7185"></stop>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <div class="og" style={`--spot: ${DOMAIN_COLOR[p.primary]}`}>
+      <div class="og-art"><Fragment set:html={art} /></div>
+      <div class="og-glow"></div>
+
+      <div class="og-body">
+        <p class="og-brand"><Logo class="og-logo" /> gairoperalta.com</p>
+
+        <div class="og-main">
+          <p class="og-eyebrow">{p.company} · {formatMonthYear(p.date, lang)}</p>
+          <h1 class="og-title" style={`font-size: ${size}px`}>{parts.map((part, k) => (<>{k > 0 && <wbr />}{part}</>))}</h1>
+          {p.subtitle && <p class="og-sub">{p.subtitle}</p>}
+        </div>
+
+        {
+          metrics.length > 0 && (
+            <ul class="og-metrics">
+              {metrics.map((m) => (
+                <li>
+                  <span class="og-metric-value">{m.value}</span>
+                  {m.label && <span class="og-metric-label">{m.label}</span>}
+                </li>
+              ))}
+            </ul>
+          )
+        }
+
+        <p class="og-foot">
+          <span>{lang === 'es' ? 'Caso de estudio' : 'Case study'}</span>
+          <span>Gairo Peralta · {lang === 'es' ? 'Ingeniero de IA/ML' : 'AI/ML engineer'}</span>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  /* The screenshot must not include Astro's dev toolbar */
+  astro-dev-toolbar {
+    display: none !important;
+  }
+</style>
+
+<style>
+  body {
+    margin: 0;
+    background: rgb(var(--ink));
+  }
+
+  .og-defs {
+    position: absolute;
+  }
+
+  .og {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    color: rgb(var(--fg));
+    background: rgb(var(--ink));
+  }
+
+  /* The project's cover fills the right side and fades out under the text */
+  .og-art {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 660px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 40%);
+    mask-image: linear-gradient(90deg, transparent, #000 40%);
+  }
+
+  .og-art :global(.og-svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .og-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(55% 75% at 82% 38%, rgb(var(--spot) / 0.2), transparent 70%),
+      radial-gradient(45% 60% at 0% 100%, rgb(var(--violet) / 0.16), transparent 70%);
+  }
+
+  .og-body {
+    position: absolute;
+    top: 60px;
+    bottom: 52px;
+    left: 72px;
+    width: 680px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .og-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .og-brand :global(.og-logo) {
+    width: 32px;
+    height: 32px;
+  }
+
+  .og-main {
+    margin-top: auto;
+  }
+
+  .og-eyebrow,
+  .og-metric-label,
+  .og-foot {
+    font-family: 'Geist Mono Variable', ui-monospace, monospace;
+    text-transform: uppercase;
+    color: rgb(var(--fg-subtle));
+  }
+
+  .og-eyebrow {
+    margin: 0;
+    font-size: 15px;
+    letter-spacing: 0.16em;
+  }
+
+  .og-title {
+    max-width: 600px;
+    margin: 18px 0 0;
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    overflow-wrap: anywhere;
+  }
+
+  .og-sub {
+    margin: 18px 0 0;
+    max-width: 34rem;
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: rgb(var(--fg-muted));
+  }
+
+  .og-metrics {
+    display: flex;
+    gap: 12px;
+    margin: 30px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .og-metrics li {
+    padding: 12px 20px;
+    border: 1px solid rgb(var(--fg) / 0.15);
+    border-radius: 16px;
+    background: rgb(var(--ink) / 0.7);
+  }
+
+  .og-metric-value {
+    display: block;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .og-metric-label {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+
+  .og-foot {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid rgb(var(--fg) / 0.1);
+    font-size: 14px;
+    letter-spacing: 0.14em;
+  }
+</style>

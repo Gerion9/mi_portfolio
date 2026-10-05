@@ -1,0 +1,105 @@
+---
+/**
+ * LLM card visual: an illustrative trace of a text-to-SQL agent run
+ * (the agent roles mirror Meridian's orchestrator). Lines stream in when the
+ * card enters the viewport; hovering replays it.
+ */
+import type { Lang } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = {
+  en: {
+    title: 'agent trace',
+    query: '“Where should the next branch open?”',
+    steps: [
+      ['profiler', 'schema mapped'],
+      ['discovery', 'relevant tables found'],
+      ['sql_generator', 'query drafted'],
+      ['cost_gate', 'cost tier within budget'],
+      ['validator', 'results verified'],
+    ],
+    answer: 'answer ready · map + summary',
+  },
+  es: {
+    title: 'traza del agente',
+    query: '«¿Dónde abrir la siguiente sucursal?»',
+    steps: [
+      ['profiler', 'esquema mapeado'],
+      ['discovery', 'tablas relevantes encontradas'],
+      ['sql_generator', 'consulta generada'],
+      ['cost_gate', 'costo dentro del presupuesto'],
+      ['validator', 'resultados verificados'],
+    ],
+    answer: 'respuesta lista · mapa + resumen',
+  },
+}[lang];
+---
+
+<div class="trace reveal flex h-full flex-col rounded-2xl border border-line bg-ink/70 font-mono text-[0.6875rem] leading-relaxed sm:text-xs" data-trace aria-hidden="true">
+  <div class="flex items-center gap-2 border-b border-line px-4 py-2.5 text-fg-subtle">
+    <span class="h-2 w-2 rounded-full bg-fg/15"></span>
+    <span class="h-2 w-2 rounded-full bg-fg/15"></span>
+    <span class="h-2 w-2 rounded-full bg-fg/15"></span>
+    <span class="ml-2 uppercase tracking-[0.14em]">meridian · {copy.title}</span>
+  </div>
+  <ol class="flex-1 space-y-1.5 px-4 py-4">
+    <li class="trace-line text-fg" style="--i:0"><span class="text-brand-pink">›</span> {copy.query}</li>
+    {
+      copy.steps.map(([agent, status], i) => (
+        <li class="trace-line grid grid-cols-[7.5rem_1fr] gap-2" style={`--i:${i + 1}`}>
+          <span class="text-[#c4b5fd]">{agent}</span>
+          <span class="text-fg-muted">
+            <span class="text-brand-lime">✓</span> {status}
+          </span>
+        </li>
+      ))
+    }
+    <li class="trace-line pt-1 text-fg" style={`--i:${copy.steps.length + 1}`}>
+      <span class="text-brand-pink">›</span> {copy.answer}<span class="trace-caret"></span>
+    </li>
+  </ol>
+</div>
+
+<style>
+  .trace-caret {
+    display: inline-block;
+    width: 0.5em;
+    height: 1em;
+    margin-left: 0.3em;
+    vertical-align: -0.15em;
+    background: rgb(var(--fg) / 0.7);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html.motion .trace .trace-line {
+      opacity: 0;
+      transform: translateX(-6px);
+    }
+
+    html.motion .trace.is-in .trace-line {
+      animation: trace-in 0.45s var(--ease-out) forwards;
+      animation-delay: calc(var(--i) * 380ms + 200ms);
+    }
+
+    .trace-caret {
+      animation: caret 1s steps(1) 6;
+    }
+  }
+
+  @keyframes trace-in {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes caret {
+    50% {
+      opacity: 0;
+    }
+  }
+</style>

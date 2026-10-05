@@ -4,7 +4,6 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{hyperref}
-\usepackage{pdfcomment}
 \usepackage{xcolor}
 \usepackage{enumitem}
 
@@ -26,7 +25,11 @@
 \hypersetup{
     colorlinks=true,
     linkcolor=linkcolor,
-    urlcolor=linkcolor
+    urlcolor=linkcolor,
+    pdftitle={Gairo Peralta - Lead AI Engineer},
+    pdfauthor={Gairo Peralta},
+    pdfsubject={Resume},
+    pdfkeywords={Lead AI Engineer, LLM agents, GeoAI, production ML}
 }
 
 % Configurar márgenes
@@ -65,7 +68,7 @@
 % Comando para posición y ubicación con alineación consistente
 \newcommand{\positionlocation}[3]{
   \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
-    \roletext{#1} & \makebox[5.5cm][l]{#2 \hfill {\color{datecolor}\textbf{#3}}}
+    \roletext{#1} & \makebox[6.2cm][l]{#2 \hfill {\color{datecolor}\textbf{#3}}}
   \end{tabular*}
 }
 
@@ -79,6 +82,12 @@
 
 % Comando para métricas destacadas
 \newcommand{\highlight}[1]{{\textcolor{metriccolor}{\textbf{#1}}}}
+
+% "About" sign as a real ASCII tilde ("~" alone is a non-breaking space in LaTeX)
+\newcommand{\approxsym}{\textasciitilde}
+
+% Product name linked to its case study on gairoperalta.com
+\newcommand{\caselink}[2]{\href{https://gairoperalta.com/experience/#1/}{\textcolor{companycolor}{\textbf{#2}}}}
 
 % Comando para las etiquetas de habilidades
 \newcommand{\skilltag}[1]{{\small\textbf{#1}}}
@@ -97,101 +106,100 @@
 % Encabezado sin línea superior
 \namesection{}{Gairo Peralta}{
     \begin{center}
-        \urlstyle{same}\href{https://gairoperalta.com}{\textcolor{accentcolor}{gairoperalta.com}} \\
+        \urlstyle{same}\href{https://gairoperalta.com}{\textcolor{accentcolor}{gairoperalta.com}} \;|\; Case studies: \href{https://gairoperalta.com/experience/}{\textcolor{accentcolor}{gairoperalta.com/experience}} \;|\; English \& Spanish \\
         \vspace{0.1em}
         \begin{tabular}{p{0.3\textwidth} p{0.3\textwidth} p{0.3\textwidth}}
-            \raggedright\href{mailto:gairo@berkeley.edu}{gairo@berkeley.edu} & 
-            \centering (323) 434-5684 & 
+            \raggedright\href{mailto:gairo@berkeley.edu}{gairo@berkeley.edu} &
+            \centering +1 (323) 434-5684 &
             \raggedleft \urlstyle{same}\href{https://www.linkedin.com/in/gairoperalta}{LinkedIn.com/in/gairoperalta}
         \end{tabular}
-        {\small\color{sectioncolor}AI/ML Engineer specializing in \textbf{Large Language Models}, \textbf{production ML systems}, and \textbf{multi-modal AI applications}}
+        {\small\color{sectioncolor}\textbf{Lead AI Engineer} building \textbf{tool-grounded LLM agents} with \textbf{evals} and deterministic fallbacks, plus \textbf{GeoAI} on national-scale data}
         \vspace{-1.2em}
     \end{center}
 }
 
-\section{EDUCATION} 
-\runsubsection{\companytext{TECNOLOGICO DE MONTERREY}}
-\descript{\hfill{Mexico}}
-\location{\textit{MA in \textbf{Applied Artificial Intelligence}} \hfill Grade: \highlight{98/100} | \datetext{Expected 2026} }
-\runsubsection{\companytext{THE UNIVERSITY OF TEXAS AT SAN ANTONIO}}
-\descript{\hfill{Texas}}
-\location{\textit{Visiting Student Researcher (Medical AI, Volunteer)} \hfill \datetext{2025--Present}}
-\runsubsection{\companytext{UNIVERSITY OF CALIFORNIA, BERKELEY}}
-\descript{\hfill{California}}
-\location{\textit{BA in \textbf{Data Science}} \hfill \datetext{2022}}
-
 \section{PROFESSIONAL EXPERIENCE}
 \runsubsection{\companytext{BLACKPRINT TECHNOLOGIES}}
-\positionlocation{AI/ML Engineer (Full-time)}{Remote}{2025--Present}
+\positionlocation{Lead AI Engineer (Full-time)}{Remote}{2025--Present}
 \begin{tightitemize}
-\item Built LLM-powered GeoAI platform for \highlight{2.5M+} urban blocks with \textbf{React/Mapbox/Turf.js} and real-time inference
-\item Built \textbf{Node.js} + \textbf{Google Cloud} web platform for license regularization using external POI data: density gradients by cadastral block, alcohol business flags, dashboards, and PDF export
+% src: BlackPrint Copilot v2
+\item Led the map copilot's redesign into a tool-grounded \textbf{agent} (\caselink{blackprint-copilot-v2}{Copilot v2}): \highlight{38} \textbf{FastMCP} tools with per-tool authorization, \highlight{53} user-confirmed UI actions and a \highlight{778}-question blind-annotated gold \textbf{eval} set
+% src: BrokerAI
+\item Architected a production \caselink{brokerai}{WhatsApp agent} that qualifies real-estate leads and books appointments via \textbf{OpenAI} tool calling, with a deterministic slot validator, human takeover and \highlight{13} golden evals
+% src: GromAI Report Studio
+\item Built \caselink{gromai-report-studio}{GromAI Report Studio}, grounding \textbf{Claude} site-report narratives behind a numeric firewall, claim ledger and anti-leak guard with deterministic fallback; \highlight{15} eval suites, \highlight{2,809} tests
+% src: Expansion Intelligence OS
+\item Built an \caselink{expansion-intelligence-os}{expansion-planning OS} demoed to \highlight{3} chains: \textbf{Claude} tool calling over deterministic services (\highlight{87\%} prompt-cache hits, \highlight{58/58} Q\&A audit), a finance engine within \highlight{+0.27\%} of public disclosures
+% src: mireporte.ai
+\item Led \caselink{mireporte-ai}{mireporte.ai}, which turns a map point into a 25-section market study, from \highlight{3} to \highlight{11} metro areas: per-city data contracts that fail the build on drift, sha256 manifests, \highlight{19} ADRs and \highlight{5,043} tests
+% src: LLM GeoAI Platform for Urban Intelligence; QSR Site Intelligence
+\item Built an \textbf{LLM}-powered \caselink{llm-geoai-platform-for-urban-intelligence}{GeoAI platform} for \highlight{2.5M+} urban blocks and a multi-brand \caselink{qsr-site-intelligence}{site selector} (\highlight{63,724} blocks, \highlight{117} municipalities) whose v1.2 sales model cut leave-one-out MAPE from \highlight{106\%} to \highlight{22\%}
+% src: Acceptance Radar; BlackPrint Radar
+\item Scored \caselink{acceptance-radar}{acceptance propensity} of \highlight{\approxsym5.5M} merchants for a global payments network (45 GB \textbf{Postgres} to \highlight{70 MB} \textbf{Parquet} via \textbf{DuckDB}); reconciled \highlight{230,553} \caselink{blackprint-radar}{business records} with \textbf{MiniLM} embeddings
+% src: Fulfillment Intelligence; Pharma Field Sales
+\item Built logistics optimizers: an exact \textbf{MILP (HiGHS)} partner selector on a \highlight{4,851}-pair \textbf{OSRM} drive-time matrix for a \caselink{fulfillment-intelligence}{digital pharmacy}; \textbf{VRP} routing for a \caselink{pharma-field-sales}{pharma distributor's} \highlight{3,100+} pharmacy pilot
 \end{tightitemize}
 \vspace{0.05em}
 \positionlocation{Data Scientist}{Berkeley, CA}{2022--2023}
 \begin{tightitemize}
-\item Delivered property analytics with \textbf{Google Maps} geocoding (\highlight{92\%} accuracy) and built \textbf{pandas/SQL} ETL pipelines ensuring \highlight{99.9\%} deliverable accuracy
+% src: Data Analysis for Property Management System
+\item Geocoded properties via \textbf{Google Maps} (\highlight{92\%} accuracy); built \textbf{pandas/SQL} ETL with \highlight{99.9\%} accuracy
 \end{tightitemize}
 \vspace{0.1em}
 
 \runsubsection{\companytext{LAW OFFICES OF MANUEL SOLIS}}
-\positionlocation{Lead AI/ML Engineer (Consulting)}{Remote}{2025--Present}
+\positionlocation{Lead AI/ML Engineer (Consulting)}{Remote}{2025--Jul 2026}
 \begin{tightitemize}
-\item Led development of \textbf{custom LLM agents} for T-Visa declarations and cover letters, cutting turnaround from \highlight{~2 hours} to \highlight{~15 minutes} per document (\highlight{~8x faster}), boosting productivity; automated email-to-case DB ingestion and assignment
-\item Built meeting intelligence platform (Zoom/Teams/Meet) that turns recordings into searchable transcripts and action-item summaries, with group-based access control across org/team
+% src: resume.ts (T-Visa, ~2 h to ~15 min, email-to-case); DeclarationLetterOnline (led interns)
+\item Led an intern team building custom \textbf{LLM agents} for T-Visa declarations and cover letters, cutting turnaround from \highlight{\approxsym2 hours} to \highlight{\approxsym15 minutes} per document (\highlight{\approxsym8x faster}); automated email-to-case ingestion
+% src: Meeting Intelligence Platform for Legal Teams; resume.ts (GPT-5); OCR Gemini
+\item Led delivery of a \caselink{meeting-intelligence-platform-for-legal-teams}{meeting-intelligence platform} for Zoom/Teams/Meet (\textbf{Speechmatics}, \textbf{GPT-5} summaries, \textbf{Pinecone} search, \highlight{3}-level \textbf{RBAC}) and a layout-preserving \caselink{ocr-gemini}{Gemini Vision} translation pipeline
+\end{tightitemize}
+\vspace{0.1em}
+
+\runsubsection{\companytext{THE UNIVERSITY OF TEXAS AT SAN ANTONIO}}
+\positionlocation{Visiting Student Researcher (Medical AI, Volunteer)}{San Antonio, TX}{2025--Jan 2026}
+\begin{tightitemize}
+% src: Medical QA Multi-Agent System; resume.ts (PrimeKG size)
+\item Built a \caselink{medical-qa-multi-agent-system}{multi-agent medical QA system} over \textbf{PrimeKG} (4M+ nodes, 33M+ edges) in \textbf{Neo4j}; multi-hop reasoning raised accuracy \highlight{+24.24 pp} to \highlight{54.69\%} under systematic benchmarking
 \end{tightitemize}
 \vspace{0.1em}
 
 \runsubsection{\companytext{STRTGY}}
 \positionlocation{AI/ML Engineer (Full-time)}{Remote}{2023--2025}
 \begin{tightitemize}
-\item Architected \textbf{multi-modal GeoAI system} (spatial embeddings + \textbf{FAISS}), driving \highlight{82\%} improvement in location-based decision accuracy
-\item Built production ML pipelines: \textbf{Transformer+LoRA} forecasting (\highlight{42\%} accuracy gain, \highlight{60\%} lower latency) and enterprise \textbf{RAG} (Claude 3.5 Sonnet, hybrid retrieval) with \highlight{90\%} relevance
+% src: Specialized Industrial Real Estate Chatbot; GeoAI Insights
+\item Built a \caselink{specialized-industrial-real-estate-chatbot}{RAG assistant} for industrial real estate (\textbf{Claude 3.5 Sonnet}, \textbf{FAISS}; \highlight{+90\%} response relevance, query time down \highlight{85\%}) and \textbf{GPT-4}/Vision \caselink{geoai-insights}{competitor mapping} in \textbf{ArcGIS} (\highlight{+82\%} decision confidence)
+% src: Advanced Demand Forecasting & Inventory Optimization System
+\item Built adaptive \caselink{advanced-demand-forecasting-and-inventory}{demand forecasting} for a beverage-industry client (\textbf{Prophet} or \textbf{SARIMA} chosen per SKU history, with inventory optimization): \highlight{+42\%} forecast accuracy, \highlight{30\%} lower inventory cost
 \end{tightitemize}
 \vspace{0.1em}
 
 \runsubsection{\companytext{PRODENSA}}
 \positionlocation{AI Engineer (Contract)}{Remote}{2024--2025}
 \begin{tightitemize}
-\item Built OCR + fine-tuned \textbf{Llama 3.3 70B} document extraction pipeline (\highlight{95\%} accuracy); deployed via \textbf{FastAPI} with \textbf{React/Vite} front-end for real-time PDF processing
+% src: Intelligent Commercial Document Analysis System
+\item Built \caselink{intelligent-commercial-document-analysis-system}{OCR + Llama 3.3 extraction} for invoices, packing lists and customs documents (\highlight{95\%} accuracy, \highlight{98\%} less processing time), with \textbf{FastAPI}, \textbf{React/Vite} and async PDF/CSV/XLSX ingestion
 \end{tightitemize}
 
-\section{SELECTED AI/ML PROJECTS (DETAILS)}
-\projecttitle{MEDICAL QA MULTI-AGENT SYSTEM (PrimeKG + Neo4j)}
-\vspace{-0.2em}
-\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
-\projectorg{UT San Antonio (Volunteer)} & \datetext{2025--Present}
-\end{tabular*}
-\vspace{-0.8em}
-\begin{tightitemize}
-\item Developed multi-agent LLM architecture with knowledge graph integration (PrimeKG: 4M+ nodes, 33M+ edges), achieving \highlight{54.69\%} accuracy on medical QA (\highlight{+24.24pp})
-\item Engineered four specialized agents (II-Medical-8B, Kimi-K2-Instruct) with \textbf{Neo4j} for multi-hop reasoning and systematic evaluation
-\end{tightitemize}
-\vspace{0.05em}
-
-\projecttitle{MEETING INTELLIGENCE PLATFORM}
-\vspace{-0.2em}
-\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
-\projectorg{Law Offices of Manuel Solis (Consulting)} & \datetext{2025--Present}
-\end{tabular*}
-\vspace{-0.8em}
-\begin{tightitemize}
-\item Captured Zoom/Teams/Meet meetings; \mbox{Speechmatics} transcription + \textbf{GPT-5} structured summaries (bullets, deadlines)
-\item Indexed transcripts in \textbf{Pinecone} for semantic search/Q\&A and retrieval across meetings
-\item Enforced group-based \textbf{RBAC} for access control (admin/supervisor/user) across teams
-\end{tightitemize}
-\vspace{0.15em}
+\section{EDUCATION}
+\runsubsection{\companytext{TECNOL\'OGICO DE MONTERREY}}
+\descript{\hfill{Mexico}}
+\location{\textit{Master in \textbf{Applied Artificial Intelligence}} \hfill Grade: \highlight{98/100} | \datetext{Expected 2027} }
+\runsubsection{\companytext{UNIVERSITY OF CALIFORNIA, BERKELEY}}
+\descript{\hfill{California}}
+\location{\textit{BA in \textbf{Data Science}}; Sutardja Center for Entrepreneurship Certificate \hfill \datetext{2022}}
 
 \section{TECHNICAL SKILLS}
 \vspace{-0.2em}
-\textbf{GenAI/LLM:} RAG, agents, fine-tuning (LoRA), embeddings, LangChain, FAISS, Pinecone, Speechmatics, RBAC \\
+\textbf{LLMs \& Agents:} tool calling, MCP (FastMCP), RAG, evals (gold sets), grounding guards, prompt caching, LangGraph \\
 \vspace{0.1em}
-\textbf{LLM Platforms:} OpenAI (GPT-4o/GPT-5), Claude, Gemini, Llama \\
+\textbf{Models \& Retrieval:} Claude, OpenAI (GPT-4o/GPT-5), Gemini, Llama, open-weight (Modal), Pinecone, FAISS, pgvector \\
 \vspace{0.1em}
-\textbf{ML/DL:} PyTorch, TensorFlow, scikit-learn, XGBoost, LSTM, forecasting \\
+\textbf{GeoAI \& Optimization:} PostGIS, GeoPandas, H3, OSRM, isochrones, MapLibre/Mapbox GL, deck.gl, VRP, MILP (HiGHS) \\
 \vspace{0.1em}
-\textbf{Backend/Cloud:} FastAPI, Node.js, Google Cloud, REST APIs, MLflow, Docker \\
+\textbf{ML:} PyTorch, TensorFlow, scikit-learn, XGBoost, Prophet/SARIMA, LSTM/Transformers, entity resolution, LOOCV \\
 \vspace{0.1em}
-\textbf{Data/Geo:} Python, SQL, TypeScript, pandas, NumPy, GeoPandas, Neo4j, MongoDB, Mapbox GL, Turf.js, ArcGIS
+\textbf{Data/Backend:} Python, TypeScript, SQL, FastAPI, Node.js, Next.js/React, Postgres, DuckDB, BigQuery, Docker, GCP
 
 \end{document}

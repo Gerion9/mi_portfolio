@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # lighthouse reports
 lh-report.json
+
+# Real client names and named project variants (confidential; never commit to the public repo)
+src/data/clients.private.json

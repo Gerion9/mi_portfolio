@@ -1,0 +1,22 @@
+---
+/**
+ * Mark: a pointy-top hex cell (an H3 nod) holding a location node —
+ * the GeoAI + graph idea in 24px. The gradient (#gp-mark) is defined once
+ * in Layout.astro so the mark can repeat on a page without duplicate ids.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = 'h-7 w-7' } = Astro.props;
+---
+
+<svg class={className} viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
+  <path
+    d="M16 2.6 27.6 9.3v13.4L16 29.4 4.4 22.7V9.3L16 2.6Z"
+    stroke="url(#gp-mark)"
+    stroke-width="1.8"
+    stroke-linejoin="round"></path>
+  <path d="M16 9.5v6.2m0 0 5.4 3.1M16 15.7l-5.4 3.1" stroke="url(#gp-mark)" stroke-width="1.6" stroke-linecap="round"
+  ></path>
+  <circle cx="16" cy="15.7" r="2.6" fill="url(#gp-mark)"></circle>
+</svg>

@@ -1,0 +1,40 @@
+---
+/**
+ * Procedural project cover. By default it references the static SVG generated
+ * at /covers/<slug>.svg (cacheable, lazy-loaded); `mode="inline"` embeds it.
+ */
+import { coverSvg } from '../lib/covers';
+import type { CoverVariant, Domain } from '../lib/projects';
+
+interface Props {
+  slug: string;
+  domain: Domain;
+  variant?: CoverVariant;
+  /** Unique per instance on the page (paint-server ids) — inline mode only. */
+  uid: string;
+  class?: string;
+  mode?: 'img' | 'inline';
+  /** Above-the-fold covers (case-study hero) load eagerly with high priority. */
+  eager?: boolean;
+}
+
+const { slug, domain, variant, uid, class: className = 'h-full w-full', mode = 'img', eager = false } = Astro.props;
+const svg = mode === 'inline' ? coverSvg(slug, domain, uid, className, variant) : '';
+---
+
+{
+  mode === 'inline' ? (
+    <Fragment set:html={svg} />
+  ) : (
+    <img
+      src={`/covers/${slug}.svg`}
+      alt=""
+      width="400"
+      height="250"
+      class={className}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      fetchpriority={eager ? 'high' : 'auto'}
+    />
+  )
+}

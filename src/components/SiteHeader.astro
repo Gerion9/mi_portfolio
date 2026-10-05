@@ -1,0 +1,395 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { alternatePath, localizePath, stripLang, useCopy, type Lang } from '../i18n';
+import { PROFILE, SOCIALS } from '../data/site';
+
+interface Props {
+  lang: Lang;
+  pathname: string;
+  /** False on single-language pages: the switch then goes to the other home. */
+  translated?: boolean;
+}
+
+const { lang, pathname, translated = true } = Astro.props;
+const t = useCopy(lang);
+const current = stripLang(pathname.replace(/\/$/, '') || '/');
+
+const links = [
+  { href: '/experience', label: t.nav.work },
+  { href: '/about', label: t.nav.about },
+  { href: '/resume', label: t.nav.resume },
+  { href: '/contact', label: t.nav.contact },
+];
+
+const isActive = (href: string) => current === href || current.startsWith(`${href}/`);
+const switchTo = (code: Lang) => (translated ? alternatePath(pathname, code) : localizePath('/', code));
+const langs = [
+  { code: 'en' as const, label: 'EN', href: switchTo('en'), name: 'English' },
+  { code: 'es' as const, label: 'ES', href: switchTo('es'), name: 'Español' },
+];
+---
+
+<header class="site-header pointer-events-none fixed inset-x-0 top-0 z-50" data-header>
+  <div class="mx-auto flex max-w-site justify-center px-3 pt-3 sm:px-6 sm:pt-4">
+    <nav
+      aria-label={lang === 'es' ? 'Navegación principal' : 'Main navigation'}
+      class="header-pill pointer-events-auto flex w-full max-w-[54rem] items-center justify-between gap-2 rounded-full p-1.5 pl-2.5"
+    >
+      <a
+        href={localizePath('/', lang)}
+        class="group flex items-center gap-2.5 rounded-full py-1 pl-1 pr-3"
+        aria-label={lang === 'es' ? 'Gairo Peralta, inicio' : 'Gairo Peralta, home'}
+      >
+        <Logo class="h-7 w-7 transition-transform duration-700 ease-out-expo group-hover:rotate-[60deg]" />
+        <span class="text-[0.9375rem] font-semibold tracking-[-0.02em] text-fg">Gairo Peralta</span>
+      </a>
+
+      <ul class="hidden items-center md:flex">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={localizePath(link.href, lang)}
+                class="nav-link"
+                aria-current={isActive(link.href) ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="flex items-center gap-1.5">
+        <div class="lang-switch hidden sm:flex" role="group" aria-label={t.nav.langSwitch}>
+          {
+            langs.map((l) => (
+              <a
+                href={l.href}
+                hreflang={l.code}
+                lang={l.code}
+                aria-current={lang === l.code ? 'true' : undefined}
+                title={l.name}
+              >
+                {l.label}
+              </a>
+            ))
+          }
+        </div>
+        <a href={localizePath('/contact', lang)} class="btn btn-primary btn-sm hidden md:inline-flex">
+          {t.nav.cta}
+        </a>
+        <button
+          type="button"
+          class="menu-btn inline-flex md:hidden"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          data-menu-open
+        >
+          <Icon name="menu" class="h-5 w-5" />
+          <span class="sr-only">{t.nav.menu}</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<dialog id="mobile-menu" class="mobile-menu animated" aria-label={t.nav.menu}>
+  <div class="flex h-full flex-col">
+    <div class="flex items-center justify-between px-5 pt-5">
+      <a href={localizePath('/', lang)} class="flex items-center gap-2.5">
+        <Logo class="h-7 w-7" />
+        <span class="text-base font-semibold tracking-[-0.02em]">Gairo Peralta</span>
+      </a>
+      <button type="button" class="menu-btn inline-flex" data-menu-close>
+        <Icon name="x" class="h-5 w-5" />
+        <span class="sr-only">{t.nav.close}</span>
+      </button>
+    </div>
+
+    <nav aria-label={lang === 'es' ? 'Menú' : 'Menu'} class="mt-10 flex-1 px-5">
+      <ul class="space-y-1">
+        <li class="menu-item" style="--n:0">
+          <a href={localizePath('/', lang)} class="menu-link" aria-current={current === '/' ? 'page' : undefined}>
+            <span>{lang === 'es' ? 'Inicio' : 'Home'}</span>
+            <Icon name="arrow-right" class="h-5 w-5" />
+          </a>
+        </li>
+        {
+          links.map((link, i) => (
+            <li class="menu-item" style={`--n:${i + 1}`}>
+              <a
+                href={localizePath(link.href, lang)}
+                class="menu-link"
+                aria-current={isActive(link.href) ? 'page' : undefined}
+              >
+                <span>{link.label}</span>
+                <Icon name="arrow-right" class="h-5 w-5" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="menu-item space-y-5 border-t border-line px-5 pb-8 pt-6" style="--n:6">
+      <div class="flex items-center justify-between">
+        <div class="lang-switch flex" role="group" aria-label={t.nav.langSwitch}>
+          {
+            langs.map((l) => (
+              <a href={l.href} hreflang={l.code} lang={l.code} aria-current={lang === l.code ? 'true' : undefined}>
+                {l.name}
+              </a>
+            ))
+          }
+        </div>
+        <div class="flex items-center gap-1">
+          <a href={SOCIALS.linkedin.href} target="_blank" rel="noopener noreferrer" class="icon-btn inline-flex" aria-label="LinkedIn">
+            <Icon name="linkedin" class="h-[1.125rem] w-[1.125rem]" />
+          </a>
+          <a href={SOCIALS.github.href} target="_blank" rel="noopener noreferrer" class="icon-btn inline-flex" aria-label="GitHub">
+            <Icon name="github" class="h-5 w-5" />
+          </a>
+        </div>
+      </div>
+      <a href={`mailto:${PROFILE.email}`} class="btn btn-primary w-full">
+        <Icon name="mail" class="h-4 w-4" />
+        {PROFILE.email}
+      </a>
+    </div>
+  </div>
+</dialog>
+
+<style is:global>
+  .header-pill {
+    view-transition-name: site-header;
+    background: rgb(var(--ink) / 0.4);
+    border: 1px solid rgb(var(--fg) / 0.08);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    backdrop-filter: blur(18px) saturate(150%);
+    box-shadow:
+      inset 0 1px 0 rgb(var(--fg) / 0.06),
+      0 12px 40px -24px rgb(0 0 0 / 0.9);
+    transition:
+      background-color 0.5s var(--ease-out),
+      border-color 0.5s var(--ease-out),
+      box-shadow 0.5s var(--ease-out);
+  }
+
+  [data-header][data-scrolled] .header-pill {
+    background: rgb(var(--ink-2) / 0.78);
+    border-color: rgb(var(--fg) / 0.12);
+    box-shadow:
+      inset 0 1px 0 rgb(var(--fg) / 0.07),
+      0 18px 50px -20px rgb(0 0 0 / 0.95);
+  }
+
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(var(--fg-muted));
+    transition:
+      color 0.3s var(--ease-out),
+      background-color 0.3s var(--ease-out);
+  }
+
+  .nav-link:hover {
+    color: rgb(var(--fg));
+    background: rgb(var(--fg) / 0.06);
+  }
+
+  .nav-link[aria-current='page'] {
+    color: rgb(var(--fg));
+  }
+
+  .nav-link[aria-current='page']::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0.2rem;
+    width: 0.25rem;
+    height: 0.25rem;
+    border-radius: 999px;
+    transform: translateX(-50%);
+    background: #f0abfc;
+    box-shadow: 0 0 8px rgb(var(--pink) / 0.9);
+  }
+
+  .lang-switch {
+    align-items: center;
+    gap: 0.125rem;
+    padding: 0.2rem;
+    border-radius: 999px;
+    border: 1px solid rgb(var(--fg) / 0.08);
+    background: rgb(var(--fg) / 0.03);
+  }
+
+  .lang-switch a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    min-height: 1.875rem;
+    padding: 0 0.6rem;
+    border-radius: 999px;
+    font-family: theme('fontFamily.mono');
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    color: rgb(var(--fg-subtle));
+    transition:
+      color 0.3s var(--ease-out),
+      background-color 0.3s var(--ease-out);
+  }
+
+  .lang-switch a:hover {
+    color: rgb(var(--fg));
+  }
+
+  .lang-switch a[aria-current='true'] {
+    color: rgb(var(--ink));
+    background: rgb(var(--fg));
+  }
+
+  /* display is set with utilities on the element so md:hidden can win */
+  .menu-btn,
+  .icon-btn {
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    color: rgb(var(--fg));
+    transition: background-color 0.3s var(--ease-out);
+  }
+
+  .menu-btn {
+    border: 1px solid rgb(var(--fg) / 0.12);
+    background: rgb(var(--fg) / 0.05);
+  }
+
+  .menu-btn:hover,
+  .icon-btn:hover {
+    background: rgb(var(--fg) / 0.1);
+  }
+
+  /* Mobile menu: full-screen native dialog */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background:
+      radial-gradient(120% 60% at 100% 0%, rgb(var(--violet) / 0.22), transparent 60%),
+      radial-gradient(90% 50% at 0% 100%, rgb(var(--pink) / 0.14), transparent 60%),
+      rgb(var(--ink));
+  }
+
+  .mobile-menu::backdrop {
+    background: rgb(var(--ink));
+  }
+
+  .menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 0;
+    font-size: clamp(2rem, 9vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    color: rgb(var(--fg-muted));
+    border-bottom: 1px solid rgb(var(--fg) / 0.06);
+    transition: color 0.3s var(--ease-out);
+  }
+
+  .menu-link[aria-current='page'],
+  .menu-link:hover {
+    color: rgb(var(--fg));
+  }
+
+  .menu-link svg {
+    opacity: 0.4;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .mobile-menu .menu-item {
+      opacity: 0;
+      transform: translateY(16px);
+      transition:
+        opacity 0.6s var(--ease-out),
+        transform 0.6s var(--ease-out);
+      transition-delay: calc(var(--n) * 45ms + 80ms);
+    }
+
+    .mobile-menu[open] .menu-item {
+      opacity: 1;
+      transform: none;
+    }
+
+    @starting-style {
+      .mobile-menu[open] .menu-item {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+    }
+  }
+
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const menu = document.getElementById('mobile-menu') as HTMLDialogElement | null;
+  const openBtn = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+  const closeBtn = document.querySelector<HTMLButtonElement>('[data-menu-close]');
+
+  if (header) {
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      header.toggleAttribute('data-scrolled', window.scrollY > 8);
+    };
+    requestAnimationFrame(update);
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true },
+    );
+  }
+
+  if (menu && openBtn) {
+    const setExpanded = (v: boolean) => openBtn.setAttribute('aria-expanded', String(v));
+    openBtn.addEventListener('click', () => {
+      menu.showModal();
+      setExpanded(true);
+    });
+    closeBtn?.addEventListener('click', () => menu.close());
+    menu.addEventListener('close', () => {
+      setExpanded(false);
+      // Closed by the breakpoint, the menu button is hidden: focus the logo
+      (openBtn.offsetParent ? openBtn : header?.querySelector<HTMLElement>('a'))?.focus();
+    });
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => menu.close()));
+    window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
+      if (e.matches && menu.open) menu.close();
+    });
+  }
+</script>
